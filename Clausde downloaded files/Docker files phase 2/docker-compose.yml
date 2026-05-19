@@ -1,0 +1,58 @@
+# ============================================================
+# ConvertDox — docker-compose.yml
+# WHERE TO PUT: railway-backend/docker-compose.yml
+#
+# WHAT IS THIS?
+# This file lets you run your ENTIRE backend with ONE command.
+# Instead of starting each service manually, just type:
+#   docker-compose up
+# And it starts everything: API + Redis + ready to go.
+#
+# HOW TO USE:
+# 1. Install Docker Desktop from docker.com
+# 2. Open Terminal, go to railway-backend folder
+# 3. Type: docker-compose up
+# 4. Your API runs at http://localhost:3001
+# ============================================================
+
+version: '3.8'
+
+services:
+
+  # ── Your main API server ──────────────────────────────────
+  api:
+    build: .                    # Build from our Dockerfile
+    container_name: convertdox-api
+    ports:
+      - "3001:3001"             # Your computer:Container
+    environment:
+      - NODE_ENV=development
+      - PORT=3001
+      - FRONTEND_URL=http://localhost:3000
+      - R2_ACCOUNT_ID=${R2_ACCOUNT_ID}
+      - R2_ACCESS_KEY_ID=${R2_ACCESS_KEY_ID}
+      - R2_SECRET_ACCESS_KEY=${R2_SECRET_ACCESS_KEY}
+      - R2_BUCKET_NAME=${R2_BUCKET_NAME}
+      - R2_PUBLIC_URL=${R2_PUBLIC_URL}
+      - REDIS_URL=redis://redis:6379   # Points to Redis below
+    depends_on:
+      - redis                   # Wait for Redis to start first
+    volumes:
+      - ./src:/app/src          # Live code updates (dev only)
+    restart: unless-stopped
+
+  # ── Redis (for rate limiting and job queues) ──────────────
+  # This replaces Upstash Redis for local development
+  redis:
+    image: redis:7-alpine       # Small, fast Redis image
+    container_name: convertdox-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data        # Saves data between restarts
+    restart: unless-stopped
+    command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru
+
+# ── Named volumes (persists data) ─────────────────────────
+volumes:
+  redis_data:
