@@ -11,7 +11,7 @@ const NAV = () => (
     <div style={{ maxWidth:'1100px',margin:'0 auto',padding:'0 24px',height:'62px',display:'flex',alignItems:'center',justifyContent:'space-between' }}>
       <a href="/" style={{ textDecoration:'none',display:'flex',alignItems:'center',gap:'9px' }}>
         <div style={{ width:'34px',height:'34px',background:'linear-gradient(135deg,#E85D04,#F48C42)',borderRadius:'9px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'17px',boxShadow:'0 2px 8px rgba(232,93,4,0.3)' }}>📄</div>
-        <span style={{ fontFamily:"'Space Grotesk', system-ui, sans-serif",fontSize:'22px',fontWeight:800,color:'#0F2A4A' }}>Convert<span style={{ color:'#E85D04' }}>Dox</span></span>
+        <span style={{ fontFamily:"'Space Grotesk', system-ui, sans-serif",fontSize:22px',fontWeight:800,color:'#0F2A4A' }}>Convert<span style={{ color:'#E85D04' }}>Dox</span></span>
       </a>
       <a href="/" style={{ fontSize:'13px',color:'#64748b',textDecoration:'none',fontWeight:500 }}>← All Tools</a>
     </div>

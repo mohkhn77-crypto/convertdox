@@ -53,7 +53,7 @@ export default function HomePage() {
         <div style={{ maxWidth:'1200px',margin:'0 auto',padding:'0 24px',height:'62px',display:'flex',alignItems:'center',justifyContent:'space-between',gap:'16px' }}>
           <a href="/" style={{ textDecoration:'none',display:'flex',alignItems:'center',gap:'9px',flexShrink:0 }}>
             <div style={{ width:'44px',height:'44px',background:'#0F2A4A',borderRadius:'10px',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0 }}><svg width="28" height="28" viewBox="0 0 44 44" fill="none"><rect x="6" y="10" width="13" height="17" rx="2" fill="white" opacity="0.95"/><rect x="7" y="14" width="7" height="1.5" rx="0.75" fill="#0F2A4A" opacity="0.35"/><rect x="7" y="17" width="5" height="1.5" rx="0.75" fill="#0F2A4A" opacity="0.35"/><rect x="7" y="20" width="6" height="1.5" rx="0.75" fill="#0F2A4A" opacity="0.35"/><rect x="25" y="17" width="13" height="17" rx="2" fill="#E85D04"/><rect x="26" y="21" width="7" height="1.5" rx="0.75" fill="white" opacity="0.5"/><rect x="26" y="24" width="5" height="1.5" rx="0.75" fill="white" opacity="0.5"/><rect x="26" y="27" width="6" height="1.5" rx="0.75" fill="white" opacity="0.5"/><path d="M20 22h4M21 20l3 2-3 2" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <span style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'22px',fontWeight:800,color:'#0F2A4A' }}>Convert<span style={{ color:'#E85D04' }}>Dox</span></span>
+            <span style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:22px',fontWeight:800,color:'#0F2A4A' }}>Convert<span style={{ color:'#E85D04' }}>Dox</span></span>
           </a>
           <div style={{ display:'flex',gap:'2px',overflow:'auto' }}>
             {['PDF Tools','Image Tools','AI Tools','Calculators','Text Tools'].map(item => (
@@ -142,7 +142,7 @@ export default function HomePage() {
         )}
         <div style={{ marginTop:'48px' }}>
           <div style={{ display:'flex',alignItems:'center',gap:'12px',marginBottom:'20px' }}>
-            <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'22px',fontWeight:800,color:'#0F2A4A',margin:0 }}>Coming Soon</h2>
+            <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:22px',fontWeight:800,color:'#0F2A4A',margin:0 }}>Coming Soon</h2>
             <span style={{ background:'#FFF7ED',border:'1.5px solid #FED7AA',color:'#C2410C',fontSize:'12px',fontWeight:700,padding:'3px 10px',borderRadius:'999px' }}>Building now</span>
           </div>
           <div style={{ display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'14px' }}>
