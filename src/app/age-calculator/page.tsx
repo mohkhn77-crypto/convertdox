@@ -11,7 +11,7 @@ const NAV = () => (
     <div style={{ maxWidth:'1100px',margin:'0 auto',padding:'0 24px',height:'62px',display:'flex',alignItems:'center',justifyContent:'space-between' }}>
       <a href="/" style={{ textDecoration:'none',display:'flex',alignItems:'center',gap:'9px' }}>
         <div style={{ width:'34px',height:'34px',background:'linear-gradient(135deg,#E85D04,#F48C42)',borderRadius:'9px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'17px' }}>📄</div>
-        <span style={{ fontFamily:"'Syne',sans-serif",fontSize:'19px',fontWeight:800,color:'#0F2A4A' }}>Convert<span style={{ color:'#E85D04' }}>Dox</span></span>
+        <span style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'19px',fontWeight:800,color:'#0F2A4A' }}>Convert<span style={{ color:'#E85D04' }}>Dox</span></span>
       </a>
       <a href="/" style={{ fontSize:'13px',color:'#64748b',textDecoration:'none',fontWeight:500 }}>← All Tools</a>
     </div>
@@ -20,7 +20,7 @@ const NAV = () => (
 const FOOTER = () => (
   <footer style={{ background:'#0F2A4A',marginTop:'60px',padding:'28px 24px' }}>
     <div style={{ maxWidth:'1100px',margin:'0 auto',display:'flex',alignItems:'center',justifyContent:'space-between',flexWrap:'wrap',gap:'12px' }}>
-      <span style={{ fontFamily:"'Syne',sans-serif",fontSize:'16px',fontWeight:800,color:'white' }}>Convert<span style={{ color:'#F48C42' }}>Dox</span></span>
+      <span style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'16px',fontWeight:800,color:'white' }}>Convert<span style={{ color:'#F48C42' }}>Dox</span></span>
       <p style={{ color:'rgba(255,255,255,0.4)',fontSize:'13px',margin:0 }}>© 2025 ConvertDox</p>
       <div style={{ display:'flex',gap:'16px' }}>{['Privacy','Terms','All Tools'].map(l=><a key={l} href="#" style={{ color:'rgba(255,255,255,0.4)',fontSize:'13px',textDecoration:'none' }}>{l}</a>)}</div>
     </div>
@@ -86,7 +86,7 @@ export default function AgeCalculatorPage() {
         <div style={{ maxWidth:'1100px',margin:'0 auto',display:'flex',alignItems:'center',gap:'16px' }}>
           <div style={{ width:'56px',height:'56px',background:'rgba(232,93,4,0.2)',borderRadius:'14px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'28px',flexShrink:0 }}>🎂</div>
           <div>
-            <h1 style={{ fontFamily:"'Syne',sans-serif",fontSize:'clamp(24px,3vw,36px)',fontWeight:800,color:'white',margin:0 }}>Age Calculator</h1>
+            <h1 style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'clamp(24px,3vw,36px)',fontWeight:800,color:'white',margin:0 }}>Age Calculator</h1>
             <p style={{ color:'rgba(255,255,255,0.65)',fontSize:'15px',margin:'6px 0 0' }}>Calculate your exact age in years, months, days, weeks, and hours.</p>
           </div>
         </div>
@@ -118,7 +118,7 @@ export default function AgeCalculatorPage() {
             <div style={{ display:'flex',justifyContent:'center',gap:'20px',flexWrap:'wrap' }}>
               {[{num:r.years,label:'Years'},{num:r.months,label:'Months'},{num:r.days,label:'Days'}].map(item=>(
                 <div key={item.label} style={{ textAlign:'center' }}>
-                  <div style={{ fontFamily:"'Syne',sans-serif",fontSize:'clamp(36px,6vw,56px)',fontWeight:800,color:item.label==='Years'?'#F48C42':'white',lineHeight:1 }}>{item.num}</div>
+                  <div style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'clamp(36px,6vw,56px)',fontWeight:800,color:item.label==='Years'?'#F48C42':'white',lineHeight:1 }}>{item.num}</div>
                   <div style={{ fontSize:'13px',color:'rgba(255,255,255,0.5)',marginTop:'4px' }}>{item.label}</div>
                 </div>
               ))}
@@ -136,7 +136,7 @@ export default function AgeCalculatorPage() {
               <div key={s.label} style={{ background:s.bg,borderRadius:'14px',padding:'16px',display:'flex',alignItems:'center',gap:'12px' }}>
                 <span style={{ fontSize:'24px' }}>{s.icon}</span>
                 <div>
-                  <div style={{ fontFamily:"'Syne',sans-serif",fontSize:'22px',fontWeight:800,color:s.color,lineHeight:1 }}>{s.val}</div>
+                  <div style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'22px',fontWeight:800,color:s.color,lineHeight:1 }}>{s.val}</div>
                   <div style={{ fontSize:'12px',color:'#64748b',marginTop:'3px' }}>{s.label}</div>
                 </div>
               </div>

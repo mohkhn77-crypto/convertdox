@@ -59,7 +59,7 @@ export default function HomePage() {
         <div style={{ maxWidth:'1200px',margin:'0 auto',padding:'0 24px',height:'62px',display:'flex',alignItems:'center',justifyContent:'space-between',gap:'16px' }}>
           <a href="/" style={{ textDecoration:'none',display:'flex',alignItems:'center',gap:'9px',flexShrink:0 }}>
             <div style={{ width:'34px',height:'34px',background:'linear-gradient(135deg,#E85D04,#F48C42)',borderRadius:'9px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'17px' }}>📄</div>
-            <span style={{ fontFamily:"'Syne',sans-serif",fontSize:'19px',fontWeight:800,color:'#0F2A4A' }}>Convert<span style={{ color:'#E85D04' }}>Dox</span></span>
+            <span style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'19px',fontWeight:800,color:'#0F2A4A' }}>Convert<span style={{ color:'#E85D04' }}>Dox</span></span>
           </a>
           <div style={{ display:'flex',gap:'2px',overflow:'auto' }}>
             {['PDF Tools','Image Tools','AI Tools','Calculators','Text Tools'].map(item => (
@@ -80,7 +80,7 @@ export default function HomePage() {
             <span style={{ background:'#E85D04',borderRadius:'999px',padding:'1px 8px',fontWeight:700,color:'white',fontSize:'11px' }}>FREE</span>
             200+ Online Tools — No Sign-up Required
           </div>
-          <h1 style={{ fontFamily:"'Syne',sans-serif",fontSize:'clamp(32px,5vw,56px)',fontWeight:800,color:'white',lineHeight:1.15,letterSpacing:'-0.5px',marginBottom:'18px',margin:'0 0 18px' }}>
+          <h1 style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'clamp(32px,5vw,56px)',fontWeight:800,color:'white',lineHeight:1.15,letterSpacing:'-0.5px',marginBottom:'18px',margin:'0 0 18px' }}>
             Every Online Tool<br/>You Need —{' '}
             <span style={{ color:'#F48C42' }}>In One Place</span>
           </h1>
@@ -124,7 +124,7 @@ export default function HomePage() {
         <div style={{ maxWidth:'1200px',margin:'0 auto',display:'flex',justifyContent:'center',gap:'48px',flexWrap:'wrap' }}>
           {[{num:'200+',label:'Free Tools'},{num:'0',label:'Sign-up Required'},{num:'100%',label:'Free to Use'},{num:'∞',label:'No Limits'}].map(s => (
             <div key={s.label} style={{ textAlign:'center' }}>
-              <div style={{ fontFamily:"'Syne',sans-serif",fontSize:'22px',fontWeight:800,color:'#F48C42' }}>{s.num}</div>
+              <div style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'22px',fontWeight:800,color:'#F48C42' }}>{s.num}</div>
               <div style={{ fontSize:'11.5px',color:'rgba(255,255,255,0.45)',marginTop:'2px',textTransform:'uppercase',letterSpacing:'0.5px' }}>{s.label}</div>
             </div>
           ))}
@@ -136,7 +136,7 @@ export default function HomePage() {
 
         <div style={{ marginBottom:'28px' }}>
           <div style={{ fontSize:'12px',fontWeight:700,color:'#E85D04',textTransform:'uppercase',letterSpacing:'1px',marginBottom:'6px' }}>All Categories</div>
-          <h2 style={{ fontFamily:"'Syne',sans-serif",fontSize:'clamp(24px,3vw,34px)',fontWeight:800,color:'#0F2A4A',margin:'0 0 8px' }}>Free Online Tools</h2>
+          <h2 style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'clamp(24px,3vw,34px)',fontWeight:800,color:'#0F2A4A',margin:'0 0 8px' }}>Free Online Tools</h2>
           <p style={{ fontSize:'15px',color:'#64748b',margin:0 }}>No installation. Works instantly in your browser.</p>
         </div>
 
@@ -177,7 +177,7 @@ export default function HomePage() {
         {/* Coming Soon */}
         <div style={{ marginTop:'48px' }}>
           <div style={{ display:'flex',alignItems:'center',gap:'12px',marginBottom:'20px' }}>
-            <h2 style={{ fontFamily:"'Syne',sans-serif",fontSize:'22px',fontWeight:800,color:'#0F2A4A',margin:0 }}>Coming Soon</h2>
+            <h2 style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'22px',fontWeight:800,color:'#0F2A4A',margin:0 }}>Coming Soon</h2>
             <span style={{ background:'#FFF7ED',border:'1.5px solid #FED7AA',color:'#C2410C',fontSize:'12px',fontWeight:700,padding:'3px 10px',borderRadius:'999px' }}>Building now</span>
           </div>
           <div style={{ display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'14px' }}>
@@ -196,7 +196,7 @@ export default function HomePage() {
       <div style={{ background:'#f8fafc',padding:'56px 24px',borderTop:'1px solid #e2e8f0' }}>
         <div style={{ maxWidth:'1200px',margin:'0 auto' }}>
           <div style={{ textAlign:'center',marginBottom:'36px' }}>
-            <h2 style={{ fontFamily:"'Syne',sans-serif",fontSize:'clamp(22px,3vw,32px)',fontWeight:800,color:'#0F2A4A',marginBottom:'10px' }}>Why ConvertDox?</h2>
+            <h2 style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'clamp(22px,3vw,32px)',fontWeight:800,color:'#0F2A4A',marginBottom:'10px' }}>Why ConvertDox?</h2>
             <p style={{ fontSize:'16px',color:'#64748b',margin:0 }}>Built for speed, privacy, and simplicity</p>
           </div>
           <div style={{ display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'20px' }}>
@@ -225,7 +225,7 @@ export default function HomePage() {
             <div>
               <div style={{ display:'flex',alignItems:'center',gap:'8px',marginBottom:'14px' }}>
                 <div style={{ width:'30px',height:'30px',background:'#E85D04',borderRadius:'7px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'15px' }}>📄</div>
-                <span style={{ fontFamily:"'Syne',sans-serif",fontSize:'18px',fontWeight:800,color:'white' }}>Convert<span style={{ color:'#F48C42' }}>Dox</span></span>
+                <span style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'18px',fontWeight:800,color:'white' }}>Convert<span style={{ color:'#F48C42' }}>Dox</span></span>
               </div>
               <p style={{ fontSize:'13.5px',color:'rgba(255,255,255,0.4)',lineHeight:'1.7',maxWidth:'260px',margin:0 }}>Every online tool you need in one place. Free, fast, and private.</p>
             </div>

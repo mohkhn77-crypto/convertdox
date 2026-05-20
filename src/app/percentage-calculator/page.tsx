@@ -11,7 +11,7 @@ const NAV = () => (
     <div style={{ maxWidth:'1100px',margin:'0 auto',padding:'0 24px',height:'62px',display:'flex',alignItems:'center',justifyContent:'space-between' }}>
       <a href="/" style={{ textDecoration:'none',display:'flex',alignItems:'center',gap:'9px' }}>
         <div style={{ width:'34px',height:'34px',background:'linear-gradient(135deg,#E85D04,#F48C42)',borderRadius:'9px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'17px' }}>📄</div>
-        <span style={{ fontFamily:"'Syne',sans-serif",fontSize:'19px',fontWeight:800,color:'#0F2A4A' }}>Convert<span style={{ color:'#E85D04' }}>Dox</span></span>
+        <span style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'19px',fontWeight:800,color:'#0F2A4A' }}>Convert<span style={{ color:'#E85D04' }}>Dox</span></span>
       </a>
       <a href="/" style={{ fontSize:'13px',color:'#64748b',textDecoration:'none',fontWeight:500 }}>← All Tools</a>
     </div>
@@ -20,7 +20,7 @@ const NAV = () => (
 const FOOTER = () => (
   <footer style={{ background:'#0F2A4A',marginTop:'60px',padding:'28px 24px' }}>
     <div style={{ maxWidth:'1100px',margin:'0 auto',display:'flex',alignItems:'center',justifyContent:'space-between',flexWrap:'wrap',gap:'12px' }}>
-      <span style={{ fontFamily:"'Syne',sans-serif",fontSize:'16px',fontWeight:800,color:'white' }}>Convert<span style={{ color:'#F48C42' }}>Dox</span></span>
+      <span style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'16px',fontWeight:800,color:'white' }}>Convert<span style={{ color:'#F48C42' }}>Dox</span></span>
       <p style={{ color:'rgba(255,255,255,0.4)',fontSize:'13px',margin:0 }}>© 2025 ConvertDox</p>
       <div style={{ display:'flex',gap:'16px' }}>{['Privacy','Terms','All Tools'].map(l=><a key={l} href="#" style={{ color:'rgba(255,255,255,0.4)',fontSize:'13px',textDecoration:'none' }}>{l}</a>)}</div>
     </div>
@@ -73,7 +73,7 @@ export default function PercentageCalculatorPage() {
         <div style={{ maxWidth:'1100px',margin:'0 auto',display:'flex',alignItems:'center',gap:'16px' }}>
           <div style={{ width:'56px',height:'56px',background:'rgba(232,93,4,0.2)',borderRadius:'14px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'28px',flexShrink:0 }}>%</div>
           <div>
-            <h1 style={{ fontFamily:"'Syne',sans-serif",fontSize:'clamp(24px,3vw,36px)',fontWeight:800,color:'white',margin:0 }}>Percentage Calculator</h1>
+            <h1 style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'clamp(24px,3vw,36px)',fontWeight:800,color:'white',margin:0 }}>Percentage Calculator</h1>
             <p style={{ color:'rgba(255,255,255,0.65)',fontSize:'15px',margin:'6px 0 0' }}>Five different percentage calculations in one tool.</p>
           </div>
         </div>
@@ -111,7 +111,7 @@ export default function PercentageCalculatorPage() {
         {result ? (
           <div style={{ background:'linear-gradient(135deg,#0F2A4A,#1a3a5c)',borderRadius:'16px',padding:'28px',textAlign:'center',boxShadow:'0 8px 32px rgba(15,42,74,0.2)' }}>
             <div style={{ fontSize:'13px',color:'rgba(255,255,255,0.6)',fontWeight:600,textTransform:'uppercase',letterSpacing:'0.5px',marginBottom:'8px' }}>{result.label}</div>
-            <div style={{ fontFamily:"'Syne',sans-serif",fontSize:'52px',fontWeight:800,color: (result as any).positive===false?'#FCA5A5':(result as any).positive===true?'#86EFAC':'#F48C42',lineHeight:1 }}>
+            <div style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'52px',fontWeight:800,color: (result as any).positive===false?'#FCA5A5':(result as any).positive===true?'#86EFAC':'#F48C42',lineHeight:1 }}>
               {result.display}
             </div>
           </div>
@@ -124,7 +124,7 @@ export default function PercentageCalculatorPage() {
 
         {/* FAQ */}
         <div style={{ marginTop:'40px' }}>
-          <h2 style={{ fontFamily:"'Syne',sans-serif",fontSize:'20px',fontWeight:700,color:'#0F2A4A',marginBottom:'14px' }}>FAQ</h2>
+          <h2 style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'20px',fontWeight:700,color:'#0F2A4A',marginBottom:'14px' }}>FAQ</h2>
           {[{q:'How do I calculate 20% of a number?',a:'Multiply the number by 0.20. Example: 20% of 150 = 150 × 0.20 = 30. Or use the "% of Number" tab above.'},{q:'How do I find percentage change?',a:'Percentage change = ((New Value − Old Value) / Old Value) × 100. Use the "% Change" tab for instant results.'},{q:'What is percentage increase?',a:'Percentage increase = Original + (Original × Rate/100). Example: 200 increased by 25% = 200 + 50 = 250.'}].map((item,i)=>(
             <details key={i} style={{ border:'1.5px solid #e2e8f0',borderRadius:'12px',padding:'14px 18px',marginBottom:'8px',background:'white' }}>
               <summary style={{ fontWeight:700,fontSize:'14px',color:'#0F2A4A',cursor:'pointer',listStyle:'none',display:'flex',justifyContent:'space-between' }}>{item.q}<span style={{ color:'#E85D04',fontSize:'20px',fontWeight:300 }}>+</span></summary>

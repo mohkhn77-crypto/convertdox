@@ -98,7 +98,7 @@ export default function WordCounterPage() {
         <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 24px', height: '62px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <a href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '9px' }}>
             <div style={{ width: '34px', height: '34px', background: 'linear-gradient(135deg,#E85D04,#F48C42)', borderRadius: '9px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '17px', boxShadow: '0 2px 8px rgba(232,93,4,0.3)' }}>📄</div>
-            <span style={{ fontFamily: "'Syne', sans-serif", fontSize: '19px', fontWeight: 800, color: '#0F2A4A', letterSpacing: '-0.3px' }}>
+            <span style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: '19px', fontWeight: 800, color: '#0F2A4A', letterSpacing: '-0.3px' }}>
               Convert<span style={{ color: '#E85D04' }}>Dox</span>
             </span>
           </a>
@@ -119,7 +119,7 @@ export default function WordCounterPage() {
         <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', alignItems: 'center', gap: '16px' }}>
           <div style={{ width: '56px', height: '56px', background: 'rgba(232,93,4,0.2)', borderRadius: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '28px', flexShrink: 0 }}>📝</div>
           <div>
-            <h1 style={{ fontFamily: "'Syne', sans-serif", fontSize: 'clamp(24px,3vw,36px)', fontWeight: 800, color: 'white', margin: 0, letterSpacing: '-0.5px' }}>
+            <h1 style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: 'clamp(24px,3vw,36px)', fontWeight: 800, color: 'white', margin: 0, letterSpacing: '-0.5px' }}>
               Word & Character Counter
             </h1>
             <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '15px', margin: '6px 0 0', lineHeight: 1.5 }}>
@@ -146,7 +146,7 @@ export default function WordCounterPage() {
             { num: s.lines.toLocaleString(),         label: 'Lines',       color: '#0F2A4A', accent: '#FDF4FF' },
           ].map(item => (
             <div key={item.label} style={{ ...statCard(), background: item.accent }}>
-              <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 'clamp(22px,2.5vw,30px)', fontWeight: 800, color: item.color, lineHeight: 1 }}>
+              <div style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: 'clamp(22px,2.5vw,30px)', fontWeight: 800, color: item.color, lineHeight: 1 }}>
                 {item.num}
               </div>
               <div style={{ fontSize: '11.5px', color: '#64748b', marginTop: '5px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.4px' }}>
@@ -161,14 +161,14 @@ export default function WordCounterPage() {
           <div style={{ background: '#0F2A4A', borderRadius: '14px', padding: '16px 20px', display: 'flex', alignItems: 'center', gap: '14px' }}>
             <div style={{ width: '44px', height: '44px', background: 'rgba(255,255,255,0.1)', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '22px', flexShrink: 0 }}>📖</div>
             <div>
-              <div style={{ fontFamily: "'Syne', sans-serif", fontSize: '22px', fontWeight: 800, color: 'white' }}>{s.readTime}</div>
+              <div style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: '22px', fontWeight: 800, color: 'white' }}>{s.readTime}</div>
               <div style={{ fontSize: '12.5px', color: 'rgba(255,255,255,0.55)', marginTop: '2px' }}>Reading time · 200 words/min</div>
             </div>
           </div>
           <div style={{ background: '#E85D04', borderRadius: '14px', padding: '16px 20px', display: 'flex', alignItems: 'center', gap: '14px' }}>
             <div style={{ width: '44px', height: '44px', background: 'rgba(255,255,255,0.2)', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '22px', flexShrink: 0 }}>🎙</div>
             <div>
-              <div style={{ fontFamily: "'Syne', sans-serif", fontSize: '22px', fontWeight: 800, color: 'white' }}>{s.speakTime}</div>
+              <div style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: '22px', fontWeight: 800, color: 'white' }}>{s.speakTime}</div>
               <div style={{ fontSize: '12.5px', color: 'rgba(255,255,255,0.7)', marginTop: '2px' }}>Speaking time · 130 words/min</div>
             </div>
           </div>
@@ -243,7 +243,7 @@ export default function WordCounterPage() {
                         <span style={{ fontSize: '16px' }}>{item.icon}</span>
                         <span style={{ fontSize: '13px', fontWeight: 600, color: '#0F2A4A' }}>{item.label}</span>
                       </div>
-                      <span style={{ fontFamily: "'Syne', sans-serif", fontSize: '18px', fontWeight: 800, color: item.color }}>{item.val}</span>
+                      <span style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: '18px', fontWeight: 800, color: item.color }}>{item.val}</span>
                     </div>
                   ))}
                 </div>
@@ -306,7 +306,7 @@ export default function WordCounterPage() {
 
         {/* ── Related Tools ────────────────────────────────── */}
         <div style={{ marginTop: '40px' }}>
-          <h2 style={{ fontFamily: "'Syne', sans-serif", fontSize: '20px', fontWeight: 700, color: '#0F2A4A', marginBottom: '14px' }}>
+          <h2 style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: '20px', fontWeight: 700, color: '#0F2A4A', marginBottom: '14px' }}>
             Related Tools
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px' }}>
@@ -329,7 +329,7 @@ export default function WordCounterPage() {
 
         {/* ── FAQ ──────────────────────────────────────────── */}
         <div style={{ marginTop: '40px', maxWidth: '720px' }}>
-          <h2 style={{ fontFamily: "'Syne', sans-serif", fontSize: '20px', fontWeight: 700, color: '#0F2A4A', marginBottom: '14px' }}>
+          <h2 style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: '20px', fontWeight: 700, color: '#0F2A4A', marginBottom: '14px' }}>
             Frequently Asked Questions
           </h2>
           {[
@@ -354,7 +354,7 @@ export default function WordCounterPage() {
         <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <div style={{ width: '28px', height: '28px', background: '#E85D04', borderRadius: '7px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px' }}>📄</div>
-            <span style={{ fontFamily: "'Syne', sans-serif", fontSize: '16px', fontWeight: 800, color: 'white' }}>Convert<span style={{ color: '#F48C42' }}>Dox</span></span>
+            <span style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: '16px', fontWeight: 800, color: 'white' }}>Convert<span style={{ color: '#F48C42' }}>Dox</span></span>
           </div>
           <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: '13px' }}>© 2025 ConvertDox — Every Online Tool You Need</p>
           <div style={{ display: 'flex', gap: '16px' }}>

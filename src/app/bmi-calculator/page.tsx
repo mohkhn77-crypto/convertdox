@@ -11,7 +11,7 @@ const NAV = () => (
     <div style={{ maxWidth:'1100px',margin:'0 auto',padding:'0 24px',height:'62px',display:'flex',alignItems:'center',justifyContent:'space-between' }}>
       <a href="/" style={{ textDecoration:'none',display:'flex',alignItems:'center',gap:'9px' }}>
         <div style={{ width:'34px',height:'34px',background:'linear-gradient(135deg,#E85D04,#F48C42)',borderRadius:'9px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'17px',boxShadow:'0 2px 8px rgba(232,93,4,0.3)' }}>📄</div>
-        <span style={{ fontFamily:"'Syne',sans-serif",fontSize:'19px',fontWeight:800,color:'#0F2A4A' }}>Convert<span style={{ color:'#E85D04' }}>Dox</span></span>
+        <span style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'19px',fontWeight:800,color:'#0F2A4A' }}>Convert<span style={{ color:'#E85D04' }}>Dox</span></span>
       </a>
       <a href="/" style={{ fontSize:'13px',color:'#64748b',textDecoration:'none',fontWeight:500 }}>← All Tools</a>
     </div>
@@ -20,7 +20,7 @@ const NAV = () => (
 const FOOTER = () => (
   <footer style={{ background:'#0F2A4A',marginTop:'60px',padding:'28px 24px' }}>
     <div style={{ maxWidth:'1100px',margin:'0 auto',display:'flex',alignItems:'center',justifyContent:'space-between',flexWrap:'wrap',gap:'12px' }}>
-      <span style={{ fontFamily:"'Syne',sans-serif",fontSize:'16px',fontWeight:800,color:'white' }}>Convert<span style={{ color:'#F48C42' }}>Dox</span></span>
+      <span style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'16px',fontWeight:800,color:'white' }}>Convert<span style={{ color:'#F48C42' }}>Dox</span></span>
       <p style={{ color:'rgba(255,255,255,0.4)',fontSize:'13px',margin:0 }}>© 2025 ConvertDox — Every Online Tool You Need</p>
       <div style={{ display:'flex',gap:'16px' }}>{['Privacy','Terms','All Tools'].map(l=><a key={l} href="#" style={{ color:'rgba(255,255,255,0.4)',fontSize:'13px',textDecoration:'none' }}>{l}</a>)}</div>
     </div>
@@ -75,7 +75,7 @@ export default function BMICalculatorPage() {
         <div style={{ maxWidth:'1100px',margin:'0 auto',display:'flex',alignItems:'center',gap:'16px' }}>
           <div style={{ width:'56px',height:'56px',background:'rgba(232,93,4,0.2)',borderRadius:'14px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'28px',flexShrink:0 }}>⚖️</div>
           <div>
-            <h1 style={{ fontFamily:"'Syne',sans-serif",fontSize:'clamp(24px,3vw,36px)',fontWeight:800,color:'white',margin:0 }}>BMI Calculator</h1>
+            <h1 style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'clamp(24px,3vw,36px)',fontWeight:800,color:'white',margin:0 }}>BMI Calculator</h1>
             <p style={{ color:'rgba(255,255,255,0.65)',fontSize:'15px',margin:'6px 0 0' }}>Calculate your Body Mass Index instantly. Supports metric and imperial units.</p>
           </div>
         </div>
@@ -138,7 +138,7 @@ export default function BMICalculatorPage() {
             {bmiR && info ? (
               <div style={{ background:info.bg,border:`2px solid ${info.border}`,borderRadius:'20px',padding:'24px',textAlign:'center' }}>
                 <div style={{ fontSize:'13px',fontWeight:700,color:info.color,textTransform:'uppercase',letterSpacing:'0.5px',marginBottom:'8px' }}>Your BMI</div>
-                <div style={{ fontFamily:"'Syne',sans-serif",fontSize:'64px',fontWeight:800,color:info.color,lineHeight:1 }}>{bmiR}</div>
+                <div style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'64px',fontWeight:800,color:info.color,lineHeight:1 }}>{bmiR}</div>
                 <div style={{ fontSize:'18px',fontWeight:700,color:info.color,marginTop:'10px',marginBottom:'16px' }}>{info.label}</div>
 
                 {/* Gauge bar */}
@@ -176,7 +176,7 @@ export default function BMICalculatorPage() {
 
         {/* FAQ */}
         <div style={{ marginTop:'40px' }}>
-          <h2 style={{ fontFamily:"'Syne',sans-serif",fontSize:'20px',fontWeight:700,color:'#0F2A4A',marginBottom:'14px' }}>FAQ</h2>
+          <h2 style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'20px',fontWeight:700,color:'#0F2A4A',marginBottom:'14px' }}>FAQ</h2>
           {[{q:'What is a healthy BMI?',a:'A BMI between 18.5 and 24.9 is considered normal weight for most adults.'},{q:'Is BMI accurate?',a:'BMI is a useful screening tool but has limitations — it doesn\'t account for muscle mass, bone density, or body fat distribution. Always consult a doctor for medical advice.'},{q:'How is BMI calculated?',a:'BMI = weight(kg) ÷ height(m)². In imperial: BMI = (weight(lbs) ÷ height(in)²) × 703.'}].map((item,i)=>(
             <details key={i} style={{ border:'1.5px solid #e2e8f0',borderRadius:'12px',padding:'14px 18px',marginBottom:'8px',background:'white' }}>
               <summary style={{ fontWeight:700,fontSize:'14px',color:'#0F2A4A',cursor:'pointer',listStyle:'none',display:'flex',justifyContent:'space-between',alignItems:'center' }}>{item.q}<span style={{ color:'#E85D04',fontSize:'20px',fontWeight:300 }}>+</span></summary>
