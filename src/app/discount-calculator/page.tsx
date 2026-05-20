@@ -12,7 +12,7 @@ const NAV = () => (
     <div style={{ maxWidth:'1100px',margin:'0 auto',padding:'0 24px',height:'62px',display:'flex',alignItems:'center',justifyContent:'space-between' }}>
       <a href="/" style={{ textDecoration:'none',display:'flex',alignItems:'center',gap:'9px' }}>
         <div style={{ width:'34px',height:'34px',background:'linear-gradient(135deg,#E85D04,#F48C42)',borderRadius:'9px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'17px' }}>📄</div>
-        <span style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'19px',fontWeight:800,color:'#0F2A4A' }}>Convert<span style={{ color:'#E85D04' }}>Dox</span></span>
+        <span style={{ fontFamily:"'Space Grotesk', system-ui, sans-serif",fontSize:'19px',fontWeight:800,color:'#0F2A4A' }}>Convert<span style={{ color:'#E85D04' }}>Dox</span></span>
       </a>
       <a href="/" style={{ fontSize:'13px',color:'#64748b',textDecoration:'none',fontWeight:500 }}>← All Tools</a>
     </div>
@@ -21,7 +21,7 @@ const NAV = () => (
 const FOOTER = () => (
   <footer style={{ background:'#0F2A4A',marginTop:'60px',padding:'28px 24px' }}>
     <div style={{ maxWidth:'1100px',margin:'0 auto',display:'flex',alignItems:'center',justifyContent:'space-between',flexWrap:'wrap',gap:'12px' }}>
-      <span style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'16px',fontWeight:800,color:'white' }}>Convert<span style={{ color:'#F48C42' }}>Dox</span></span>
+      <span style={{ fontFamily:"'Space Grotesk', system-ui, sans-serif",fontSize:'16px',fontWeight:800,color:'white' }}>Convert<span style={{ color:'#F48C42' }}>Dox</span></span>
       <p style={{ color:'rgba(255,255,255,0.4)',fontSize:'13px',margin:0 }}>© 2025 ConvertDox</p>
       <div style={{ display:'flex',gap:'16px' }}>{['Privacy','Terms','All Tools'].map(l=><a key={l} href="#" style={{ color:'rgba(255,255,255,0.4)',fontSize:'13px',textDecoration:'none' }}>{l}</a>)}</div>
     </div>
@@ -48,7 +48,7 @@ export default function DiscountCalculatorPage() {
         <div style={{ maxWidth:'1100px',margin:'0 auto',display:'flex',alignItems:'center',gap:'16px' }}>
           <div style={{ width:'56px',height:'56px',background:'rgba(232,93,4,0.2)',borderRadius:'14px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'28px',flexShrink:0 }}>🏷</div>
           <div>
-            <h1 style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'clamp(24px,3vw,36px)',fontWeight:800,color:'white',margin:0 }}>Discount Calculator</h1>
+            <h1 style={{ fontFamily:"'Space Grotesk', system-ui, sans-serif",fontSize:'clamp(24px,3vw,36px)',fontWeight:800,color:'white',margin:0 }}>Discount Calculator</h1>
             <p style={{ color:'rgba(255,255,255,0.65)',fontSize:'15px',margin:'6px 0 0' }}>Find the sale price, savings amount, and percentage saved instantly.</p>
           </div>
         </div>
@@ -95,15 +95,15 @@ export default function DiscountCalculatorPage() {
           <div style={{ display:'grid',gridTemplateColumns:'1fr 1fr',gap:'12px' }}>
             <div style={{ background:'#FEF2F2',border:'2px solid #FECACA',borderRadius:'14px',padding:'18px',textAlign:'center' }}>
               <div style={{ fontSize:'12.5px',color:'#DC2626',fontWeight:600,textTransform:'uppercase',letterSpacing:'0.5px',marginBottom:'6px' }}>You Save</div>
-              <div style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'30px',fontWeight:800,color:'#DC2626' }}>${savings.toFixed(2)}</div>
+              <div style={{ fontFamily:"'Space Grotesk', system-ui, sans-serif",fontSize:'30px',fontWeight:800,color:'#DC2626' }}>${savings.toFixed(2)}</div>
             </div>
             <div style={{ background:'#F0FDF4',border:'2px solid #BBF7D0',borderRadius:'14px',padding:'18px',textAlign:'center' }}>
               <div style={{ fontSize:'12.5px',color:'#16A34A',fontWeight:600,textTransform:'uppercase',letterSpacing:'0.5px',marginBottom:'6px' }}>% Saved</div>
-              <div style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'30px',fontWeight:800,color:'#16A34A' }}>{pctSaved.toFixed(1)}%</div>
+              <div style={{ fontFamily:"'Space Grotesk', system-ui, sans-serif",fontSize:'30px',fontWeight:800,color:'#16A34A' }}>{pctSaved.toFixed(1)}%</div>
             </div>
             <div style={{ gridColumn:'1/-1',background:'linear-gradient(135deg,#0F2A4A,#1a3a5c)',borderRadius:'14px',padding:'20px',textAlign:'center' }}>
               <div style={{ fontSize:'13px',color:'rgba(255,255,255,0.6)',fontWeight:600,textTransform:'uppercase',letterSpacing:'0.5px',marginBottom:'6px' }}>Final Price</div>
-              <div style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'44px',fontWeight:800,color:'#F48C42' }}>${finalPrice.toFixed(2)}</div>
+              <div style={{ fontFamily:"'Space Grotesk', system-ui, sans-serif",fontSize:'44px',fontWeight:800,color:'#F48C42' }}>${finalPrice.toFixed(2)}</div>
             </div>
           </div>
         </div>

@@ -11,7 +11,7 @@ const NAV = () => (
     <div style={{ maxWidth:'1100px',margin:'0 auto',padding:'0 24px',height:'62px',display:'flex',alignItems:'center',justifyContent:'space-between' }}>
       <a href="/" style={{ textDecoration:'none',display:'flex',alignItems:'center',gap:'9px' }}>
         <div style={{ width:'34px',height:'34px',background:'linear-gradient(135deg,#E85D04,#F48C42)',borderRadius:'9px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'17px',boxShadow:'0 2px 8px rgba(232,93,4,0.3)' }}>📄</div>
-        <span style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'19px',fontWeight:800,color:'#0F2A4A' }}>Convert<span style={{ color:'#E85D04' }}>Dox</span></span>
+        <span style={{ fontFamily:"'Space Grotesk', system-ui, sans-serif",fontSize:'19px',fontWeight:800,color:'#0F2A4A' }}>Convert<span style={{ color:'#E85D04' }}>Dox</span></span>
       </a>
       <a href="/" style={{ fontSize:'13px',color:'#64748b',textDecoration:'none',fontWeight:500 }}>← All Tools</a>
     </div>
@@ -21,7 +21,7 @@ const NAV = () => (
 const FOOTER = () => (
   <footer style={{ background:'#0F2A4A',marginTop:'60px',padding:'28px 24px' }}>
     <div style={{ maxWidth:'1100px',margin:'0 auto',display:'flex',alignItems:'center',justifyContent:'space-between',flexWrap:'wrap',gap:'12px' }}>
-      <span style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'16px',fontWeight:800,color:'white' }}>Convert<span style={{ color:'#F48C42' }}>Dox</span></span>
+      <span style={{ fontFamily:"'Space Grotesk', system-ui, sans-serif",fontSize:'16px',fontWeight:800,color:'white' }}>Convert<span style={{ color:'#F48C42' }}>Dox</span></span>
       <p style={{ color:'rgba(255,255,255,0.4)',fontSize:'13px',margin:0 }}>© 2025 ConvertDox — Every Online Tool You Need</p>
       <div style={{ display:'flex',gap:'16px' }}>
         {['Privacy','Terms','All Tools'].map(l=><a key={l} href="#" style={{ color:'rgba(255,255,255,0.4)',fontSize:'13px',textDecoration:'none' }}>{l}</a>)}
@@ -54,7 +54,7 @@ export default function TipCalculatorPage() {
         <div style={{ maxWidth:'1100px',margin:'0 auto',display:'flex',alignItems:'center',gap:'16px' }}>
           <div style={{ width:'56px',height:'56px',background:'rgba(232,93,4,0.2)',borderRadius:'14px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'28px',flexShrink:0 }}>🍽</div>
           <div>
-            <h1 style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'clamp(24px,3vw,36px)',fontWeight:800,color:'white',margin:0 }}>Tip Calculator</h1>
+            <h1 style={{ fontFamily:"'Space Grotesk', system-ui, sans-serif",fontSize:'clamp(24px,3vw,36px)',fontWeight:800,color:'white',margin:0 }}>Tip Calculator</h1>
             <p style={{ color:'rgba(255,255,255,0.65)',fontSize:'15px',margin:'6px 0 0' }}>Calculate tip and split the bill instantly. Never do restaurant math again.</p>
           </div>
         </div>
@@ -98,7 +98,7 @@ export default function TipCalculatorPage() {
             <div style={{ display:'flex',alignItems:'center',gap:'16px' }}>
               <button onClick={()=>setPeople(Math.max(1,people-1))} style={{ width:'44px',height:'44px',borderRadius:'50%',border:'2px solid #e2e8f0',background:'white',fontSize:'22px',cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center',fontWeight:700,transition:'all 0.15s' }}>−</button>
               <div style={{ textAlign:'center',minWidth:'60px' }}>
-                <div style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'32px',fontWeight:800,color:'#0F2A4A',lineHeight:1 }}>{people}</div>
+                <div style={{ fontFamily:"'Space Grotesk', system-ui, sans-serif",fontSize:'32px',fontWeight:800,color:'#0F2A4A',lineHeight:1 }}>{people}</div>
                 <div style={{ fontSize:'12px',color:'#94a3b8',marginTop:'3px' }}>{people===1?'person':'people'}</div>
               </div>
               <button onClick={()=>setPeople(people+1)} style={{ width:'44px',height:'44px',borderRadius:'50%',border:'2px solid #e2e8f0',background:'white',fontSize:'22px',cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center',fontWeight:700,transition:'all 0.15s' }}>+</button>
@@ -112,26 +112,26 @@ export default function TipCalculatorPage() {
           <div style={{ display:'grid',gridTemplateColumns:'1fr 1fr',gap:'12px' }}>
             <div style={{ background:'#FFF7ED',border:'2px solid #FED7AA',borderRadius:'14px',padding:'18px',textAlign:'center' }}>
               <div style={{ fontSize:'13px',color:'#C2410C',fontWeight:600,textTransform:'uppercase',letterSpacing:'0.5px',marginBottom:'6px' }}>Tip Amount</div>
-              <div style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'32px',fontWeight:800,color:'#C2410C' }}>${tip.toFixed(2)}</div>
+              <div style={{ fontFamily:"'Space Grotesk', system-ui, sans-serif",fontSize:'32px',fontWeight:800,color:'#C2410C' }}>${tip.toFixed(2)}</div>
             </div>
             <div style={{ background:'#F0FDF4',border:'2px solid #BBF7D0',borderRadius:'14px',padding:'18px',textAlign:'center' }}>
               <div style={{ fontSize:'13px',color:'#166534',fontWeight:600,textTransform:'uppercase',letterSpacing:'0.5px',marginBottom:'6px' }}>Total Bill</div>
-              <div style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'32px',fontWeight:800,color:'#166534' }}>${total.toFixed(2)}</div>
+              <div style={{ fontFamily:"'Space Grotesk', system-ui, sans-serif",fontSize:'32px',fontWeight:800,color:'#166534' }}>${total.toFixed(2)}</div>
             </div>
             {people>1 && <>
               <div style={{ background:'#EFF6FF',border:'2px solid #BFDBFE',borderRadius:'14px',padding:'18px',textAlign:'center' }}>
                 <div style={{ fontSize:'13px',color:'#1D4ED8',fontWeight:600,textTransform:'uppercase',letterSpacing:'0.5px',marginBottom:'6px' }}>Tip / Person</div>
-                <div style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'28px',fontWeight:800,color:'#1D4ED8' }}>${tipPer.toFixed(2)}</div>
+                <div style={{ fontFamily:"'Space Grotesk', system-ui, sans-serif",fontSize:'28px',fontWeight:800,color:'#1D4ED8' }}>${tipPer.toFixed(2)}</div>
               </div>
               <div style={{ background:'#0F2A4A',borderRadius:'14px',padding:'18px',textAlign:'center' }}>
                 <div style={{ fontSize:'13px',color:'rgba(255,255,255,0.6)',fontWeight:600,textTransform:'uppercase',letterSpacing:'0.5px',marginBottom:'6px' }}>Each Person Pays</div>
-                <div style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'28px',fontWeight:800,color:'white' }}>${perP.toFixed(2)}</div>
+                <div style={{ fontFamily:"'Space Grotesk', system-ui, sans-serif",fontSize:'28px',fontWeight:800,color:'white' }}>${perP.toFixed(2)}</div>
               </div>
             </>}
             {people===1 && (
               <div style={{ gridColumn:'1/-1',background:'linear-gradient(135deg,#0F2A4A,#1a3a5c)',borderRadius:'14px',padding:'20px',textAlign:'center' }}>
                 <div style={{ fontSize:'13px',color:'rgba(255,255,255,0.6)',fontWeight:600,textTransform:'uppercase',letterSpacing:'0.5px',marginBottom:'6px' }}>You Pay Total</div>
-                <div style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'40px',fontWeight:800,color:'white' }}>${total.toFixed(2)}</div>
+                <div style={{ fontFamily:"'Space Grotesk', system-ui, sans-serif",fontSize:'40px',fontWeight:800,color:'white' }}>${total.toFixed(2)}</div>
               </div>
             )}
           </div>
@@ -139,7 +139,7 @@ export default function TipCalculatorPage() {
 
         {/* Related */}
         <div style={{ marginTop:'36px' }}>
-          <h2 style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'20px',fontWeight:700,color:'#0F2A4A',marginBottom:'14px' }}>Related Tools</h2>
+          <h2 style={{ fontFamily:"'Space Grotesk', system-ui, sans-serif",fontSize:'20px',fontWeight:700,color:'#0F2A4A',marginBottom:'14px' }}>Related Tools</h2>
           <div style={{ display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'12px' }}>
             {[{href:'/percentage-calculator',icon:'%',name:'Percentage Calculator',desc:'Quick % math'},{href:'/discount-calculator',icon:'🏷',name:'Discount Calculator',desc:'Sale price finder'},{href:'/bmi-calculator',icon:'⚖️',name:'BMI Calculator',desc:'Body mass index'}].map(t=>(
               <a key={t.href} href={t.href} style={{ background:'white',border:'1.5px solid #e2e8f0',borderRadius:'12px',padding:'14px',textDecoration:'none',display:'flex',gap:'10px',alignItems:'flex-start',boxShadow:'0 2px 8px rgba(15,42,74,0.04)' }}>
@@ -152,7 +152,7 @@ export default function TipCalculatorPage() {
 
         {/* FAQ */}
         <div style={{ marginTop:'36px' }}>
-          <h2 style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'20px',fontWeight:700,color:'#0F2A4A',marginBottom:'14px' }}>FAQ</h2>
+          <h2 style={{ fontFamily:"'Space Grotesk', system-ui, sans-serif",fontSize:'20px',fontWeight:700,color:'#0F2A4A',marginBottom:'14px' }}>FAQ</h2>
           {[{q:'How much should I tip?',a:'Standard in the US is 15-20% for sit-down restaurants. 10% for takeout. 20-25% for exceptional service.'},{q:'How does the bill split work?',a:'Enter the number of people and we divide the total (bill + tip) equally among everyone.'},{q:'Is this calculator free?',a:'Yes, 100% free forever. No sign-up needed.'}].map((item,i)=>(
             <details key={i} style={{ border:'1.5px solid #e2e8f0',borderRadius:'12px',padding:'14px 18px',marginBottom:'8px',background:'white' }}>
               <summary style={{ fontWeight:700,fontSize:'14px',color:'#0F2A4A',cursor:'pointer',listStyle:'none',display:'flex',justifyContent:'space-between',alignItems:'center' }}>{item.q}<span style={{ color:'#E85D04',fontSize:'20px',fontWeight:300 }}>+</span></summary>

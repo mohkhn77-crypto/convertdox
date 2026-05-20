@@ -11,7 +11,7 @@ const NAV = () => (
     <div style={{ maxWidth:'1100px',margin:'0 auto',padding:'0 24px',height:'62px',display:'flex',alignItems:'center',justifyContent:'space-between' }}>
       <a href="/" style={{ textDecoration:'none',display:'flex',alignItems:'center',gap:'9px' }}>
         <div style={{ width:'34px',height:'34px',background:'linear-gradient(135deg,#E85D04,#F48C42)',borderRadius:'9px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'17px' }}>📄</div>
-        <span style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'19px',fontWeight:800,color:'#0F2A4A' }}>Convert<span style={{ color:'#E85D04' }}>Dox</span></span>
+        <span style={{ fontFamily:"'Space Grotesk', system-ui, sans-serif",fontSize:'19px',fontWeight:800,color:'#0F2A4A' }}>Convert<span style={{ color:'#E85D04' }}>Dox</span></span>
       </a>
       <a href="/" style={{ fontSize:'13px',color:'#64748b',textDecoration:'none',fontWeight:500 }}>← All Tools</a>
     </div>
@@ -20,7 +20,7 @@ const NAV = () => (
 const FOOTER = () => (
   <footer style={{ background:'#0F2A4A',marginTop:'60px',padding:'28px 24px' }}>
     <div style={{ maxWidth:'1100px',margin:'0 auto',display:'flex',alignItems:'center',justifyContent:'space-between',flexWrap:'wrap',gap:'12px' }}>
-      <span style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'16px',fontWeight:800,color:'white' }}>Convert<span style={{ color:'#F48C42' }}>Dox</span></span>
+      <span style={{ fontFamily:"'Space Grotesk', system-ui, sans-serif",fontSize:'16px',fontWeight:800,color:'white' }}>Convert<span style={{ color:'#F48C42' }}>Dox</span></span>
       <p style={{ color:'rgba(255,255,255,0.4)',fontSize:'13px',margin:0 }}>© 2025 ConvertDox</p>
       <div style={{ display:'flex',gap:'16px' }}>{['Privacy','Terms','All Tools'].map(l=><a key={l} href="#" style={{ color:'rgba(255,255,255,0.4)',fontSize:'13px',textDecoration:'none' }}>{l}</a>)}</div>
     </div>
@@ -81,7 +81,7 @@ export default function PasswordGeneratorPage() {
         <div style={{ maxWidth:'1100px',margin:'0 auto',display:'flex',alignItems:'center',gap:'16px' }}>
           <div style={{ width:'56px',height:'56px',background:'rgba(232,93,4,0.2)',borderRadius:'14px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'28px',flexShrink:0 }}>🔑</div>
           <div>
-            <h1 style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'clamp(24px,3vw,36px)',fontWeight:800,color:'white',margin:0 }}>Password Generator</h1>
+            <h1 style={{ fontFamily:"'Space Grotesk', system-ui, sans-serif",fontSize:'clamp(24px,3vw,36px)',fontWeight:800,color:'white',margin:0 }}>Password Generator</h1>
             <p style={{ color:'rgba(255,255,255,0.65)',fontSize:'15px',margin:'6px 0 0' }}>Generate secure, cryptographically random passwords instantly. Nothing leaves your browser.</p>
           </div>
         </div>
@@ -117,7 +117,7 @@ export default function PasswordGeneratorPage() {
           <div style={{ marginBottom:'24px' }}>
             <div style={{ display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'10px' }}>
               <label style={{ fontSize:'14px',fontWeight:700,color:'#0F2A4A' }}>Password Length</label>
-              <div style={{ background:'#0F2A4A',color:'white',borderRadius:'8px',padding:'4px 12px',fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'18px',fontWeight:800 }}>{length}</div>
+              <div style={{ background:'#0F2A4A',color:'white',borderRadius:'8px',padding:'4px 12px',fontFamily:"'Space Grotesk', system-ui, sans-serif",fontSize:'18px',fontWeight:800 }}>{length}</div>
             </div>
             <input type="range" min="4" max="64" value={length} onChange={e=>setLength(parseInt(e.target.value))} style={{ width:'100%',accentColor:'#E85D04',height:'6px',cursor:'pointer' }}/>
             <div style={{ display:'flex',justifyContent:'space-between',fontSize:'11.5px',color:'#94a3b8',marginTop:'5px' }}>
