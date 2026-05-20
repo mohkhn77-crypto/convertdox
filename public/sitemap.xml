@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- Homepage -->
   <url>
     <loc>https://convertdox.com</loc>
     <changefreq>weekly</changefreq>
@@ -9,100 +8,37 @@
   </url>
 
   <!-- Text Tools -->
-  <url>
-    <loc>https://convertdox.com/word-counter</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://convertdox.com/text-case-converter</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://convertdox.com/lorem-ipsum</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
+  <url><loc>https://convertdox.com/word-counter</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://convertdox.com/text-case-converter</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://convertdox.com/lorem-ipsum</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://convertdox.com/markdown-editor</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
 
   <!-- Calculator Tools -->
-  <url>
-    <loc>https://convertdox.com/tip-calculator</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://convertdox.com/bmi-calculator</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://convertdox.com/percentage-calculator</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://convertdox.com/age-calculator</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://convertdox.com/discount-calculator</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
+  <url><loc>https://convertdox.com/tip-calculator</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://convertdox.com/bmi-calculator</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://convertdox.com/percentage-calculator</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://convertdox.com/age-calculator</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://convertdox.com/discount-calculator</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://convertdox.com/unit-converter</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
 
   <!-- Security Tools -->
-  <url>
-    <loc>https://convertdox.com/password-generator</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
+  <url><loc>https://convertdox.com/password-generator</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
 
   <!-- QR Tools -->
-  <url>
-    <loc>https://convertdox.com/qr-generator</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
+  <url><loc>https://convertdox.com/qr-generator</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
 
   <!-- Colour Tools -->
-  <url>
-    <loc>https://convertdox.com/hex-rgb-converter</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
+  <url><loc>https://convertdox.com/hex-rgb-converter</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://convertdox.com/css-gradient</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
 
   <!-- Developer Tools -->
-  <url>
-    <loc>https://convertdox.com/json-formatter</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
+  <url><loc>https://convertdox.com/json-formatter</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://convertdox.com/base64-encoder</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://convertdox.com/url-encoder</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
 
-  <url>
-    <loc>https://convertdox.com/base64-encoder</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Fun Tools -->
-  <url>
-    <loc>https://convertdox.com/random-number-generator</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://convertdox.com/coin-flip</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
+  <!-- Fun & Random Tools -->
+  <url><loc>https://convertdox.com/random-number-generator</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://convertdox.com/coin-flip</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://convertdox.com/stopwatch</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
 
 </urlset>
