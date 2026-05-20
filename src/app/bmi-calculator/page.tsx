@@ -10,7 +10,7 @@ const NAV = () => (
   <nav style={{ position:'sticky',top:0,zIndex:100,background:'rgba(255,255,255,0.97)',backdropFilter:'blur(12px)',borderBottom:'1px solid #e2e8f0',boxShadow:'0 1px 8px rgba(15,42,74,0.06)' }}>
     <div style={{ maxWidth:'1100px',margin:'0 auto',padding:'0 24px',height:'62px',display:'flex',alignItems:'center',justifyContent:'space-between' }}>
       <a href="/" style={{ textDecoration:'none',display:'flex',alignItems:'center',gap:'9px' }}>
-        <div style={{ width:'44px',height:'44px',background:'#0F2A4A',borderRadius:'10px',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0 }}><svg width='28' height='28' viewBox='0 0 44 44' fill='none'><rect x='6' y='10' width='13' height='17' rx='2' fill='white' opacity='0.95'/><rect x='25' y='17' width='13' height='17' rx='2' fill='#E85D04'/><path d='M20 22h4M21 20l3 2-3 2' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/></svg></div>
+        <div style={{ width:'44px',height:'44px',background:'#0F2A4A',borderRadius:'10px',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0 }}><svg width='28' height='28' viewBox='0 0 44 44' fill='none'><rect x='6' y='10' width='13' height='17' rx='2' fill='white' opacity='0.95'/><rect x='25' y='17' width='13' height='17' rx='2' fill='#E85D04'/><path d='M20 22h4M21 20l3 2-3 2' stroke='white' strokeWidth='1.8' strokeLinecap='round' strokeLinejoin='round'/></svg></div>
         <span style={{ fontFamily:"'Space Grotesk', system-ui, sans-serif",fontSize:'30px',fontWeight:800,color:'#0F2A4A' }}>Convert<span style={{ color:'#E85D04' }}>Dox</span></span>
       </a>
       <a href="/" style={{ fontSize:'13px',color:'#64748b',textDecoration:'none',fontWeight:500 }}>← All Tools</a>
