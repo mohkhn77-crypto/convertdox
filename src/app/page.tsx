@@ -1,8 +1,3 @@
-/*
-  ConvertDox — Homepage
-  PUT IN: src/app/page.tsx
-  REPLACE everything in this file with this code
-*/
 'use client'
 import { useState } from 'react'
 
@@ -18,22 +13,22 @@ const TOOLS = [
 ]
 
 const COMING = [
-  { icon:'📱', title:'QR Code Generator',     desc:'URL, WiFi, email QR codes' },
-  { icon:'🎨', title:'HEX ↔ RGB Converter',   desc:'Color code converter' },
-  { icon:'{}', title:'JSON Formatter',         desc:'Format & validate JSON' },
-  { icon:'📄', title:'Lorem Ipsum Generator',  desc:'Placeholder text generator' },
-  { icon:'🎲', title:'Random Number Gen',      desc:'Random numbers with ranges' },
-  { icon:'📄', title:'PDF to Word',            desc:'Convert PDF to editable Word' },
-  { icon:'🖼', title:'Image Compressor',       desc:'Reduce image size instantly' },
-  { icon:'✂️', title:'Background Remover',     desc:'AI removes image backgrounds' },
+  { icon:'📱', title:'QR Code Generator',    desc:'URL, WiFi, email QR codes' },
+  { icon:'🎨', title:'HEX to RGB Converter', desc:'Color code converter' },
+  { icon:'{}', title:'JSON Formatter',        desc:'Format & validate JSON' },
+  { icon:'📄', title:'Lorem Ipsum',           desc:'Placeholder text generator' },
+  { icon:'🎲', title:'Random Number Gen',     desc:'Random numbers with ranges' },
+  { icon:'📄', title:'PDF to Word',           desc:'Convert PDF to editable Word' },
+  { icon:'🖼', title:'Image Compressor',      desc:'Reduce image size instantly' },
+  { icon:'✂️', title:'Background Remover',    desc:'AI removes image backgrounds' },
 ]
 
 export default function HomePage() {
   const [activeCat, setActiveCat] = useState('all')
-  const [search, setSearch]       = useState('')
+  const [search, setSearch] = useState('')
 
   const filtered = TOOLS.filter(t => {
-    const matchCat    = activeCat === 'all' || t.cat === activeCat
+    const matchCat = activeCat === 'all' || t.cat === activeCat
     const matchSearch = search === '' ||
       t.title.toLowerCase().includes(search.toLowerCase()) ||
       t.desc.toLowerCase().includes(search.toLowerCase())
@@ -52,14 +47,13 @@ export default function HomePage() {
   ]
 
   return (
-    <div style={{ minHeight:'100vh', background:'#ffffff', fontFamily:"'Plus Jakarta Sans',system-ui,sans-serif" }}>
+    <div style={{ minHeight:'100vh', background:'#fff', fontFamily:"'Plus Jakarta Sans',system-ui,sans-serif" }}>
 
-      {/* NAV */}
       <nav style={{ position:'sticky',top:0,zIndex:100,background:'rgba(255,255,255,0.97)',backdropFilter:'blur(12px)',borderBottom:'1px solid #e2e8f0',boxShadow:'0 1px 8px rgba(15,42,74,0.06)' }}>
         <div style={{ maxWidth:'1200px',margin:'0 auto',padding:'0 24px',height:'62px',display:'flex',alignItems:'center',justifyContent:'space-between',gap:'16px' }}>
           <a href="/" style={{ textDecoration:'none',display:'flex',alignItems:'center',gap:'9px',flexShrink:0 }}>
             <div style={{ width:'34px',height:'34px',background:'linear-gradient(135deg,#E85D04,#F48C42)',borderRadius:'9px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'17px' }}>📄</div>
-            <span style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'19px',fontWeight:800,color:'#0F2A4A' }}>Convert<span style={{ color:'#E85D04' }}>Dox</span></span>
+            <span style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'19px',fontWeight:800,color:'#0F2A4A' }}>Convert<span style={{ color:'#E85D04' }}>Dox</span></span>
           </a>
           <div style={{ display:'flex',gap:'2px',overflow:'auto' }}>
             {['PDF Tools','Image Tools','AI Tools','Calculators','Text Tools'].map(item => (
@@ -73,74 +67,50 @@ export default function HomePage() {
         </div>
       </nav>
 
-      {/* HERO */}
-      <div style={{ background:'linear-gradient(135deg,#0F2A4A 0%,#1a3a5c 100%)',padding:'80px 24px 64px',textAlign:'center' }}>
+      <div style={{ background:'linear-gradient(135deg,#0F2A4A,#1a3a5c)',padding:'80px 24px 64px',textAlign:'center' }}>
         <div style={{ maxWidth:'760px',margin:'0 auto' }}>
           <div style={{ display:'inline-flex',alignItems:'center',gap:'6px',background:'rgba(255,255,255,0.1)',border:'1px solid rgba(255,255,255,0.2)',borderRadius:'999px',padding:'5px 16px',fontSize:'13px',color:'rgba(255,255,255,0.85)',marginBottom:'28px' }}>
             <span style={{ background:'#E85D04',borderRadius:'999px',padding:'1px 8px',fontWeight:700,color:'white',fontSize:'11px' }}>FREE</span>
             200+ Online Tools — No Sign-up Required
           </div>
-          <h1 style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'clamp(32px,5vw,56px)',fontWeight:800,color:'white',lineHeight:1.15,letterSpacing:'-0.5px',marginBottom:'18px',margin:'0 0 18px' }}>
+          <h1 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'clamp(32px,5vw,56px)',fontWeight:800,color:'white',lineHeight:1.15,letterSpacing:'-0.5px',margin:'0 0 18px' }}>
             Every Online Tool<br/>You Need —{' '}
             <span style={{ color:'#F48C42' }}>In One Place</span>
           </h1>
           <p style={{ fontSize:'clamp(15px,2vw,18px)',color:'rgba(255,255,255,0.65)',maxWidth:'540px',margin:'0 auto 40px',lineHeight:1.7 }}>
-            PDF, Image, AI, Calculators, Text, QR Code and 200+ more tools.
-            Free. Fast. No installation needed.
+            PDF, Image, AI, Calculators, Text, QR Code and 200+ more tools. Free. Fast. No installation.
           </p>
-
-          {/* Search */}
           <div style={{ maxWidth:'500px',margin:'0 auto 36px',position:'relative' }}>
             <span style={{ position:'absolute',left:'16px',top:'50%',transform:'translateY(-50%)',fontSize:'18px',pointerEvents:'none' }}>🔍</span>
-            <input
-              type="text"
-              value={search}
-              onChange={e => setSearch(e.target.value)}
+            <input type="text" value={search} onChange={e => setSearch(e.target.value)}
               placeholder="Search tools — BMI Calculator, Word Counter..."
-              style={{ width:'100%',padding:'15px 20px 15px 48px',borderRadius:'14px',border:'1px solid rgba(255,255,255,0.25)',background:'rgba(255,255,255,0.12)',fontFamily:'inherit',fontSize:'15px',color:'white',outline:'none',boxSizing:'border-box' }}
-            />
+              style={{ width:'100%',padding:'15px 20px 15px 48px',borderRadius:'14px',border:'1px solid rgba(255,255,255,0.25)',background:'rgba(255,255,255,0.12)',fontFamily:'inherit',fontSize:'15px',color:'white',outline:'none',boxSizing:'border-box' }}/>
           </div>
-
-          {/* Quick links */}
           <div style={{ display:'flex',flexWrap:'wrap',justifyContent:'center',gap:'8px' }}>
-            {[
-              { label:'📝 Word Counter',       href:'/word-counter' },
-              { label:'⚖️ BMI Calculator',     href:'/bmi-calculator' },
-              { label:'🍽 Tip Calculator',     href:'/tip-calculator' },
-              { label:'🔑 Password Generator', href:'/password-generator' },
-              { label:'% Percentage Calc',     href:'/percentage-calculator' },
-              { label:'🎂 Age Calculator',     href:'/age-calculator' },
-            ].map(item => (
-              <a key={item.href} href={item.href} style={{ background:'rgba(255,255,255,0.1)',border:'1px solid rgba(255,255,255,0.2)',borderRadius:'999px',padding:'7px 16px',fontSize:'13px',color:'rgba(255,255,255,0.9)',textDecoration:'none',whiteSpace:'nowrap' }}>
-                {item.label}
-              </a>
+            {[{label:'📝 Word Counter',href:'/word-counter'},{label:'⚖️ BMI Calculator',href:'/bmi-calculator'},{label:'🍽 Tip Calculator',href:'/tip-calculator'},{label:'🔑 Password Gen',href:'/password-generator'},{label:'% Percentage',href:'/percentage-calculator'},{label:'🎂 Age Calc',href:'/age-calculator'}].map(item => (
+              <a key={item.href} href={item.href} style={{ background:'rgba(255,255,255,0.1)',border:'1px solid rgba(255,255,255,0.2)',borderRadius:'999px',padding:'7px 16px',fontSize:'13px',color:'rgba(255,255,255,0.9)',textDecoration:'none',whiteSpace:'nowrap' }}>{item.label}</a>
             ))}
           </div>
         </div>
       </div>
 
-      {/* STATS */}
       <div style={{ background:'#0a1f38',padding:'16px 24px' }}>
         <div style={{ maxWidth:'1200px',margin:'0 auto',display:'flex',justifyContent:'center',gap:'48px',flexWrap:'wrap' }}>
           {[{num:'200+',label:'Free Tools'},{num:'0',label:'Sign-up Required'},{num:'100%',label:'Free to Use'},{num:'∞',label:'No Limits'}].map(s => (
             <div key={s.label} style={{ textAlign:'center' }}>
-              <div style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'22px',fontWeight:800,color:'#F48C42' }}>{s.num}</div>
+              <div style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'22px',fontWeight:800,color:'#F48C42' }}>{s.num}</div>
               <div style={{ fontSize:'11.5px',color:'rgba(255,255,255,0.45)',marginTop:'2px',textTransform:'uppercase',letterSpacing:'0.5px' }}>{s.label}</div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* TOOLS */}
       <div id="tools" style={{ maxWidth:'1200px',margin:'0 auto',padding:'56px 24px' }}>
-
         <div style={{ marginBottom:'28px' }}>
           <div style={{ fontSize:'12px',fontWeight:700,color:'#E85D04',textTransform:'uppercase',letterSpacing:'1px',marginBottom:'6px' }}>All Categories</div>
-          <h2 style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'clamp(24px,3vw,34px)',fontWeight:800,color:'#0F2A4A',margin:'0 0 8px' }}>Free Online Tools</h2>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'clamp(24px,3vw,34px)',fontWeight:800,color:'#0F2A4A',margin:'0 0 8px' }}>Free Online Tools</h2>
           <p style={{ fontSize:'15px',color:'#64748b',margin:0 }}>No installation. Works instantly in your browser.</p>
         </div>
-
-        {/* Category tabs */}
         <div style={{ display:'flex',gap:'6px',flexWrap:'wrap',marginBottom:'28px' }}>
           {cats.map(cat => (
             <button key={cat.id} onClick={() => setActiveCat(cat.id)}
@@ -149,13 +119,10 @@ export default function HomePage() {
             </button>
           ))}
         </div>
-
-        {/* Tool cards */}
         {filtered.length > 0 ? (
           <div style={{ display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'14px',marginBottom:'14px' }}>
             {filtered.map(tool => (
-              <a key={tool.href} href={tool.href}
-                style={{ background:'white',border:'1.5px solid #e2e8f0',borderRadius:'16px',padding:'20px',textDecoration:'none',display:'flex',flexDirection:'column',gap:'12px',boxShadow:'0 2px 8px rgba(15,42,74,0.04)' }}>
+              <a key={tool.href} href={tool.href} style={{ background:'white',border:'1.5px solid #e2e8f0',borderRadius:'16px',padding:'20px',textDecoration:'none',display:'flex',flexDirection:'column',gap:'12px',boxShadow:'0 2px 8px rgba(15,42,74,0.04)' }}>
                 <div style={{ width:'44px',height:'44px',background:'#FFF7ED',borderRadius:'11px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'22px' }}>{tool.icon}</div>
                 <div>
                   <div style={{ fontSize:'14px',fontWeight:700,color:'#0F2A4A',marginBottom:'4px' }}>{tool.title}</div>
@@ -173,11 +140,9 @@ export default function HomePage() {
             <p>No tools found for "{search}"</p>
           </div>
         )}
-
-        {/* Coming Soon */}
         <div style={{ marginTop:'48px' }}>
           <div style={{ display:'flex',alignItems:'center',gap:'12px',marginBottom:'20px' }}>
-            <h2 style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'22px',fontWeight:800,color:'#0F2A4A',margin:0 }}>Coming Soon</h2>
+            <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'22px',fontWeight:800,color:'#0F2A4A',margin:0 }}>Coming Soon</h2>
             <span style={{ background:'#FFF7ED',border:'1.5px solid #FED7AA',color:'#C2410C',fontSize:'12px',fontWeight:700,padding:'3px 10px',borderRadius:'999px' }}>Building now</span>
           </div>
           <div style={{ display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'14px' }}>
@@ -192,48 +157,33 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* WHY SECTION */}
       <div style={{ background:'#f8fafc',padding:'56px 24px',borderTop:'1px solid #e2e8f0' }}>
-        <div style={{ maxWidth:'1200px',margin:'0 auto' }}>
-          <div style={{ textAlign:'center',marginBottom:'36px' }}>
-            <h2 style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'clamp(22px,3vw,32px)',fontWeight:800,color:'#0F2A4A',marginBottom:'10px' }}>Why ConvertDox?</h2>
-            <p style={{ fontSize:'16px',color:'#64748b',margin:0 }}>Built for speed, privacy, and simplicity</p>
-          </div>
-          <div style={{ display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'20px' }}>
-            {[
-              { icon:'⚡', title:'Instant Results',   desc:'All tools work in real time. Results appear as you type — no loading screens.' },
-              { icon:'🔒', title:'100% Private',       desc:'Your files and text stay in your browser. Nothing uploaded to any server.' },
-              { icon:'🆓', title:'Always Free',        desc:'Core tools are free forever. No credit card, no sign-up, no hidden fees.' },
-              { icon:'📱', title:'Works Everywhere',   desc:'Fully responsive — works perfectly on phone, tablet, and desktop.' },
-              { icon:'⚙️', title:'200+ Tools',         desc:'PDF, Image, AI, Text, Calculators, QR, Security — all in one place.' },
-              { icon:'🚀', title:'No Installation',    desc:'Open your browser, use the tool. No apps to download or install ever.' },
-            ].map(f => (
-              <div key={f.title} style={{ background:'white',border:'1.5px solid #e2e8f0',borderRadius:'16px',padding:'24px' }}>
-                <div style={{ fontSize:'28px',marginBottom:'12px' }}>{f.icon}</div>
-                <div style={{ fontSize:'15px',fontWeight:700,color:'#0F2A4A',marginBottom:'8px' }}>{f.title}</div>
-                <div style={{ fontSize:'13.5px',color:'#64748b',lineHeight:'1.6' }}>{f.desc}</div>
-              </div>
-            ))}
-          </div>
+        <div style={{ maxWidth:'1200px',margin:'0 auto',textAlign:'center',marginBottom:'36px' }}>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'clamp(22px,3vw,32px)',fontWeight:800,color:'#0F2A4A',marginBottom:'10px' }}>Why ConvertDox?</h2>
+          <p style={{ fontSize:'16px',color:'#64748b',margin:0 }}>Built for speed, privacy, and simplicity</p>
+        </div>
+        <div style={{ maxWidth:'1200px',margin:'0 auto',display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'20px' }}>
+          {[{icon:'⚡',title:'Instant Results',desc:'All tools work in real time. Results appear as you type.'},{icon:'🔒',title:'100% Private',desc:'Your files stay in your browser. Nothing uploaded to any server.'},{icon:'🆓',title:'Always Free',desc:'Core tools are free forever. No credit card or sign-up.'},{icon:'📱',title:'Works Everywhere',desc:'Fully responsive on phone, tablet, and desktop.'},{icon:'⚙️',title:'200+ Tools',desc:'PDF, Image, AI, Text, Calculators, QR — all in one place.'},{icon:'🚀',title:'No Installation',desc:'Open your browser and use the tool. Nothing to download.'}].map(f => (
+            <div key={f.title} style={{ background:'white',border:'1.5px solid #e2e8f0',borderRadius:'16px',padding:'24px' }}>
+              <div style={{ fontSize:'28px',marginBottom:'12px' }}>{f.icon}</div>
+              <div style={{ fontSize:'15px',fontWeight:700,color:'#0F2A4A',marginBottom:'8px' }}>{f.title}</div>
+              <div style={{ fontSize:'13.5px',color:'#64748b',lineHeight:'1.6' }}>{f.desc}</div>
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* FOOTER */}
       <footer style={{ background:'#0F2A4A',padding:'48px 24px 28px' }}>
         <div style={{ maxWidth:'1200px',margin:'0 auto' }}>
           <div style={{ display:'grid',gridTemplateColumns:'2fr 1fr 1fr 1fr',gap:'40px',marginBottom:'40px' }}>
             <div>
               <div style={{ display:'flex',alignItems:'center',gap:'8px',marginBottom:'14px' }}>
                 <div style={{ width:'30px',height:'30px',background:'#E85D04',borderRadius:'7px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'15px' }}>📄</div>
-                <span style={{ fontFamily:'Space Grotesk', system-ui, sans-serif,fontSize:'18px',fontWeight:800,color:'white' }}>Convert<span style={{ color:'#F48C42' }}>Dox</span></span>
+                <span style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'18px',fontWeight:800,color:'white' }}>Convert<span style={{ color:'#F48C42' }}>Dox</span></span>
               </div>
               <p style={{ fontSize:'13.5px',color:'rgba(255,255,255,0.4)',lineHeight:'1.7',maxWidth:'260px',margin:0 }}>Every online tool you need in one place. Free, fast, and private.</p>
             </div>
-            {[
-              { title:'Tools',      links:['Word Counter','BMI Calculator','Tip Calculator','Password Generator','Age Calculator'] },
-              { title:'Categories', links:['PDF Tools','Image Tools','AI Tools','Calculators','Text Tools'] },
-              { title:'Company',    links:['About','Privacy Policy','Terms of Use','Contact'] },
-            ].map(col => (
+            {[{title:'Tools',links:['Word Counter','BMI Calculator','Tip Calculator','Password Generator','Age Calculator']},{title:'Categories',links:['PDF Tools','Image Tools','AI Tools','Calculators','Text Tools']},{title:'Company',links:['About','Privacy Policy','Terms of Use','Contact']}].map(col => (
               <div key={col.title}>
                 <div style={{ fontSize:'12px',fontWeight:700,color:'rgba(255,255,255,0.45)',textTransform:'uppercase',letterSpacing:'0.8px',marginBottom:'14px' }}>{col.title}</div>
                 {col.links.map(link => (
@@ -252,7 +202,6 @@ export default function HomePage() {
           </div>
         </div>
       </footer>
-
     </div>
   )
 }
