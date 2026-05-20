@@ -3,7 +3,7 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: 'ConvertDox — Every Online Tool You Need',
-  description: 'Free online tools — PDF, Image, AI, Calculator, Text, QR and 200+ more.',
+  description: 'Free online tools — PDF, Image, AI, Calculator, Text, QR and 200+ more. Free, fast, no signup needed.',
   keywords: 'online tools, pdf converter, image tools, calculator, word counter, qr generator',
 }
 
@@ -17,6 +17,7 @@ export default function RootLayout({
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="google-site-verification" content="mLMYPJpfYqdB5u1Dsc7GFINCVxFR8sTxS2yhzaytrTQ" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
