@@ -97,8 +97,8 @@ export default function WordCounterPage() {
       }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 24px', height: '62px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <a href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '9px' }}>
-            <div style={{ width: '34px', height: '34px', background: 'linear-gradient(135deg,#E85D04,#F48C42)', borderRadius: '9px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '17px', boxShadow: '0 2px 8px rgba(232,93,4,0.3)' }}>📄</div>
-            <span style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: '19px', fontWeight: 800, color: '#0F2A4A', letterSpacing: '-0.3px' }}>
+            <div style={{ width: '44px', height: '44px', background: '#0F2A4A', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><svg width='28' height='28' viewBox='0 0 44 44' fill='none'><rect x='6' y='10' width='13' height='17' rx='2' fill='white' opacity='0.95'/><rect x='25' y='17' width='13' height='17' rx='2' fill='#E85D04'/><polygon points='20,20 24,22 20,24' fill='white'/></svg></div>
+            <span style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: '30px', fontWeight: 800, color: '#0F2A4A', letterSpacing: '-0.3px' }}>
               Convert<span style={{ color: '#E85D04' }}>Dox</span>
             </span>
           </a>
