@@ -1,26 +1,50 @@
+/*
+  ConvertDox — Homepage (Updated with all 15 tools)
+  PUT IN: src/app/page.tsx — REPLACE everything
+*/
 'use client'
 import { useState } from 'react'
 
 const TOOLS = [
-  { icon:'📝', title:'Word Counter',          desc:'Count words, chars & reading time',       href:'/word-counter',          cat:'text' },
-  { icon:'🔤', title:'Text Case Converter',   desc:'UPPER, lower, Title, camelCase & more',   href:'/text-case-converter',   cat:'text' },
-  { icon:'🍽', title:'Tip Calculator',        desc:'Split bills and calculate tips instantly', href:'/tip-calculator',        cat:'calc' },
-  { icon:'⚖️', title:'BMI Calculator',        desc:'Body mass index — metric & imperial',     href:'/bmi-calculator',        cat:'calc' },
-  { icon:'%',  title:'Percentage Calculator', desc:'5 types of percentage calculations',      href:'/percentage-calculator', cat:'calc' },
-  { icon:'🎂', title:'Age Calculator',        desc:'Exact age + zodiac sign + next birthday', href:'/age-calculator',        cat:'calc' },
-  { icon:'🏷', title:'Discount Calculator',   desc:'Find sale price and savings instantly',   href:'/discount-calculator',   cat:'calc' },
-  { icon:'🔑', title:'Password Generator',    desc:'Cryptographically secure passwords',      href:'/password-generator',    cat:'security' },
+  { icon:'📝', title:'Word Counter',            desc:'Count words, chars & reading time',       href:'/word-counter',              cat:'text' },
+  { icon:'🔤', title:'Text Case Converter',     desc:'UPPER, lower, Title, camelCase & more',   href:'/text-case-converter',       cat:'text' },
+  { icon:'📄', title:'Lorem Ipsum Generator',   desc:'Placeholder text for designs',            href:'/lorem-ipsum',               cat:'text' },
+  { icon:'🍽', title:'Tip Calculator',          desc:'Split bills and calculate tips',          href:'/tip-calculator',            cat:'calc' },
+  { icon:'⚖️', title:'BMI Calculator',          desc:'Body mass index — metric & imperial',     href:'/bmi-calculator',            cat:'calc' },
+  { icon:'%',  title:'Percentage Calculator',   desc:'5 types of percentage calculations',      href:'/percentage-calculator',     cat:'calc' },
+  { icon:'🎂', title:'Age Calculator',          desc:'Exact age + zodiac + next birthday',      href:'/age-calculator',            cat:'calc' },
+  { icon:'🏷', title:'Discount Calculator',     desc:'Find sale price and savings instantly',   href:'/discount-calculator',       cat:'calc' },
+  { icon:'🔑', title:'Password Generator',      desc:'Cryptographically secure passwords',      href:'/password-generator',        cat:'security' },
+  { icon:'📱', title:'QR Code Generator',       desc:'URL, WiFi, email QR codes — free',        href:'/qr-generator',              cat:'qr' },
+  { icon:'🎨', title:'HEX ↔ RGB Converter',     desc:'Convert between colour code formats',     href:'/hex-rgb-converter',         cat:'color' },
+  { icon:'{}', title:'JSON Formatter',          desc:'Format, validate and minify JSON',        href:'/json-formatter',            cat:'dev' },
+  { icon:'🎲', title:'Random Number Generator', desc:'Random numbers in any range',             href:'/random-number-generator',   cat:'fun' },
+  { icon:'🔐', title:'Base64 Encoder/Decoder',  desc:'Encode text or decode Base64 strings',    href:'/base64-encoder',            cat:'dev' },
+  { icon:'🪙', title:'Coin Flip & Dice Roller', desc:'Flip coins, roll any dice',               href:'/coin-flip',                 cat:'fun' },
 ]
 
 const COMING = [
-  { icon:'📱', title:'QR Code Generator',    desc:'URL, WiFi, email QR codes' },
-  { icon:'🎨', title:'HEX to RGB Converter', desc:'Color code converter' },
-  { icon:'{}', title:'JSON Formatter',        desc:'Format & validate JSON' },
-  { icon:'📄', title:'Lorem Ipsum',           desc:'Placeholder text generator' },
-  { icon:'🎲', title:'Random Number Gen',     desc:'Random numbers with ranges' },
   { icon:'📄', title:'PDF to Word',           desc:'Convert PDF to editable Word' },
   { icon:'🖼', title:'Image Compressor',      desc:'Reduce image size instantly' },
   { icon:'✂️', title:'Background Remover',    desc:'AI removes image backgrounds' },
+  { icon:'📊', title:'CSV to JSON',           desc:'Convert spreadsheet data' },
+  { icon:'🔗', title:'URL Shortener',         desc:'Shorten long URLs' },
+  { icon:'📧', title:'Email Validator',       desc:'Validate email addresses' },
+  { icon:'🌐', title:'IP Address Lookup',     desc:'Find IP location info' },
+  { icon:'⏱', title:'Stopwatch & Timer',     desc:'Online stopwatch and timer' },
+]
+
+const CATS = [
+  { id:'all',      label:'🔥 All Tools' },
+  { id:'text',     label:'✍ Text' },
+  { id:'calc',     label:'🔢 Calculators' },
+  { id:'security', label:'🔒 Security' },
+  { id:'dev',      label:'💻 Developer' },
+  { id:'qr',       label:'📱 QR Code' },
+  { id:'color',    label:'🎨 Colour' },
+  { id:'fun',      label:'🎲 Fun & Random' },
+  { id:'pdf',      label:'📄 PDF Tools' },
+  { id:'image',    label:'🖼 Image' },
 ]
 
 export default function HomePage() {
@@ -35,24 +59,20 @@ export default function HomePage() {
     return matchCat && matchSearch
   })
 
-  const cats = [
-    { id:'all',      label:'🔥 All Tools' },
-    { id:'text',     label:'✍ Text Tools' },
-    { id:'calc',     label:'🔢 Calculators' },
-    { id:'security', label:'🔒 Security' },
-    { id:'pdf',      label:'📄 PDF Tools' },
-    { id:'image',    label:'🖼 Image Tools' },
-    { id:'ai',       label:'🤖 AI Tools' },
-    { id:'dev',      label:'💻 Developer' },
-  ]
-
   return (
     <div style={{ minHeight:'100vh', background:'#fff', fontFamily:"'Plus Jakarta Sans',system-ui,sans-serif" }}>
 
+      {/* NAV */}
       <nav style={{ position:'sticky',top:0,zIndex:100,background:'rgba(255,255,255,0.97)',backdropFilter:'blur(12px)',borderBottom:'1px solid #e2e8f0',boxShadow:'0 1px 8px rgba(15,42,74,0.06)' }}>
         <div style={{ maxWidth:'1200px',margin:'0 auto',padding:'0 24px',height:'62px',display:'flex',alignItems:'center',justifyContent:'space-between',gap:'16px' }}>
           <a href="/" style={{ textDecoration:'none',display:'flex',alignItems:'center',gap:'9px',flexShrink:0 }}>
-            <div style={{ width:'44px',height:'44px',background:'#0F2A4A',borderRadius:'10px',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0 }}><svg width="28" height="28" viewBox="0 0 44 44" fill="none"><rect x="6" y="10" width="13" height="17" rx="2" fill="white" opacity="0.95"/><rect x="7" y="14" width="7" height="1.5" rx="0.75" fill="#0F2A4A" opacity="0.35"/><rect x="7" y="17" width="5" height="1.5" rx="0.75" fill="#0F2A4A" opacity="0.35"/><rect x="7" y="20" width="6" height="1.5" rx="0.75" fill="#0F2A4A" opacity="0.35"/><rect x="25" y="17" width="13" height="17" rx="2" fill="#E85D04"/><rect x="26" y="21" width="7" height="1.5" rx="0.75" fill="white" opacity="0.5"/><rect x="26" y="24" width="5" height="1.5" rx="0.75" fill="white" opacity="0.5"/><rect x="26" y="27" width="6" height="1.5" rx="0.75" fill="white" opacity="0.5"/><path d="M20 22h4M21 20l3 2-3 2" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg></div>
+            <div style={{ width:'44px',height:'44px',background:'#0F2A4A',borderRadius:'10px',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0 }}>
+              <svg width="28" height="28" viewBox="0 0 44 44" fill="none">
+                <rect x="6" y="10" width="13" height="17" rx="2" fill="white" opacity="0.95"/>
+                <rect x="25" y="17" width="13" height="17" rx="2" fill="#E85D04"/>
+                <polygon points="20,20 24,22 20,24" fill="white"/>
+              </svg>
+            </div>
             <span style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'30px',fontWeight:800,color:'#0F2A4A' }}>Convert<span style={{ color:'#E85D04' }}>Dox</span></span>
           </a>
           <div style={{ display:'flex',gap:'2px',overflow:'auto' }}>
@@ -67,6 +87,7 @@ export default function HomePage() {
         </div>
       </nav>
 
+      {/* HERO */}
       <div style={{ background:'linear-gradient(135deg,#0F2A4A,#1a3a5c)',padding:'80px 24px 64px',textAlign:'center' }}>
         <div style={{ maxWidth:'760px',margin:'0 auto' }}>
           <div style={{ display:'inline-flex',alignItems:'center',gap:'6px',background:'rgba(255,255,255,0.1)',border:'1px solid rgba(255,255,255,0.2)',borderRadius:'999px',padding:'5px 16px',fontSize:'13px',color:'rgba(255,255,255,0.85)',marginBottom:'28px' }}>
@@ -83,20 +104,28 @@ export default function HomePage() {
           <div style={{ maxWidth:'500px',margin:'0 auto 36px',position:'relative' }}>
             <span style={{ position:'absolute',left:'16px',top:'50%',transform:'translateY(-50%)',fontSize:'18px',pointerEvents:'none' }}>🔍</span>
             <input type="text" value={search} onChange={e => setSearch(e.target.value)}
-              placeholder="Search tools — BMI Calculator, Word Counter..."
+              placeholder="Search 15+ tools — QR Code, BMI, Word Counter..."
               style={{ width:'100%',padding:'15px 20px 15px 48px',borderRadius:'14px',border:'1px solid rgba(255,255,255,0.25)',background:'rgba(255,255,255,0.12)',fontFamily:'inherit',fontSize:'15px',color:'white',outline:'none',boxSizing:'border-box' }}/>
           </div>
           <div style={{ display:'flex',flexWrap:'wrap',justifyContent:'center',gap:'8px' }}>
-            {[{label:'📝 Word Counter',href:'/word-counter'},{label:'⚖️ BMI Calculator',href:'/bmi-calculator'},{label:'🍽 Tip Calculator',href:'/tip-calculator'},{label:'🔑 Password Gen',href:'/password-generator'},{label:'% Percentage',href:'/percentage-calculator'},{label:'🎂 Age Calc',href:'/age-calculator'}].map(item => (
+            {[
+              { label:'📝 Word Counter', href:'/word-counter' },
+              { label:'⚖️ BMI Calculator', href:'/bmi-calculator' },
+              { label:'📱 QR Generator', href:'/qr-generator' },
+              { label:'🔑 Password Gen', href:'/password-generator' },
+              { label:'🎲 Random Number', href:'/random-number-generator' },
+              { label:'🔐 Base64', href:'/base64-encoder' },
+            ].map(item => (
               <a key={item.href} href={item.href} style={{ background:'rgba(255,255,255,0.1)',border:'1px solid rgba(255,255,255,0.2)',borderRadius:'999px',padding:'7px 16px',fontSize:'13px',color:'rgba(255,255,255,0.9)',textDecoration:'none',whiteSpace:'nowrap' }}>{item.label}</a>
             ))}
           </div>
         </div>
       </div>
 
+      {/* STATS */}
       <div style={{ background:'#0a1f38',padding:'16px 24px' }}>
         <div style={{ maxWidth:'1200px',margin:'0 auto',display:'flex',justifyContent:'center',gap:'48px',flexWrap:'wrap' }}>
-          {[{num:'200+',label:'Free Tools'},{num:'0',label:'Sign-up Required'},{num:'100%',label:'Free to Use'},{num:'∞',label:'No Limits'}].map(s => (
+          {[{num:'15+',label:'Tools Live'},{num:'200+',label:'Coming Soon'},{num:'100%',label:'Free to Use'},{num:'0',label:'Sign-up Needed'}].map(s => (
             <div key={s.label} style={{ textAlign:'center' }}>
               <div style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'22px',fontWeight:800,color:'#F48C42' }}>{s.num}</div>
               <div style={{ fontSize:'11.5px',color:'rgba(255,255,255,0.45)',marginTop:'2px',textTransform:'uppercase',letterSpacing:'0.5px' }}>{s.label}</div>
@@ -105,24 +134,28 @@ export default function HomePage() {
         </div>
       </div>
 
+      {/* TOOLS */}
       <div id="tools" style={{ maxWidth:'1200px',margin:'0 auto',padding:'56px 24px' }}>
         <div style={{ marginBottom:'28px' }}>
           <div style={{ fontSize:'12px',fontWeight:700,color:'#E85D04',textTransform:'uppercase',letterSpacing:'1px',marginBottom:'6px' }}>All Categories</div>
           <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'clamp(24px,3vw,34px)',fontWeight:800,color:'#0F2A4A',margin:'0 0 8px' }}>Free Online Tools</h2>
           <p style={{ fontSize:'15px',color:'#64748b',margin:0 }}>No installation. Works instantly in your browser.</p>
         </div>
+
         <div style={{ display:'flex',gap:'6px',flexWrap:'wrap',marginBottom:'28px' }}>
-          {cats.map(cat => (
+          {CATS.map(cat => (
             <button key={cat.id} onClick={() => setActiveCat(cat.id)}
               style={{ padding:'8px 16px',borderRadius:'999px',border:'1.5px solid',borderColor:activeCat===cat.id?'#0F2A4A':'#e2e8f0',background:activeCat===cat.id?'#0F2A4A':'white',color:activeCat===cat.id?'white':'#64748b',fontFamily:'inherit',fontSize:'13px',fontWeight:600,cursor:'pointer',whiteSpace:'nowrap' }}>
               {cat.label}
             </button>
           ))}
         </div>
+
         {filtered.length > 0 ? (
           <div style={{ display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'14px',marginBottom:'14px' }}>
             {filtered.map(tool => (
-              <a key={tool.href} href={tool.href} style={{ background:'white',border:'1.5px solid #e2e8f0',borderRadius:'16px',padding:'20px',textDecoration:'none',display:'flex',flexDirection:'column',gap:'12px',boxShadow:'0 2px 8px rgba(15,42,74,0.04)' }}>
+              <a key={tool.href} href={tool.href}
+                style={{ background:'white',border:'1.5px solid #e2e8f0',borderRadius:'16px',padding:'20px',textDecoration:'none',display:'flex',flexDirection:'column',gap:'12px',boxShadow:'0 2px 8px rgba(15,42,74,0.04)' }}>
                 <div style={{ width:'44px',height:'44px',background:'#FFF7ED',borderRadius:'11px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'22px' }}>{tool.icon}</div>
                 <div>
                   <div style={{ fontSize:'14px',fontWeight:700,color:'#0F2A4A',marginBottom:'4px' }}>{tool.title}</div>
@@ -140,9 +173,11 @@ export default function HomePage() {
             <p>No tools found for "{search}"</p>
           </div>
         )}
+
+        {/* Coming Soon */}
         <div style={{ marginTop:'48px' }}>
           <div style={{ display:'flex',alignItems:'center',gap:'12px',marginBottom:'20px' }}>
-            <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'30px',fontWeight:800,color:'#0F2A4A',margin:0 }}>Coming Soon</h2>
+            <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'22px',fontWeight:800,color:'#0F2A4A',margin:0 }}>Coming Soon</h2>
             <span style={{ background:'#FFF7ED',border:'1.5px solid #FED7AA',color:'#C2410C',fontSize:'12px',fontWeight:700,padding:'3px 10px',borderRadius:'999px' }}>Building now</span>
           </div>
           <div style={{ display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'14px' }}>
@@ -157,13 +192,21 @@ export default function HomePage() {
         </div>
       </div>
 
+      {/* WHY */}
       <div style={{ background:'#f8fafc',padding:'56px 24px',borderTop:'1px solid #e2e8f0' }}>
         <div style={{ maxWidth:'1200px',margin:'0 auto',textAlign:'center',marginBottom:'36px' }}>
           <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'clamp(22px,3vw,32px)',fontWeight:800,color:'#0F2A4A',marginBottom:'10px' }}>Why ConvertDox?</h2>
           <p style={{ fontSize:'16px',color:'#64748b',margin:0 }}>Built for speed, privacy, and simplicity</p>
         </div>
         <div style={{ maxWidth:'1200px',margin:'0 auto',display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'20px' }}>
-          {[{icon:'⚡',title:'Instant Results',desc:'All tools work in real time. Results appear as you type.'},{icon:'🔒',title:'100% Private',desc:'Your files stay in your browser. Nothing uploaded to any server.'},{icon:'🆓',title:'Always Free',desc:'Core tools are free forever. No credit card or sign-up.'},{icon:'📱',title:'Works Everywhere',desc:'Fully responsive on phone, tablet, and desktop.'},{icon:'⚙️',title:'200+ Tools',desc:'PDF, Image, AI, Text, Calculators, QR — all in one place.'},{icon:'🚀',title:'No Installation',desc:'Open your browser and use the tool. Nothing to download.'}].map(f => (
+          {[
+            { icon:'⚡', title:'Instant Results',   desc:'All tools work in real time. Results appear as you type.' },
+            { icon:'🔒', title:'100% Private',       desc:'Your files stay in your browser. Nothing uploaded to any server.' },
+            { icon:'🆓', title:'Always Free',        desc:'Core tools are free forever. No credit card or sign-up.' },
+            { icon:'📱', title:'Works Everywhere',   desc:'Fully responsive on phone, tablet, and desktop.' },
+            { icon:'⚙️', title:'200+ Tools',         desc:'PDF, Image, AI, Text, Calculators, QR — all in one place.' },
+            { icon:'🚀', title:'No Installation',    desc:'Open your browser and use the tool. Nothing to download.' },
+          ].map(f => (
             <div key={f.title} style={{ background:'white',border:'1.5px solid #e2e8f0',borderRadius:'16px',padding:'24px' }}>
               <div style={{ fontSize:'28px',marginBottom:'12px' }}>{f.icon}</div>
               <div style={{ fontSize:'15px',fontWeight:700,color:'#0F2A4A',marginBottom:'8px' }}>{f.title}</div>
@@ -173,6 +216,7 @@ export default function HomePage() {
         </div>
       </div>
 
+      {/* FOOTER */}
       <footer style={{ background:'#0F2A4A',padding:'48px 24px 28px' }}>
         <div style={{ maxWidth:'1200px',margin:'0 auto' }}>
           <div style={{ display:'grid',gridTemplateColumns:'2fr 1fr 1fr 1fr',gap:'40px',marginBottom:'40px' }}>
@@ -183,7 +227,11 @@ export default function HomePage() {
               </div>
               <p style={{ fontSize:'13.5px',color:'rgba(255,255,255,0.4)',lineHeight:'1.7',maxWidth:'260px',margin:0 }}>Every online tool you need in one place. Free, fast, and private.</p>
             </div>
-            {[{title:'Tools',links:['Word Counter','BMI Calculator','Tip Calculator','Password Generator','Age Calculator']},{title:'Categories',links:['PDF Tools','Image Tools','AI Tools','Calculators','Text Tools']},{title:'Company',links:['About','Privacy Policy','Terms of Use','Contact']}].map(col => (
+            {[
+              { title:'Tools', links:['Word Counter','QR Generator','BMI Calculator','Password Generator','Base64 Encoder'] },
+              { title:'Categories', links:['PDF Tools','Image Tools','AI Tools','Calculators','Developer Tools'] },
+              { title:'Company', links:['About','Privacy Policy','Terms of Use','Contact'] },
+            ].map(col => (
               <div key={col.title}>
                 <div style={{ fontSize:'12px',fontWeight:700,color:'rgba(255,255,255,0.45)',textTransform:'uppercase',letterSpacing:'0.8px',marginBottom:'14px' }}>{col.title}</div>
                 {col.links.map(link => (
