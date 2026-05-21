@@ -1,40 +1,213 @@
-/*
-  ConvertDox — Homepage (All 20 tools)
-  PUT IN: src/app/page.tsx — REPLACE everything
-*/
 'use client'
 import { useState } from 'react'
 import Script from 'next/script'
 import NavBar from '@/components/NavBar'
 
+const ToolIcon = ({ type }: { type: string }) => {
+  const icons: Record<string, React.ReactElement> = {
+    'word-counter': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="6" y="10" width="28" height="34" rx="4" fill="#DBEAFE" stroke="#3B82F6" strokeWidth="1.5"/>
+        <text x="20" y="32" fontFamily="Arial" fontSize="10" fontWeight="700" fill="#1D4ED8" textAnchor="middle">123</text>
+        <rect x="20" y="6" width="26" height="32" rx="4" fill="#3B82F6"/>
+        <text x="33" y="26" fontFamily="Arial" fontSize="12" fontWeight="700" fill="white" textAnchor="middle">W</text>
+      </svg>
+    ),
+    'text-case': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="6" y="10" width="28" height="34" rx="4" fill="#FEE2E2" stroke="#EF4444" strokeWidth="1.5"/>
+        <text x="20" y="32" fontFamily="Arial" fontSize="10" fontWeight="700" fill="#B91C1C" textAnchor="middle">aB</text>
+        <rect x="20" y="6" width="26" height="32" rx="4" fill="#EF4444"/>
+        <text x="33" y="26" fontFamily="Arial" fontSize="10" fontWeight="700" fill="white" textAnchor="middle">Aa</text>
+      </svg>
+    ),
+    'lorem': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="6" y="10" width="28" height="34" rx="4" fill="#F3F4F6" stroke="#6B7280" strokeWidth="1.5"/>
+        <rect x="11" y="16" width="18" height="2" rx="1" fill="#6B7280"/>
+        <rect x="11" y="22" width="14" height="2" rx="1" fill="#6B7280"/>
+        <rect x="11" y="28" width="16" height="2" rx="1" fill="#6B7280"/>
+        <rect x="11" y="34" width="12" height="2" rx="1" fill="#6B7280"/>
+        <rect x="20" y="6" width="26" height="32" rx="4" fill="#6B7280"/>
+        <text x="33" y="26" fontFamily="Arial" fontSize="10" fontWeight="700" fill="white" textAnchor="middle">Aa</text>
+      </svg>
+    ),
+    'markdown': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="6" y="10" width="28" height="34" rx="4" fill="#E0E7FF" stroke="#6366F1" strokeWidth="1.5"/>
+        <text x="20" y="32" fontFamily="monospace" fontSize="10" fontWeight="700" fill="#4338CA" textAnchor="middle">.md</text>
+        <rect x="20" y="6" width="26" height="32" rx="4" fill="#6366F1"/>
+        <text x="33" y="26" fontFamily="Arial" fontSize="11" fontWeight="700" fill="white" textAnchor="middle">M</text>
+      </svg>
+    ),
+    'tip': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#FCE7F3" stroke="#DB2777" strokeWidth="1.5"/>
+        <text x="26" y="34" fontFamily="Arial" fontSize="22" fontWeight="700" fill="#DB2777" textAnchor="middle">$</text>
+      </svg>
+    ),
+    'bmi': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#FEF3C7" stroke="#F59E0B" strokeWidth="1.5"/>
+        <circle cx="26" cy="20" r="4" fill="#F59E0B"/>
+        <path d="M22 28h8M22 32h6M22 36h7" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round"/>
+      </svg>
+    ),
+    'percentage': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#CFFAFE" stroke="#0891B2" strokeWidth="1.5"/>
+        <text x="26" y="33" fontFamily="Arial" fontSize="22" fontWeight="700" fill="#0E7490" textAnchor="middle">%</text>
+      </svg>
+    ),
+    'age': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#FED7AA" stroke="#EA580C" strokeWidth="1.5"/>
+        <rect x="14" y="18" width="24" height="20" rx="2" fill="white" stroke="#EA580C" strokeWidth="1.5"/>
+        <rect x="14" y="18" width="24" height="6" rx="2" fill="#EA580C"/>
+        <rect x="18" y="14" width="2" height="6" rx="1" fill="#EA580C"/>
+        <rect x="32" y="14" width="2" height="6" rx="1" fill="#EA580C"/>
+        <text x="26" y="35" fontFamily="Arial" fontSize="8" fontWeight="700" fill="#EA580C" textAnchor="middle">AGE</text>
+      </svg>
+    ),
+    'discount': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#FECACA" stroke="#DC2626" strokeWidth="1.5"/>
+        <path d="M14 14L38 38M18 17a3 3 0 100-6 3 3 0 000 6zM34 41a3 3 0 100-6 3 3 0 000 6z" fill="none" stroke="#DC2626" strokeWidth="2"/>
+        <text x="26" y="42" fontFamily="Arial" fontSize="8" fontWeight="700" fill="#DC2626" textAnchor="middle">%OFF</text>
+      </svg>
+    ),
+    'unit': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#DBEAFE" stroke="#2563EB" strokeWidth="1.5"/>
+        <path d="M14 28h24M14 28l4-4M14 28l4 4M38 28l-4-4M38 28l-4 4" stroke="#2563EB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <text x="20" y="22" fontFamily="Arial" fontSize="8" fontWeight="700" fill="#2563EB" textAnchor="middle">cm</text>
+        <text x="32" y="22" fontFamily="Arial" fontSize="8" fontWeight="700" fill="#2563EB" textAnchor="middle">in</text>
+      </svg>
+    ),
+    'password': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#F3E8FF" stroke="#9333EA" strokeWidth="1.5"/>
+        <path d="M22 22a4 4 0 118 0v4h-8v-4z" fill="none" stroke="#9333EA" strokeWidth="2" strokeLinejoin="round"/>
+        <rect x="18" y="26" width="16" height="12" rx="2" fill="#9333EA"/>
+        <circle cx="26" cy="32" r="2" fill="white"/>
+      </svg>
+    ),
+    'qr': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#E0F2FE" stroke="#0EA5E9" strokeWidth="1.5"/>
+        <rect x="14" y="14" width="8" height="8" rx="1" fill="#0EA5E9"/>
+        <rect x="30" y="14" width="8" height="8" rx="1" fill="#0EA5E9"/>
+        <rect x="14" y="30" width="8" height="8" rx="1" fill="#0EA5E9"/>
+        <rect x="26" y="26" width="3" height="3" fill="#0EA5E9"/>
+        <rect x="32" y="32" width="3" height="3" fill="#0EA5E9"/>
+        <rect x="26" y="32" width="3" height="3" fill="#0EA5E9"/>
+        <rect x="32" y="26" width="3" height="3" fill="#0EA5E9"/>
+      </svg>
+    ),
+    'hex-rgb': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="6" y="10" width="28" height="34" rx="4" fill="#FEE2E2" stroke="#DC2626" strokeWidth="1.5"/>
+        <circle cx="14" cy="20" r="2" fill="#DC2626"/>
+        <circle cx="20" cy="20" r="2" fill="#16A34A"/>
+        <circle cx="26" cy="20" r="2" fill="#2563EB"/>
+        <text x="20" y="34" fontFamily="monospace" fontSize="8" fontWeight="700" fill="#7F1D1D" textAnchor="middle">RGB</text>
+        <rect x="20" y="6" width="26" height="32" rx="4" fill="#DC2626"/>
+        <text x="33" y="26" fontFamily="monospace" fontSize="9" fontWeight="700" fill="white" textAnchor="middle">HEX</text>
+      </svg>
+    ),
+    'css-gradient': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <defs>
+          <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#A855F7"/>
+            <stop offset="100%" stopColor="#EC4899"/>
+          </linearGradient>
+        </defs>
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="url(#grad1)"/>
+        <text x="26" y="32" fontFamily="Arial" fontSize="14" fontWeight="700" fill="white" textAnchor="middle">CSS</text>
+      </svg>
+    ),
+    'json': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="6" y="10" width="28" height="34" rx="4" fill="#DCFCE7" stroke="#16A34A" strokeWidth="1.5"/>
+        <text x="20" y="32" fontFamily="monospace" fontSize="12" fontWeight="700" fill="#15803D" textAnchor="middle">{'{}'}</text>
+        <rect x="20" y="6" width="26" height="32" rx="4" fill="#16A34A"/>
+        <text x="33" y="27" fontFamily="monospace" fontSize="12" fontWeight="700" fill="white" textAnchor="middle">{'{}'}</text>
+      </svg>
+    ),
+    'base64': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="6" y="10" width="28" height="34" rx="4" fill="#FFEDD5" stroke="#EA580C" strokeWidth="1.5"/>
+        <text x="20" y="32" fontFamily="monospace" fontSize="9" fontWeight="700" fill="#C2410C" textAnchor="middle">abc</text>
+        <rect x="20" y="6" width="26" height="32" rx="4" fill="#EA580C"/>
+        <text x="33" y="26" fontFamily="monospace" fontSize="8" fontWeight="700" fill="white" textAnchor="middle">b64</text>
+      </svg>
+    ),
+    'url-encoder': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#CCFBF1" stroke="#0D9488" strokeWidth="1.5"/>
+        <path d="M18 26a6 6 0 016-6h4M30 26a6 6 0 01-6 6h-4M22 26h8" stroke="#0D9488" strokeWidth="2" strokeLinecap="round"/>
+        <text x="26" y="40" fontFamily="Arial" fontSize="7" fontWeight="700" fill="#0D9488" textAnchor="middle">URL</text>
+      </svg>
+    ),
+    'random': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#FAE8FF" stroke="#A855F7" strokeWidth="1.5"/>
+        <circle cx="18" cy="20" r="2" fill="#A855F7"/>
+        <circle cx="26" cy="26" r="2" fill="#A855F7"/>
+        <circle cx="34" cy="32" r="2" fill="#A855F7"/>
+        <circle cx="34" cy="20" r="2" fill="#A855F7"/>
+        <circle cx="18" cy="32" r="2" fill="#A855F7"/>
+        <text x="26" y="43" fontFamily="Arial" fontSize="8" fontWeight="700" fill="#A855F7" textAnchor="middle">RND</text>
+      </svg>
+    ),
+    'coin-flip': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#FEF9C3" stroke="#CA8A04" strokeWidth="1.5"/>
+        <circle cx="26" cy="26" r="11" fill="#EAB308" stroke="#CA8A04" strokeWidth="1.5"/>
+        <text x="26" y="31" fontFamily="Arial" fontSize="14" fontWeight="700" fill="white" textAnchor="middle">$</text>
+      </svg>
+    ),
+    'stopwatch': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#F1F5F9" stroke="#475569" strokeWidth="1.5"/>
+        <circle cx="26" cy="28" r="11" fill="white" stroke="#475569" strokeWidth="2"/>
+        <path d="M26 22v6l4 2" stroke="#475569" strokeWidth="2" strokeLinecap="round"/>
+        <rect x="23" y="13" width="6" height="3" rx="1" fill="#475569"/>
+      </svg>
+    ),
+  }
+  return icons[type] ?? icons['word-counter']
+}
+
 const TOOLS = [
   // Text
-  { icon:'📝', title:'Word Counter',            desc:'Count words, chars & reading time',       href:'/word-counter',              cat:'text' },
-  { icon:'🔤', title:'Text Case Converter',     desc:'UPPER, lower, Title, camelCase & more',   href:'/text-case-converter',       cat:'text' },
-  { icon:'📄', title:'Lorem Ipsum Generator',   desc:'Placeholder text for designs',            href:'/lorem-ipsum',               cat:'text' },
-  { icon:'📝', title:'Markdown Editor',         desc:'Write and preview Markdown live',         href:'/markdown-editor',           cat:'text' },
+  { iconType:'word-counter',    title:'Word Counter',            desc:'Count words, chars & reading time',       href:'/word-counter',              cat:'text' },
+  { iconType:'text-case',       title:'Text Case Converter',     desc:'UPPER, lower, Title, camelCase & more',   href:'/text-case-converter',       cat:'text' },
+  { iconType:'lorem',           title:'Lorem Ipsum Generator',   desc:'Placeholder text for designs',            href:'/lorem-ipsum',               cat:'text' },
+  { iconType:'markdown',        title:'Markdown Editor',         desc:'Write and preview Markdown live',         href:'/markdown-editor',           cat:'text' },
   // Calculators
-  { icon:'🍽', title:'Tip Calculator',          desc:'Split bills and calculate tips',          href:'/tip-calculator',            cat:'calc' },
-  { icon:'⚖️', title:'BMI Calculator',          desc:'Body mass index — metric & imperial',     href:'/bmi-calculator',            cat:'calc' },
-  { icon:'%',  title:'Percentage Calculator',   desc:'5 types of percentage calculations',      href:'/percentage-calculator',     cat:'calc' },
-  { icon:'🎂', title:'Age Calculator',          desc:'Exact age + zodiac + next birthday',      href:'/age-calculator',            cat:'calc' },
-  { icon:'🏷', title:'Discount Calculator',     desc:'Find sale price and savings instantly',   href:'/discount-calculator',       cat:'calc' },
-  { icon:'📐', title:'Unit Converter',          desc:'Length, weight, temperature & more',      href:'/unit-converter',            cat:'calc' },
+  { iconType:'tip',             title:'Tip Calculator',          desc:'Split bills and calculate tips',          href:'/tip-calculator',            cat:'calc' },
+  { iconType:'bmi',             title:'BMI Calculator',          desc:'Body mass index — metric & imperial',     href:'/bmi-calculator',            cat:'calc' },
+  { iconType:'percentage',      title:'Percentage Calculator',   desc:'5 types of percentage calculations',      href:'/percentage-calculator',     cat:'calc' },
+  { iconType:'age',             title:'Age Calculator',          desc:'Exact age + zodiac + next birthday',      href:'/age-calculator',            cat:'calc' },
+  { iconType:'discount',        title:'Discount Calculator',     desc:'Find sale price and savings instantly',   href:'/discount-calculator',       cat:'calc' },
+  { iconType:'unit',            title:'Unit Converter',          desc:'Length, weight, temperature & more',      href:'/unit-converter',            cat:'calc' },
   // Security
-  { icon:'🔑', title:'Password Generator',      desc:'Cryptographically secure passwords',      href:'/password-generator',        cat:'security' },
+  { iconType:'password',        title:'Password Generator',      desc:'Cryptographically secure passwords',      href:'/password-generator',        cat:'security' },
   // QR
-  { icon:'📱', title:'QR Code Generator',       desc:'URL, WiFi, email QR codes — free',        href:'/qr-generator',              cat:'qr' },
+  { iconType:'qr',              title:'QR Code Generator',       desc:'URL, WiFi, email QR codes — free',        href:'/qr-generator',              cat:'qr' },
   // Colour
-  { icon:'🎨', title:'HEX ↔ RGB Converter',     desc:'Convert between colour code formats',     href:'/hex-rgb-converter',         cat:'color' },
-  { icon:'🌈', title:'CSS Gradient Generator',  desc:'Build beautiful CSS gradients visually',  href:'/css-gradient',              cat:'color' },
+  { iconType:'hex-rgb',         title:'HEX ↔ RGB Converter',     desc:'Convert between colour code formats',     href:'/hex-rgb-converter',         cat:'color' },
+  { iconType:'css-gradient',    title:'CSS Gradient Generator',  desc:'Build beautiful CSS gradients visually',  href:'/css-gradient',              cat:'color' },
   // Developer
-  { icon:'{}', title:'JSON Formatter',          desc:'Format, validate and minify JSON',        href:'/json-formatter',            cat:'dev' },
-  { icon:'🔐', title:'Base64 Encoder/Decoder',  desc:'Encode text or decode Base64 strings',    href:'/base64-encoder',            cat:'dev' },
-  { icon:'🔗', title:'URL Encoder/Decoder',     desc:'Encode or decode URL strings',            href:'/url-encoder',               cat:'dev' },
+  { iconType:'json',            title:'JSON Formatter',          desc:'Format, validate and minify JSON',        href:'/json-formatter',            cat:'dev' },
+  { iconType:'base64',          title:'Base64 Encoder/Decoder',  desc:'Encode text or decode Base64 strings',    href:'/base64-encoder',            cat:'dev' },
+  { iconType:'url-encoder',     title:'URL Encoder/Decoder',     desc:'Encode or decode URL strings',            href:'/url-encoder',               cat:'dev' },
   // Fun
-  { icon:'🎲', title:'Random Number Generator', desc:'Random numbers in any range',             href:'/random-number-generator',   cat:'fun' },
-  { icon:'🪙', title:'Coin Flip & Dice Roller', desc:'Flip coins, roll any dice',               href:'/coin-flip',                 cat:'fun' },
-  { icon:'⏱', title:'Stopwatch & Timer',       desc:'Online stopwatch + countdown timer',      href:'/stopwatch',                 cat:'fun' },
+  { iconType:'random',          title:'Random Number Generator', desc:'Random numbers in any range',             href:'/random-number-generator',   cat:'fun' },
+  { iconType:'coin-flip',       title:'Coin Flip & Dice Roller', desc:'Flip coins, roll any dice',               href:'/coin-flip',                 cat:'fun' },
+  { iconType:'stopwatch',       title:'Stopwatch & Timer',       desc:'Online stopwatch + countdown timer',      href:'/stopwatch',                 cat:'fun' },
 ]
 
 const COMING = [
@@ -93,6 +266,7 @@ export default function HomePage() {
 
       <NavBar />
 
+      {/* Hero */}
       <div style={{ background:'linear-gradient(135deg,#0F2A4A,#1a3a5c)',padding:'80px 24px 64px',textAlign:'center' }}>
         <div style={{ maxWidth:'760px',margin:'0 auto' }}>
           <div style={{ display:'inline-flex',alignItems:'center',gap:'6px',background:'rgba(255,255,255,0.1)',border:'1px solid rgba(255,255,255,0.2)',borderRadius:'999px',padding:'5px 16px',fontSize:'13px',color:'rgba(255,255,255,0.85)',marginBottom:'28px' }}>
@@ -120,6 +294,7 @@ export default function HomePage() {
         </div>
       </div>
 
+      {/* Stats bar */}
       <div style={{ background:'#0a1f38',padding:'16px 24px' }}>
         <div style={{ maxWidth:'1200px',margin:'0 auto',display:'flex',justifyContent:'center',gap:'48px',flexWrap:'wrap' }}>
           {[{num:'20',label:'Tools Live'},{num:'200+',label:'Coming Soon'},{num:'100%',label:'Free to Use'},{num:'0',label:'Sign-up Needed'}].map(s => (
@@ -131,88 +306,10 @@ export default function HomePage() {
         </div>
       </div>
 
-      <div id="tools" style={{ maxWidth:'1200px',margin:'0 auto',padding:'56px 24px' }}>
-        <div style={{ marginBottom:'28px' }}>
-          <div style={{ fontSize:'12px',fontWeight:700,color:'#E85D04',textTransform:'uppercase',letterSpacing:'1px',marginBottom:'6px' }}>All Categories</div>
-          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'clamp(24px,3vw,34px)',fontWeight:800,color:'#0F2A4A',margin:'0 0 8px' }}>Free Online Tools</h2>
-          <p style={{ fontSize:'15px',color:'#64748b',margin:0 }}>20 tools live. No installation. Works instantly in your browser.</p>
-        </div>
-        <div style={{ display:'flex',gap:'6px',flexWrap:'wrap',marginBottom:'28px' }}>
-          {CATS.map(cat => (
-            <button key={cat.id} onClick={() => setActiveCat(cat.id)}
-              style={{ padding:'8px 16px',borderRadius:'999px',border:'1.5px solid',borderColor:activeCat===cat.id?'#0F2A4A':'#e2e8f0',background:activeCat===cat.id?'#0F2A4A':'white',color:activeCat===cat.id?'white':'#64748b',fontFamily:'inherit',fontSize:'13px',fontWeight:600,cursor:'pointer',whiteSpace:'nowrap' }}>
-              {cat.label}
-            </button>
-          ))}
-        </div>
-        {filtered.length > 0 ? (
-          <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(240px,1fr))',gap:'14px',marginBottom:'14px' }}>
-            {filtered.map(tool => (
-              <a key={tool.href} href={tool.href}
-                style={{ background:'white',border:'1.5px solid #e2e8f0',borderRadius:'16px',padding:'20px',textDecoration:'none',display:'flex',flexDirection:'column',gap:'12px',boxShadow:'0 2px 8px rgba(15,42,74,0.04)' }}>
-                <div style={{ width:'44px',height:'44px',background:'#FFF7ED',borderRadius:'11px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'22px' }}>{tool.icon}</div>
-                <div>
-                  <div style={{ fontSize:'14px',fontWeight:700,color:'#0F2A4A',marginBottom:'4px' }}>{tool.title}</div>
-                  <div style={{ fontSize:'12.5px',color:'#94a3b8',lineHeight:'1.4' }}>{tool.desc}</div>
-                </div>
-                <div style={{ marginTop:'auto' }}>
-                  <span style={{ fontSize:'12px',fontWeight:600,color:'#E85D04',background:'#FFF7ED',padding:'4px 12px',borderRadius:'999px' }}>Open Tool →</span>
-                </div>
-              </a>
-            ))}
-          </div>
-        ) : (
-          <div style={{ textAlign:'center',padding:'48px',color:'#94a3b8' }}>
-            <div style={{ fontSize:'36px',marginBottom:'10px' }}>🔍</div>
-            <p>No tools found for &ldquo;{search}&rdquo;</p>
-          </div>
-        )}
-
-        {/* Security badges */}
-        <div style={{ background:'white',padding:'40px 0',borderTop:'1px solid #e2e8f0',borderBottom:'1px solid #e2e8f0',marginTop:'48px' }}>
-          <div style={{ textAlign:'center' }}>
-            <div style={{ fontSize:'12px',fontWeight:700,color:'#E85D04',textTransform:'uppercase',letterSpacing:'1px',marginBottom:'10px' }}>Trusted & Secure</div>
-            <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'24px',fontWeight:800,color:'#0F2A4A',marginBottom:'24px' }}>Your data stays private</h2>
-            <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(180px,1fr))',gap:'14px' }}>
-              {[
-                { icon:'🔒', title:'SSL Encrypted', desc:'TLS 1.3 transfer' },
-                { icon:'🛡', title:'No Storage', desc:'Auto-delete policy' },
-                { icon:'🚫', title:'No Tracking', desc:'Privacy first' },
-                { icon:'✅', title:'GDPR Ready', desc:'Compliant practices' },
-                { icon:'⚡', title:'Cloudflare', desc:'Enterprise security' },
-                { icon:'🆓', title:'Always Free', desc:'No hidden fees' },
-              ].map(b => (
-                <div key={b.title} style={{ background:'#f8fafc',border:'1.5px solid #e2e8f0',borderRadius:'12px',padding:'16px 12px',textAlign:'center' }}>
-                  <div style={{ fontSize:'28px',marginBottom:'6px' }}>{b.icon}</div>
-                  <div style={{ fontSize:'13px',fontWeight:700,color:'#0F2A4A' }}>{b.title}</div>
-                  <div style={{ fontSize:'11.5px',color:'#94a3b8',marginTop:'2px' }}>{b.desc}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div style={{ marginTop:'48px' }}>
-          <div style={{ display:'flex',alignItems:'center',gap:'12px',marginBottom:'20px' }}>
-            <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'22px',fontWeight:800,color:'#0F2A4A',margin:0 }}>Coming Soon</h2>
-            <span style={{ background:'#FFF7ED',border:'1.5px solid #FED7AA',color:'#C2410C',fontSize:'12px',fontWeight:700,padding:'3px 10px',borderRadius:'999px' }}>Building now</span>
-          </div>
-          <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(240px,1fr))',gap:'14px' }}>
-            {COMING.map(tool => (
-              <div key={tool.title} style={{ background:'#f8fafc',border:'1.5px dashed #e2e8f0',borderRadius:'16px',padding:'20px' }}>
-                <div style={{ width:'44px',height:'44px',background:'#f1f5f9',borderRadius:'11px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'22px',marginBottom:'10px' }}>{tool.icon}</div>
-                <div style={{ fontSize:'14px',fontWeight:700,color:'#94a3b8',marginBottom:'4px' }}>{tool.title}</div>
-                <div style={{ fontSize:'12px',color:'#cbd5e1' }}>{tool.desc}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Why ConvertDox - Bold Navy Badge style */}
-      <div style={{ background:'#f8fafc',padding:'72px 24px',borderTop:'1px solid #e2e8f0' }}>
+      {/* Why ConvertDox - moved here, right after stats */}
+      <div style={{ background:'#ffffff',padding:'56px 24px',borderBottom:'1px solid #e2e8f0' }}>
         <div style={{ maxWidth:'1200px',margin:'0 auto' }}>
-          <div style={{ textAlign:'center',marginBottom:'56px' }}>
+          <div style={{ textAlign:'center',marginBottom:'48px' }}>
             <div style={{ fontSize:'12px',fontWeight:700,color:'#E85D04',textTransform:'uppercase',letterSpacing:'1.5px',marginBottom:'10px' }}>Why ConvertDox</div>
             <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'clamp(28px,4vw,42px)',fontWeight:800,color:'#0F2A4A',margin:'0 0 14px',letterSpacing:'-0.5px' }}>
               Built for everyone — fast, free, secure
@@ -320,6 +417,86 @@ export default function HomePage() {
         </div>
       </div>
 
+      {/* Tools grid */}
+      <div id="tools" style={{ maxWidth:'1200px',margin:'0 auto',padding:'56px 24px' }}>
+        <div style={{ marginBottom:'28px' }}>
+          <div style={{ fontSize:'12px',fontWeight:700,color:'#E85D04',textTransform:'uppercase',letterSpacing:'1px',marginBottom:'6px' }}>All Categories</div>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'clamp(24px,3vw,34px)',fontWeight:800,color:'#0F2A4A',margin:'0 0 8px' }}>Free Online Tools</h2>
+          <p style={{ fontSize:'15px',color:'#64748b',margin:0 }}>20 tools live. No installation. Works instantly in your browser.</p>
+        </div>
+        <div style={{ display:'flex',gap:'6px',flexWrap:'wrap',marginBottom:'28px' }}>
+          {CATS.map(cat => (
+            <button key={cat.id} onClick={() => setActiveCat(cat.id)}
+              style={{ padding:'8px 16px',borderRadius:'999px',border:'1.5px solid',borderColor:activeCat===cat.id?'#0F2A4A':'#e2e8f0',background:activeCat===cat.id?'#0F2A4A':'white',color:activeCat===cat.id?'white':'#64748b',fontFamily:'inherit',fontSize:'13px',fontWeight:600,cursor:'pointer',whiteSpace:'nowrap' }}>
+              {cat.label}
+            </button>
+          ))}
+        </div>
+        {filtered.length > 0 ? (
+          <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(240px,1fr))',gap:'14px',marginBottom:'14px' }}>
+            {filtered.map(tool => (
+              <a key={tool.href} href={tool.href}
+                style={{ background:'white',border:'1.5px solid #e2e8f0',borderRadius:'16px',padding:'20px',textDecoration:'none',display:'flex',flexDirection:'column',gap:'12px',boxShadow:'0 2px 8px rgba(15,42,74,0.04)' }}>
+                <div style={{ marginBottom:'4px' }}><ToolIcon type={tool.iconType} /></div>
+                <div>
+                  <div style={{ fontSize:'14px',fontWeight:700,color:'#0F2A4A',marginBottom:'4px' }}>{tool.title}</div>
+                  <div style={{ fontSize:'12.5px',color:'#94a3b8',lineHeight:'1.4' }}>{tool.desc}</div>
+                </div>
+                <div style={{ marginTop:'auto' }}>
+                  <span style={{ fontSize:'12px',fontWeight:600,color:'#E85D04',background:'#FFF7ED',padding:'4px 12px',borderRadius:'999px' }}>Open Tool →</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        ) : (
+          <div style={{ textAlign:'center',padding:'48px',color:'#94a3b8' }}>
+            <div style={{ fontSize:'36px',marginBottom:'10px' }}>🔍</div>
+            <p>No tools found for &ldquo;{search}&rdquo;</p>
+          </div>
+        )}
+
+        {/* Security badges */}
+        <div style={{ background:'white',padding:'40px 0',borderTop:'1px solid #e2e8f0',borderBottom:'1px solid #e2e8f0',marginTop:'48px' }}>
+          <div style={{ textAlign:'center' }}>
+            <div style={{ fontSize:'12px',fontWeight:700,color:'#E85D04',textTransform:'uppercase',letterSpacing:'1px',marginBottom:'10px' }}>Trusted & Secure</div>
+            <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'24px',fontWeight:800,color:'#0F2A4A',marginBottom:'24px' }}>Your data stays private</h2>
+            <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(180px,1fr))',gap:'14px' }}>
+              {[
+                { icon:'🔒', title:'SSL Encrypted', desc:'TLS 1.3 transfer' },
+                { icon:'🛡', title:'No Storage', desc:'Auto-delete policy' },
+                { icon:'🚫', title:'No Tracking', desc:'Privacy first' },
+                { icon:'✅', title:'GDPR Ready', desc:'Compliant practices' },
+                { icon:'⚡', title:'Cloudflare', desc:'Enterprise security' },
+                { icon:'🆓', title:'Always Free', desc:'No hidden fees' },
+              ].map(b => (
+                <div key={b.title} style={{ background:'#f8fafc',border:'1.5px solid #e2e8f0',borderRadius:'12px',padding:'16px 12px',textAlign:'center' }}>
+                  <div style={{ fontSize:'28px',marginBottom:'6px' }}>{b.icon}</div>
+                  <div style={{ fontSize:'13px',fontWeight:700,color:'#0F2A4A' }}>{b.title}</div>
+                  <div style={{ fontSize:'11.5px',color:'#94a3b8',marginTop:'2px' }}>{b.desc}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Coming soon */}
+        <div style={{ marginTop:'48px' }}>
+          <div style={{ display:'flex',alignItems:'center',gap:'12px',marginBottom:'20px' }}>
+            <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'22px',fontWeight:800,color:'#0F2A4A',margin:0 }}>Coming Soon</h2>
+            <span style={{ background:'#FFF7ED',border:'1.5px solid #FED7AA',color:'#C2410C',fontSize:'12px',fontWeight:700,padding:'3px 10px',borderRadius:'999px' }}>Building now</span>
+          </div>
+          <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(240px,1fr))',gap:'14px' }}>
+            {COMING.map(tool => (
+              <div key={tool.title} style={{ background:'#f8fafc',border:'1.5px dashed #e2e8f0',borderRadius:'16px',padding:'20px' }}>
+                <div style={{ width:'44px',height:'44px',background:'#f1f5f9',borderRadius:'11px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'22px',marginBottom:'10px' }}>{tool.icon}</div>
+                <div style={{ fontSize:'14px',fontWeight:700,color:'#94a3b8',marginBottom:'4px' }}>{tool.title}</div>
+                <div style={{ fontSize:'12px',color:'#cbd5e1' }}>{tool.desc}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       <footer style={{ background:'#0F2A4A',padding:'48px 24px 28px' }}>
         <div style={{ maxWidth:'1200px',margin:'0 auto' }}>
           <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(200px,1fr))',gap:'40px',marginBottom:'40px' }}>
@@ -331,10 +508,10 @@ export default function HomePage() {
               <p style={{ fontSize:'13.5px',color:'rgba(255,255,255,0.4)',lineHeight:'1.7',maxWidth:'260px',margin:0 }}>Every online tool you need in one place. Free, fast, and private.</p>
             </div>
             {[
-            {title:'Tools',links:[{label:'Word Counter',href:'/word-counter'},{label:'QR Generator',href:'/qr-generator'},{label:'Unit Converter',href:'/unit-converter'},{label:'CSS Gradient',href:'/css-gradient'},{label:'Stopwatch',href:'/stopwatch'}]},
-            {title:'Categories',links:[{label:'PDF Tools',href:'/#tools'},{label:'Image Tools',href:'/#tools'},{label:'AI Tools',href:'/#tools'},{label:'Calculators',href:'/#tools'},{label:'Developer Tools',href:'/#tools'}]},
-            {title:'Company',links:[{label:'About',href:'/about'},{label:'Privacy Policy',href:'/legal'},{label:'Terms of Use',href:'/legal'},{label:'Contact',href:'/contact'}]}
-          ].map(col => (
+              {title:'Tools',links:[{label:'Word Counter',href:'/word-counter'},{label:'QR Generator',href:'/qr-generator'},{label:'Unit Converter',href:'/unit-converter'},{label:'CSS Gradient',href:'/css-gradient'},{label:'Stopwatch',href:'/stopwatch'}]},
+              {title:'Categories',links:[{label:'PDF Tools',href:'/#tools'},{label:'Image Tools',href:'/#tools'},{label:'AI Tools',href:'/#tools'},{label:'Calculators',href:'/#tools'},{label:'Developer Tools',href:'/#tools'}]},
+              {title:'Company',links:[{label:'About',href:'/about'},{label:'Privacy Policy',href:'/legal'},{label:'Terms of Use',href:'/legal'},{label:'Contact',href:'/contact'}]},
+            ].map(col => (
               <div key={col.title}>
                 <div style={{ fontSize:'12px',fontWeight:700,color:'rgba(255,255,255,0.45)',textTransform:'uppercase',letterSpacing:'0.8px',marginBottom:'14px' }}>{col.title}</div>
                 {col.links.map(link => (
