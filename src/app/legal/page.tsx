@@ -13,64 +13,8 @@
 */
 'use client'
 import { useState } from 'react'
-
-const Logo = () => (
-  <div style={{ width:'44px',height:'44px',background:'#0F2A4A',borderRadius:'10px',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0 }}>
-    <svg width="28" height="28" viewBox="0 0 44 44" fill="none">
-      <rect x="6" y="10" width="13" height="17" rx="2" fill="white" opacity="0.95"/>
-      <rect x="25" y="17" width="13" height="17" rx="2" fill="#E85D04"/>
-      <polygon points="20,20 24,22 20,24" fill="white"/>
-    </svg>
-  </div>
-)
-
-const NAV = () => (
-  <nav style={{ position:'sticky',top:0,zIndex:100,background:'rgba(255,255,255,0.97)',backdropFilter:'blur(12px)',borderBottom:'1px solid #e2e8f0',boxShadow:'0 1px 8px rgba(15,42,74,0.06)' }}>
-    <div style={{ maxWidth:'1200px',margin:'0 auto',padding:'0 24px',height:'62px',display:'flex',alignItems:'center',justifyContent:'space-between' }}>
-      <a href="/" style={{ textDecoration:'none',display:'flex',alignItems:'center',gap:'9px' }}>
-        <Logo/>
-        <span style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'30px',fontWeight:800,color:'#0F2A4A' }}>Convert<span style={{ color:'#E85D04' }}>Dox</span></span>
-      </a>
-      <a href="/" style={{ fontSize:'13px',color:'#64748b',textDecoration:'none',fontWeight:500 }}>← Back to Tools</a>
-    </div>
-  </nav>
-)
-
-const FOOTER = () => (
-  <footer style={{ background:'#0F2A4A',marginTop:'60px',padding:'40px 24px 28px' }}>
-    <div style={{ maxWidth:'1200px',margin:'0 auto' }}>
-      <div style={{ display:'grid',gridTemplateColumns:'2fr 1fr 1fr 1fr',gap:'40px',marginBottom:'32px' }}>
-        <div>
-          <div style={{ display:'flex',alignItems:'center',gap:'8px',marginBottom:'14px' }}>
-            <div style={{ width:'30px',height:'30px',background:'#E85D04',borderRadius:'7px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'15px' }}>📄</div>
-            <span style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'18px',fontWeight:800,color:'white' }}>Convert<span style={{ color:'#F48C42' }}>Dox</span></span>
-          </div>
-          <p style={{ fontSize:'13.5px',color:'rgba(255,255,255,0.4)',lineHeight:'1.7',maxWidth:'260px',margin:0 }}>Every online tool you need. Free, fast, and private.</p>
-        </div>
-        {[
-          { title:'Legal', links:[{l:'Privacy Policy',h:'/legal#privacy'},{l:'Terms of Service',h:'/legal#terms'},{l:'File Security',h:'/legal#security'},{l:'DMCA Policy',h:'/legal#dmca'},{l:'Acceptable Use',h:'/legal#aup'},{l:'AI Disclaimer',h:'/legal#ai'}] },
-          { title:'Company', links:[{l:'About',h:'/about'},{l:'Contact',h:'/contact'},{l:'All Tools',h:'/'},{l:'Support',h:'/contact'}] },
-          { title:'Popular Tools', links:[{l:'Word Counter',h:'/word-counter'},{l:'QR Generator',h:'/qr-generator'},{l:'BMI Calculator',h:'/bmi-calculator'},{l:'Password Gen',h:'/password-generator'}] },
-        ].map(col => (
-          <div key={col.title}>
-            <div style={{ fontSize:'12px',fontWeight:700,color:'rgba(255,255,255,0.45)',textTransform:'uppercase',letterSpacing:'0.8px',marginBottom:'14px' }}>{col.title}</div>
-            {col.links.map(link => (
-              <a key={link.l} href={link.h} style={{ display:'block',fontSize:'13.5px',color:'rgba(255,255,255,0.4)',textDecoration:'none',marginBottom:'8px' }}>{link.l}</a>
-            ))}
-          </div>
-        ))}
-      </div>
-      <div style={{ borderTop:'1px solid rgba(255,255,255,0.08)',paddingTop:'20px',display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:'10px' }}>
-        <p style={{ fontSize:'13px',color:'rgba(255,255,255,0.3)',margin:0 }}>© 2025 ConvertDox — Every Online Tool You Need</p>
-        <div style={{ display:'flex',gap:'16px' }}>
-          {[['Privacy','/legal#privacy'],['Terms','/legal#terms'],['Contact','/contact'],['DMCA','/legal#dmca']].map(([l,h]) => (
-            <a key={l} href={h} style={{ fontSize:'13px',color:'rgba(255,255,255,0.3)',textDecoration:'none' }}>{l}</a>
-          ))}
-        </div>
-      </div>
-    </div>
-  </footer>
-)
+import NavBar from '@/components/NavBar'
+import SiteFooter from '@/components/SiteFooter'
 
 type Tab = 'privacy'|'terms'|'security'|'dmca'|'aup'|'ai'
 
@@ -110,7 +54,7 @@ export default function LegalPage() {
 
   return (
     <div style={{ minHeight:'100vh',background:'#ffffff',fontFamily:"'Plus Jakarta Sans',system-ui,sans-serif" }}>
-      <NAV/>
+      <NavBar />
 
       {/* Hero */}
       <div style={{ background:'linear-gradient(135deg,#0F2A4A,#1a3a5c)',padding:'48px 24px 40px',textAlign:'center' }}>
@@ -647,7 +591,7 @@ export default function LegalPage() {
           </div>
         </div>
       </div>
-      <FOOTER/>
+      <SiteFooter />
     </div>
   )
 }

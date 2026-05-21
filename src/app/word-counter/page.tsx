@@ -8,6 +8,9 @@
 'use client'
 
 import { useState, useCallback } from 'react'
+import NavBar from '@/components/NavBar'
+import TrustStrip from '@/components/TrustStrip'
+import SiteFooter from '@/components/SiteFooter'
 
 export default function WordCounterPage() {
   const [text, setText] = useState('')
@@ -87,32 +90,8 @@ export default function WordCounterPage() {
   return (
     <div style={page}>
 
-      {/* ── Navbar ───────────────────────────────────────────── */}
-      <nav style={{
-        position: 'sticky', top: 0, zIndex: 100,
-        background: 'rgba(255,255,255,0.97)',
-        backdropFilter: 'blur(12px)',
-        borderBottom: '1px solid #e2e8f0',
-        boxShadow: '0 1px 8px rgba(15,42,74,0.06)',
-      }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 24px', height: '62px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <a href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '9px' }}>
-            <div style={{ width: '44px', height: '44px', background: '#0F2A4A', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><svg width='28' height='28' viewBox='0 0 44 44' fill='none'><rect x='6' y='10' width='13' height='17' rx='2' fill='white' opacity='0.95'/><rect x='25' y='17' width='13' height='17' rx='2' fill='#E85D04'/><polygon points='20,20 24,22 20,24' fill='white'/></svg></div>
-            <span style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: '30px', fontWeight: 800, color: '#0F2A4A', letterSpacing: '-0.3px' }}>
-              Convert<span style={{ color: '#E85D04' }}>Dox</span>
-            </span>
-          </a>
-          <div style={{ display: 'flex', gap: '4px' }}>
-            {['PDF Tools', 'Image Tools', 'AI Tools', 'Calculators'].map(item => (
-              <a key={item} href="#" style={{ padding: '6px 12px', borderRadius: '7px', fontSize: '13px', fontWeight: 500, color: '#64748b', textDecoration: 'none' }}>{item}</a>
-            ))}
-          </div>
-          <div style={{ display: 'flex', gap: '8px' }}>
-            <button style={{ background: 'none', border: '1.5px solid #e2e8f0', padding: '7px 16px', borderRadius: '8px', fontFamily: 'inherit', fontSize: '13px', fontWeight: 600, cursor: 'pointer', color: '#0F2A4A' }}>Sign In</button>
-            <button style={{ background: '#E85D04', border: 'none', padding: '7px 18px', borderRadius: '8px', fontFamily: 'inherit', fontSize: '13px', fontWeight: 700, cursor: 'pointer', color: 'white', boxShadow: '0 2px 8px rgba(232,93,4,0.25)' }}>Go Pro 🚀</button>
-          </div>
-        </div>
-      </nav>
+      <NavBar />
+      <TrustStrip />
 
       {/* ── Hero Header ──────────────────────────────────────── */}
       <div style={{ background: 'linear-gradient(135deg, #0F2A4A 0%, #1a3a5c 100%)', padding: '48px 24px 40px' }}>
@@ -349,21 +328,7 @@ export default function WordCounterPage() {
         </div>
       </div>
 
-      {/* ── Footer ───────────────────────────────────────────── */}
-      <footer style={{ background: '#0F2A4A', marginTop: '60px', padding: '32px 24px' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <div style={{ width: '28px', height: '28px', background: '#E85D04', borderRadius: '7px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px' }}>📄</div>
-            <span style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: '16px', fontWeight: 800, color: 'white' }}>Convert<span style={{ color: '#F48C42' }}>Dox</span></span>
-          </div>
-          <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: '13px' }}>© 2025 ConvertDox — Every Online Tool You Need</p>
-          <div style={{ display: 'flex', gap: '16px' }}>
-            {['Privacy Policy', 'Terms of Use', 'All Tools'].map(link => (
-              <a key={link} href="#" style={{ color: 'rgba(255,255,255,0.45)', fontSize: '13px', textDecoration: 'none' }}>{link}</a>
-            ))}
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
 
     </div>
   )

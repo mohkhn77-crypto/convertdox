@@ -4,6 +4,8 @@
 */
 'use client'
 import { useState } from 'react'
+import Script from 'next/script'
+import NavBar from '@/components/NavBar'
 
 const TOOLS = [
   // Text
@@ -57,6 +59,19 @@ const CATS = [
   { id:'fun',      label:'🎲 Fun & Random' },
 ]
 
+const JSON_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  'name': 'ConvertDox',
+  'url': 'https://convertdox.com',
+  'description': 'Free online tools — PDF, Image, AI, Calculator, Text, QR and more.',
+  'potentialAction': {
+    '@type': 'SearchAction',
+    'target': 'https://convertdox.com/?q={search_term_string}',
+    'query-input': 'required name=search_term_string',
+  },
+}
+
 export default function HomePage() {
   const [activeCat, setActiveCat] = useState('all')
   const [search, setSearch] = useState('')
@@ -70,31 +85,13 @@ export default function HomePage() {
   })
 
   return (
-    <div style={{ minHeight:'100vh',background:'#fff',fontFamily:"'Plus Jakarta Sans',system-ui,sans-serif" }}>
+    <div style={{ minHeight:'100vh',background:'#fff',fontFamily:"'Plus Jakarta Sans',system-ui,sans-serif",maxWidth:'100%',overflowX:'hidden' }}>
 
-      <nav style={{ position:'sticky',top:0,zIndex:100,background:'rgba(255,255,255,0.97)',backdropFilter:'blur(12px)',borderBottom:'1px solid #e2e8f0',boxShadow:'0 1px 8px rgba(15,42,74,0.06)' }}>
-        <div style={{ maxWidth:'1200px',margin:'0 auto',padding:'0 24px',height:'62px',display:'flex',alignItems:'center',justifyContent:'space-between',gap:'16px' }}>
-          <a href="/" style={{ textDecoration:'none',display:'flex',alignItems:'center',gap:'9px',flexShrink:0 }}>
-            <div style={{ width:'44px',height:'44px',background:'#0F2A4A',borderRadius:'10px',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0 }}>
-              <svg width="28" height="28" viewBox="0 0 44 44" fill="none">
-                <rect x="6" y="10" width="13" height="17" rx="2" fill="white" opacity="0.95"/>
-                <rect x="25" y="17" width="13" height="17" rx="2" fill="#E85D04"/>
-                <polygon points="20,20 24,22 20,24" fill="white"/>
-              </svg>
-            </div>
-            <span style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'30px',fontWeight:800,color:'#0F2A4A' }}>Convert<span style={{ color:'#E85D04' }}>Dox</span></span>
-          </a>
-          <div style={{ display:'flex',gap:'2px',overflow:'auto' }}>
-            {['PDF Tools','Image Tools','AI Tools','Calculators','Text Tools'].map(item => (
-              <a key={item} href="#tools" style={{ padding:'6px 12px',borderRadius:'7px',fontSize:'13px',fontWeight:500,color:'#64748b',textDecoration:'none',whiteSpace:'nowrap' }}>{item}</a>
-            ))}
-          </div>
-          <div style={{ display:'flex',gap:'8px',flexShrink:0 }}>
-            <button style={{ background:'none',border:'1.5px solid #e2e8f0',padding:'7px 16px',borderRadius:'8px',fontFamily:'inherit',fontSize:'13px',fontWeight:600,cursor:'pointer',color:'#0F2A4A' }}>Sign In</button>
-            <button style={{ background:'#E85D04',border:'none',padding:'7px 18px',borderRadius:'8px',fontFamily:'inherit',fontSize:'13px',fontWeight:700,cursor:'pointer',color:'white' }}>Go Pro 🚀</button>
-          </div>
-        </div>
-      </nav>
+      <Script id="json-ld-website" type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
+      />
+
+      <NavBar />
 
       <div style={{ background:'linear-gradient(135deg,#0F2A4A,#1a3a5c)',padding:'80px 24px 64px',textAlign:'center' }}>
         <div style={{ maxWidth:'760px',margin:'0 auto' }}>
@@ -102,7 +99,7 @@ export default function HomePage() {
             <span style={{ background:'#E85D04',borderRadius:'999px',padding:'1px 8px',fontWeight:700,color:'white',fontSize:'11px' }}>FREE</span>
             20 Tools Live — 200+ Coming Soon
           </div>
-          <h1 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'clamp(32px,5vw,56px)',fontWeight:800,color:'white',lineHeight:1.15,letterSpacing:'-0.5px',margin:'0 0 18px' }}>
+          <h1 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'clamp(24px,5vw,56px)',fontWeight:800,color:'white',lineHeight:1.15,letterSpacing:'-0.5px',margin:'0 0 18px' }}>
             Every Online Tool<br/>You Need —{' '}
             <span style={{ color:'#F48C42' }}>In One Place</span>
           </h1>
@@ -149,7 +146,7 @@ export default function HomePage() {
           ))}
         </div>
         {filtered.length > 0 ? (
-          <div style={{ display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'14px',marginBottom:'14px' }}>
+          <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(240px,1fr))',gap:'14px',marginBottom:'14px' }}>
             {filtered.map(tool => (
               <a key={tool.href} href={tool.href}
                 style={{ background:'white',border:'1.5px solid #e2e8f0',borderRadius:'16px',padding:'20px',textDecoration:'none',display:'flex',flexDirection:'column',gap:'12px',boxShadow:'0 2px 8px rgba(15,42,74,0.04)' }}>
@@ -167,15 +164,40 @@ export default function HomePage() {
         ) : (
           <div style={{ textAlign:'center',padding:'48px',color:'#94a3b8' }}>
             <div style={{ fontSize:'36px',marginBottom:'10px' }}>🔍</div>
-            <p>No tools found for "{search}"</p>
+            <p>No tools found for &ldquo;{search}&rdquo;</p>
           </div>
         )}
+
+        {/* Security badges */}
+        <div style={{ background:'white',padding:'40px 0',borderTop:'1px solid #e2e8f0',borderBottom:'1px solid #e2e8f0',marginTop:'48px' }}>
+          <div style={{ textAlign:'center' }}>
+            <div style={{ fontSize:'12px',fontWeight:700,color:'#E85D04',textTransform:'uppercase',letterSpacing:'1px',marginBottom:'10px' }}>Trusted & Secure</div>
+            <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'24px',fontWeight:800,color:'#0F2A4A',marginBottom:'24px' }}>Your data stays private</h2>
+            <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(180px,1fr))',gap:'14px' }}>
+              {[
+                { icon:'🔒', title:'SSL Encrypted', desc:'TLS 1.3 transfer' },
+                { icon:'🛡', title:'No Storage', desc:'Auto-delete policy' },
+                { icon:'🚫', title:'No Tracking', desc:'Privacy first' },
+                { icon:'✅', title:'GDPR Ready', desc:'Compliant practices' },
+                { icon:'⚡', title:'Cloudflare', desc:'Enterprise security' },
+                { icon:'🆓', title:'Always Free', desc:'No hidden fees' },
+              ].map(b => (
+                <div key={b.title} style={{ background:'#f8fafc',border:'1.5px solid #e2e8f0',borderRadius:'12px',padding:'16px 12px',textAlign:'center' }}>
+                  <div style={{ fontSize:'28px',marginBottom:'6px' }}>{b.icon}</div>
+                  <div style={{ fontSize:'13px',fontWeight:700,color:'#0F2A4A' }}>{b.title}</div>
+                  <div style={{ fontSize:'11.5px',color:'#94a3b8',marginTop:'2px' }}>{b.desc}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
         <div style={{ marginTop:'48px' }}>
           <div style={{ display:'flex',alignItems:'center',gap:'12px',marginBottom:'20px' }}>
             <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'22px',fontWeight:800,color:'#0F2A4A',margin:0 }}>Coming Soon</h2>
             <span style={{ background:'#FFF7ED',border:'1.5px solid #FED7AA',color:'#C2410C',fontSize:'12px',fontWeight:700,padding:'3px 10px',borderRadius:'999px' }}>Building now</span>
           </div>
-          <div style={{ display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'14px' }}>
+          <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(240px,1fr))',gap:'14px' }}>
             {COMING.map(tool => (
               <div key={tool.title} style={{ background:'#f8fafc',border:'1.5px dashed #e2e8f0',borderRadius:'16px',padding:'20px' }}>
                 <div style={{ width:'44px',height:'44px',background:'#f1f5f9',borderRadius:'11px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'22px',marginBottom:'10px' }}>{tool.icon}</div>
@@ -192,7 +214,7 @@ export default function HomePage() {
           <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'clamp(22px,3vw,32px)',fontWeight:800,color:'#0F2A4A',marginBottom:'10px' }}>Why ConvertDox?</h2>
           <p style={{ fontSize:'16px',color:'#64748b',margin:0 }}>Built for speed, privacy, and simplicity</p>
         </div>
-        <div style={{ maxWidth:'1200px',margin:'0 auto',display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'20px' }}>
+        <div style={{ maxWidth:'1200px',margin:'0 auto',display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(280px,1fr))',gap:'20px' }}>
           {[{icon:'⚡',title:'Instant Results',desc:'All tools work in real time. Results appear as you type.'},{icon:'🔒',title:'100% Private',desc:'Your files stay in your browser. Nothing uploaded to any server.'},{icon:'🆓',title:'Always Free',desc:'Core tools are free forever. No credit card or sign-up.'},{icon:'📱',title:'Works Everywhere',desc:'Fully responsive on phone, tablet, and desktop.'},{icon:'⚙️',title:'200+ Tools',desc:'PDF, Image, AI, Text, Calculators, QR — all in one place.'},{icon:'🚀',title:'No Installation',desc:'Open your browser and use the tool. Nothing to download.'}].map(f => (
             <div key={f.title} style={{ background:'white',border:'1.5px solid #e2e8f0',borderRadius:'16px',padding:'24px' }}>
               <div style={{ fontSize:'28px',marginBottom:'12px' }}>{f.icon}</div>
@@ -205,7 +227,7 @@ export default function HomePage() {
 
       <footer style={{ background:'#0F2A4A',padding:'48px 24px 28px' }}>
         <div style={{ maxWidth:'1200px',margin:'0 auto' }}>
-          <div style={{ display:'grid',gridTemplateColumns:'2fr 1fr 1fr 1fr',gap:'40px',marginBottom:'40px' }}>
+          <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(200px,1fr))',gap:'40px',marginBottom:'40px' }}>
             <div>
               <div style={{ display:'flex',alignItems:'center',gap:'8px',marginBottom:'14px' }}>
                 <div style={{ width:'30px',height:'30px',background:'#E85D04',borderRadius:'7px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'15px' }}>📄</div>

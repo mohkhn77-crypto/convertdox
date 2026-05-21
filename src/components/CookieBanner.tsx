@@ -44,8 +44,8 @@ export default function CookieBanner() {
 
         {!showDetails ? (
           /* Simple view */
-          <div style={{ display:'flex',alignItems:'center',gap:'20px',flexWrap:'wrap' }}>
-            <div style={{ flex:1,minWidth:'200px' }}>
+          <div style={{ display:'flex',alignItems:'flex-start',gap:'20px',flexWrap:'wrap',flexDirection:'column' }}>
+            <div style={{ flex:1,minWidth:'200px',width:'100%' }}>
               <div style={{ display:'flex',alignItems:'center',gap:'8px',marginBottom:'4px' }}>
                 <span style={{ fontSize:'20px' }}>🍪</span>
                 <span style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'15px',fontWeight:700,color:'#0F2A4A' }}>We use cookies</span>
@@ -55,17 +55,17 @@ export default function CookieBanner() {
                 <a href="/legal#privacy" style={{ color:'#E85D04',fontWeight:600 }}>Privacy Policy</a>
               </p>
             </div>
-            <div style={{ display:'flex',gap:'8px',flexShrink:0,flexWrap:'wrap' }}>
+            <div style={{ display:'flex',gap:'8px',flexWrap:'wrap',width:'100%' }}>
               <button onClick={() => setShowDetails(true)}
-                style={{ padding:'9px 16px',borderRadius:'9px',border:'1.5px solid #e2e8f0',background:'white',fontFamily:'inherit',fontSize:'13px',fontWeight:600,cursor:'pointer',color:'#64748b',whiteSpace:'nowrap' }}>
+                style={{ padding:'9px 16px',borderRadius:'9px',border:'1.5px solid #e2e8f0',background:'white',fontFamily:'inherit',fontSize:'13px',fontWeight:600,cursor:'pointer',color:'#64748b',flex:'1 1 auto' }}>
                 Manage Preferences
               </button>
               <button onClick={rejectAll}
-                style={{ padding:'9px 16px',borderRadius:'9px',border:'1.5px solid #e2e8f0',background:'white',fontFamily:'inherit',fontSize:'13px',fontWeight:600,cursor:'pointer',color:'#64748b',whiteSpace:'nowrap' }}>
+                style={{ padding:'9px 16px',borderRadius:'9px',border:'1.5px solid #e2e8f0',background:'white',fontFamily:'inherit',fontSize:'13px',fontWeight:600,cursor:'pointer',color:'#64748b',flex:'1 1 auto' }}>
                 Reject All
               </button>
               <button onClick={acceptAll}
-                style={{ padding:'9px 20px',borderRadius:'9px',border:'none',background:'#0F2A4A',fontFamily:'inherit',fontSize:'13px',fontWeight:700,cursor:'pointer',color:'white',whiteSpace:'nowrap' }}>
+                style={{ padding:'9px 20px',borderRadius:'9px',border:'none',background:'#0F2A4A',fontFamily:'inherit',fontSize:'13px',fontWeight:700,cursor:'pointer',color:'white',flex:'1 1 auto' }}>
                 Accept All
               </button>
             </div>
