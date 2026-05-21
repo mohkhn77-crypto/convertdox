@@ -41,6 +41,8 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap"
           rel="stylesheet"
         />
+        <meta name="google-adsense-account" content="ca-pub-8558443515165092" />
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8558443515165092" crossOrigin="anonymous"></script>
       </head>
       <body style={{ margin: 0, padding: 0, fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}>
         {children}
