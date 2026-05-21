@@ -209,19 +209,114 @@ export default function HomePage() {
         </div>
       </div>
 
-      <div style={{ background:'#f8fafc',padding:'56px 24px',borderTop:'1px solid #e2e8f0' }}>
-        <div style={{ maxWidth:'1200px',margin:'0 auto',textAlign:'center',marginBottom:'36px' }}>
-          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'clamp(22px,3vw,32px)',fontWeight:800,color:'#0F2A4A',marginBottom:'10px' }}>Why ConvertDox?</h2>
-          <p style={{ fontSize:'16px',color:'#64748b',margin:0 }}>Built for speed, privacy, and simplicity</p>
-        </div>
-        <div style={{ maxWidth:'1200px',margin:'0 auto',display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(280px,1fr))',gap:'20px' }}>
-          {[{icon:'⚡',title:'Instant Results',desc:'All tools work in real time. Results appear as you type.'},{icon:'🔒',title:'100% Private',desc:'Your files stay in your browser. Nothing uploaded to any server.'},{icon:'🆓',title:'Always Free',desc:'Core tools are free forever. No credit card or sign-up.'},{icon:'📱',title:'Works Everywhere',desc:'Fully responsive on phone, tablet, and desktop.'},{icon:'⚙️',title:'200+ Tools',desc:'PDF, Image, AI, Text, Calculators, QR — all in one place.'},{icon:'🚀',title:'No Installation',desc:'Open your browser and use the tool. Nothing to download.'}].map(f => (
-            <div key={f.title} style={{ background:'white',border:'1.5px solid #e2e8f0',borderRadius:'16px',padding:'24px' }}>
-              <div style={{ fontSize:'28px',marginBottom:'12px' }}>{f.icon}</div>
-              <div style={{ fontSize:'15px',fontWeight:700,color:'#0F2A4A',marginBottom:'8px' }}>{f.title}</div>
-              <div style={{ fontSize:'13.5px',color:'#64748b',lineHeight:'1.6' }}>{f.desc}</div>
+      {/* Why ConvertDox - Bold Navy Badge style */}
+      <div style={{ background:'#f8fafc',padding:'72px 24px',borderTop:'1px solid #e2e8f0' }}>
+        <div style={{ maxWidth:'1200px',margin:'0 auto' }}>
+          <div style={{ textAlign:'center',marginBottom:'56px' }}>
+            <div style={{ fontSize:'12px',fontWeight:700,color:'#E85D04',textTransform:'uppercase',letterSpacing:'1.5px',marginBottom:'10px' }}>Why ConvertDox</div>
+            <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'clamp(28px,4vw,42px)',fontWeight:800,color:'#0F2A4A',margin:'0 0 14px',letterSpacing:'-0.5px' }}>
+              Built for everyone — fast, free, secure
+            </h2>
+            <p style={{ fontSize:'17px',color:'#64748b',maxWidth:'620px',margin:'0 auto',lineHeight:'1.7' }}>
+              ConvertDox brings together 200+ professional tools in one platform —
+              designed with privacy, speed, and simplicity at its core.
+            </p>
+          </div>
+
+          <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:'32px' }}>
+
+            <div style={{ textAlign:'center',padding:'8px' }}>
+              <div style={{ width:'72px',height:'72px',background:'#0F2A4A',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',margin:'0 auto 20px' }}>
+                <svg width="36" height="36" viewBox="0 0 48 48" fill="none">
+                  <path d="M16 20l8-6 8 6v8a2 2 0 01-2 2H18a2 2 0 01-2-2v-8z" fill="none" stroke="white" strokeWidth="2" strokeLinejoin="round"/>
+                  <circle cx="24" cy="24" r="2" fill="#F48C42"/>
+                </svg>
+              </div>
+              <h3 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'20px',fontWeight:700,color:'#0F2A4A',margin:'0 0 12px' }}>200+ Tools Available</h3>
+              <p style={{ fontSize:'15px',color:'#64748b',lineHeight:'1.7',margin:0,padding:'0 8px' }}>
+                From PDF conversion and image editing to calculators, text utilities,
+                and developer tools — we support more categories than any other free
+                platform available online.
+              </p>
             </div>
-          ))}
+
+            <div style={{ textAlign:'center',padding:'8px' }}>
+              <div style={{ width:'72px',height:'72px',background:'#0F2A4A',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',margin:'0 auto 20px' }}>
+                <svg width="36" height="36" viewBox="0 0 48 48" fill="none">
+                  <path d="M22 14l-6 12h6l-2 8 8-12h-6l2-8z" fill="#F48C42"/>
+                </svg>
+              </div>
+              <h3 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'20px',fontWeight:700,color:'#0F2A4A',margin:'0 0 12px' }}>Fast and Easy</h3>
+              <p style={{ fontSize:'15px',color:'#64748b',lineHeight:'1.7',margin:0,padding:'0 8px' }}>
+                Just open your tool, paste your text or drop your file, and get instant
+                results. Most tools work in real time — no loading screens, no waiting,
+                no friction whatsoever.
+              </p>
+            </div>
+
+            <div style={{ textAlign:'center',padding:'8px' }}>
+              <div style={{ width:'72px',height:'72px',background:'#0F2A4A',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',margin:'0 auto 20px' }}>
+                <svg width="36" height="36" viewBox="0 0 48 48" fill="none">
+                  <path d="M16 28a4 4 0 014-4 6 6 0 0112 0h.5a3.5 3.5 0 010 7h-12.5a4 4 0 01-4-3z" fill="none" stroke="white" strokeWidth="2" strokeLinejoin="round"/>
+                  <path d="M24 18v4M22 20l2-2 2 2" stroke="#F48C42" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+              <h3 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'20px',fontWeight:700,color:'#0F2A4A',margin:'0 0 12px' }}>Works in the Cloud</h3>
+              <p style={{ fontSize:'15px',color:'#64748b',lineHeight:'1.7',margin:0,padding:'0 8px' }}>
+                Everything runs in your browser. No software to download, no apps to
+                install, no system resources consumed. Open any tool and start using
+                it immediately.
+              </p>
+            </div>
+
+            <div style={{ textAlign:'center',padding:'8px' }}>
+              <div style={{ width:'72px',height:'72px',background:'#0F2A4A',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',margin:'0 auto 20px' }}>
+                <svg width="36" height="36" viewBox="0 0 48 48" fill="none">
+                  <circle cx="24" cy="24" r="6" fill="none" stroke="white" strokeWidth="2"/>
+                  <path d="M24 14v3M24 31v3M14 24h3M31 24h3M17 17l2 2M29 29l2 2M17 31l2-2M29 19l2-2" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+                  <circle cx="24" cy="24" r="2" fill="#F48C42"/>
+                </svg>
+              </div>
+              <h3 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'20px',fontWeight:700,color:'#0F2A4A',margin:'0 0 12px' }}>Custom Settings</h3>
+              <p style={{ fontSize:'15px',color:'#64748b',lineHeight:'1.7',margin:0,padding:'0 8px' }}>
+                Most tools support advanced customisation options. Adjust QR code
+                colours, choose password complexity, customise conversions — fine-tune
+                every result to your exact needs.
+              </p>
+            </div>
+
+            <div style={{ textAlign:'center',padding:'8px' }}>
+              <div style={{ width:'72px',height:'72px',background:'#0F2A4A',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',margin:'0 auto 20px' }}>
+                <svg width="36" height="36" viewBox="0 0 48 48" fill="none">
+                  <path d="M24 12l9 4v8c0 6-4 11-9 12-5-1-9-6-9-12v-8l9-4z" fill="none" stroke="#F48C42" strokeWidth="2" strokeLinejoin="round"/>
+                  <path d="M20 24l3 3 5-5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+              <h3 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'20px',fontWeight:700,color:'#0F2A4A',margin:'0 0 12px' }}>Security Guaranteed</h3>
+              <p style={{ fontSize:'15px',color:'#64748b',lineHeight:'1.7',margin:0,padding:'0 8px' }}>
+                Your files and data are processed securely and deleted instantly after
+                use. We never store, share, or sell your information — your privacy
+                is fully protected. <a href="/legal" style={{ color:'#E85D04',fontWeight:600,textDecoration:'none' }}>Read more about security</a>.
+              </p>
+            </div>
+
+            <div style={{ textAlign:'center',padding:'8px' }}>
+              <div style={{ width:'72px',height:'72px',background:'#0F2A4A',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',margin:'0 auto 20px' }}>
+                <svg width="36" height="36" viewBox="0 0 48 48" fill="none">
+                  <rect x="12" y="14" width="18" height="13" rx="1.5" fill="none" stroke="white" strokeWidth="2"/>
+                  <rect x="32" y="18" width="8" height="16" rx="1.5" fill="none" stroke="white" strokeWidth="2"/>
+                  <circle cx="36" cy="31" r="1" fill="#F48C42"/>
+                </svg>
+              </div>
+              <h3 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'20px',fontWeight:700,color:'#0F2A4A',margin:'0 0 12px' }}>All Devices Supported</h3>
+              <p style={{ fontSize:'15px',color:'#64748b',lineHeight:'1.7',margin:0,padding:'0 8px' }}>
+                ConvertDox is fully browser-based and works seamlessly on every device
+                — desktop, laptop, tablet, and mobile. Access any tool from anywhere,
+                on any platform.
+              </p>
+            </div>
+
+          </div>
         </div>
       </div>
 
