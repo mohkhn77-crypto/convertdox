@@ -221,15 +221,93 @@ const COMING = [
   { icon:'📋', title:'HTML Formatter',      desc:'Beautify HTML code' },
 ]
 
+const CatIcon = ({ type, active }: { type: string, active: boolean }) => {
+  const color = active ? '#ffffff' : '#64748b'
+  const accent = active ? '#F48C42' : '#E85D04'
+  const icons: Record<string, React.ReactElement> = {
+    all: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <rect x="3" y="3" width="7" height="7" rx="1.5" fill={accent}/>
+        <rect x="14" y="3" width="7" height="7" rx="1.5" fill={color}/>
+        <rect x="3" y="14" width="7" height="7" rx="1.5" fill={color}/>
+        <rect x="14" y="14" width="7" height="7" rx="1.5" fill={accent}/>
+      </svg>
+    ),
+    text: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <path d="M5 4h14M12 4v16M9 20h6" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+    calc: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <rect x="4" y="3" width="16" height="18" rx="2" stroke={color} strokeWidth="1.8" fill="none"/>
+        <rect x="6" y="5" width="12" height="4" rx="1" fill={accent}/>
+        <circle cx="8" cy="13" r="1" fill={color}/>
+        <circle cx="12" cy="13" r="1" fill={color}/>
+        <circle cx="16" cy="13" r="1" fill={color}/>
+        <circle cx="8" cy="17" r="1" fill={color}/>
+        <circle cx="12" cy="17" r="1" fill={color}/>
+        <circle cx="16" cy="17" r="1" fill={accent}/>
+      </svg>
+    ),
+    security: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <path d="M12 3l8 3v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-3z" fill="none" stroke={color} strokeWidth="1.8" strokeLinejoin="round"/>
+        <path d="M9 12l2 2 4-4" stroke={accent} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+    dev: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+    color: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="9" fill="none" stroke={color} strokeWidth="1.8"/>
+        <circle cx="8" cy="9" r="1.5" fill="#EF4444"/>
+        <circle cx="15" cy="9" r="1.5" fill="#10B981"/>
+        <circle cx="9" cy="15" r="1.5" fill="#3B82F6"/>
+        <circle cx="15" cy="15" r="1.5" fill={accent}/>
+      </svg>
+    ),
+    qr: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <rect x="3" y="3" width="6" height="6" rx="1" fill="none" stroke={color} strokeWidth="1.8"/>
+        <rect x="15" y="3" width="6" height="6" rx="1" fill="none" stroke={color} strokeWidth="1.8"/>
+        <rect x="3" y="15" width="6" height="6" rx="1" fill="none" stroke={color} strokeWidth="1.8"/>
+        <rect x="5" y="5" width="2" height="2" fill={accent}/>
+        <rect x="17" y="5" width="2" height="2" fill={accent}/>
+        <rect x="5" y="17" width="2" height="2" fill={accent}/>
+        <rect x="13" y="13" width="2" height="2" fill={color}/>
+        <rect x="17" y="13" width="2" height="2" fill={color}/>
+        <rect x="13" y="17" width="2" height="2" fill={color}/>
+        <rect x="19" y="19" width="2" height="2" fill={accent}/>
+      </svg>
+    ),
+    fun: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <rect x="3" y="3" width="14" height="14" rx="2" fill="none" stroke={color} strokeWidth="1.8"/>
+        <circle cx="7" cy="7" r="1.2" fill={color}/>
+        <circle cx="13" cy="7" r="1.2" fill={color}/>
+        <circle cx="10" cy="10" r="1.2" fill={accent}/>
+        <circle cx="7" cy="13" r="1.2" fill={color}/>
+        <circle cx="13" cy="13" r="1.2" fill={color}/>
+        <circle cx="18" cy="18" r="3" fill={accent}/>
+      </svg>
+    ),
+  }
+  return icons[type] ?? icons['all']
+}
+
 const CATS = [
-  { id:'all',      label:'🔥 All Tools' },
-  { id:'text',     label:'✍ Text' },
-  { id:'calc',     label:'🔢 Calculators' },
-  { id:'security', label:'🔒 Security' },
-  { id:'dev',      label:'💻 Developer' },
-  { id:'color',    label:'🎨 Colour' },
-  { id:'qr',       label:'📱 QR Code' },
-  { id:'fun',      label:'🎲 Fun & Random' },
+  { id:'all',      label:'All Tools',    iconType:'all' },
+  { id:'text',     label:'Text',         iconType:'text' },
+  { id:'calc',     label:'Calculators',  iconType:'calc' },
+  { id:'security', label:'Security',     iconType:'security' },
+  { id:'dev',      label:'Developer',    iconType:'dev' },
+  { id:'color',    label:'Colour',       iconType:'color' },
+  { id:'qr',       label:'QR Code',      iconType:'qr' },
+  { id:'fun',      label:'Fun & Random', iconType:'fun' },
 ]
 
 const JSON_LD = {
@@ -427,7 +505,8 @@ export default function HomePage() {
         <div style={{ display:'flex',gap:'6px',flexWrap:'wrap',marginBottom:'28px' }}>
           {CATS.map(cat => (
             <button key={cat.id} onClick={() => setActiveCat(cat.id)}
-              style={{ padding:'8px 16px',borderRadius:'999px',border:'1.5px solid',borderColor:activeCat===cat.id?'#0F2A4A':'#e2e8f0',background:activeCat===cat.id?'#0F2A4A':'white',color:activeCat===cat.id?'white':'#64748b',fontFamily:'inherit',fontSize:'13px',fontWeight:600,cursor:'pointer',whiteSpace:'nowrap' }}>
+              style={{ padding:'8px 16px',borderRadius:'999px',border:'1.5px solid',borderColor:activeCat===cat.id?'#0F2A4A':'#e2e8f0',background:activeCat===cat.id?'#0F2A4A':'white',color:activeCat===cat.id?'white':'#64748b',fontFamily:'inherit',fontSize:'13px',fontWeight:600,cursor:'pointer',whiteSpace:'nowrap',display:'flex',alignItems:'center',gap:'7px',transition:'all 0.15s' }}>
+              <CatIcon type={cat.iconType} active={activeCat===cat.id} />
               {cat.label}
             </button>
           ))}
