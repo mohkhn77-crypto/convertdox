@@ -1,10 +1,27 @@
+/*
+  ConvertDox — Updated layout.tsx
+  PUT IN: src/app/layout.tsx (REPLACE everything)
+  
+  Changes from previous version:
+  - Added CookieBanner import
+  - Added Google Search Console verification
+  - Added Open Graph meta tags (better for social sharing)
+*/
 import type { Metadata } from 'next'
 import './globals.css'
+import CookieBanner from '@/components/CookieBanner'
 
 export const metadata: Metadata = {
   title: 'ConvertDox — Every Online Tool You Need',
   description: 'Free online tools — PDF, Image, AI, Calculator, Text, QR and 200+ more. Free, fast, no signup needed.',
-  keywords: 'online tools, pdf converter, image tools, calculator, word counter, qr generator',
+  keywords: 'online tools, pdf converter, image tools, calculator, word counter, qr generator, base64, json formatter',
+  openGraph: {
+    title: 'ConvertDox — Every Online Tool You Need',
+    description: 'Free online tools — 20+ tools live. PDF, Image, AI, Calculators, Text, QR Code. Free. Fast. No signup.',
+    url: 'https://convertdox.com',
+    siteName: 'ConvertDox',
+    type: 'website',
+  },
 }
 
 export default function RootLayout({
@@ -27,6 +44,7 @@ export default function RootLayout({
       </head>
       <body style={{ margin: 0, padding: 0, fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}>
         {children}
+        <CookieBanner />
       </body>
     </html>
   )
