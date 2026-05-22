@@ -1,26 +1,49 @@
-/*
-  ConvertDox — Updated layout.tsx
-  PUT IN: src/app/layout.tsx (REPLACE everything)
-  
-  Changes from previous version:
-  - Added CookieBanner import
-  - Added Google Search Console verification
-  - Added Open Graph meta tags (better for social sharing)
-*/
 import type { Metadata } from 'next'
 import './globals.css'
 import CookieBanner from '@/components/CookieBanner'
 
 export const metadata: Metadata = {
-  title: 'ConvertDox — Every Online Tool You Need',
-  description: 'Free online tools — PDF, Image, AI, Calculator, Text, QR and 200+ more. Free, fast, no signup needed.',
-  keywords: 'online tools, pdf converter, image tools, calculator, word counter, qr generator, base64, json formatter',
+  title: 'ConvertDox — Every Online Tool You Need (25+ Free Tools)',
+  description: 'Free online tools — Word Counter, QR Generator, BMI Calculator, JSON Formatter, Password Generator and 20+ more. No signup, files never stored, 100% free.',
+  keywords: 'online tools, free tools, word counter, qr generator, bmi calculator, json formatter, password generator, csv to json, uuid generator, text diff, online converter',
+  authors: [{ name: 'ConvertDox' }],
+  creator: 'ConvertDox',
+  publisher: 'ConvertDox',
   openGraph: {
-    title: 'ConvertDox — Every Online Tool You Need',
-    description: 'Free online tools — 20+ tools live. PDF, Image, AI, Calculators, Text, QR Code. Free. Fast. No signup.',
+    title: 'ConvertDox — 25+ Free Online Tools, No Signup Required',
+    description: 'Free online tools: Word Counter, QR Generator, JSON Formatter, BMI Calculator, Password Generator, CSS Gradient and 20+ more. Files never stored. 100% free forever.',
     url: 'https://convertdox.com',
     siteName: 'ConvertDox',
+    images: [
+      {
+        url: 'https://convertdox.com/og-image.svg',
+        width: 1200,
+        height: 630,
+        alt: 'ConvertDox — Every Online Tool You Need',
+      },
+    ],
+    locale: 'en_US',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ConvertDox — 25+ Free Online Tools',
+    description: 'Free online tools. No signup. Files never stored. 100% free.',
+    images: ['https://convertdox.com/og-image.svg'],
+    creator: '@convertdox',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  alternates: {
+    canonical: 'https://convertdox.com',
   },
 }
 
@@ -43,6 +66,18 @@ export default function RootLayout({
         />
         <meta name="google-adsense-account" content="ca-pub-8558443515165092" />
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8558443515165092" crossOrigin="anonymous"></script>
+        {/* Google Analytics */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-93F3LQWNSN"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-93F3LQWNSN');
+            `,
+          }}
+        />
       </head>
       <body style={{ margin: 0, padding: 0, fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}>
         {children}
