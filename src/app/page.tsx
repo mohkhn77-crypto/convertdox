@@ -218,6 +218,156 @@ const ToolIcon = ({ type }: { type: string }) => {
         <text x="38" y="31" fontFamily="Arial" fontSize="10" fontWeight="700" fill="#16A34A" textAnchor="middle">+</text>
       </svg>
     ),
+    'loan': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#DBEAFE" stroke="#2563EB" strokeWidth="1.5"/>
+        <text x="26" y="26" fontFamily="Arial" fontSize="9" fontWeight="700" fill="#1D4ED8" textAnchor="middle">LOAN</text>
+        <text x="26" y="37" fontFamily="Arial" fontSize="14" fontWeight="700" fill="#2563EB" textAnchor="middle">$</text>
+      </svg>
+    ),
+    'timezone': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#CFFAFE" stroke="#0891B2" strokeWidth="1.5"/>
+        <circle cx="26" cy="26" r="11" fill="none" stroke="#0891B2" strokeWidth="2"/>
+        <path d="M26 19v7l4 3" stroke="#0891B2" strokeWidth="2" strokeLinecap="round"/>
+        <text x="26" y="43" fontFamily="Arial" fontSize="7" fontWeight="700" fill="#0891B2" textAnchor="middle">TZ</text>
+      </svg>
+    ),
+    'date-diff': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#FED7AA" stroke="#EA580C" strokeWidth="1.5"/>
+        <rect x="12" y="16" width="12" height="10" rx="1" fill="#EA580C" opacity="0.3"/>
+        <rect x="28" y="20" width="12" height="10" rx="1" fill="#EA580C" opacity="0.7"/>
+        <path d="M20 22h12" stroke="#EA580C" strokeWidth="2" strokeLinecap="round"/>
+        <text x="26" y="38" fontFamily="Arial" fontSize="8" fontWeight="700" fill="#EA580C" textAnchor="middle">DIFF</text>
+      </svg>
+    ),
+    'salary': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#DCFCE7" stroke="#16A34A" strokeWidth="1.5"/>
+        <text x="26" y="30" fontFamily="Arial" fontSize="22" fontWeight="700" fill="#15803D" textAnchor="middle">$</text>
+        <path d="M16 38h20" stroke="#16A34A" strokeWidth="2" strokeLinecap="round"/>
+      </svg>
+    ),
+    'compound': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#FEF3C7" stroke="#D97706" strokeWidth="1.5"/>
+        <path d="M14 36 Q18 28 22 30 Q26 32 30 20 Q34 16 38 14" fill="none" stroke="#D97706" strokeWidth="2.5" strokeLinecap="round"/>
+      </svg>
+    ),
+    'gpa': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#E0E7FF" stroke="#6366F1" strokeWidth="1.5"/>
+        <text x="26" y="30" fontFamily="Arial" fontSize="16" fontWeight="700" fill="#4338CA" textAnchor="middle">GPA</text>
+        <text x="26" y="40" fontFamily="Arial" fontSize="10" fontWeight="700" fill="#6366F1" textAnchor="middle">4.0</text>
+      </svg>
+    ),
+    'calorie': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#FEE2E2" stroke="#EF4444" strokeWidth="1.5"/>
+        <path d="M26 14 C24 18 20 20 20 26 C20 30 23 34 26 34 C29 34 32 30 32 26 C32 20 28 18 26 14Z" fill="#EF4444" opacity="0.7"/>
+        <path d="M26 22 C25 24 23 25 23 28 C23 30 24.5 32 26 32" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+      </svg>
+    ),
+    'pomodoro': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#FEE2E2" stroke="#EF4444" strokeWidth="1.5"/>
+        <circle cx="26" cy="27" r="11" fill="#EF4444" opacity="0.8"/>
+        <path d="M26 21v6l4 2" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+        <path d="M22 12 C22 10 30 10 30 12" fill="none" stroke="#EF4444" strokeWidth="2" strokeLinecap="round"/>
+      </svg>
+    ),
+    'jwt': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="6" y="10" width="28" height="34" rx="4" fill="#EDE9FE" stroke="#7C3AED" strokeWidth="1.5"/>
+        <text x="20" y="28" fontFamily="monospace" fontSize="8" fontWeight="700" fill="#5B21B6" textAnchor="middle">JWT</text>
+        <rect x="20" y="6" width="26" height="32" rx="4" fill="#7C3AED"/>
+        <text x="33" y="26" fontFamily="Arial" fontSize="10" fontWeight="700" fill="white" textAnchor="middle">🔐</text>
+      </svg>
+    ),
+    'hash': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#F3F4F6" stroke="#6B7280" strokeWidth="1.5"/>
+        <text x="26" y="30" fontFamily="monospace" fontSize="20" fontWeight="700" fill="#374151" textAnchor="middle">#</text>
+      </svg>
+    ),
+    'xml': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="6" y="10" width="28" height="34" rx="4" fill="#FEF3C7" stroke="#D97706" strokeWidth="1.5"/>
+        <text x="20" y="32" fontFamily="monospace" fontSize="10" fontWeight="700" fill="#92400E" textAnchor="middle">XML</text>
+        <rect x="20" y="6" width="26" height="32" rx="4" fill="#D97706"/>
+        <text x="33" y="26" fontFamily="monospace" fontSize="9" fontWeight="700" fill="white" textAnchor="middle">{'</>'}</text>
+      </svg>
+    ),
+    'yaml': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="6" y="10" width="28" height="34" rx="4" fill="#F0FDF4" stroke="#16A34A" strokeWidth="1.5"/>
+        <text x="20" y="29" fontFamily="monospace" fontSize="9" fontWeight="700" fill="#15803D" textAnchor="middle">YAML</text>
+        <rect x="20" y="6" width="26" height="32" rx="4" fill="#16A34A"/>
+        <text x="33" y="26" fontFamily="monospace" fontSize="9" fontWeight="700" fill="white" textAnchor="middle">JSON</text>
+      </svg>
+    ),
+    'json-csv': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="6" y="10" width="28" height="34" rx="4" fill="#DCFCE7" stroke="#16A34A" strokeWidth="1.5"/>
+        <text x="20" y="28" fontFamily="monospace" fontSize="9" fontWeight="700" fill="#15803D" textAnchor="middle">JSON</text>
+        <rect x="20" y="6" width="26" height="32" rx="4" fill="#059669"/>
+        <text x="33" y="26" fontFamily="monospace" fontSize="9" fontWeight="700" fill="white" textAnchor="middle">CSV</text>
+      </svg>
+    ),
+    'sql': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#E0F2FE" stroke="#0284C7" strokeWidth="1.5"/>
+        <ellipse cx="26" cy="18" rx="10" ry="4" fill="#0284C7" opacity="0.7"/>
+        <path d="M16 18v8c0 2.2 4.5 4 10 4s10-1.8 10-4v-8" fill="none" stroke="#0284C7" strokeWidth="1.5"/>
+        <path d="M16 26v6c0 2.2 4.5 4 10 4s10-1.8 10-4v-6" fill="none" stroke="#0284C7" strokeWidth="1.5"/>
+      </svg>
+    ),
+    'regex': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#FAE8FF" stroke="#A855F7" strokeWidth="1.5"/>
+        <text x="26" y="30" fontFamily="monospace" fontSize="16" fontWeight="700" fill="#7E22CE" textAnchor="middle">.*</text>
+      </svg>
+    ),
+    'html-md': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="6" y="10" width="28" height="34" rx="4" fill="#FFEDD5" stroke="#EA580C" strokeWidth="1.5"/>
+        <text x="20" y="29" fontFamily="monospace" fontSize="8" fontWeight="700" fill="#C2410C" textAnchor="middle">HTML</text>
+        <rect x="20" y="6" width="26" height="32" rx="4" fill="#EA580C"/>
+        <text x="33" y="26" fontFamily="monospace" fontSize="9" fontWeight="700" fill="white" textAnchor="middle">.md</text>
+      </svg>
+    ),
+    'md-html': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="6" y="10" width="28" height="34" rx="4" fill="#E0E7FF" stroke="#6366F1" strokeWidth="1.5"/>
+        <text x="20" y="29" fontFamily="monospace" fontSize="8" fontWeight="700" fill="#4338CA" textAnchor="middle">.md</text>
+        <rect x="20" y="6" width="26" height="32" rx="4" fill="#6366F1"/>
+        <text x="33" y="26" fontFamily="monospace" fontSize="8" fontWeight="700" fill="white" textAnchor="middle">HTML</text>
+      </svg>
+    ),
+    'slug': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#CCFBF1" stroke="#0D9488" strokeWidth="1.5"/>
+        <text x="26" y="23" fontFamily="monospace" fontSize="8" fontWeight="700" fill="#0F766E" textAnchor="middle">title</text>
+        <path d="M26 25v4" stroke="#0D9488" strokeWidth="1.5" strokeLinecap="round"/>
+        <text x="26" y="36" fontFamily="monospace" fontSize="8" fontWeight="700" fill="#0D9488" textAnchor="middle">ti-tle</text>
+      </svg>
+    ),
+    'entities': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#FEF9C3" stroke="#CA8A04" strokeWidth="1.5"/>
+        <text x="26" y="26" fontFamily="monospace" fontSize="9" fontWeight="700" fill="#92400E" textAnchor="middle">&amp;lt;</text>
+        <text x="26" y="37" fontFamily="monospace" fontSize="9" fontWeight="700" fill="#CA8A04" textAnchor="middle">{'<'}</text>
+      </svg>
+    ),
+    'cron': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#F1F5F9" stroke="#475569" strokeWidth="1.5"/>
+        <circle cx="26" cy="26" r="10" fill="none" stroke="#475569" strokeWidth="2"/>
+        <path d="M26 20v6l3 3" stroke="#E85D04" strokeWidth="2" strokeLinecap="round"/>
+        <text x="26" y="42" fontFamily="monospace" fontSize="6" fontWeight="700" fill="#475569" textAnchor="middle">* * * * *</text>
+      </svg>
+    ),
   }
   return icons[type] ?? icons['word-counter']
 }
@@ -256,6 +406,28 @@ const TOOLS = [
   { iconType:'text-diff',    title:'Text Diff Checker',       desc:'Compare two texts and highlight changes',  href:'/text-diff',       cat:'text' },
   { iconType:'csv-json',     title:'CSV to JSON Converter',   desc:'Convert CSV spreadsheet data to JSON',     href:'/csv-to-json',     cat:'dev' },
   { iconType:'uuid',         title:'UUID Generator',          desc:'Generate random UUID v4 identifiers',      href:'/uuid-generator',  cat:'dev' },
+  // Calculators (new)
+  { iconType:'loan',       title:'Loan Calculator',          desc:'Calculate monthly payments & amortization',  href:'/loan-calculator',      cat:'calc' },
+  { iconType:'timezone',   title:'Time Zone Converter',      desc:'Convert times between any time zones',        href:'/timezone-converter',   cat:'calc' },
+  { iconType:'date-diff',  title:'Date Difference',          desc:'Days, weeks, months between two dates',       href:'/date-difference',      cat:'calc' },
+  { iconType:'salary',     title:'Salary Calculator',        desc:'Convert hourly ↔ annual salary instantly',    href:'/salary-calculator',    cat:'calc' },
+  { iconType:'compound',   title:'Compound Interest',        desc:'Calculate investment growth over time',        href:'/compound-interest',    cat:'calc' },
+  { iconType:'gpa',        title:'GPA Calculator',           desc:'Calculate GPA from course grades',            href:'/gpa-calculator',       cat:'calc' },
+  { iconType:'calorie',    title:'Calorie Calculator',       desc:'BMR & TDEE from age, height & weight',        href:'/calorie-calculator',   cat:'calc' },
+  { iconType:'pomodoro',   title:'Pomodoro Timer',           desc:'Focus timer with work & break intervals',     href:'/pomodoro-timer',       cat:'fun' },
+  // Developer (new)
+  { iconType:'jwt',        title:'JWT Decoder',              desc:'Decode & inspect JSON Web Tokens',            href:'/jwt-decoder',          cat:'dev' },
+  { iconType:'hash',       title:'Hash Generator',           desc:'MD5, SHA-1, SHA-256, SHA-512 hashes',         href:'/hash-generator',       cat:'dev' },
+  { iconType:'xml',        title:'XML Formatter',            desc:'Format, validate and minify XML code',        href:'/xml-formatter',        cat:'dev' },
+  { iconType:'yaml',       title:'YAML ↔ JSON Converter',   desc:'Convert between YAML and JSON formats',        href:'/yaml-to-json',         cat:'dev' },
+  { iconType:'json-csv',   title:'JSON to CSV Converter',   desc:'Convert JSON arrays to CSV spreadsheets',      href:'/json-to-csv',          cat:'dev' },
+  { iconType:'sql',        title:'SQL Formatter',            desc:'Format and beautify SQL queries',             href:'/sql-formatter',        cat:'dev' },
+  { iconType:'regex',      title:'Regex Tester',             desc:'Test and debug regular expressions live',     href:'/regex-tester',         cat:'dev' },
+  { iconType:'html-md',    title:'HTML to Markdown',         desc:'Convert HTML code to Markdown format',        href:'/html-to-markdown',     cat:'dev' },
+  { iconType:'md-html',    title:'Markdown to HTML',         desc:'Convert Markdown to HTML with preview',       href:'/markdown-to-html',     cat:'dev' },
+  { iconType:'slug',       title:'Slug Generator',           desc:'Convert text to URL-friendly slugs',          href:'/slug-generator',       cat:'dev' },
+  { iconType:'entities',   title:'HTML Entity Encoder',      desc:'Encode & decode HTML entities',               href:'/html-entities',        cat:'dev' },
+  { iconType:'cron',       title:'Cron Expression Generator',desc:'Build and explain cron job schedules',        href:'/cron-generator',       cat:'dev' },
 ]
 
 const COMING = [
@@ -396,7 +568,7 @@ export default function HomePage() {
         <div style={{ maxWidth:'760px',margin:'0 auto' }}>
           <div style={{ display:'inline-flex',alignItems:'center',gap:'6px',background:'rgba(255,255,255,0.1)',border:'1px solid rgba(255,255,255,0.2)',borderRadius:'999px',padding:'5px 16px',fontSize:'13px',color:'rgba(255,255,255,0.85)',marginBottom:'28px' }}>
             <span style={{ background:'#E85D04',borderRadius:'999px',padding:'1px 8px',fontWeight:700,color:'white',fontSize:'11px' }}>FREE</span>
-            25 Tools Live — 200+ Coming Soon
+            45 Tools Live — 200+ Coming Soon
           </div>
           <h1 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'clamp(24px,5vw,56px)',fontWeight:800,color:'white',lineHeight:1.15,letterSpacing:'-0.5px',margin:'0 0 18px' }}>
             Every Online Tool<br/>You Need —{' '}
@@ -408,7 +580,7 @@ export default function HomePage() {
           <div style={{ maxWidth:'500px',margin:'0 auto 36px',position:'relative' }}>
             <span style={{ position:'absolute',left:'16px',top:'50%',transform:'translateY(-50%)',fontSize:'18px',pointerEvents:'none' }}>🔍</span>
             <input type="text" value={search} onChange={e => setSearch(e.target.value)}
-              placeholder="Search 25+ tools — QR Code, BMI, Unit Converter..."
+              placeholder="Search 45+ tools — QR Code, BMI, Unit Converter..."
               style={{ width:'100%',padding:'15px 20px 15px 48px',borderRadius:'14px',border:'1px solid rgba(255,255,255,0.25)',background:'rgba(255,255,255,0.12)',fontFamily:'inherit',fontSize:'15px',color:'white',outline:'none',boxSizing:'border-box' }}/>
           </div>
           <div style={{ display:'flex',flexWrap:'wrap',justifyContent:'center',gap:'8px' }}>
@@ -422,7 +594,7 @@ export default function HomePage() {
       {/* Stats bar */}
       <div style={{ background:'#0a1f38',padding:'16px 24px' }}>
         <div style={{ maxWidth:'1200px',margin:'0 auto',display:'flex',justifyContent:'center',gap:'48px',flexWrap:'wrap' }}>
-          {[{num:'25',label:'Tools Live'},{num:'200+',label:'Coming Soon'},{num:'100%',label:'Free to Use'},{num:'0',label:'Sign-up Needed'}].map(s => (
+          {[{num:'45',label:'Tools Live'},{num:'200+',label:'Coming Soon'},{num:'100%',label:'Free to Use'},{num:'0',label:'Sign-up Needed'}].map(s => (
             <div key={s.label} style={{ textAlign:'center' }}>
               <div style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'22px',fontWeight:800,color:'#F48C42' }}>{s.num}</div>
               <div style={{ fontSize:'11.5px',color:'rgba(255,255,255,0.45)',marginTop:'2px',textTransform:'uppercase',letterSpacing:'0.5px' }}>{s.label}</div>
@@ -547,7 +719,7 @@ export default function HomePage() {
         <div style={{ marginBottom:'28px' }}>
           <div style={{ fontSize:'12px',fontWeight:700,color:'#E85D04',textTransform:'uppercase',letterSpacing:'1px',marginBottom:'6px' }}>All Categories</div>
           <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'clamp(24px,3vw,34px)',fontWeight:800,color:'#0F2A4A',margin:'0 0 8px' }}>Free Online Tools</h2>
-          <p style={{ fontSize:'15px',color:'#64748b',margin:0 }}>25 tools live. No installation. Works instantly in your browser.</p>
+          <p style={{ fontSize:'15px',color:'#64748b',margin:0 }}>45 tools live. No installation. Works instantly in your browser.</p>
         </div>
         <div style={{ display:'flex',gap:'6px',flexWrap:'wrap',marginBottom:'28px' }}>
           {CATS.map(cat => (
