@@ -368,6 +368,178 @@ const ToolIcon = ({ type }: { type: string }) => {
         <text x="26" y="42" fontFamily="monospace" fontSize="6" fontWeight="700" fill="#475569" textAnchor="middle">* * * * *</text>
       </svg>
     ),
+    'char-count': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="6" y="10" width="28" height="34" rx="4" fill="#DBEAFE" stroke="#3B82F6" strokeWidth="1.5"/>
+        <text x="20" y="26" fontFamily="Arial" fontSize="8" fontWeight="700" fill="#1D4ED8" textAnchor="middle">123</text>
+        <text x="20" y="36" fontFamily="Arial" fontSize="8" fontWeight="700" fill="#1D4ED8" textAnchor="middle">abc</text>
+        <rect x="20" y="6" width="26" height="32" rx="4" fill="#3B82F6"/>
+        <text x="33" y="26" fontFamily="Arial" fontSize="9" fontWeight="700" fill="white" textAnchor="middle">#</text>
+      </svg>
+    ),
+    'reverse-text': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#FEE2E2" stroke="#EF4444" strokeWidth="1.5"/>
+        <text x="26" y="24" fontFamily="monospace" fontSize="9" fontWeight="700" fill="#B91C1C" textAnchor="middle">ABC</text>
+        <path d="M16 30h20M30 26l4 4-4 4" stroke="#EF4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <text x="26" y="43" fontFamily="monospace" fontSize="8" fontWeight="700" fill="#EF4444" textAnchor="middle">CBA</text>
+      </svg>
+    ),
+    'remove-dup': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#FCE7F3" stroke="#DB2777" strokeWidth="1.5"/>
+        <rect x="14" y="16" width="16" height="4" rx="1" fill="#DB2777" opacity="0.4"/>
+        <rect x="14" y="22" width="16" height="4" rx="1" fill="#DB2777" opacity="0.8"/>
+        <rect x="14" y="28" width="16" height="4" rx="1" fill="#DB2777" opacity="0.4"/>
+        <path d="M34 16l4 4-4 4M34 24l4 4-4 4" stroke="#DB2777" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+    'sort-lines': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#CCFBF1" stroke="#0D9488" strokeWidth="1.5"/>
+        <path d="M14 20h12M14 26h18M14 32h10" stroke="#0D9488" strokeWidth="2" strokeLinecap="round"/>
+        <path d="M34 15v18M30 29l4 4 4-4" stroke="#0D9488" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+    'find-replace': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#FEF3C7" stroke="#D97706" strokeWidth="1.5"/>
+        <circle cx="20" cy="22" r="6" fill="none" stroke="#D97706" strokeWidth="2"/>
+        <path d="M24 26l4 4" stroke="#D97706" strokeWidth="2" strokeLinecap="round"/>
+        <path d="M30 30l8-4" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round"/>
+        <rect x="28" y="30" width="8" height="4" rx="1" fill="#D97706" opacity="0.6"/>
+      </svg>
+    ),
+    'slug-adv': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#CFFAFE" stroke="#0891B2" strokeWidth="1.5"/>
+        <text x="26" y="24" fontFamily="monospace" fontSize="9" fontWeight="700" fill="#0E7490" textAnchor="middle">Title</text>
+        <path d="M26 26v4" stroke="#0891B2" strokeWidth="1.5" strokeLinecap="round"/>
+        <text x="26" y="37" fontFamily="monospace" fontSize="8" fontWeight="700" fill="#0891B2" textAnchor="middle">ti-tle</text>
+      </svg>
+    ),
+    'strip-html': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#FFEDD5" stroke="#EA580C" strokeWidth="1.5"/>
+        <text x="22" y="24" fontFamily="monospace" fontSize="8" fontWeight="700" fill="#EA580C" textAnchor="middle">{'<html>'}</text>
+        <path d="M14 34l24-4" stroke="#EA580C" strokeWidth="2" strokeLinecap="round"/>
+        <path d="M32 30l6 6M38 30l-6 6" stroke="#DC2626" strokeWidth="2" strokeLinecap="round"/>
+      </svg>
+    ),
+    'quotes': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#EDE9FE" stroke="#7C3AED" strokeWidth="1.5"/>
+        <text x="19" y="32" fontFamily="serif" fontSize="26" fontWeight="700" fill="#7C3AED" textAnchor="middle">{'"'}</text>
+        <text x="33" y="34" fontFamily="serif" fontSize="26" fontWeight="700" fill="#A78BFA" textAnchor="middle">{'"'}</text>
+      </svg>
+    ),
+    'palette': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#FAE8FF" stroke="#A855F7" strokeWidth="1.5"/>
+        <circle cx="18" cy="20" r="5" fill="#EF4444"/>
+        <circle cx="34" cy="20" r="5" fill="#3B82F6"/>
+        <circle cx="18" cy="34" r="5" fill="#10B981"/>
+        <circle cx="34" cy="34" r="5" fill="#F59E0B"/>
+        <circle cx="26" cy="27" r="5" fill="#A855F7"/>
+      </svg>
+    ),
+    'box-shadow': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#F1F5F9" stroke="#475569" strokeWidth="1.5"/>
+        <rect x="17" y="17" width="22" height="18" rx="3" fill="#94A3B8" opacity="0.4"/>
+        <rect x="14" y="14" width="22" height="18" rx="3" fill="white" stroke="#475569" strokeWidth="1"/>
+      </svg>
+    ),
+    'border-radius': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#CCFBF1" stroke="#0D9488" strokeWidth="1.5"/>
+        <rect x="15" y="15" width="22" height="22" rx="8" fill="none" stroke="#0D9488" strokeWidth="2.5"/>
+        <circle cx="15" cy="15" r="2" fill="#E85D04"/>
+        <circle cx="37" cy="15" r="2" fill="#E85D04"/>
+        <circle cx="15" cy="37" r="2" fill="#E85D04"/>
+        <circle cx="37" cy="37" r="2" fill="#E85D04"/>
+      </svg>
+    ),
+    'color-blind': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#F0FDF4" stroke="#16A34A" strokeWidth="1.5"/>
+        <ellipse cx="26" cy="26" rx="12" ry="8" fill="none" stroke="#374151" strokeWidth="1.8"/>
+        <circle cx="26" cy="26" r="4" fill="#374151"/>
+        <circle cx="22" cy="21" r="2" fill="#EF4444"/>
+        <circle cx="30" cy="21" r="2" fill="#10B981"/>
+        <circle cx="22" cy="31" r="2" fill="#3B82F6"/>
+        <circle cx="30" cy="31" r="2" fill="#F59E0B"/>
+      </svg>
+    ),
+    'pw-strength': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#DCFCE7" stroke="#16A34A" strokeWidth="1.5"/>
+        <path d="M26 12l10 4v8c0 6-4.5 10-10 11-5.5-1-10-5-10-11v-8l10-4z" fill="none" stroke="#16A34A" strokeWidth="2" strokeLinejoin="round"/>
+        <rect x="16" y="28" width="20" height="4" rx="2" fill="#E5E7EB"/>
+        <rect x="16" y="28" width="14" height="4" rx="2" fill="#16A34A"/>
+      </svg>
+    ),
+    'pin-gen': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#EDE9FE" stroke="#7C3AED" strokeWidth="1.5"/>
+        <rect x="12" y="20" width="7" height="12" rx="2" fill="#7C3AED"/>
+        <rect x="22" y="20" width="7" height="12" rx="2" fill="#7C3AED" opacity="0.7"/>
+        <rect x="32" y="20" width="7" height="12" rx="2" fill="#7C3AED" opacity="0.4"/>
+        <text x="26" y="40" fontFamily="Arial" fontSize="7" fontWeight="700" fill="#7C3AED" textAnchor="middle">PIN</text>
+      </svg>
+    ),
+    'username': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#E0E7FF" stroke="#6366F1" strokeWidth="1.5"/>
+        <circle cx="26" cy="22" r="6" fill="none" stroke="#6366F1" strokeWidth="2"/>
+        <path d="M14 36c0-6 5.4-10 12-10s12 4 12 10" fill="none" stroke="#6366F1" strokeWidth="2" strokeLinecap="round"/>
+        <text x="38" y="16" fontFamily="Arial" fontSize="11" fontWeight="700" fill="#E85D04" textAnchor="middle">@</text>
+      </svg>
+    ),
+    'binary': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="6" y="10" width="28" height="34" rx="4" fill="#DBEAFE" stroke="#3B82F6" strokeWidth="1.5"/>
+        <text x="20" y="32" fontFamily="monospace" fontSize="14" fontWeight="700" fill="#1D4ED8" textAnchor="middle">01</text>
+        <rect x="20" y="6" width="26" height="32" rx="4" fill="#3B82F6"/>
+        <text x="33" y="26" fontFamily="monospace" fontSize="10" fontWeight="700" fill="white" textAnchor="middle">10</text>
+      </svg>
+    ),
+    'morse': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#FEF3C7" stroke="#D97706" strokeWidth="1.5"/>
+        <circle cx="17" cy="22" r="4" fill="#D97706"/>
+        <rect x="24" y="18" width="12" height="8" rx="2" fill="#D97706"/>
+        <circle cx="17" cy="34" r="4" fill="#D97706" opacity="0.6"/>
+        <circle cx="26" cy="34" r="4" fill="#D97706" opacity="0.6"/>
+        <rect x="33" y="30" width="8" height="8" rx="2" fill="#D97706" opacity="0.4"/>
+      </svg>
+    ),
+    'base-conv': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="6" y="10" width="28" height="34" rx="4" fill="#DCFCE7" stroke="#16A34A" strokeWidth="1.5"/>
+        <text x="20" y="24" fontFamily="monospace" fontSize="8" fontWeight="700" fill="#15803D" textAnchor="middle">10</text>
+        <text x="20" y="34" fontFamily="monospace" fontSize="8" fontWeight="700" fill="#15803D" textAnchor="middle">16</text>
+        <rect x="20" y="6" width="26" height="32" rx="4" fill="#16A34A"/>
+        <text x="33" y="24" fontFamily="monospace" fontSize="8" fontWeight="700" fill="white" textAnchor="middle">8</text>
+        <text x="33" y="34" fontFamily="monospace" fontSize="8" fontWeight="700" fill="white" textAnchor="middle">2</text>
+      </svg>
+    ),
+    'timestamp': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#CFFAFE" stroke="#0891B2" strokeWidth="1.5"/>
+        <circle cx="26" cy="26" r="10" fill="none" stroke="#0891B2" strokeWidth="2"/>
+        <path d="M26 20v6l3 3" stroke="#0891B2" strokeWidth="2" strokeLinecap="round"/>
+        <text x="26" y="43" fontFamily="monospace" fontSize="6" fontWeight="700" fill="#0891B2" textAnchor="middle">1234567890</text>
+      </svg>
+    ),
+    'text-binary': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="6" y="10" width="28" height="34" rx="4" fill="#EDE9FE" stroke="#7C3AED" strokeWidth="1.5"/>
+        <text x="20" y="30" fontFamily="Arial" fontSize="14" fontWeight="700" fill="#5B21B6" textAnchor="middle">Aa</text>
+        <rect x="20" y="6" width="26" height="32" rx="4" fill="#7C3AED"/>
+        <text x="33" y="26" fontFamily="monospace" fontSize="9" fontWeight="700" fill="white" textAnchor="middle">01</text>
+      </svg>
+    ),
   }
   return icons[type] ?? icons['word-counter']
 }
@@ -428,6 +600,30 @@ const TOOLS = [
   { iconType:'slug',       title:'Slug Generator',           desc:'Convert text to URL-friendly slugs',          href:'/slug-generator',       cat:'dev' },
   { iconType:'entities',   title:'HTML Entity Encoder',      desc:'Encode & decode HTML entities',               href:'/html-entities',        cat:'dev' },
   { iconType:'cron',       title:'Cron Expression Generator',desc:'Build and explain cron job schedules',        href:'/cron-generator',       cat:'dev' },
+  // Batch 3 — Text
+  { iconType:'char-count',    title:'Character Counter',       desc:'Count chars, words, sentences & more',       href:'/character-counter',    cat:'text' },
+  { iconType:'reverse-text',  title:'Reverse Text',            desc:'Reverse chars, words, or flip upside down',  href:'/reverse-text',         cat:'text' },
+  { iconType:'remove-dup',    title:'Remove Duplicates',       desc:'Remove duplicate lines from any text',        href:'/remove-duplicates',    cat:'text' },
+  { iconType:'sort-lines',    title:'Sort Lines',              desc:'Alphabetical, numeric or random sorting',     href:'/sort-lines',           cat:'text' },
+  { iconType:'find-replace',  title:'Find & Replace',          desc:'Multi-pattern text find and replace',         href:'/find-replace',         cat:'text' },
+  { iconType:'slug-adv',      title:'Text to Slug',            desc:'Batch URL slug generator',                   href:'/text-to-slug',         cat:'text' },
+  { iconType:'strip-html',    title:'Strip HTML Tags',         desc:'Extract plain text from HTML code',           href:'/strip-html',           cat:'text' },
+  { iconType:'quotes',        title:'Quote Generator',         desc:'Famous quotes by category',                  href:'/quote-generator',      cat:'text' },
+  // Batch 3 — Color
+  { iconType:'palette',       title:'Color Palette',           desc:'5 palette modes from any base color',         href:'/color-palette',        cat:'color' },
+  { iconType:'box-shadow',    title:'CSS Box Shadow',          desc:'Visual CSS box shadow generator',             href:'/box-shadow',           cat:'color' },
+  { iconType:'border-radius', title:'CSS Border Radius',       desc:'Visual border radius generator',              href:'/border-radius',        cat:'color' },
+  { iconType:'color-blind',   title:'Color Blindness Sim',     desc:'Test colors for accessibility',               href:'/color-blindness',      cat:'color' },
+  // Batch 3 — Security
+  { iconType:'pw-strength',   title:'Password Strength',       desc:'Test password security strength',             href:'/password-strength',    cat:'security' },
+  { iconType:'pin-gen',       title:'PIN Generator',           desc:'Generate secure PINs and codes',              href:'/pin-generator',        cat:'security' },
+  { iconType:'username',      title:'Username Generator',      desc:'Creative random username ideas',               href:'/username-generator',   cat:'security' },
+  // Batch 3 — Dev & Fun
+  { iconType:'binary',        title:'Binary ↔ Decimal',        desc:'Convert binary, decimal, hex, octal',         href:'/binary-decimal',       cat:'dev' },
+  { iconType:'morse',         title:'Morse Code',              desc:'Translate text ↔ Morse with audio',           href:'/morse-code',           cat:'fun' },
+  { iconType:'base-conv',     title:'Number Base Converter',   desc:'Convert between any number bases',            href:'/base-converter',       cat:'dev' },
+  { iconType:'timestamp',     title:'Timestamp Converter',     desc:'Unix timestamp ↔ human-readable dates',       href:'/timestamp-converter',  cat:'dev' },
+  { iconType:'text-binary',   title:'Text to Binary',          desc:'Convert text to binary code',                 href:'/text-to-binary',       cat:'dev' },
 ]
 
 const COMING = [
@@ -568,7 +764,7 @@ export default function HomePage() {
         <div style={{ maxWidth:'760px',margin:'0 auto' }}>
           <div style={{ display:'inline-flex',alignItems:'center',gap:'6px',background:'rgba(255,255,255,0.1)',border:'1px solid rgba(255,255,255,0.2)',borderRadius:'999px',padding:'5px 16px',fontSize:'13px',color:'rgba(255,255,255,0.85)',marginBottom:'28px' }}>
             <span style={{ background:'#E85D04',borderRadius:'999px',padding:'1px 8px',fontWeight:700,color:'white',fontSize:'11px' }}>FREE</span>
-            45 Tools Live — 200+ Coming Soon
+            65 Tools Live — 200+ Coming Soon
           </div>
           <h1 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'clamp(24px,5vw,56px)',fontWeight:800,color:'white',lineHeight:1.15,letterSpacing:'-0.5px',margin:'0 0 18px' }}>
             Every Online Tool<br/>You Need —{' '}
@@ -580,7 +776,7 @@ export default function HomePage() {
           <div style={{ maxWidth:'500px',margin:'0 auto 36px',position:'relative' }}>
             <span style={{ position:'absolute',left:'16px',top:'50%',transform:'translateY(-50%)',fontSize:'18px',pointerEvents:'none' }}>🔍</span>
             <input type="text" value={search} onChange={e => setSearch(e.target.value)}
-              placeholder="Search 45+ tools — QR Code, BMI, Unit Converter..."
+              placeholder="Search 65+ tools — QR Code, BMI, Unit Converter..."
               style={{ width:'100%',padding:'15px 20px 15px 48px',borderRadius:'14px',border:'1px solid rgba(255,255,255,0.25)',background:'rgba(255,255,255,0.12)',fontFamily:'inherit',fontSize:'15px',color:'white',outline:'none',boxSizing:'border-box' }}/>
           </div>
           <div style={{ display:'flex',flexWrap:'wrap',justifyContent:'center',gap:'8px' }}>
@@ -594,7 +790,7 @@ export default function HomePage() {
       {/* Stats bar */}
       <div style={{ background:'#0a1f38',padding:'16px 24px' }}>
         <div style={{ maxWidth:'1200px',margin:'0 auto',display:'flex',justifyContent:'center',gap:'48px',flexWrap:'wrap' }}>
-          {[{num:'45',label:'Tools Live'},{num:'200+',label:'Coming Soon'},{num:'100%',label:'Free to Use'},{num:'0',label:'Sign-up Needed'}].map(s => (
+          {[{num:'65',label:'Tools Live'},{num:'200+',label:'Coming Soon'},{num:'100%',label:'Free to Use'},{num:'0',label:'Sign-up Needed'}].map(s => (
             <div key={s.label} style={{ textAlign:'center' }}>
               <div style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'22px',fontWeight:800,color:'#F48C42' }}>{s.num}</div>
               <div style={{ fontSize:'11.5px',color:'rgba(255,255,255,0.45)',marginTop:'2px',textTransform:'uppercase',letterSpacing:'0.5px' }}>{s.label}</div>
@@ -719,7 +915,7 @@ export default function HomePage() {
         <div style={{ marginBottom:'28px' }}>
           <div style={{ fontSize:'12px',fontWeight:700,color:'#E85D04',textTransform:'uppercase',letterSpacing:'1px',marginBottom:'6px' }}>All Categories</div>
           <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'clamp(24px,3vw,34px)',fontWeight:800,color:'#0F2A4A',margin:'0 0 8px' }}>Free Online Tools</h2>
-          <p style={{ fontSize:'15px',color:'#64748b',margin:0 }}>45 tools live. No installation. Works instantly in your browser.</p>
+          <p style={{ fontSize:'15px',color:'#64748b',margin:0 }}>65 tools live. No installation. Works instantly in your browser.</p>
         </div>
         <div style={{ display:'flex',gap:'6px',flexWrap:'wrap',marginBottom:'28px' }}>
           {CATS.map(cat => (
