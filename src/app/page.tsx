@@ -540,6 +540,178 @@ const ToolIcon = ({ type }: { type: string }) => {
         <text x="33" y="26" fontFamily="monospace" fontSize="9" fontWeight="700" fill="white" textAnchor="middle">01</text>
       </svg>
     ),
+    'magic-8': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <circle cx="26" cy="26" r="22" fill="#1a1a2e" stroke="#4B0082" strokeWidth="2"/>
+        <circle cx="26" cy="26" r="14" fill="#0F2A4A"/>
+        <text x="26" y="32" fontFamily="Arial" fontSize="16" fontWeight="900" fill="white" textAnchor="middle">8</text>
+      </svg>
+    ),
+    'decision': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#DBEAFE" stroke="#3B82F6" strokeWidth="1.5"/>
+        <text x="18" y="30" fontFamily="Arial" fontSize="13" fontWeight="700" fill="#16A34A" textAnchor="middle">Y</text>
+        <text x="34" y="30" fontFamily="Arial" fontSize="13" fontWeight="700" fill="#DC2626" textAnchor="middle">N</text>
+        <path d="M26 20v8" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round"/>
+      </svg>
+    ),
+    'team-picker': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#CCFBF1" stroke="#0D9488" strokeWidth="1.5"/>
+        <circle cx="18" cy="22" r="5" fill="#0D9488" opacity="0.7"/>
+        <circle cx="34" cy="22" r="5" fill="#0D9488" opacity="0.7"/>
+        <path d="M12 34c0-4 2.7-6 6-6M28 34c0-4 2.7-6 6-6" fill="none" stroke="#0D9488" strokeWidth="2" strokeLinecap="round"/>
+        <circle cx="26" cy="20" r="4" fill="#0D9488"/>
+        <path d="M20 34c0-3 2.7-5 6-5" fill="none" stroke="#0D9488" strokeWidth="2" strokeLinecap="round"/>
+      </svg>
+    ),
+    'rand-color': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#FAE8FF" stroke="#A855F7" strokeWidth="1.5"/>
+        <rect x="12" y="12" width="12" height="12" rx="3" fill="#EF4444"/>
+        <rect x="28" y="12" width="12" height="12" rx="3" fill="#3B82F6"/>
+        <rect x="12" y="28" width="12" height="12" rx="3" fill="#10B981"/>
+        <rect x="28" y="28" width="12" height="12" rx="3" fill="#F59E0B"/>
+      </svg>
+    ),
+    'emoji': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#FEF9C3" stroke="#CA8A04" strokeWidth="1.5"/>
+        <circle cx="26" cy="26" r="12" fill="#EAB308"/>
+        <circle cx="21" cy="23" r="2" fill="#1a1a1a"/>
+        <circle cx="31" cy="23" r="2" fill="#1a1a1a"/>
+        <path d="M20 30 Q26 35 32 30" fill="none" stroke="#1a1a1a" strokeWidth="1.5" strokeLinecap="round"/>
+      </svg>
+    ),
+    'yes-no': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#F0FDF4" stroke="#16A34A" strokeWidth="1.5"/>
+        <ellipse cx="26" cy="26" rx="14" ry="14" fill="none" stroke="#e2e8f0" strokeWidth="1.5"/>
+        <path d="M12 26 A14 14 0 0 1 40 26" fill="#16A34A" opacity="0.7"/>
+        <path d="M40 26 A14 14 0 0 1 12 26" fill="#DC2626" opacity="0.7"/>
+        <text x="19" y="24" fontFamily="Arial" fontSize="8" fontWeight="700" fill="white" textAnchor="middle">YES</text>
+        <text x="33" y="31" fontFamily="Arial" fontSize="8" fontWeight="700" fill="white" textAnchor="middle">NO</text>
+      </svg>
+    ),
+    'img-base64': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="6" y="10" width="28" height="34" rx="4" fill="#EDE9FE" stroke="#7C3AED" strokeWidth="1.5"/>
+        <rect x="9" y="14" width="22" height="16" rx="2" fill="#DDD6FE"/>
+        <circle cx="14" cy="20" r="3" fill="#7C3AED" opacity="0.5"/>
+        <path d="M9 28l6-6 4 4 3-3 5 5" fill="none" stroke="#7C3AED" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <rect x="20" y="6" width="26" height="32" rx="4" fill="#7C3AED"/>
+        <text x="33" y="26" fontFamily="monospace" fontSize="7" fontWeight="700" fill="white" textAnchor="middle">b64</text>
+      </svg>
+    ),
+    'bitrate': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#FFEDD5" stroke="#EA580C" strokeWidth="1.5"/>
+        <text x="26" y="24" fontFamily="monospace" fontSize="9" fontWeight="700" fill="#EA580C" textAnchor="middle">kbps</text>
+        <path d="M14 34h24" stroke="#EA580C" strokeWidth="2" strokeLinecap="round"/>
+        <path d="M14 28 L18 24 L22 30 L26 22 L30 28 L34 26" fill="none" stroke="#EA580C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+    'aspect': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#DBEAFE" stroke="#3B82F6" strokeWidth="1.5"/>
+        <rect x="12" y="18" width="28" height="16" rx="2" fill="none" stroke="#3B82F6" strokeWidth="2"/>
+        <text x="26" y="29" fontFamily="Arial" fontSize="9" fontWeight="700" fill="#1D4ED8" textAnchor="middle">16:9</text>
+      </svg>
+    ),
+    'length': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#FEF3C7" stroke="#D97706" strokeWidth="1.5"/>
+        <rect x="12" y="22" width="28" height="8" rx="2" fill="#D97706" opacity="0.3"/>
+        <path d="M12 24v4M20 24v4M28 24v4M36 24v4" stroke="#D97706" strokeWidth="1.5" strokeLinecap="round"/>
+        <text x="26" y="38" fontFamily="Arial" fontSize="8" fontWeight="700" fill="#D97706" textAnchor="middle">mm cm m ft</text>
+      </svg>
+    ),
+    'weight': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#F1F5F9" stroke="#475569" strokeWidth="1.5"/>
+        <path d="M12 36 L18 16 L34 16 L40 36Z" fill="none" stroke="#475569" strokeWidth="1.5" strokeLinejoin="round"/>
+        <path d="M12 36h28" stroke="#475569" strokeWidth="2" strokeLinecap="round"/>
+        <circle cx="26" cy="14" r="4" fill="#475569" opacity="0.6"/>
+      </svg>
+    ),
+    'temp': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#FEE2E2" stroke="#EF4444" strokeWidth="1.5"/>
+        <rect x="24" y="12" width="4" height="20" rx="2" fill="#EF4444" opacity="0.3"/>
+        <rect x="24" y="22" width="4" height="10" rx="1" fill="#EF4444"/>
+        <circle cx="26" cy="34" r="5" fill="#EF4444"/>
+      </svg>
+    ),
+    'volume': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#CFFAFE" stroke="#0891B2" strokeWidth="1.5"/>
+        <path d="M18 14 L16 38 L36 38 L34 14Z" fill="none" stroke="#0891B2" strokeWidth="1.5" strokeLinejoin="round"/>
+        <path d="M16 28 L36 28" stroke="#0891B2" strokeWidth="1" strokeDasharray="2 2"/>
+        <path d="M17 22 L35 22" stroke="#0891B2" strokeWidth="1" strokeDasharray="2 2"/>
+      </svg>
+    ),
+    'speed': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#FEE2E2" stroke="#EF4444" strokeWidth="1.5"/>
+        <path d="M12 30 A14 14 0 0 1 40 30" fill="none" stroke="#e2e8f0" strokeWidth="4" strokeLinecap="round"/>
+        <path d="M12 30 A14 14 0 0 1 34 20" fill="none" stroke="#EF4444" strokeWidth="4" strokeLinecap="round"/>
+        <circle cx="26" cy="30" r="2" fill="#0F2A4A"/>
+        <path d="M26 30 L30 22" stroke="#0F2A4A" strokeWidth="1.5" strokeLinecap="round"/>
+      </svg>
+    ),
+    'lorem-adv': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#F3F4F6" stroke="#6B7280" strokeWidth="1.5"/>
+        <rect x="13" y="16" width="26" height="2" rx="1" fill="#6B7280"/>
+        <rect x="13" y="21" width="20" height="2" rx="1" fill="#6B7280"/>
+        <rect x="13" y="26" width="24" height="2" rx="1" fill="#6B7280"/>
+        <rect x="13" y="31" width="18" height="2" rx="1" fill="#6B7280"/>
+        <text x="38" y="38" fontFamily="Arial" fontSize="8" fontWeight="700" fill="#E85D04" textAnchor="middle">Aa</text>
+      </svg>
+    ),
+    'uuid-bulk': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="6" y="10" width="28" height="34" rx="4" fill="#EDE9FE" stroke="#7C3AED" strokeWidth="1.5"/>
+        <text x="20" y="22" fontFamily="monospace" fontSize="7" fontWeight="700" fill="#5B21B6" textAnchor="middle">uuid</text>
+        <text x="20" y="30" fontFamily="monospace" fontSize="7" fontWeight="700" fill="#5B21B6" textAnchor="middle">uuid</text>
+        <text x="20" y="38" fontFamily="monospace" fontSize="7" fontWeight="700" fill="#5B21B6" textAnchor="middle">uuid</text>
+        <rect x="20" y="6" width="26" height="32" rx="4" fill="#7C3AED"/>
+        <text x="33" y="22" fontFamily="Arial" fontSize="8" fontWeight="700" fill="white" textAnchor="middle">×N</text>
+        <text x="33" y="30" fontFamily="Arial" fontSize="7" fontWeight="700" fill="white" textAnchor="middle">IDs</text>
+      </svg>
+    ),
+    'md-cheat': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#EDE9FE" stroke="#7C3AED" strokeWidth="1.5"/>
+        <text x="26" y="24" fontFamily="monospace" fontSize="9" fontWeight="700" fill="#5B21B6" textAnchor="middle"># H1</text>
+        <text x="26" y="32" fontFamily="monospace" fontSize="8" fontWeight="700" fill="#7C3AED" textAnchor="middle">**bold**</text>
+        <text x="26" y="40" fontFamily="monospace" fontSize="7" fontWeight="700" fill="#A78BFA" textAnchor="middle">[link]()</text>
+      </svg>
+    ),
+    'beautifier': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#DCFCE7" stroke="#16A34A" strokeWidth="1.5"/>
+        <text x="26" y="30" fontFamily="monospace" fontSize="22" fontWeight="700" fill="#16A34A" textAnchor="middle">{'{}'}</text>
+      </svg>
+    ),
+    'words-num': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="6" y="10" width="28" height="34" rx="4" fill="#DBEAFE" stroke="#3B82F6" strokeWidth="1.5"/>
+        <text x="20" y="28" fontFamily="Arial" fontSize="9" fontWeight="700" fill="#1D4ED8" textAnchor="middle">five</text>
+        <text x="20" y="38" fontFamily="Arial" fontSize="7" fontWeight="600" fill="#1D4ED8" textAnchor="middle">hundred</text>
+        <rect x="20" y="6" width="26" height="32" rx="4" fill="#3B82F6"/>
+        <text x="33" y="26" fontFamily="Arial" fontSize="12" fontWeight="700" fill="white" textAnchor="middle">500</text>
+      </svg>
+    ),
+    'ascii': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#F3F4F6" stroke="#6B7280" strokeWidth="1.5"/>
+        <text x="26" y="20" fontFamily="monospace" fontSize="7" fontWeight="700" fill="#374151" textAnchor="middle">/\  /\</text>
+        <text x="26" y="26" fontFamily="monospace" fontSize="7" fontWeight="700" fill="#374151" textAnchor="middle">/__\/__\</text>
+        <text x="26" y="32" fontFamily="monospace" fontSize="7" fontWeight="700" fill="#374151" textAnchor="middle">/  \/  \</text>
+        <text x="26" y="40" fontFamily="Arial" fontSize="7" fontWeight="700" fill="#E85D04" textAnchor="middle">ASCII</text>
+      </svg>
+    ),
   }
   return icons[type] ?? icons['word-counter']
 }
@@ -624,6 +796,27 @@ const TOOLS = [
   { iconType:'base-conv',     title:'Number Base Converter',   desc:'Convert between any number bases',            href:'/base-converter',       cat:'dev' },
   { iconType:'timestamp',     title:'Timestamp Converter',     desc:'Unix timestamp ↔ human-readable dates',       href:'/timestamp-converter',  cat:'dev' },
   { iconType:'text-binary',   title:'Text to Binary',          desc:'Convert text to binary code',                 href:'/text-to-binary',       cat:'dev' },
+  // Batch 4 — Fun
+  { iconType:'magic-8',      title:'Magic 8 Ball',           desc:'Classic Magic 8-Ball predictions',          href:'/magic-8-ball',          cat:'fun' },
+  { iconType:'decision',     title:'Decision Maker',          desc:'Yes/No or multi-choice random decider',     href:'/decision-maker',        cat:'fun' },
+  { iconType:'team-picker',  title:'Team Picker',             desc:'Shuffle names into random teams',           href:'/team-picker',           cat:'fun' },
+  { iconType:'rand-color',   title:'Random Color',            desc:'Random colors with palette mode',           href:'/random-color',          cat:'color' },
+  { iconType:'emoji',        title:'Random Emoji',            desc:'Pick random emojis by category',            href:'/emoji-picker',          cat:'fun' },
+  { iconType:'yes-no',       title:'Yes No Picker',           desc:'Spinning coin yes/no flipper',              href:'/yes-no-picker',         cat:'fun' },
+  { iconType:'img-base64',   title:'Image to Base64',         desc:'Convert images to Base64 in browser',       href:'/image-to-base64',       cat:'dev' },
+  { iconType:'bitrate',      title:'Bitrate Calculator',      desc:'Bitrate, duration, file size calc',         href:'/bitrate-calculator',    cat:'calc' },
+  { iconType:'aspect',       title:'Aspect Ratio',            desc:'Resolution and ratio calculator',           href:'/aspect-ratio',          cat:'calc' },
+  { iconType:'length',       title:'Length Converter',        desc:'mm, cm, m, km, ft, miles & more',           href:'/length-converter',      cat:'calc' },
+  { iconType:'weight',       title:'Weight Converter',        desc:'g, kg, lbs, oz, stones & more',             href:'/weight-converter',      cat:'calc' },
+  { iconType:'temp',         title:'Temperature Converter',   desc:'Celsius, Fahrenheit, Kelvin & more',        href:'/temperature-converter', cat:'calc' },
+  { iconType:'volume',       title:'Volume Converter',        desc:'ml, l, cups, gallons, ounces',              href:'/volume-converter',      cat:'calc' },
+  { iconType:'speed',        title:'Speed Converter',         desc:'mph, km/h, knots, mach & pace',             href:'/speed-converter',       cat:'calc' },
+  { iconType:'lorem-adv',    title:'Lorem Ipsum Advanced',    desc:'Hipster, corporate & tech lorem types',     href:'/lorem-advanced',        cat:'text' },
+  { iconType:'uuid-bulk',    title:'UUID Bulk Generator',     desc:'Generate up to 1000 UUIDs at once',         href:'/uuid-bulk',             cat:'dev' },
+  { iconType:'md-cheat',     title:'Markdown Cheatsheet',     desc:'Live editor with interactive cheatsheet',   href:'/markdown-cheatsheet',   cat:'dev' },
+  { iconType:'beautifier',   title:'Code Beautifier',         desc:'Format HTML, CSS, JS, SQL, XML, JSON',      href:'/code-beautifier',       cat:'dev' },
+  { iconType:'words-num',    title:'Words to Number',         desc:'"five hundred" converts to 500',            href:'/words-to-number',       cat:'text' },
+  { iconType:'ascii',        title:'ASCII Art Generator',     desc:'Convert text to ASCII art fonts',           href:'/ascii-art',             cat:'fun' },
 ]
 
 const COMING = [
@@ -764,7 +957,7 @@ export default function HomePage() {
         <div style={{ maxWidth:'760px',margin:'0 auto' }}>
           <div style={{ display:'inline-flex',alignItems:'center',gap:'6px',background:'rgba(255,255,255,0.1)',border:'1px solid rgba(255,255,255,0.2)',borderRadius:'999px',padding:'5px 16px',fontSize:'13px',color:'rgba(255,255,255,0.85)',marginBottom:'28px' }}>
             <span style={{ background:'#E85D04',borderRadius:'999px',padding:'1px 8px',fontWeight:700,color:'white',fontSize:'11px' }}>FREE</span>
-            65 Tools Live — 200+ Coming Soon
+            85 Tools Live — 200+ Coming Soon
           </div>
           <h1 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'clamp(24px,5vw,56px)',fontWeight:800,color:'white',lineHeight:1.15,letterSpacing:'-0.5px',margin:'0 0 18px' }}>
             Every Online Tool<br/>You Need —{' '}
@@ -776,7 +969,7 @@ export default function HomePage() {
           <div style={{ maxWidth:'500px',margin:'0 auto 36px',position:'relative' }}>
             <span style={{ position:'absolute',left:'16px',top:'50%',transform:'translateY(-50%)',fontSize:'18px',pointerEvents:'none' }}>🔍</span>
             <input type="text" value={search} onChange={e => setSearch(e.target.value)}
-              placeholder="Search 65+ tools — QR Code, BMI, Unit Converter..."
+              placeholder="Search 85+ tools — QR Code, BMI, Unit Converter..."
               style={{ width:'100%',padding:'15px 20px 15px 48px',borderRadius:'14px',border:'1px solid rgba(255,255,255,0.25)',background:'rgba(255,255,255,0.12)',fontFamily:'inherit',fontSize:'15px',color:'white',outline:'none',boxSizing:'border-box' }}/>
           </div>
           <div style={{ display:'flex',flexWrap:'wrap',justifyContent:'center',gap:'8px' }}>
@@ -790,7 +983,7 @@ export default function HomePage() {
       {/* Stats bar */}
       <div style={{ background:'#0a1f38',padding:'16px 24px' }}>
         <div style={{ maxWidth:'1200px',margin:'0 auto',display:'flex',justifyContent:'center',gap:'48px',flexWrap:'wrap' }}>
-          {[{num:'65',label:'Tools Live'},{num:'200+',label:'Coming Soon'},{num:'100%',label:'Free to Use'},{num:'0',label:'Sign-up Needed'}].map(s => (
+          {[{num:'85',label:'Tools Live'},{num:'200+',label:'Coming Soon'},{num:'100%',label:'Free to Use'},{num:'0',label:'Sign-up Needed'}].map(s => (
             <div key={s.label} style={{ textAlign:'center' }}>
               <div style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'22px',fontWeight:800,color:'#F48C42' }}>{s.num}</div>
               <div style={{ fontSize:'11.5px',color:'rgba(255,255,255,0.45)',marginTop:'2px',textTransform:'uppercase',letterSpacing:'0.5px' }}>{s.label}</div>
@@ -915,7 +1108,7 @@ export default function HomePage() {
         <div style={{ marginBottom:'28px' }}>
           <div style={{ fontSize:'12px',fontWeight:700,color:'#E85D04',textTransform:'uppercase',letterSpacing:'1px',marginBottom:'6px' }}>All Categories</div>
           <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'clamp(24px,3vw,34px)',fontWeight:800,color:'#0F2A4A',margin:'0 0 8px' }}>Free Online Tools</h2>
-          <p style={{ fontSize:'15px',color:'#64748b',margin:0 }}>65 tools live. No installation. Works instantly in your browser.</p>
+          <p style={{ fontSize:'15px',color:'#64748b',margin:0 }}>85 tools live. No installation. Works instantly in your browser.</p>
         </div>
         <div style={{ display:'flex',gap:'6px',flexWrap:'wrap',marginBottom:'28px' }}>
           {CATS.map(cat => (
