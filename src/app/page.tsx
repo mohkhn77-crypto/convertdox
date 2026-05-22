@@ -176,6 +176,48 @@ const ToolIcon = ({ type }: { type: string }) => {
         <rect x="23" y="13" width="6" height="3" rx="1" fill="#475569"/>
       </svg>
     ),
+    'number-words': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="6" y="10" width="28" height="34" rx="4" fill="#CFFAFE" stroke="#0891B2" strokeWidth="1.5"/>
+        <text x="20" y="28" fontFamily="Arial" fontSize="9" fontWeight="700" fill="#0E7490" textAnchor="middle">123</text>
+        <text x="20" y="38" fontFamily="Arial" fontSize="7" fontWeight="600" fill="#0E7490" textAnchor="middle">words</text>
+        <rect x="20" y="6" width="26" height="32" rx="4" fill="#0891B2"/>
+        <text x="33" y="26" fontFamily="Arial" fontSize="10" fontWeight="700" fill="white" textAnchor="middle">Abc</text>
+      </svg>
+    ),
+    'csv-json': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="6" y="10" width="28" height="34" rx="4" fill="#DCFCE7" stroke="#16A34A" strokeWidth="1.5"/>
+        <text x="20" y="28" fontFamily="monospace" fontSize="9" fontWeight="700" fill="#15803D" textAnchor="middle">CSV</text>
+        <rect x="20" y="6" width="26" height="32" rx="4" fill="#16A34A"/>
+        <text x="33" y="26" fontFamily="monospace" fontSize="8" fontWeight="700" fill="white" textAnchor="middle">JSON</text>
+      </svg>
+    ),
+    'roman': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="6" y="10" width="28" height="34" rx="4" fill="#FEF3C7" stroke="#D97706" strokeWidth="1.5"/>
+        <text x="20" y="32" fontFamily="serif" fontSize="12" fontWeight="700" fill="#92400E" textAnchor="middle">XIV</text>
+        <rect x="20" y="6" width="26" height="32" rx="4" fill="#D97706"/>
+        <text x="33" y="27" fontFamily="Arial" fontSize="11" fontWeight="700" fill="white" textAnchor="middle">14</text>
+      </svg>
+    ),
+    'uuid': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="6" y="10" width="28" height="34" rx="4" fill="#EDE9FE" stroke="#7C3AED" strokeWidth="1.5"/>
+        <text x="20" y="26" fontFamily="monospace" fontSize="7" fontWeight="700" fill="#5B21B6" textAnchor="middle">uuid</text>
+        <text x="20" y="35" fontFamily="monospace" fontSize="6" fill="#7C3AED" textAnchor="middle">v4</text>
+        <rect x="20" y="6" width="26" height="32" rx="4" fill="#7C3AED"/>
+        <text x="33" y="26" fontFamily="Arial" fontSize="11" fontWeight="700" fill="white" textAnchor="middle">ID</text>
+      </svg>
+    ),
+    'text-diff': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="4" y="10" width="20" height="34" rx="4" fill="#FEE2E2" stroke="#DC2626" strokeWidth="1.5"/>
+        <text x="14" y="31" fontFamily="Arial" fontSize="10" fontWeight="700" fill="#DC2626" textAnchor="middle">−</text>
+        <rect x="28" y="10" width="20" height="34" rx="4" fill="#DCFCE7" stroke="#16A34A" strokeWidth="1.5"/>
+        <text x="38" y="31" fontFamily="Arial" fontSize="10" fontWeight="700" fill="#16A34A" textAnchor="middle">+</text>
+      </svg>
+    ),
   }
   return icons[type] ?? icons['word-counter']
 }
@@ -208,13 +250,18 @@ const TOOLS = [
   { iconType:'random',          title:'Random Number Generator', desc:'Random numbers in any range',             href:'/random-number-generator',   cat:'fun' },
   { iconType:'coin-flip',       title:'Coin Flip & Dice Roller', desc:'Flip coins, roll any dice',               href:'/coin-flip',                 cat:'fun' },
   { iconType:'stopwatch',       title:'Stopwatch & Timer',       desc:'Online stopwatch + countdown timer',      href:'/stopwatch',                 cat:'fun' },
+  // New tools
+  { iconType:'number-words', title:'Number to Words',         desc:'Convert numbers to written English words', href:'/number-to-words', cat:'text' },
+  { iconType:'roman',        title:'Roman Numeral Converter', desc:'Convert numbers ↔ Roman numerals',         href:'/roman-numerals',  cat:'text' },
+  { iconType:'text-diff',    title:'Text Diff Checker',       desc:'Compare two texts and highlight changes',  href:'/text-diff',       cat:'text' },
+  { iconType:'csv-json',     title:'CSV to JSON Converter',   desc:'Convert CSV spreadsheet data to JSON',     href:'/csv-to-json',     cat:'dev' },
+  { iconType:'uuid',         title:'UUID Generator',          desc:'Generate random UUID v4 identifiers',      href:'/uuid-generator',  cat:'dev' },
 ]
 
 const COMING = [
   { icon:'📄', title:'PDF to Word',         desc:'Convert PDF to editable Word' },
   { icon:'🖼', title:'Image Compressor',    desc:'Reduce image size instantly' },
   { icon:'✂️', title:'Background Remover',  desc:'AI removes image backgrounds' },
-  { icon:'📊', title:'CSV to JSON',         desc:'Convert spreadsheet data' },
   { icon:'🌐', title:'IP Address Lookup',   desc:'Find IP location info' },
   { icon:'📧', title:'Email Validator',     desc:'Validate email addresses' },
   { icon:'🔑', title:'MD5 Hash Generator',  desc:'Generate MD5 hashes instantly' },
@@ -349,7 +396,7 @@ export default function HomePage() {
         <div style={{ maxWidth:'760px',margin:'0 auto' }}>
           <div style={{ display:'inline-flex',alignItems:'center',gap:'6px',background:'rgba(255,255,255,0.1)',border:'1px solid rgba(255,255,255,0.2)',borderRadius:'999px',padding:'5px 16px',fontSize:'13px',color:'rgba(255,255,255,0.85)',marginBottom:'28px' }}>
             <span style={{ background:'#E85D04',borderRadius:'999px',padding:'1px 8px',fontWeight:700,color:'white',fontSize:'11px' }}>FREE</span>
-            20 Tools Live — 200+ Coming Soon
+            25 Tools Live — 200+ Coming Soon
           </div>
           <h1 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'clamp(24px,5vw,56px)',fontWeight:800,color:'white',lineHeight:1.15,letterSpacing:'-0.5px',margin:'0 0 18px' }}>
             Every Online Tool<br/>You Need —{' '}
@@ -361,7 +408,7 @@ export default function HomePage() {
           <div style={{ maxWidth:'500px',margin:'0 auto 36px',position:'relative' }}>
             <span style={{ position:'absolute',left:'16px',top:'50%',transform:'translateY(-50%)',fontSize:'18px',pointerEvents:'none' }}>🔍</span>
             <input type="text" value={search} onChange={e => setSearch(e.target.value)}
-              placeholder="Search 20+ tools — QR Code, BMI, Unit Converter..."
+              placeholder="Search 25+ tools — QR Code, BMI, Unit Converter..."
               style={{ width:'100%',padding:'15px 20px 15px 48px',borderRadius:'14px',border:'1px solid rgba(255,255,255,0.25)',background:'rgba(255,255,255,0.12)',fontFamily:'inherit',fontSize:'15px',color:'white',outline:'none',boxSizing:'border-box' }}/>
           </div>
           <div style={{ display:'flex',flexWrap:'wrap',justifyContent:'center',gap:'8px' }}>
@@ -375,7 +422,7 @@ export default function HomePage() {
       {/* Stats bar */}
       <div style={{ background:'#0a1f38',padding:'16px 24px' }}>
         <div style={{ maxWidth:'1200px',margin:'0 auto',display:'flex',justifyContent:'center',gap:'48px',flexWrap:'wrap' }}>
-          {[{num:'20',label:'Tools Live'},{num:'200+',label:'Coming Soon'},{num:'100%',label:'Free to Use'},{num:'0',label:'Sign-up Needed'}].map(s => (
+          {[{num:'25',label:'Tools Live'},{num:'200+',label:'Coming Soon'},{num:'100%',label:'Free to Use'},{num:'0',label:'Sign-up Needed'}].map(s => (
             <div key={s.label} style={{ textAlign:'center' }}>
               <div style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'22px',fontWeight:800,color:'#F48C42' }}>{s.num}</div>
               <div style={{ fontSize:'11.5px',color:'rgba(255,255,255,0.45)',marginTop:'2px',textTransform:'uppercase',letterSpacing:'0.5px' }}>{s.label}</div>
@@ -500,7 +547,7 @@ export default function HomePage() {
         <div style={{ marginBottom:'28px' }}>
           <div style={{ fontSize:'12px',fontWeight:700,color:'#E85D04',textTransform:'uppercase',letterSpacing:'1px',marginBottom:'6px' }}>All Categories</div>
           <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'clamp(24px,3vw,34px)',fontWeight:800,color:'#0F2A4A',margin:'0 0 8px' }}>Free Online Tools</h2>
-          <p style={{ fontSize:'15px',color:'#64748b',margin:0 }}>20 tools live. No installation. Works instantly in your browser.</p>
+          <p style={{ fontSize:'15px',color:'#64748b',margin:0 }}>25 tools live. No installation. Works instantly in your browser.</p>
         </div>
         <div style={{ display:'flex',gap:'6px',flexWrap:'wrap',marginBottom:'28px' }}>
           {CATS.map(cat => (
