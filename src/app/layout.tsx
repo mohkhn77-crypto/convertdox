@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Script from 'next/script'
 import './globals.css'
 import CookieBanner from '@/components/CookieBanner'
 
@@ -66,22 +67,23 @@ export default function RootLayout({
         />
         <meta name="google-adsense-account" content="ca-pub-8558443515165092" />
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8558443515165092" crossOrigin="anonymous"></script>
-        {/* Google Analytics */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-93F3LQWNSN"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-93F3LQWNSN');
-            `,
-          }}
-        />
       </head>
       <body style={{ margin: 0, padding: 0, fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}>
         {children}
         <CookieBanner />
+        {/* Google Analytics — must use next/script outside <head> in App Router */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-93F3LQWNSN"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-93F3LQWNSN');
+          `}
+        </Script>
       </body>
     </html>
   )
