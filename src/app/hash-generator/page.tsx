@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import NavBar from '@/components/NavBar'
 import SiteFooter from '@/components/SiteFooter'
+import RelatedTools from '@/components/RelatedTools'
 import TrustStrip from '@/components/TrustStrip'
 
 // Minimal MD5 implementation
@@ -116,6 +117,7 @@ export default function HashGeneratorPage() {
           </div>
         )}
       </div>
+      <RelatedTools currentPath="/hash-generator" />
       <SiteFooter />
     </div>
   )

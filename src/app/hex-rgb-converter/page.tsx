@@ -8,6 +8,7 @@ import { useState } from 'react'
 import NavBar from '@/components/NavBar'
 import TrustStrip from '@/components/TrustStrip'
 import SiteFooter from '@/components/SiteFooter'
+import RelatedTools from '@/components/RelatedTools'
 
 export default function HexRgbPage() {
   const [hex, setHex] = useState('#E85D04')
@@ -151,6 +152,7 @@ export default function HexRgbPage() {
           </div>
         )}
       </div>
+      <RelatedTools currentPath="/hex-rgb-converter" />
       <SiteFooter />
     </div>
   )

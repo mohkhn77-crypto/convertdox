@@ -11,6 +11,7 @@ import { useState, useCallback } from 'react'
 import NavBar from '@/components/NavBar'
 import TrustStrip from '@/components/TrustStrip'
 import SiteFooter from '@/components/SiteFooter'
+import RelatedTools from '@/components/RelatedTools'
 
 export default function WordCounterPage() {
   const [text, setText] = useState('')
@@ -327,6 +328,8 @@ export default function WordCounterPage() {
           ))}
         </div>
       </div>
+
+      <RelatedTools currentPath="/word-counter" />
 
       <SiteFooter />
 

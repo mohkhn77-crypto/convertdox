@@ -8,6 +8,7 @@ import { useState } from 'react'
 import NavBar from '@/components/NavBar'
 import TrustStrip from '@/components/TrustStrip'
 import SiteFooter from '@/components/SiteFooter'
+import RelatedTools from '@/components/RelatedTools'
 
 export default function BMICalculatorPage() {
   const [unit, setUnit] = useState<'metric'|'imperial'>('metric')
@@ -168,6 +169,7 @@ export default function BMICalculatorPage() {
           ))}
         </div>
       </div>
+      <RelatedTools currentPath="/bmi-calculator" />
       <SiteFooter />
     </div>
   )

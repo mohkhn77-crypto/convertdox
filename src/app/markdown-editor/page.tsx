@@ -7,6 +7,7 @@ import { useState } from 'react'
 import NavBar from '@/components/NavBar'
 import TrustStrip from '@/components/TrustStrip'
 import SiteFooter from '@/components/SiteFooter'
+import RelatedTools from '@/components/RelatedTools'
 
 // Simple markdown parser
 const parseMarkdown = (md: string): string => {
@@ -192,6 +193,7 @@ export default function MarkdownEditorPage() {
           ))}
         </div>
       </div>
+      <RelatedTools currentPath="/markdown-editor" />
       <SiteFooter />
     </div>
   )

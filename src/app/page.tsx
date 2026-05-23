@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Script from 'next/script'
 import NavBar from '@/components/NavBar'
 
@@ -933,14 +933,30 @@ const JSON_LD = {
 
 export default function HomePage() {
   const [activeCat, setActiveCat] = useState('all')
-  const [search, setSearch] = useState('')
+  const [searchQuery, setSearchQuery] = useState('')
+  const [recentTools, setRecentTools] = useState<string[]>([])
 
-  const filtered = TOOLS.filter(t => {
-    const matchCat = activeCat === 'all' || t.cat === activeCat
-    const matchSearch = search === '' ||
-      t.title.toLowerCase().includes(search.toLowerCase()) ||
-      t.desc.toLowerCase().includes(search.toLowerCase())
-    return matchCat && matchSearch
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('convertdox-recent-tools')
+      if (saved) setRecentTools(JSON.parse(saved) as string[])
+    } catch { /* ignore */ }
+  }, [])
+
+  const trackToolClick = (href: string) => {
+    setRecentTools(prev => {
+      const deduped = [href, ...prev.filter(h => h !== href)].slice(0, 5)
+      try { localStorage.setItem('convertdox-recent-tools', JSON.stringify(deduped)) } catch { /* ignore */ }
+      return deduped
+    })
+  }
+
+  const filtered = TOOLS.filter(tool => {
+    const matchesCategory = activeCat === 'all' || tool.cat === activeCat
+    const matchesSearch = !searchQuery ||
+      tool.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      tool.desc.toLowerCase().includes(searchQuery.toLowerCase())
+    return matchesCategory && matchesSearch
   })
 
   return (
@@ -968,7 +984,7 @@ export default function HomePage() {
           </p>
           <div style={{ maxWidth:'500px',margin:'0 auto 36px',position:'relative' }}>
             <span style={{ position:'absolute',left:'16px',top:'50%',transform:'translateY(-50%)',fontSize:'18px',pointerEvents:'none' }}>🔍</span>
-            <input type="text" value={search} onChange={e => setSearch(e.target.value)}
+            <input type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
               placeholder="Search 85+ tools — QR Code, BMI, Unit Converter..."
               style={{ width:'100%',padding:'15px 20px 15px 48px',borderRadius:'14px',border:'1px solid rgba(255,255,255,0.25)',background:'rgba(255,255,255,0.12)',fontFamily:'inherit',fontSize:'15px',color:'white',outline:'none',boxSizing:'border-box' }}/>
           </div>
@@ -980,8 +996,39 @@ export default function HomePage() {
         </div>
       </div>
 
+      {/* Search bar — below hero */}
+      <div style={{ background:'white',padding:'32px 24px 0',display:'flex',flexDirection:'column',alignItems:'center' }}>
+        <div style={{ maxWidth:'700px',width:'100%',position:'relative' }}>
+          <div style={{ position:'absolute',left:'16px',top:'50%',transform:'translateY(-50%)',pointerEvents:'none' }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <circle cx="11" cy="11" r="7" stroke="#64748b" strokeWidth="2"/>
+              <path d="M16.5 16.5l4 4" stroke="#64748b" strokeWidth="2" strokeLinecap="round"/>
+            </svg>
+          </div>
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
+            placeholder="Search 85+ tools (e.g. word counter, json, calculator)..."
+            style={{ width:'100%',padding:'15px 48px 15px 48px',borderRadius:'16px',border:'2px solid #0F2A4A',background:'white',fontFamily:'inherit',fontSize:'15px',color:'#0F2A4A',outline:'none',boxSizing:'border-box',boxShadow:'0 8px 24px rgba(15,42,74,0.12)' }}
+          />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery('')}
+              style={{ position:'absolute',right:'14px',top:'50%',transform:'translateY(-50%)',background:'none',border:'none',cursor:'pointer',padding:'4px',fontSize:'18px',color:'#64748b',lineHeight:1 }}
+              aria-label="Clear search"
+            >✕</button>
+          )}
+        </div>
+        {searchQuery && (
+          <div style={{ marginTop:'10px',fontSize:'13px',color:'#64748b',paddingBottom:'0' }}>
+            {filtered.length > 0 ? `Found ${filtered.length} tool${filtered.length !== 1 ? 's' : ''}` : 'No tools found'}
+          </div>
+        )}
+      </div>
+
       {/* Stats bar */}
-      <div style={{ background:'#0a1f38',padding:'16px 24px' }}>
+      <div style={{ background:'#0a1f38',padding:'16px 24px',marginTop:'40px' }}>
         <div style={{ maxWidth:'1200px',margin:'0 auto',display:'flex',justifyContent:'center',gap:'48px',flexWrap:'wrap' }}>
           {[{num:'85',label:'Tools Live'},{num:'200+',label:'Coming Soon'},{num:'100%',label:'Free to Use'},{num:'0',label:'Sign-up Needed'}].map(s => (
             <div key={s.label} style={{ textAlign:'center' }}>
@@ -1119,10 +1166,35 @@ export default function HomePage() {
             </button>
           ))}
         </div>
+
+        {/* Recently Used */}
+        {recentTools.length > 0 && !searchQuery && activeCat === 'all' && (
+          <div style={{ marginBottom:'32px' }}>
+            <div style={{ fontSize:'12px',fontWeight:700,color:'#E85D04',textTransform:'uppercase',letterSpacing:'1px',marginBottom:'12px' }}>Recently Used</div>
+            <div style={{ display:'flex',gap:'10px',flexWrap:'wrap' }}>
+              {recentTools.map(href => {
+                const tool = TOOLS.find(t => t.href === href)
+                if (!tool) return null
+                return (
+                  <a key={href} href={href}
+                    onClick={() => trackToolClick(href)}
+                    style={{ background:'#FFF7ED',border:'1.5px solid #FED7AA',borderRadius:'10px',padding:'14px',textDecoration:'none',display:'flex',alignItems:'center',gap:'10px',minWidth:'180px' }}>
+                    <div style={{ flex:1 }}>
+                      <div style={{ fontSize:'13px',fontWeight:700,color:'#0F2A4A' }}>{tool.title}</div>
+                      <div style={{ fontSize:'12px',color:'#C2410C',marginTop:'2px' }}>Open again →</div>
+                    </div>
+                  </a>
+                )
+              })}
+            </div>
+          </div>
+        )}
+
         {filtered.length > 0 ? (
           <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(240px,1fr))',gap:'14px',marginBottom:'14px' }}>
             {filtered.map(tool => (
               <a key={tool.href} href={tool.href}
+                onClick={() => trackToolClick(tool.href)}
                 style={{ background:'white',border:'1.5px solid #e2e8f0',borderRadius:'16px',padding:'20px',textDecoration:'none',display:'flex',flexDirection:'column',gap:'12px',boxShadow:'0 2px 8px rgba(15,42,74,0.04)' }}>
                 <div style={{ marginBottom:'4px' }}><ToolIcon type={tool.iconType} /></div>
                 <div>
@@ -1138,7 +1210,7 @@ export default function HomePage() {
         ) : (
           <div style={{ textAlign:'center',padding:'48px',color:'#94a3b8' }}>
             <div style={{ fontSize:'36px',marginBottom:'10px' }}>🔍</div>
-            <p>No tools found for &ldquo;{search}&rdquo;</p>
+            <p>No tools found for &ldquo;{searchQuery}&rdquo;</p>
           </div>
         )}
 

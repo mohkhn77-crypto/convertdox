@@ -8,6 +8,7 @@ import { useState } from 'react'
 import NavBar from '@/components/NavBar'
 import TrustStrip from '@/components/TrustStrip'
 import SiteFooter from '@/components/SiteFooter'
+import RelatedTools from '@/components/RelatedTools'
 
 export default function TipCalculatorPage() {
   const [bill, setBill] = useState('')
@@ -141,6 +142,7 @@ export default function TipCalculatorPage() {
           ))}
         </div>
       </div>
+      <RelatedTools currentPath="/tip-calculator" />
       <SiteFooter />
     </div>
   )

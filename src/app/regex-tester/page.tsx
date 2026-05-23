@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
 import SiteFooter from '@/components/SiteFooter'
+import RelatedTools from '@/components/RelatedTools'
 import TrustStrip from '@/components/TrustStrip'
 
 const CHEAT_SHEET = [
@@ -179,6 +180,7 @@ export default function RegexTesterPage() {
           </div>
         )}
       </div>
+      <RelatedTools currentPath="/regex-tester" />
       <SiteFooter />
     </div>
   )

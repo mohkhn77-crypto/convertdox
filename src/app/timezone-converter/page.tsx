@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import NavBar from '@/components/NavBar'
 import SiteFooter from '@/components/SiteFooter'
+import RelatedTools from '@/components/RelatedTools'
 import TrustStrip from '@/components/TrustStrip'
 
 const COMMON_TZ = [
@@ -160,6 +161,7 @@ export default function TimezoneConverterPage() {
           )}
         </div>
       </div>
+      <RelatedTools currentPath="/timezone-converter" />
       <SiteFooter />
     </div>
   )

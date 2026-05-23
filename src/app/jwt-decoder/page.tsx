@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
 import SiteFooter from '@/components/SiteFooter'
+import RelatedTools from '@/components/RelatedTools'
 import TrustStrip from '@/components/TrustStrip'
 
 function b64urlDecode(str: string): string {
@@ -149,6 +150,7 @@ export default function JWTDecoderPage() {
           </div>
         ) : null}
       </div>
+      <RelatedTools currentPath="/jwt-decoder" />
       <SiteFooter />
     </div>
   )

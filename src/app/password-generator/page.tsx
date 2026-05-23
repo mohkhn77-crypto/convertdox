@@ -8,6 +8,7 @@ import { useState, useCallback } from 'react'
 import NavBar from '@/components/NavBar'
 import TrustStrip from '@/components/TrustStrip'
 import SiteFooter from '@/components/SiteFooter'
+import RelatedTools from '@/components/RelatedTools'
 
 function Check({ checked, onChange, label }: { checked:boolean; onChange:(v:boolean)=>void; label:string }) {
   return (
@@ -143,6 +144,7 @@ export default function PasswordGeneratorPage() {
           </div>
         )}
       </div>
+      <RelatedTools currentPath="/password-generator" />
       <SiteFooter />
     </div>
   )

@@ -7,6 +7,7 @@ import { useState } from 'react'
 import NavBar from '@/components/NavBar'
 import TrustStrip from '@/components/TrustStrip'
 import SiteFooter from '@/components/SiteFooter'
+import RelatedTools from '@/components/RelatedTools'
 
 export default function Base64Page() {
   const [mode, setMode] = useState<'encode'|'decode'>('encode')
@@ -167,6 +168,7 @@ export default function Base64Page() {
           ))}
         </div>
       </div>
+      <RelatedTools currentPath="/base64-encoder" />
       <SiteFooter />
     </div>
   )

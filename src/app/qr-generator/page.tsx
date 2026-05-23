@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react'
 import NavBar from '@/components/NavBar'
 import TrustStrip from '@/components/TrustStrip'
 import SiteFooter from '@/components/SiteFooter'
+import RelatedTools from '@/components/RelatedTools'
 import QRCode from 'qrcode'
 
 export default function QRGeneratorPage() {
@@ -180,6 +181,7 @@ export default function QRGeneratorPage() {
           ))}
         </div>
       </div>
+      <RelatedTools currentPath="/qr-generator" />
       <SiteFooter />
     </div>
   )

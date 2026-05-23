@@ -1,4 +1,5 @@
 'use client'
+import RelatedTools from '@/components/RelatedTools'
 import { useState, useEffect } from 'react'
 
 const Logo = () => (
@@ -224,6 +225,7 @@ export default function UuidGeneratorPage() {
 
       </div>
 
+      <RelatedTools currentPath="/uuid-generator" />
       <FOOTER />
     </div>
   )

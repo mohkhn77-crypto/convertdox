@@ -7,6 +7,7 @@ import { useState } from 'react'
 import NavBar from '@/components/NavBar'
 import TrustStrip from '@/components/TrustStrip'
 import SiteFooter from '@/components/SiteFooter'
+import RelatedTools from '@/components/RelatedTools'
 
 const PRESETS = [
   { name:'Sunset', c1:'#ff6b6b', c2:'#feca57' },
@@ -166,6 +167,7 @@ export default function CSSGradientPage() {
           </div>
         </div>
       </div>
+      <RelatedTools currentPath="/css-gradient" />
       <SiteFooter />
     </div>
   )

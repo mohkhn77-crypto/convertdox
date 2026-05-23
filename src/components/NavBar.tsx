@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import DarkModeToggle from '@/components/DarkModeToggle'
 
 export default function NavBar() {
   const [open, setOpen] = useState(false)
@@ -39,6 +40,8 @@ export default function NavBar() {
             </a>
           ))}
         </div>
+
+        <DarkModeToggle />
 
         {/* Hamburger button (mobile only) */}
         <button

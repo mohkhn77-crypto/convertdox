@@ -8,6 +8,7 @@ import { useState } from 'react'
 import NavBar from '@/components/NavBar'
 import TrustStrip from '@/components/TrustStrip'
 import SiteFooter from '@/components/SiteFooter'
+import RelatedTools from '@/components/RelatedTools'
 
 export default function AgeCalculatorPage() {
   const today = new Date()
@@ -151,6 +152,7 @@ export default function AgeCalculatorPage() {
           </div>
         )}
       </div>
+      <RelatedTools currentPath="/age-calculator" />
       <SiteFooter />
     </div>
   )

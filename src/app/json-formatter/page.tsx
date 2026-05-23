@@ -7,6 +7,7 @@ import { useState } from 'react'
 import NavBar from '@/components/NavBar'
 import TrustStrip from '@/components/TrustStrip'
 import SiteFooter from '@/components/SiteFooter'
+import RelatedTools from '@/components/RelatedTools'
 
 export default function JSONFormatterPage() {
   const [input, setInput] = useState('')
@@ -145,6 +146,7 @@ export default function JSONFormatterPage() {
           </div>
         </div>
       </div>
+      <RelatedTools currentPath="/json-formatter" />
       <SiteFooter />
     </div>
   )
