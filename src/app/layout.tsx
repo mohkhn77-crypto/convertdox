@@ -4,20 +4,20 @@ import './globals.css'
 import CookieBanner from '@/components/CookieBanner'
 
 export const metadata: Metadata = {
-  title: 'ConvertDox — Every Online Tool You Need (25+ Free Tools)',
-  description: 'Free online tools — Word Counter, QR Generator, BMI Calculator, JSON Formatter, Password Generator and 20+ more. No signup, files never stored, 100% free.',
+  title: 'ConvertDox — 85+ Free Online Tools, No Signup Required',
+  description: 'Free online tools: Word Counter, JSON Formatter, QR Generator, BMI Calculator, Password Generator and 80+ more. No signup. Files never stored.',
   keywords: 'online tools, free tools, word counter, qr generator, bmi calculator, json formatter, password generator, csv to json, uuid generator, text diff, online converter',
   authors: [{ name: 'ConvertDox' }],
   creator: 'ConvertDox',
   publisher: 'ConvertDox',
   openGraph: {
-    title: 'ConvertDox — 25+ Free Online Tools, No Signup Required',
-    description: 'Free online tools: Word Counter, QR Generator, JSON Formatter, BMI Calculator, Password Generator, CSS Gradient and 20+ more. Files never stored. 100% free forever.',
+    title: 'ConvertDox — 85+ Free Online Tools, No Signup Required',
+    description: 'Free online tools: Word Counter, JSON Formatter, QR Generator, BMI Calculator, Password Generator and 80+ more. No signup. Files never stored.',
     url: 'https://convertdox.com',
     siteName: 'ConvertDox',
     images: [
       {
-        url: 'https://convertdox.com/og-image.svg',
+        url: 'https://convertdox.com/og-image.png',
         width: 1200,
         height: 630,
         alt: 'ConvertDox — Every Online Tool You Need',
@@ -28,9 +28,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ConvertDox — 25+ Free Online Tools',
-    description: 'Free online tools. No signup. Files never stored. 100% free.',
-    images: ['https://convertdox.com/og-image.svg'],
+    title: 'ConvertDox — 85+ Free Online Tools',
+    description: '85+ free online tools. No signup. Files never stored. 100% free forever.',
+    images: ['https://convertdox.com/og-image.png'],
     creator: '@convertdox',
   },
   robots: {
