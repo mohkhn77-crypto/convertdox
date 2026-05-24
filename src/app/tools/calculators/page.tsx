@@ -139,6 +139,54 @@ const CALC_TOOLS = [
     href: '/speed-converter',
     features: ['mph, km/h, knots', 'Mach number conversion', 'Running pace calculator'],
   },
+  {
+    title: 'Tax Calculator',
+    desc: 'Estimate your income tax for the US, UK, Canada, and Australia with bracket-by-bracket breakdown.',
+    href: '/tax-calculator',
+    features: ['4 countries', '2026 tax brackets', 'Effective rate'],
+  },
+  {
+    title: 'Investment Calculator',
+    desc: 'Project the growth of your investments over time with compound interest and monthly contributions.',
+    href: '/investment-calculator',
+    features: ['Monthly contributions', 'Year-by-year table', 'Growth chart'],
+  },
+  {
+    title: 'Advanced Mortgage Calculator',
+    desc: 'Calculate your full monthly mortgage payment including PMI, property tax, insurance, and HOA.',
+    href: '/mortgage-advanced',
+    features: ['PMI auto-calculation', 'Amortization table', 'Full PITI breakdown'],
+  },
+  {
+    title: 'Retirement Calculator',
+    desc: 'Project your retirement savings and see if you are on track to meet your financial goals.',
+    href: '/retirement-calculator',
+    features: ['4% withdrawal rule', 'Employer match', 'Year projections'],
+  },
+  {
+    title: 'Body Fat Calculator',
+    desc: 'Calculate body fat percentage using the US Navy method or BMI-based estimation.',
+    href: '/body-fat-calculator',
+    features: ['Navy & BMI methods', 'Male & female formulas', 'Category chart'],
+  },
+  {
+    title: 'Macro Calculator',
+    desc: 'Calculate your daily protein, carb, and fat targets based on your weight, activity, and goals.',
+    href: '/macro-calculator',
+    features: ['3 macro splits', '5 activity levels', 'Meal breakdown'],
+  },
+  {
+    title: 'Water Intake Calculator',
+    desc: 'Calculate your optimal daily water intake based on weight, activity level, and climate.',
+    href: '/water-intake',
+    features: ['Climate adjustment', 'Pregnancy option', 'Hourly schedule'],
+  },
+  {
+    title: 'Fuel Cost Calculator',
+    desc: 'Estimate how much a road trip will cost in fuel, including per-person cost for groups.',
+    href: '/fuel-cost',
+    features: ['MPG & L/100km', 'Round trip option', 'Per-person cost'],
+  },
 ] as const
 
 export default function CalculatorsPage() {
@@ -150,7 +198,7 @@ export default function CalculatorsPage() {
       <div style={{ background: 'linear-gradient(135deg,#0F2A4A,#1a3a5c)', padding: '80px 24px 64px', textAlign: 'center' }}>
         <div style={{ maxWidth: '760px', margin: '0 auto' }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '999px', padding: '5px 16px', fontSize: '13px', color: 'rgba(255,255,255,0.85)', marginBottom: '28px' }}>
-            <span style={{ background: '#E85D04', borderRadius: '999px', padding: '1px 8px', fontWeight: 700, color: 'white', fontSize: '11px' }}>21 TOOLS</span>
+            <span style={{ background: '#E85D04', borderRadius: '999px', padding: '1px 8px', fontWeight: 700, color: 'white', fontSize: '11px' }}>29 TOOLS</span>
             Calculators &amp; Converters
           </div>
           <h1 style={{ fontFamily: "'Space Grotesk',system-ui,sans-serif", fontSize: 'clamp(24px,5vw,52px)', fontWeight: 800, color: 'white', lineHeight: 1.15, letterSpacing: '-0.5px', margin: '0 0 18px' }}>
@@ -169,7 +217,7 @@ export default function CalculatorsPage() {
         <div style={{ marginBottom: '40px', textAlign: 'center' }}>
           <div style={{ fontSize: '12px', fontWeight: 700, color: '#E85D04', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '10px' }}>Calculators &amp; Converters</div>
           <h2 style={{ fontFamily: "'Space Grotesk',system-ui,sans-serif", fontSize: 'clamp(24px,3vw,36px)', fontWeight: 800, color: '#0F2A4A', margin: '0 0 12px' }}>All Calculators</h2>
-          <p style={{ fontSize: '15px', color: '#64748b', margin: 0 }}>21 free calculators and converters for everyday maths and measurements.</p>
+          <p style={{ fontSize: '15px', color: '#64748b', margin: 0 }}>29 free calculators and converters for everyday maths and measurements.</p>
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(300px,1fr))', gap: '20px' }}>

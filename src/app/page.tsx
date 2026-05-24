@@ -712,6 +712,157 @@ const ToolIcon = ({ type }: { type: string }) => {
         <text x="26" y="40" fontFamily="Arial" fontSize="7" fontWeight="700" fill="#E85D04" textAnchor="middle">ASCII</text>
       </svg>
     ),
+    'anagram': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#FEF3C7" stroke="#F59E0B" strokeWidth="1.5"/>
+        <rect x="14" y="16" width="20" height="14" rx="2" fill="#F59E0B" opacity="0.5"/>
+        <rect x="20" y="22" width="20" height="14" rx="2" fill="#F59E0B"/>
+        <text x="30" y="33" fontFamily="Arial" fontSize="8" fontWeight="700" fill="white" textAnchor="middle">ABC</text>
+      </svg>
+    ),
+    'palindrome': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#DBEAFE" stroke="#3B82F6" strokeWidth="1.5"/>
+        <path d="M14 26h24M14 26l5-5M14 26l5 5M38 26l-5-5M38 26l-5 5" stroke="#3B82F6" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+    'word-freq': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#E0E7FF" stroke="#6366F1" strokeWidth="1.5"/>
+        <rect x="14" y="16" width="24" height="4" rx="1" fill="#6366F1"/>
+        <rect x="14" y="24" width="18" height="4" rx="1" fill="#6366F1"/>
+        <rect x="14" y="32" width="12" height="4" rx="1" fill="#6366F1"/>
+      </svg>
+    ),
+    'tts': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#FCE7F3" stroke="#DB2777" strokeWidth="1.5"/>
+        <path d="M16 22v8h6l8 6V16l-8 6h-6z" fill="#DB2777"/>
+        <path d="M34 20c2 2 2 10 0 12M37 17c4 4 4 14 0 18" stroke="#DB2777" strokeWidth="2" strokeLinecap="round" fill="none"/>
+      </svg>
+    ),
+    'stt': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#DCFCE7" stroke="#16A34A" strokeWidth="1.5"/>
+        <rect x="22" y="14" width="8" height="16" rx="4" fill="#16A34A"/>
+        <path d="M18 26c0 4 3.6 8 8 8s8-4 8-8M26 34v6M22 40h8" stroke="#16A34A" strokeWidth="2" strokeLinecap="round" fill="none"/>
+      </svg>
+    ),
+    'letter-space': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#FED7AA" stroke="#EA580C" strokeWidth="1.5"/>
+        <text x="14" y="32" fontFamily="Arial" fontSize="14" fontWeight="700" fill="#EA580C">A</text>
+        <text x="24" y="32" fontFamily="Arial" fontSize="14" fontWeight="700" fill="#EA580C">B</text>
+        <text x="34" y="32" fontFamily="Arial" fontSize="14" fontWeight="700" fill="#EA580C">C</text>
+      </svg>
+    ),
+    'sentence': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#F3E8FF" stroke="#9333EA" strokeWidth="1.5"/>
+        <rect x="14" y="20" width="24" height="12" rx="2" fill="white" stroke="#9333EA" strokeWidth="1.5"/>
+        <circle cx="32" cy="26" r="2" fill="#9333EA"/>
+        <rect x="17" y="24" width="10" height="2" rx="1" fill="#9333EA"/>
+        <rect x="17" y="28" width="6" height="2" rx="1" fill="#9333EA"/>
+      </svg>
+    ),
+    'tax': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#DCFCE7" stroke="#16A34A" strokeWidth="1.5"/>
+        <text x="26" y="34" fontFamily="Arial" fontSize="24" fontWeight="700" fill="#16A34A" textAnchor="middle">$</text>
+      </svg>
+    ),
+    'invest': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#DBEAFE" stroke="#2563EB" strokeWidth="1.5"/>
+        <path d="M14 36L22 28L28 32L38 18M30 18h8v8" stroke="#2563EB" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+      </svg>
+    ),
+    'mortgage': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#FED7AA" stroke="#EA580C" strokeWidth="1.5"/>
+        <polygon points="26,16 14,26 38,26" fill="#EA580C"/>
+        <rect x="17" y="26" width="18" height="12" fill="#EA580C" opacity="0.8"/>
+        <rect x="23" y="30" width="6" height="8" fill="white"/>
+      </svg>
+    ),
+    'retire': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#FEF3C7" stroke="#F59E0B" strokeWidth="1.5"/>
+        <circle cx="26" cy="26" r="11" fill="#F59E0B"/>
+        <text x="26" y="31" fontFamily="Arial" fontSize="13" fontWeight="700" fill="white" textAnchor="middle">$</text>
+        <circle cx="20" cy="22" r="1.5" fill="white"/>
+      </svg>
+    ),
+    'body-fat': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#FECACA" stroke="#DC2626" strokeWidth="1.5"/>
+        <text x="26" y="34" fontFamily="Arial" fontSize="22" fontWeight="700" fill="#DC2626" textAnchor="middle">%</text>
+      </svg>
+    ),
+    'macro': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#DCFCE7" stroke="#16A34A" strokeWidth="1.5"/>
+        <rect x="18" y="14" width="2" height="24" fill="#16A34A"/>
+        <path d="M16 14v6h6v-6" stroke="#16A34A" strokeWidth="2" fill="none"/>
+        <rect x="30" y="14" width="2" height="24" fill="#16A34A"/>
+        <path d="M28 14c0 4 2 6 4 6s4-2 4-6" stroke="#16A34A" strokeWidth="2" fill="none"/>
+      </svg>
+    ),
+    'water': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#DBEAFE" stroke="#2563EB" strokeWidth="1.5"/>
+        <path d="M26 14 Q18 24 18 30 Q18 38 26 38 Q34 38 34 30 Q34 24 26 14Z" fill="#2563EB"/>
+      </svg>
+    ),
+    'fuel': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#FED7AA" stroke="#EA580C" strokeWidth="1.5"/>
+        <rect x="16" y="14" width="14" height="24" rx="2" fill="#EA580C"/>
+        <rect x="18" y="16" width="10" height="6" fill="white"/>
+        <path d="M30 22h4l2 2v10c0 1-1 2-2 2s-2-1-2-2v-6" stroke="#EA580C" strokeWidth="2" fill="none"/>
+      </svg>
+    ),
+    'flexbox': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#E0E7FF" stroke="#6366F1" strokeWidth="1.5"/>
+        <rect x="13" y="20" width="8" height="12" rx="2" fill="#6366F1"/>
+        <rect x="23" y="20" width="8" height="12" rx="2" fill="#6366F1"/>
+        <rect x="33" y="20" width="8" height="12" rx="2" fill="#6366F1"/>
+      </svg>
+    ),
+    'grid-gen': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#FCE7F3" stroke="#DB2777" strokeWidth="1.5"/>
+        <rect x="14" y="14" width="7" height="7" rx="1" fill="#DB2777"/>
+        <rect x="23" y="14" width="7" height="7" rx="1" fill="#DB2777"/>
+        <rect x="32" y="14" width="7" height="7" rx="1" fill="#DB2777"/>
+        <rect x="14" y="23" width="7" height="7" rx="1" fill="#DB2777"/>
+        <rect x="23" y="23" width="7" height="7" rx="1" fill="#DB2777"/>
+        <rect x="32" y="23" width="7" height="7" rx="1" fill="#DB2777"/>
+        <rect x="14" y="32" width="7" height="7" rx="1" fill="#DB2777"/>
+        <rect x="23" y="32" width="7" height="7" rx="1" fill="#DB2777"/>
+        <rect x="32" y="32" width="7" height="7" rx="1" fill="#DB2777"/>
+      </svg>
+    ),
+    'animation': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#F3E8FF" stroke="#9333EA" strokeWidth="1.5"/>
+        <polygon points="20,16 20,36 36,26" fill="#9333EA"/>
+      </svg>
+    ),
+    'favicon': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#FEF3C7" stroke="#F59E0B" strokeWidth="1.5"/>
+        <polygon points="26,14 29,22 38,22 31,28 33,37 26,32 19,37 21,28 14,22 23,22" fill="#F59E0B"/>
+      </svg>
+    ),
+    'contrast': (
+      <svg width="48" height="48" viewBox="0 0 52 52">
+        <rect x="8" y="8" width="36" height="36" rx="6" fill="#F3F4F6" stroke="#0F2A4A" strokeWidth="1.5"/>
+        <path d="M26 14 a12 12 0 0 1 0 24 z" fill="#0F2A4A"/>
+        <circle cx="26" cy="26" r="12" fill="none" stroke="#0F2A4A" strokeWidth="1.5"/>
+      </svg>
+    ),
   }
   return icons[type] ?? icons['word-counter']
 }
@@ -817,6 +968,27 @@ const TOOLS = [
   { iconType:'beautifier',   title:'Code Beautifier',         desc:'Format HTML, CSS, JS, SQL, XML, JSON',      href:'/code-beautifier',       cat:'dev' },
   { iconType:'words-num',    title:'Words to Number',         desc:'"five hundred" converts to 500',            href:'/words-to-number',       cat:'text' },
   { iconType:'ascii',        title:'ASCII Art Generator',     desc:'Convert text to ASCII art fonts',           href:'/ascii-art',             cat:'fun' },
+  // Batch 5 — New 20 tools
+  { iconType:'anagram', title:'Anagram Generator', desc:'Generate letter rearrangements from any word', href:'/anagram-generator', cat:'text' },
+  { iconType:'palindrome', title:'Palindrome Checker', desc:'Check if text reads same forwards and backwards', href:'/palindrome-checker', cat:'text' },
+  { iconType:'word-freq', title:'Word Frequency Counter', desc:'Count word occurrences and visualize frequency', href:'/word-frequency', cat:'text' },
+  { iconType:'tts', title:'Text to Speech', desc:'Convert text to spoken audio via browser', href:'/text-to-speech', cat:'text' },
+  { iconType:'stt', title:'Speech to Text', desc:'Voice transcription in your browser', href:'/speech-to-text', cat:'text' },
+  { iconType:'letter-space', title:'Letter Spacing Generator', desc:'Add spaces/separators between letters', href:'/letter-spacing', cat:'text' },
+  { iconType:'sentence', title:'Sentence Counter', desc:'Sentence stats and readability scores', href:'/sentence-counter', cat:'text' },
+  { iconType:'tax', title:'Tax Calculator', desc:'Estimate income tax for US, UK, Canada, Australia', href:'/tax-calculator', cat:'calc' },
+  { iconType:'invest', title:'Investment Calculator', desc:'Project stock/savings growth over time', href:'/investment-calculator', cat:'calc' },
+  { iconType:'mortgage', title:'Advanced Mortgage', desc:'Full PITI calculator with PMI and amortization', href:'/mortgage-advanced', cat:'calc' },
+  { iconType:'retire', title:'Retirement Calculator', desc:'401k/IRA nest egg and withdrawal projections', href:'/retirement-calculator', cat:'calc' },
+  { iconType:'body-fat', title:'Body Fat Calculator', desc:'Calculate body fat % with Navy or BMI method', href:'/body-fat-calculator', cat:'calc' },
+  { iconType:'macro', title:'Macro Calculator', desc:'Daily protein, carbs, and fat targets by goal', href:'/macro-calculator', cat:'calc' },
+  { iconType:'water', title:'Water Intake Calculator', desc:'Daily hydration needs based on weight and activity', href:'/water-intake', cat:'calc' },
+  { iconType:'fuel', title:'Fuel Cost Calculator', desc:'Estimate trip fuel cost and per-person share', href:'/fuel-cost', cat:'calc' },
+  { iconType:'flexbox', title:'CSS Flexbox Generator', desc:'Visual flexbox layout builder with live preview', href:'/flexbox-generator', cat:'dev' },
+  { iconType:'grid-gen', title:'CSS Grid Generator', desc:'Visual CSS Grid builder with live preview', href:'/grid-generator', cat:'dev' },
+  { iconType:'animation', title:'CSS Animation Generator', desc:'Build CSS keyframe animations visually', href:'/animation-generator', cat:'dev' },
+  { iconType:'favicon', title:'Favicon Generator', desc:'Generate favicons from text or initials', href:'/favicon-generator', cat:'dev' },
+  { iconType:'contrast', title:'Color Contrast Checker', desc:'WCAG accessibility contrast ratio checker', href:'/color-contrast', cat:'color' },
 ]
 
 const COMING = [
@@ -925,7 +1097,7 @@ const JSON_LD = [
     'name': 'ConvertDox',
     'url': 'https://convertdox.com',
     'logo': 'https://convertdox.com/og-image.png',
-    'description': '85+ free online tools — no signup, files never stored',
+    'description': '105+ free online tools — no signup, files never stored',
   },
   {
     '@context': 'https://schema.org',
@@ -983,7 +1155,7 @@ export default function HomePage() {
         <div style={{ maxWidth:'760px',margin:'0 auto' }}>
           <div style={{ display:'inline-flex',alignItems:'center',gap:'6px',background:'rgba(255,255,255,0.1)',border:'1px solid rgba(255,255,255,0.2)',borderRadius:'999px',padding:'5px 16px',fontSize:'13px',color:'rgba(255,255,255,0.85)',marginBottom:'28px' }}>
             <span style={{ background:'#E85D04',borderRadius:'999px',padding:'1px 8px',fontWeight:700,color:'white',fontSize:'11px' }}>FREE</span>
-            85 Tools Live — 200+ Coming Soon
+            105 Tools Live — 200+ Coming Soon
           </div>
           <h1 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'clamp(24px,5vw,56px)',fontWeight:800,color:'white',lineHeight:1.15,letterSpacing:'-0.5px',margin:'0 0 18px' }}>
             Every Online Tool<br/>You Need —{' '}
@@ -995,7 +1167,7 @@ export default function HomePage() {
           <div style={{ maxWidth:'500px',margin:'0 auto 36px',position:'relative' }}>
             <span style={{ position:'absolute',left:'16px',top:'50%',transform:'translateY(-50%)',fontSize:'18px',pointerEvents:'none' }}>🔍</span>
             <input type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
-              placeholder="Search 85+ tools — QR Code, BMI, Unit Converter..."
+              placeholder="Search 105+ tools — QR Code, BMI, Unit Converter..."
               style={{ width:'100%',padding:'15px 20px 15px 48px',borderRadius:'14px',border:'1px solid rgba(255,255,255,0.25)',background:'rgba(255,255,255,0.12)',fontFamily:'inherit',fontSize:'15px',color:'white',outline:'none',boxSizing:'border-box' }}/>
           </div>
           <div style={{ display:'flex',flexWrap:'wrap',justifyContent:'center',gap:'8px' }}>
@@ -1019,7 +1191,7 @@ export default function HomePage() {
             type="text"
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
-            placeholder="Search 85+ tools (e.g. word counter, json, calculator)..."
+            placeholder="Search 105+ tools (e.g. word counter, json, calculator)..."
             style={{ width:'100%',padding:'15px 48px 15px 48px',borderRadius:'16px',border:'2px solid #0F2A4A',background:'white',fontFamily:'inherit',fontSize:'15px',color:'#0F2A4A',outline:'none',boxSizing:'border-box',boxShadow:'0 8px 24px rgba(15,42,74,0.12)' }}
           />
           {searchQuery && (
@@ -1040,7 +1212,7 @@ export default function HomePage() {
       {/* Stats bar */}
       <div style={{ background:'#0a1f38',padding:'16px 24px',marginTop:'40px' }}>
         <div style={{ maxWidth:'1200px',margin:'0 auto',display:'flex',justifyContent:'center',gap:'48px',flexWrap:'wrap' }}>
-          {[{num:'85',label:'Tools Live'},{num:'200+',label:'Coming Soon'},{num:'100%',label:'Free to Use'},{num:'0',label:'Sign-up Needed'}].map(s => (
+          {[{num:'105',label:'Tools Live'},{num:'200+',label:'Coming Soon'},{num:'100%',label:'Free to Use'},{num:'0',label:'Sign-up Needed'}].map(s => (
             <div key={s.label} style={{ textAlign:'center' }}>
               <div style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'22px',fontWeight:800,color:'#F48C42' }}>{s.num}</div>
               <div style={{ fontSize:'11.5px',color:'rgba(255,255,255,0.45)',marginTop:'2px',textTransform:'uppercase',letterSpacing:'0.5px' }}>{s.label}</div>

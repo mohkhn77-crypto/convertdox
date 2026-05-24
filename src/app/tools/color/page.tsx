@@ -55,6 +55,12 @@ const COLOR_TOOLS = [
     href: '/random-color',
     features: ['Random single colour', 'Palette generation mode', 'HEX and RGB values'],
   },
+  {
+    title: 'Color Contrast Checker',
+    desc: 'Check foreground/background color contrast ratios against WCAG AA and AAA accessibility standards.',
+    href: '/color-contrast',
+    features: ['WCAG AA & AAA', 'Live text preview', 'Contrast ratio display'],
+  },
 ] as const
 
 export default function ColorToolsPage() {
@@ -66,7 +72,7 @@ export default function ColorToolsPage() {
       <div style={{ background: 'linear-gradient(135deg,#0F2A4A,#1a3a5c)', padding: '80px 24px 64px', textAlign: 'center' }}>
         <div style={{ maxWidth: '760px', margin: '0 auto' }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '999px', padding: '5px 16px', fontSize: '13px', color: 'rgba(255,255,255,0.85)', marginBottom: '28px' }}>
-            <span style={{ background: '#E85D04', borderRadius: '999px', padding: '1px 8px', fontWeight: 700, color: 'white', fontSize: '11px' }}>7 TOOLS</span>
+            <span style={{ background: '#E85D04', borderRadius: '999px', padding: '1px 8px', fontWeight: 700, color: 'white', fontSize: '11px' }}>8 TOOLS</span>
             Color Tools
           </div>
           <h1 style={{ fontFamily: "'Space Grotesk',system-ui,sans-serif", fontSize: 'clamp(24px,5vw,52px)', fontWeight: 800, color: 'white', lineHeight: 1.15, letterSpacing: '-0.5px', margin: '0 0 18px' }}>
@@ -85,7 +91,7 @@ export default function ColorToolsPage() {
         <div style={{ marginBottom: '40px', textAlign: 'center' }}>
           <div style={{ fontSize: '12px', fontWeight: 700, color: '#E85D04', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '10px' }}>Color Tools</div>
           <h2 style={{ fontFamily: "'Space Grotesk',system-ui,sans-serif", fontSize: 'clamp(24px,3vw,36px)', fontWeight: 800, color: '#0F2A4A', margin: '0 0 12px' }}>All Color Tools</h2>
-          <p style={{ fontSize: '15px', color: '#64748b', margin: 0 }}>7 free colour tools for designers, developers, and creative professionals.</p>
+          <p style={{ fontSize: '15px', color: '#64748b', margin: 0 }}>8 free colour tools for designers, developers, and creative professionals.</p>
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(300px,1fr))', gap: '20px' }}>

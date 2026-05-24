@@ -103,6 +103,48 @@ const TEXT_TOOLS = [
     href: '/text-diff',
     features: ['Line-by-line diff view', 'Added and removed highlighting', 'Character-level diff support'],
   },
+  {
+    title: 'Anagram Generator',
+    desc: 'Generate all possible letter rearrangements from any word or phrase, filtered to real English words.',
+    href: '/anagram-generator',
+    features: ['Real word filtering', 'Up to 100 results', 'Word length filter'],
+  },
+  {
+    title: 'Palindrome Checker',
+    desc: 'Check if text reads the same forwards and backwards, with options to ignore spaces and punctuation.',
+    href: '/palindrome-checker',
+    features: ['Case-sensitive option', 'Ignore spaces/punctuation', 'Famous examples'],
+  },
+  {
+    title: 'Word Frequency Counter',
+    desc: 'Count how often each word appears in your text and visualize the frequency as a bar chart.',
+    href: '/word-frequency',
+    features: ['Stop word exclusion', 'Bar chart visualization', 'CSV export'],
+  },
+  {
+    title: 'Text to Speech',
+    desc: 'Convert any text to spoken audio directly in your browser using the Web Speech API.',
+    href: '/text-to-speech',
+    features: ['Voice selector', 'Speed & pitch control', 'No download needed'],
+  },
+  {
+    title: 'Speech to Text',
+    desc: 'Transcribe your voice to text in real-time using browser speech recognition.',
+    href: '/speech-to-text',
+    features: ['Multiple languages', 'Live transcription', 'Edit & copy'],
+  },
+  {
+    title: 'Letter Spacing Generator',
+    desc: 'Add spaces, dots, dashes, or underscores between letters for social media bios and design.',
+    href: '/letter-spacing',
+    features: ['5 spacing styles', 'Custom separator', 'Copy instantly'],
+  },
+  {
+    title: 'Sentence Counter',
+    desc: 'Count sentences, calculate readability scores, and analyze your writing at the sentence level.',
+    href: '/sentence-counter',
+    features: ['Flesch reading score', 'Grade level', 'Per-sentence breakdown'],
+  },
 ] as const
 
 export default function TextToolsPage() {
@@ -114,7 +156,7 @@ export default function TextToolsPage() {
       <div style={{ background: 'linear-gradient(135deg,#0F2A4A,#1a3a5c)', padding: '80px 24px 64px', textAlign: 'center' }}>
         <div style={{ maxWidth: '760px', margin: '0 auto' }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '999px', padding: '5px 16px', fontSize: '13px', color: 'rgba(255,255,255,0.85)', marginBottom: '28px' }}>
-            <span style={{ background: '#E85D04', borderRadius: '999px', padding: '1px 8px', fontWeight: 700, color: 'white', fontSize: '11px' }}>15 TOOLS</span>
+            <span style={{ background: '#E85D04', borderRadius: '999px', padding: '1px 8px', fontWeight: 700, color: 'white', fontSize: '11px' }}>22 TOOLS</span>
             Text Utilities
           </div>
           <h1 style={{ fontFamily: "'Space Grotesk',system-ui,sans-serif", fontSize: 'clamp(24px,5vw,52px)', fontWeight: 800, color: 'white', lineHeight: 1.15, letterSpacing: '-0.5px', margin: '0 0 18px' }}>

@@ -157,6 +157,30 @@ const DEV_TOOLS = [
     href: '/code-beautifier',
     features: ['6 language support', 'Custom indentation', 'Minify option'],
   },
+  {
+    title: 'CSS Flexbox Generator',
+    desc: 'Build flexbox layouts visually with a live preview and copy the generated CSS code.',
+    href: '/flexbox-generator',
+    features: ['All flex properties', 'Live preview', 'Preset layouts'],
+  },
+  {
+    title: 'CSS Grid Generator',
+    desc: 'Create CSS Grid layouts visually with column/row controls and a live preview.',
+    href: '/grid-generator',
+    features: ['Column & row controls', 'Gap slider', 'Preset grids'],
+  },
+  {
+    title: 'CSS Animation Generator',
+    desc: 'Build CSS keyframe animations visually with full control over transforms, timing, and easing.',
+    href: '/animation-generator',
+    features: ['Keyframe editor', 'Live preview', 'Preset animations'],
+  },
+  {
+    title: 'Favicon Generator',
+    desc: 'Generate a favicon from text or initials with custom colors and shapes, downloadable as PNG.',
+    href: '/favicon-generator',
+    features: ['Canvas-based', 'Custom colors', 'PNG download'],
+  },
 ] as const
 
 export default function DeveloperToolsPage() {
@@ -168,7 +192,7 @@ export default function DeveloperToolsPage() {
       <div style={{ background: 'linear-gradient(135deg,#0F2A4A,#1a3a5c)', padding: '80px 24px 64px', textAlign: 'center' }}>
         <div style={{ maxWidth: '760px', margin: '0 auto' }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '999px', padding: '5px 16px', fontSize: '13px', color: 'rgba(255,255,255,0.85)', marginBottom: '28px' }}>
-            <span style={{ background: '#E85D04', borderRadius: '999px', padding: '1px 8px', fontWeight: 700, color: 'white', fontSize: '11px' }}>24 TOOLS</span>
+            <span style={{ background: '#E85D04', borderRadius: '999px', padding: '1px 8px', fontWeight: 700, color: 'white', fontSize: '11px' }}>28 TOOLS</span>
             Developer Tools
           </div>
           <h1 style={{ fontFamily: "'Space Grotesk',system-ui,sans-serif", fontSize: 'clamp(24px,5vw,52px)', fontWeight: 800, color: 'white', lineHeight: 1.15, letterSpacing: '-0.5px', margin: '0 0 18px' }}>
@@ -187,7 +211,7 @@ export default function DeveloperToolsPage() {
         <div style={{ marginBottom: '40px', textAlign: 'center' }}>
           <div style={{ fontSize: '12px', fontWeight: 700, color: '#E85D04', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '10px' }}>Developer Tools</div>
           <h2 style={{ fontFamily: "'Space Grotesk',system-ui,sans-serif", fontSize: 'clamp(24px,3vw,36px)', fontWeight: 800, color: '#0F2A4A', margin: '0 0 12px' }}>All Developer Tools</h2>
-          <p style={{ fontSize: '15px', color: '#64748b', margin: 0 }}>24 free tools for developers, engineers, and technical professionals.</p>
+          <p style={{ fontSize: '15px', color: '#64748b', margin: 0 }}>28 free tools for developers, engineers, and technical professionals.</p>
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(300px,1fr))', gap: '20px' }}>
