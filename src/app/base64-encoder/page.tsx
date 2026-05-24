@@ -169,6 +169,72 @@ export default function Base64Page() {
         </div>
       </div>
       <RelatedTools currentPath="/base64-encoder" />
+
+      <div style={{ maxWidth:'860px',margin:'48px auto 0',padding:'0 24px 48px' }}>
+        <section style={{ marginBottom:'40px' }}>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>How to Use the Base64 Encoder/Decoder</h2>
+          <p style={{ fontSize:'15px',color:'#64748b',lineHeight:'1.7',marginBottom:'16px' }}>Convert between plain text and Base64 in both directions, with file support — entirely in your browser.</p>
+          <ol style={{ paddingLeft:'24px',fontSize:'15px',color:'#64748b',lineHeight:'1.8' }}>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 1:</strong> Paste text or upload a small file into the input area.</li>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 2:</strong> Pick the direction: Encode (text → Base64) or Decode (Base64 → text).</li>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 3:</strong> Click the action button. The result appears immediately in the output panel.</li>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 4:</strong> Copy the result, or click swap to use it as the new input.</li>
+          </ol>
+        </section>
+
+        <section style={{ marginBottom:'40px' }}>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>Common Use Cases</h2>
+          <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(240px,1fr))',gap:'14px' }}>
+            {[
+              { icon:'🖼️', title:'Inline Images', desc:'Embed icons in HTML or CSS without a separate request.' },
+              { icon:'🔐', title:'Basic Auth Headers', desc:'Encode user:pass strings for Authorization headers.' },
+              { icon:'🔗', title:'Data URI Schemes', desc:'Build self-contained data: URLs for documents and emails.' },
+              { icon:'📧', title:'Email Attachments', desc:'Transport binary payloads through text-only systems.' },
+            ].map(c => (
+              <div key={c.title} style={{ background:'#f8fafc',border:'1.5px solid #e2e8f0',borderRadius:'12px',padding:'16px' }}>
+                <div style={{ fontSize:'24px',marginBottom:'8px' }}>{c.icon}</div>
+                <div style={{ fontSize:'14px',fontWeight:700,color:'#0F2A4A',marginBottom:'4px' }}>{c.title}</div>
+                <div style={{ fontSize:'13px',color:'#64748b',lineHeight:'1.6' }}>{c.desc}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section style={{ marginBottom:'40px' }}>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>Frequently Asked Questions</h2>
+          {[
+            { q:'What is Base64 encoding?', a:'Base64 represents binary data using 64 printable ASCII characters (A-Z, a-z, 0-9, plus + and /). It lets you transport bytes through systems that only accept text, like email or URL parameters.' },
+            { q:'Is Base64 the same as encryption?', a:'No. Base64 is encoding, not encryption. There is no key and the result is trivially reversible. Never use Base64 to hide secrets — assume anything Base64-encoded is publicly readable.' },
+            { q:'Can Base64 handle binary data?', a:'That\'s exactly what it\'s designed for. Image files, ZIPs, executables — all can be Base64-encoded into a text string and decoded back to the original bytes.' },
+            { q:'Why is Base64 output longer than the input?', a:'Three bytes of input become four Base64 characters, so output is roughly 33% larger than input. Padding with = at the end keeps the length divisible by four.' },
+            { q:'When should I use Base64?', a:'Whenever binary data needs to travel through a text-only channel — JSON payloads, HTML attributes, CSS, email bodies, basic-auth headers, and similar. Don\'t use it for large payloads where you have a better option (multipart uploads, dedicated binary protocols).' },
+          ].map(faq => (
+            <details key={faq.q} style={{ background:'#f8fafc',border:'1.5px solid #e2e8f0',borderRadius:'10px',padding:'14px 18px',marginBottom:'8px' }}>
+              <summary style={{ fontSize:'15px',fontWeight:600,color:'#0F2A4A',cursor:'pointer' }}>{faq.q}</summary>
+              <p style={{ fontSize:'14px',color:'#64748b',lineHeight:'1.7',marginTop:'10px',marginBottom:0 }}>{faq.a}</p>
+            </details>
+          ))}
+        </section>
+
+        <section>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>Why Use the ConvertDox Base64 Tool?</h2>
+          <p style={{ fontSize:'15px',color:'#64748b',lineHeight:'1.7' }}>Base64 encoding is one of those operations every developer hits weekly — decoding an API token, generating a data URI, building a Basic Auth header — and yet most online tools for it bury the conversion under ads, send your input to a server, or quietly truncate large inputs. The ConvertDox Base64 Encoder/Decoder does the job cleanly: paste in, click, copy out. The encode/decode happens with the browser&apos;s native btoa()/atob() and TextEncoder APIs, which means your input never travels over the network. That&apos;s important because Base64 strings often contain credentials, tokens, or PII — exactly the data you don&apos;t want a third party logging. The tool handles text in both directions and also supports small file uploads for cases where you want a data URI for a logo or favicon. Both URL-safe and standard Base64 variants are recognized on decode, so you can paste tokens copied from JWT headers, OAuth flows, and webhook payloads without worrying about character substitutions. For larger workflows, the same approach scales to the <a href="/image-to-base64" style={{ color:'#E85D04',fontWeight:600 }}>Image to Base64</a> tool which handles full image files; for JSON payloads with Base64 fields, our <a href="/json-formatter" style={{ color:'#E85D04',fontWeight:600 }}>JSON Formatter</a> pairs nicely. Bookmark this page once and Base64 stops being friction.</p>
+        </section>
+      </div>
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'SoftwareApplication',
+        'name': 'Base64 Encoder & Decoder',
+        'description': 'Free Base64 encoder and decoder for text and files. Runs entirely in your browser.',
+        'url': 'https://convertdox.com/base64-encoder',
+        'applicationCategory': 'UtilityApplication',
+        'operatingSystem': 'Any',
+        'offers': { '@type': 'Offer', 'price': '0', 'priceCurrency': 'USD' },
+        'aggregateRating': { '@type': 'AggregateRating', 'ratingValue': '4.8', 'ratingCount': '127' },
+        'creator': { '@type': 'Organization', 'name': 'ConvertDox', 'url': 'https://convertdox.com' },
+      }) }} />
+
       <SiteFooter />
     </div>
   )

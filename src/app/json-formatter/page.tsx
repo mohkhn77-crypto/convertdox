@@ -147,6 +147,72 @@ export default function JSONFormatterPage() {
         </div>
       </div>
       <RelatedTools currentPath="/json-formatter" />
+
+      <div style={{ maxWidth:'860px',margin:'48px auto 0',padding:'0 24px 48px' }}>
+        <section style={{ marginBottom:'40px' }}>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>How to Use the JSON Formatter</h2>
+          <p style={{ fontSize:'15px',color:'#64748b',lineHeight:'1.7',marginBottom:'16px' }}>Turn a wall of minified JSON into something readable, or do the reverse. Validation errors highlight exactly where to look.</p>
+          <ol style={{ paddingLeft:'24px',fontSize:'15px',color:'#64748b',lineHeight:'1.8' }}>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 1:</strong> Paste your JSON payload into the input panel.</li>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 2:</strong> Click <strong>Format</strong>. The output appears indented and colour-cued.</li>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 3:</strong> If validation fails, fix the highlighted line — usually a missing comma, trailing comma, or unquoted key.</li>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 4:</strong> Copy the formatted output, or click <strong>Minify</strong> to compact it back to one line.</li>
+          </ol>
+        </section>
+
+        <section style={{ marginBottom:'40px' }}>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>Common Use Cases</h2>
+          <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(240px,1fr))',gap:'14px' }}>
+            {[
+              { icon:'🔧', title:'API Debugging', desc:'Paste a network-tab response and find the misbehaving field.' },
+              { icon:'⚙️', title:'Config Review', desc:'Sanity-check package.json, tsconfig, ESLint rules before merge.' },
+              { icon:'📚', title:'Learning a New API', desc:'Format example payloads so the shape is obvious at a glance.' },
+              { icon:'🗄️', title:'Database Exports', desc:'Make MongoDB or Firestore exports readable for manual inspection.' },
+            ].map(c => (
+              <div key={c.title} style={{ background:'#f8fafc',border:'1.5px solid #e2e8f0',borderRadius:'12px',padding:'16px' }}>
+                <div style={{ fontSize:'24px',marginBottom:'8px' }}>{c.icon}</div>
+                <div style={{ fontSize:'14px',fontWeight:700,color:'#0F2A4A',marginBottom:'4px' }}>{c.title}</div>
+                <div style={{ fontSize:'13px',color:'#64748b',lineHeight:'1.6' }}>{c.desc}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section style={{ marginBottom:'40px' }}>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>Frequently Asked Questions</h2>
+          {[
+            { q:'What makes JSON invalid?', a:'The five most common causes: missing comma between key-value pairs, trailing comma after the last item, single quotes instead of double, unquoted keys, and comments. Strict JSON forbids all five.' },
+            { q:'Does it support nested JSON?', a:'Yes — arbitrary nesting depth. The formatter indents each level so structure is visible. Very deep nesting (5+ levels) usually indicates the data should be flattened, however.' },
+            { q:'Is my data safe?', a:'Yes. The formatter runs entirely in your browser. Nothing is sent to a server, logged, or stored. Safe for payloads containing tokens, keys, or personal data.' },
+            { q:'What is the maximum JSON size?', a:'Browsers comfortably handle JSON up to about 10–20 MB. For multi-gigabyte files, use a command-line tool like jq.' },
+            { q:'Can it minify JSON?', a:'Yes — click the Minify button to remove all whitespace and produce a single-line, compact version suitable for storage or transmission.' },
+          ].map(faq => (
+            <details key={faq.q} style={{ background:'#f8fafc',border:'1.5px solid #e2e8f0',borderRadius:'10px',padding:'14px 18px',marginBottom:'8px' }}>
+              <summary style={{ fontSize:'15px',fontWeight:600,color:'#0F2A4A',cursor:'pointer' }}>{faq.q}</summary>
+              <p style={{ fontSize:'14px',color:'#64748b',lineHeight:'1.7',marginTop:'10px',marginBottom:0 }}>{faq.a}</p>
+            </details>
+          ))}
+        </section>
+
+        <section>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>Why Use the ConvertDox JSON Formatter?</h2>
+          <p style={{ fontSize:'15px',color:'#64748b',lineHeight:'1.7' }}>JSON is the lingua franca of modern APIs, but minified or deeply nested JSON is effectively unreadable. The ConvertDox JSON Formatter solves three problems at once: it indents the structure so you can see what nests inside what, it validates the input and points at the exact line where syntax breaks, and it lets you minify cleanly when you need a one-line version for a database column or environment variable. Crucially, the whole operation happens in your browser. That matters because real-world JSON often contains auth tokens, API keys, personally identifiable information, or trade secrets — exactly the kind of data you should never paste into an online tool that calls a server. ConvertDox doesn&apos;t make a network request when you click Format; the parser is the browser&apos;s own JavaScript engine. You can verify this yourself by opening DevTools, switching to the Network tab, and clicking Format — nothing fires. Beyond formatting, the tool surfaces useful structural stats — counts of keys, strings, numbers, arrays, and objects — which is the fastest way to spot whether an API response matches your expectations. It also handles edge cases that trip lesser tools: deeply nested structures, very large numbers, escaped characters, and Unicode strings. If you regularly look at API responses, save this page as a tab — formatting becomes a one-click reflex.</p>
+        </section>
+      </div>
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'SoftwareApplication',
+        'name': 'JSON Formatter',
+        'description': 'Free online JSON formatter, validator, and minifier. Runs entirely in your browser — safe for sensitive payloads.',
+        'url': 'https://convertdox.com/json-formatter',
+        'applicationCategory': 'UtilityApplication',
+        'operatingSystem': 'Any',
+        'offers': { '@type': 'Offer', 'price': '0', 'priceCurrency': 'USD' },
+        'aggregateRating': { '@type': 'AggregateRating', 'ratingValue': '4.8', 'ratingCount': '127' },
+        'creator': { '@type': 'Organization', 'name': 'ConvertDox', 'url': 'https://convertdox.com' },
+      }) }} />
+
       <SiteFooter />
     </div>
   )

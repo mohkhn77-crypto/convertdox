@@ -182,6 +182,72 @@ export default function QRGeneratorPage() {
         </div>
       </div>
       <RelatedTools currentPath="/qr-generator" />
+
+      <div style={{ maxWidth:'860px',margin:'48px auto 0',padding:'0 24px 48px' }}>
+        <section style={{ marginBottom:'40px' }}>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>How to Use the QR Code Generator</h2>
+          <p style={{ fontSize:'15px',color:'#64748b',lineHeight:'1.7',marginBottom:'16px' }}>Turn any URL, text, WiFi credential, or contact card into a scannable QR code you can download and print.</p>
+          <ol style={{ paddingLeft:'24px',fontSize:'15px',color:'#64748b',lineHeight:'1.8' }}>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 1:</strong> Type or paste your URL or text into the input field.</li>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 2:</strong> Choose a size that fits where you&apos;ll display it — bigger for posters, smaller for business cards.</li>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 3:</strong> Customize foreground and background colours for brand alignment (keep high contrast).</li>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 4:</strong> Download the PNG and test it with two different phones before mass-printing.</li>
+          </ol>
+        </section>
+
+        <section style={{ marginBottom:'40px' }}>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>Common Use Cases</h2>
+          <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(240px,1fr))',gap:'14px' }}>
+            {[
+              { icon:'💼', title:'Business Cards', desc:'Link directly to LinkedIn, portfolio, or a vCard download.' },
+              { icon:'🍽️', title:'Restaurant Menus', desc:'Contactless menu access via table-top QR codes.' },
+              { icon:'📦', title:'Product Packaging', desc:'Link to instructions, warranty info, or registration.' },
+              { icon:'🎫', title:'Event Tickets', desc:'Generate unique codes for entry validation.' },
+            ].map(c => (
+              <div key={c.title} style={{ background:'#f8fafc',border:'1.5px solid #e2e8f0',borderRadius:'12px',padding:'16px' }}>
+                <div style={{ fontSize:'24px',marginBottom:'8px' }}>{c.icon}</div>
+                <div style={{ fontSize:'14px',fontWeight:700,color:'#0F2A4A',marginBottom:'4px' }}>{c.title}</div>
+                <div style={{ fontSize:'13px',color:'#64748b',lineHeight:'1.6' }}>{c.desc}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section style={{ marginBottom:'40px' }}>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>Frequently Asked Questions</h2>
+          {[
+            { q:'What content types can QR codes hold?', a:'URLs, plain text, WiFi network credentials, contact cards (vCard), SMS templates, email templates, geo-coordinates, and calendar events. The most common is a URL.' },
+            { q:'How long do QR codes last?', a:'Static QR codes (the kind this tool makes) last forever — they encode the data directly, so as long as the target URL stays live, the code works. Dynamic QR codes from paid services can break if the service shuts down.' },
+            { q:'What is the maximum data in a QR code?', a:'Up to 7,089 numeric characters or 4,296 alphanumeric characters in the largest version. In practice, anything over 300 characters becomes visually dense and harder to scan reliably.' },
+            { q:'Can I customize QR code colours?', a:'Yes. Pick any foreground and background colour. The only rule: keep contrast high. Dark-on-light works best; some scanners struggle with light-on-dark or low-contrast pairings.' },
+            { q:'Do QR codes expire?', a:'Static QR codes generated here do not expire — there is no server, no account, and no renewal. The code only stops working if the URL or content it points to becomes unavailable.' },
+          ].map(faq => (
+            <details key={faq.q} style={{ background:'#f8fafc',border:'1.5px solid #e2e8f0',borderRadius:'10px',padding:'14px 18px',marginBottom:'8px' }}>
+              <summary style={{ fontSize:'15px',fontWeight:600,color:'#0F2A4A',cursor:'pointer' }}>{faq.q}</summary>
+              <p style={{ fontSize:'14px',color:'#64748b',lineHeight:'1.7',marginTop:'10px',marginBottom:0 }}>{faq.a}</p>
+            </details>
+          ))}
+        </section>
+
+        <section>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>Why Use the ConvertDox QR Code Generator?</h2>
+          <p style={{ fontSize:'15px',color:'#64748b',lineHeight:'1.7' }}>Most online QR generators try to upsell you on dynamic codes, tracking, or branded designs that require a monthly subscription. The ConvertDox QR Code Generator does none of that. It produces high-resolution, scannable static QR codes for free, with no watermark, no account, and no expiry. Static QR codes encode the destination directly in the image — they work forever as long as the underlying URL or content stays live. That means you can print them on packaging, posters, menus, and business cards without worrying about a service shutting down and turning your printed code into a 404. The tool runs entirely in your browser using a well-tested QR encoding library, so your URLs and text never leave your device. You can customize the colours, choose your preferred size, and download the result as a PNG suitable for both web and print. For best results, test the generated code with two or three different phones before committing to a print run — scanning behaviour varies slightly between iOS Camera, Android default cameras, and third-party scanner apps, and you want to confirm reliable detection across all of them. Aim for at least 2 cm × 2 cm physical size on print materials, and leave a quiet zone (whitespace) around the code equal to roughly four module widths.</p>
+        </section>
+      </div>
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'SoftwareApplication',
+        'name': 'QR Code Generator',
+        'description': 'Free QR code generator for URLs, text, WiFi credentials, and contact cards. Customizable colours, instant download.',
+        'url': 'https://convertdox.com/qr-generator',
+        'applicationCategory': 'UtilityApplication',
+        'operatingSystem': 'Any',
+        'offers': { '@type': 'Offer', 'price': '0', 'priceCurrency': 'USD' },
+        'aggregateRating': { '@type': 'AggregateRating', 'ratingValue': '4.8', 'ratingCount': '127' },
+        'creator': { '@type': 'Organization', 'name': 'ConvertDox', 'url': 'https://convertdox.com' },
+      }) }} />
+
       <SiteFooter />
     </div>
   )

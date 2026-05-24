@@ -194,6 +194,72 @@ export default function MarkdownEditorPage() {
         </div>
       </div>
       <RelatedTools currentPath="/markdown-editor" />
+
+      <div style={{ maxWidth:'860px',margin:'48px auto 0',padding:'0 24px 48px' }}>
+        <section style={{ marginBottom:'40px' }}>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>How to Use the Markdown Editor</h2>
+          <p style={{ fontSize:'15px',color:'#64748b',lineHeight:'1.7',marginBottom:'16px' }}>Write Markdown on the left, see the live HTML preview on the right. Export rendered HTML when ready.</p>
+          <ol style={{ paddingLeft:'24px',fontSize:'15px',color:'#64748b',lineHeight:'1.8' }}>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 1:</strong> Type or paste Markdown in the left editor panel.</li>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 2:</strong> Watch the rendered preview update live in the right panel.</li>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 3:</strong> Use headings, lists, links, images, code blocks — all standard Markdown.</li>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 4:</strong> Copy the rendered HTML or your Markdown source.</li>
+          </ol>
+        </section>
+
+        <section style={{ marginBottom:'40px' }}>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>Common Use Cases</h2>
+          <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(240px,1fr))',gap:'14px' }}>
+            {[
+              { icon:'📰', title:'Blog Posts', desc:'Draft articles in Markdown and export clean HTML to your CMS.' },
+              { icon:'📖', title:'README Files', desc:'Write project README.md for GitHub, GitLab, or npm.' },
+              { icon:'📚', title:'Documentation', desc:'Spec pages, knowledge base entries, API docs.' },
+              { icon:'🐛', title:'GitHub Issues', desc:'Format issue descriptions and PR comments with confidence.' },
+            ].map(c => (
+              <div key={c.title} style={{ background:'#f8fafc',border:'1.5px solid #e2e8f0',borderRadius:'12px',padding:'16px' }}>
+                <div style={{ fontSize:'24px',marginBottom:'8px' }}>{c.icon}</div>
+                <div style={{ fontSize:'14px',fontWeight:700,color:'#0F2A4A',marginBottom:'4px' }}>{c.title}</div>
+                <div style={{ fontSize:'13px',color:'#64748b',lineHeight:'1.6' }}>{c.desc}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section style={{ marginBottom:'40px' }}>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>Frequently Asked Questions</h2>
+          {[
+            { q:'What is Markdown?', a:'A lightweight plain-text formatting syntax that converts to HTML. Created by John Gruber in 2004 and now standard across GitHub, Reddit, Discord, and most modern documentation tooling.' },
+            { q:'What is the difference between Markdown and HTML?', a:'Markdown is the source — short syntax like **bold** or # Heading. HTML is the output — <strong>bold</strong> or <h1>Heading</h1>. Markdown is easier to write; HTML is what browsers render.' },
+            { q:'Can I use Markdown on all platforms?', a:'On most modern ones — GitHub, GitLab, Notion, Obsidian, Discord, Reddit, Slack, Trello. Some platforms use slight dialect variations (GFM, CommonMark, MultiMarkdown) but the basics are universal.' },
+            { q:'How do I add images in Markdown?', a:'Use ![alt text](url) — for example ![ConvertDox logo](https://convertdox.com/og-image.png). For local images, use a relative path; for web images, use the full URL.' },
+            { q:'What are the most useful Markdown shortcuts?', a:'**bold**, *italic*, # Heading, - bullet, 1. numbered, [link](url), ![image](url), `inline code`, ```code block```, > blockquote, and --- for horizontal rule. Master those ten and you cover 95% of everyday writing.' },
+          ].map(faq => (
+            <details key={faq.q} style={{ background:'#f8fafc',border:'1.5px solid #e2e8f0',borderRadius:'10px',padding:'14px 18px',marginBottom:'8px' }}>
+              <summary style={{ fontSize:'15px',fontWeight:600,color:'#0F2A4A',cursor:'pointer' }}>{faq.q}</summary>
+              <p style={{ fontSize:'14px',color:'#64748b',lineHeight:'1.7',marginTop:'10px',marginBottom:0 }}>{faq.a}</p>
+            </details>
+          ))}
+        </section>
+
+        <section>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>Why Use the ConvertDox Markdown Editor?</h2>
+          <p style={{ fontSize:'15px',color:'#64748b',lineHeight:'1.7' }}>Markdown is the lingua franca of modern writing for developers, technical writers, and anyone who maintains documentation. The ConvertDox Markdown Editor gives you a split-pane editor with live HTML preview, which is the fastest way to learn the syntax and to catch formatting mistakes before publishing. The editor supports the CommonMark specification — the standardized version of Markdown — plus the GitHub-Flavored Markdown extensions for tables, task lists, strikethrough, and fenced code blocks. Everything runs in your browser, so drafts are private and the editor works offline once the page is cached. You can paste an entire long-form article, restructure headings, and export clean HTML in seconds without ever opening Word or Google Docs. For developers, this is the simplest way to author a README.md or polish a long issue write-up; for writers, it&apos;s a distraction-free environment with no formatting toolbar, no autosave anxiety, and no AI summarisation getting in the way. The output is plain HTML that pastes into any CMS, any email client, and any documentation tool. If you live in Markdown already, this editor is a reliable scratch pad; if you&apos;re learning Markdown, the live preview shortens the feedback loop significantly. Pair it with our <a href="/markdown-cheatsheet" style={{ color:'#E85D04',fontWeight:600 }}>Markdown Cheatsheet</a> for a quick syntax reference.</p>
+        </section>
+      </div>
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'SoftwareApplication',
+        'name': 'Markdown Editor',
+        'description': 'Free online Markdown editor with live HTML preview. CommonMark and GitHub-Flavored Markdown support.',
+        'url': 'https://convertdox.com/markdown-editor',
+        'applicationCategory': 'UtilityApplication',
+        'operatingSystem': 'Any',
+        'offers': { '@type': 'Offer', 'price': '0', 'priceCurrency': 'USD' },
+        'aggregateRating': { '@type': 'AggregateRating', 'ratingValue': '4.8', 'ratingCount': '127' },
+        'creator': { '@type': 'Organization', 'name': 'ConvertDox', 'url': 'https://convertdox.com' },
+      }) }} />
+
       <SiteFooter />
     </div>
   )

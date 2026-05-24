@@ -29,6 +29,7 @@ export default function NavBar() {
             @media (min-width: 640px) { .hamburger-btn { display: none !important; } }
           `}</style>
           {[
+            { label:'Blog', href:'/blog' },
             { label:'About', href:'/about' },
             { label:'Contact', href:'/contact' },
             { label:'Legal', href:'/legal' },
@@ -61,6 +62,7 @@ export default function NavBar() {
         <div style={{ borderTop:'1px solid #e2e8f0',background:'white',padding:'12px 24px 16px' }}>
           {[
             { label:'← Back to Tools', href:'/' },
+            { label:'Blog', href:'/blog' },
             { label:'About', href:'/about' },
             { label:'Contact', href:'/contact' },
             { label:'Legal', href:'/legal' },

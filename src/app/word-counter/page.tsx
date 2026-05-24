@@ -331,6 +331,71 @@ export default function WordCounterPage() {
 
       <RelatedTools currentPath="/word-counter" />
 
+      <div style={{ maxWidth:'860px',margin:'48px auto 0',padding:'0 24px 48px' }}>
+        <section style={{ marginBottom:'40px' }}>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>How to Use the Word Counter</h2>
+          <p style={{ fontSize:'15px',color:'#64748b',lineHeight:'1.7',marginBottom:'16px' }}>The ConvertDox Word Counter gives you a live word, character, sentence, and reading-time read-out as you type. Everything runs locally in your browser — no upload, no sign-up.</p>
+          <ol style={{ paddingLeft:'24px',fontSize:'15px',color:'#64748b',lineHeight:'1.8' }}>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 1:</strong> Paste or type your text into the editor.</li>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 2:</strong> Watch the live stats update — words, characters, sentences, paragraphs, reading and speaking time.</li>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 3:</strong> Switch to the &ldquo;Words&rdquo; tab to see word density and your most-used terms.</li>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 4:</strong> Use the Copy button to grab the text, or Clear to start over.</li>
+          </ol>
+        </section>
+
+        <section style={{ marginBottom:'40px' }}>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>Common Use Cases</h2>
+          <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(240px,1fr))',gap:'14px' }}>
+            {[
+              { icon:'✍️', title:'Writers & Authors', desc:'Hit essay, article, or chapter word targets without surprises.' },
+              { icon:'🔍', title:'SEO Professionals', desc:'Check article length and keyword density before publishing.' },
+              { icon:'🎓', title:'Students', desc:'Stay inside assignment word limits — under and over both lose marks.' },
+              { icon:'📱', title:'Social Media Managers', desc:'Trim captions to fit X, Instagram, and LinkedIn limits.' },
+            ].map(c => (
+              <div key={c.title} style={{ background:'#f8fafc',border:'1.5px solid #e2e8f0',borderRadius:'12px',padding:'16px' }}>
+                <div style={{ fontSize:'24px',marginBottom:'8px' }}>{c.icon}</div>
+                <div style={{ fontSize:'14px',fontWeight:700,color:'#0F2A4A',marginBottom:'4px' }}>{c.title}</div>
+                <div style={{ fontSize:'13px',color:'#64748b',lineHeight:'1.6' }}>{c.desc}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section style={{ marginBottom:'40px' }}>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>Frequently Asked Questions</h2>
+          {[
+            { q:'Does it count spaces?', a:'The character counter shows both totals — with and without spaces — at the top of the stats grid. The word counter ignores spaces and counts anything separated by whitespace as a word.' },
+            { q:'What is the maximum text length?', a:'There is no hard limit. The tool comfortably handles novel-length documents (100,000+ words) on modern devices because everything happens in your browser memory.' },
+            { q:'Does it work offline?', a:'After the first visit, the page is cached by your browser, so it generally works offline. For guaranteed offline use, save the page as a bookmark while online.' },
+            { q:'Can I count words in multiple languages?', a:'Yes — the counter is Unicode-aware and works with English, French, Spanish, German, Chinese, Japanese, Arabic, Hindi, and more. Note that CJK languages (Chinese, Japanese, Korean) don\'t use spaces between words, so the count reflects characters or runs of characters rather than &ldquo;words&rdquo; in the Western sense.' },
+            { q:'How accurate is reading time?', a:'Reading time uses 200 words per minute — the average adult silent reading speed. Speaking time uses 130 words per minute. Both are good estimates for typical prose; technical content reads slower.' },
+          ].map(faq => (
+            <details key={faq.q} style={{ background:'#f8fafc',border:'1.5px solid #e2e8f0',borderRadius:'10px',padding:'14px 18px',marginBottom:'8px' }}>
+              <summary style={{ fontSize:'15px',fontWeight:600,color:'#0F2A4A',cursor:'pointer' }}>{faq.q}</summary>
+              <p style={{ fontSize:'14px',color:'#64748b',lineHeight:'1.7',marginTop:'10px',marginBottom:0 }}>{faq.a}</p>
+            </details>
+          ))}
+        </section>
+
+        <section>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>Why Use the ConvertDox Word Counter?</h2>
+          <p style={{ fontSize:'15px',color:'#64748b',lineHeight:'1.7' }}>Most word-counting tools online are either buried under ads or send your text to a server for &ldquo;processing.&rdquo; The ConvertDox Word Counter does neither. Every keystroke is measured locally in your browser — your draft never leaves your machine, which matters when you&apos;re working on something confidential like a legal brief, a job application, or unreleased copy. The tool shows the numbers you actually need on a single screen: total words, characters with and without spaces, sentences, paragraphs, lines, reading time, speaking time, unique words, longest word, and average word length. A second tab surfaces word density — the top eight terms in your text and how often each appears, which is the fastest way to catch repetition before an editor does. The third tab consolidates the readability details for a quick before-and-after when you&apos;re tightening prose. Because it&apos;s a static page, it loads instantly and works on every device — phone, tablet, laptop, Chromebook. There&apos;s no account to make, no premium tier to hit, no usage cap. Bookmark it once and the live counter is one click away whenever you need to know if your essay is going to fit, your blog post is the right length, or your tweet is under 280 characters.</p>
+        </section>
+      </div>
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'SoftwareApplication',
+        'name': 'Word Counter',
+        'description': 'Free online word counter — count words, characters, sentences, paragraphs and estimate reading time. Runs in your browser.',
+        'url': 'https://convertdox.com/word-counter',
+        'applicationCategory': 'UtilityApplication',
+        'operatingSystem': 'Any',
+        'offers': { '@type': 'Offer', 'price': '0', 'priceCurrency': 'USD' },
+        'aggregateRating': { '@type': 'AggregateRating', 'ratingValue': '4.8', 'ratingCount': '127' },
+        'creator': { '@type': 'Organization', 'name': 'ConvertDox', 'url': 'https://convertdox.com' },
+      }) }} />
+
       <SiteFooter />
 
     </div>

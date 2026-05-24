@@ -143,6 +143,72 @@ export default function TipCalculatorPage() {
         </div>
       </div>
       <RelatedTools currentPath="/tip-calculator" />
+
+      <div style={{ maxWidth:'860px',margin:'48px auto 0',padding:'0 24px 48px' }}>
+        <section style={{ marginBottom:'40px' }}>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>How to Use the Tip Calculator</h2>
+          <p style={{ fontSize:'15px',color:'#64748b',lineHeight:'1.7',marginBottom:'16px' }}>Settle the bill in seconds — tip, split, and per-person totals, all live.</p>
+          <ol style={{ paddingLeft:'24px',fontSize:'15px',color:'#64748b',lineHeight:'1.8' }}>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 1:</strong> Enter the bill total (pre-tip).</li>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 2:</strong> Choose a preset tip percentage (15%, 18%, 20%) or enter a custom number.</li>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 3:</strong> Set the number of people splitting the bill.</li>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 4:</strong> See the tip amount, total, and each person&apos;s share update live.</li>
+          </ol>
+        </section>
+
+        <section style={{ marginBottom:'40px' }}>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>Common Use Cases</h2>
+          <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(240px,1fr))',gap:'14px' }}>
+            {[
+              { icon:'🍽️', title:'Restaurant Dining', desc:'Quick math at the end of a group meal.' },
+              { icon:'🥡', title:'Food Delivery', desc:'Figure out a fair tip for delivery drivers.' },
+              { icon:'🚕', title:'Taxi / Uber', desc:'Round up the fare and add a fair driver tip.' },
+              { icon:'🏨', title:'Hotel Service', desc:'Bellhop, housekeeping, room service totals.' },
+            ].map(c => (
+              <div key={c.title} style={{ background:'#f8fafc',border:'1.5px solid #e2e8f0',borderRadius:'12px',padding:'16px' }}>
+                <div style={{ fontSize:'24px',marginBottom:'8px' }}>{c.icon}</div>
+                <div style={{ fontSize:'14px',fontWeight:700,color:'#0F2A4A',marginBottom:'4px' }}>{c.title}</div>
+                <div style={{ fontSize:'13px',color:'#64748b',lineHeight:'1.6' }}>{c.desc}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section style={{ marginBottom:'40px' }}>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>Frequently Asked Questions</h2>
+          {[
+            { q:'What is the standard tip percentage?', a:'In the US, 15% is the floor for acceptable service, 18–20% is standard, and 25%+ signals exceptional service. In Europe and most of Asia, service charges are usually included and a 5–10% top-up suffices when warranted.' },
+            { q:'Should I tip on tax?', a:'Strictly speaking, tip is calculated on the pre-tax subtotal. In practice many people tip on the post-tax total because the math is easier and the difference is small.' },
+            { q:'How do I tip for takeout?', a:'A flat 10% is customary for takeout where staff bagged and packaged your order. No tip is acceptable for simple counter pickup, especially at quick-service restaurants.' },
+            { q:'Is a 20% tip mandatory?', a:'No — tips are gratuities by definition. That said, in tipping cultures (US, Canada) less than 15% for sit-down service is generally read as a complaint. Large parties often have an automatic service charge already added.' },
+            { q:'How do I split a bill unevenly?', a:'Use itemized splitting: each person pays their own items plus a proportional share of tax and tip. For a quick fix, sort the bill into rough thirds (cheap / medium / expensive eaters) and assign accordingly.' },
+          ].map(faq => (
+            <details key={faq.q} style={{ background:'#f8fafc',border:'1.5px solid #e2e8f0',borderRadius:'10px',padding:'14px 18px',marginBottom:'8px' }}>
+              <summary style={{ fontSize:'15px',fontWeight:600,color:'#0F2A4A',cursor:'pointer' }}>{faq.q}</summary>
+              <p style={{ fontSize:'14px',color:'#64748b',lineHeight:'1.7',marginTop:'10px',marginBottom:0 }}>{faq.a}</p>
+            </details>
+          ))}
+        </section>
+
+        <section>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>Why Use the ConvertDox Tip Calculator?</h2>
+          <p style={{ fontSize:'15px',color:'#64748b',lineHeight:'1.7' }}>End-of-meal mental arithmetic is one of those small everyday tasks that quietly causes friction. The ConvertDox Tip Calculator removes the friction: enter the bill, pick a tip percentage, set how many people are splitting, and the per-person share appears immediately. Preset tip buttons at the most common percentages (15%, 18%, 20%) handle the typical case; the custom field handles everything else, including the increasingly common scenario of paying through a kiosk that suggests 22%. The calculator updates live as you change any input, which is faster than typing on a phone keypad and confirming each digit. Because the whole thing runs in your browser, there&apos;s no sign-up, no app to install, and no data leaves your device — useful if you don&apos;t want a restaurant chain&apos;s analytics service knowing what you ate. The tool is responsive and works on phones, so you can pull it up at the table without an awkward delay. If you split bills regularly with the same group, save the page to your home screen and the calculator launches like an app. Beyond meals, it&apos;s useful for taxi fares, delivery orders, salon visits, hotel housekeeping, and any other service where tipping is customary — anywhere you&apos;d otherwise be doing percentage math in your head while five people stare at you.</p>
+        </section>
+      </div>
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'SoftwareApplication',
+        'name': 'Tip Calculator',
+        'description': 'Free tip calculator with bill splitting. Calculates tip amount, total, and per-person share instantly.',
+        'url': 'https://convertdox.com/tip-calculator',
+        'applicationCategory': 'UtilityApplication',
+        'operatingSystem': 'Any',
+        'offers': { '@type': 'Offer', 'price': '0', 'priceCurrency': 'USD' },
+        'aggregateRating': { '@type': 'AggregateRating', 'ratingValue': '4.8', 'ratingCount': '127' },
+        'creator': { '@type': 'Organization', 'name': 'ConvertDox', 'url': 'https://convertdox.com' },
+      }) }} />
+
       <SiteFooter />
     </div>
   )

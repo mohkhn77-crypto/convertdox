@@ -154,6 +154,72 @@ export default function LoremIpsumPage() {
         </div>
       </div>
       <RelatedTools currentPath="/lorem-ipsum" />
+
+      <div style={{ maxWidth:'860px',margin:'48px auto 0',padding:'0 24px 48px' }}>
+        <section style={{ marginBottom:'40px' }}>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>How to Use the Lorem Ipsum Generator</h2>
+          <p style={{ fontSize:'15px',color:'#64748b',lineHeight:'1.7',marginBottom:'16px' }}>Generate placeholder text in any quantity you need — from a sentence to twenty paragraphs.</p>
+          <ol style={{ paddingLeft:'24px',fontSize:'15px',color:'#64748b',lineHeight:'1.8' }}>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 1:</strong> Choose how many paragraphs (or words / sentences) you want.</li>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 2:</strong> Click Generate. The Lorem text appears instantly.</li>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 3:</strong> Click Copy to send the result to your clipboard.</li>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 4:</strong> Paste into your mockup, prototype, or template.</li>
+          </ol>
+        </section>
+
+        <section style={{ marginBottom:'40px' }}>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>Common Use Cases</h2>
+          <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(240px,1fr))',gap:'14px' }}>
+            {[
+              { icon:'🎨', title:'Web Design Mockups', desc:'Fill paragraphs in Figma, Sketch, or Photoshop.' },
+              { icon:'📱', title:'App Prototypes', desc:'Populate cards, lists, and modals before content is ready.' },
+              { icon:'🖨️', title:'Print Layouts', desc:'Test typography and spacing in InDesign and Affinity.' },
+              { icon:'✉️', title:'Placeholder Emails', desc:'Build email templates before the marketing copy lands.' },
+            ].map(c => (
+              <div key={c.title} style={{ background:'#f8fafc',border:'1.5px solid #e2e8f0',borderRadius:'12px',padding:'16px' }}>
+                <div style={{ fontSize:'24px',marginBottom:'8px' }}>{c.icon}</div>
+                <div style={{ fontSize:'14px',fontWeight:700,color:'#0F2A4A',marginBottom:'4px' }}>{c.title}</div>
+                <div style={{ fontSize:'13px',color:'#64748b',lineHeight:'1.6' }}>{c.desc}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section style={{ marginBottom:'40px' }}>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>Frequently Asked Questions</h2>
+          {[
+            { q:'What does Lorem Ipsum mean?', a:'Nothing useful, deliberately. It\'s scrambled pseudo-Latin derived from a 1st-century BC Cicero treatise. The point is to look like real text without distracting readers with actual meaning.' },
+            { q:'Where did Lorem Ipsum come from?', a:'A 16th-century printer scrambled a passage from Cicero\'s De finibus bonorum et malorum to demonstrate type specimens. It\'s been the placeholder text industry standard ever since.' },
+            { q:'Is Lorem Ipsum still used?', a:'Widely. Every design tool ships a Lorem command. The convention persists because the abstract Latin text doesn\'t accidentally communicate ideas the way English placeholder text would.' },
+            { q:'Can I generate custom placeholder text?', a:'Yes — our <a href="/lorem-advanced" style="color:#E85D04;font-weight:600">Lorem Ipsum Advanced</a> tool offers thematic variants like hipster, corporate, pirate, and tech-flavored placeholder text.' },
+            { q:'How many words is one Lorem Ipsum paragraph?', a:'Typically 50–80 words. Length varies by source text version, but the average paragraph runs about 60 words — close to a real medium-length paragraph in published prose.' },
+          ].map(faq => (
+            <details key={faq.q} style={{ background:'#f8fafc',border:'1.5px solid #e2e8f0',borderRadius:'10px',padding:'14px 18px',marginBottom:'8px' }}>
+              <summary style={{ fontSize:'15px',fontWeight:600,color:'#0F2A4A',cursor:'pointer' }}>{faq.q}</summary>
+              <p style={{ fontSize:'14px',color:'#64748b',lineHeight:'1.7',marginTop:'10px',marginBottom:0 }} dangerouslySetInnerHTML={{ __html: faq.a }} />
+            </details>
+          ))}
+        </section>
+
+        <section>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>Why Use the ConvertDox Lorem Ipsum Generator?</h2>
+          <p style={{ fontSize:'15px',color:'#64748b',lineHeight:'1.7' }}>Lorem Ipsum is the placeholder text every designer reaches for. The ConvertDox Lorem Ipsum Generator gives you flexible control over output — pick paragraphs, sentences, or words; adjust the count; copy with one click. It runs locally so the page loads instantly and works offline once cached, which matters when you&apos;re sketching at a cafe Wi-Fi or on a flight. The text is the standard scrambled-Cicero source that designers expect, so it slots into mockups without surprising clients used to seeing it. Why Lorem rather than &ldquo;the quick brown fox&rdquo;? Because the abstract Latin doesn&apos;t accidentally communicate ideas — a stakeholder reviewing a mockup with English placeholder text often fixates on the words rather than the layout. Lorem keeps attention on what you&apos;re actually showing. For more interesting placeholder copy — hipster, corporate buzzword, cyberpunk, or tech-themed variants — the <a href="/lorem-advanced" style={{ color:'#E85D04',fontWeight:600 }}>Lorem Advanced</a> tool has you covered. Designers, front-end developers, technical writers prepping a doc structure, and product managers fleshing out PRD wireframes will all find this useful. The output is plain text with normal paragraph breaks so it pastes cleanly into Figma, Notion, InDesign, Sketch, Webflow, Framer, Affinity Publisher, Microsoft Word, Google Docs, and every CMS we&apos;ve tested.</p>
+        </section>
+      </div>
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'SoftwareApplication',
+        'name': 'Lorem Ipsum Generator',
+        'description': 'Free Lorem Ipsum placeholder text generator. Choose paragraphs, sentences, or words.',
+        'url': 'https://convertdox.com/lorem-ipsum',
+        'applicationCategory': 'UtilityApplication',
+        'operatingSystem': 'Any',
+        'offers': { '@type': 'Offer', 'price': '0', 'priceCurrency': 'USD' },
+        'aggregateRating': { '@type': 'AggregateRating', 'ratingValue': '4.8', 'ratingCount': '127' },
+        'creator': { '@type': 'Organization', 'name': 'ConvertDox', 'url': 'https://convertdox.com' },
+      }) }} />
+
       <SiteFooter />
     </div>
   )

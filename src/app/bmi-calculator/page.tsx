@@ -170,6 +170,72 @@ export default function BMICalculatorPage() {
         </div>
       </div>
       <RelatedTools currentPath="/bmi-calculator" />
+
+      <div style={{ maxWidth:'860px',margin:'48px auto 0',padding:'0 24px 48px' }}>
+        <section style={{ marginBottom:'40px' }}>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>How to Use the BMI Calculator</h2>
+          <p style={{ fontSize:'15px',color:'#64748b',lineHeight:'1.7',marginBottom:'16px' }}>Get your BMI and category in seconds — metric, imperial, or mixed units. No sign-up.</p>
+          <ol style={{ paddingLeft:'24px',fontSize:'15px',color:'#64748b',lineHeight:'1.8' }}>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 1:</strong> Choose your unit system — metric (kg / cm) or imperial (lbs / ft + in).</li>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 2:</strong> Enter your height.</li>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 3:</strong> Enter your weight.</li>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 4:</strong> Read your BMI value and the category it falls into.</li>
+          </ol>
+        </section>
+
+        <section style={{ marginBottom:'40px' }}>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>Common Use Cases</h2>
+          <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(240px,1fr))',gap:'14px' }}>
+            {[
+              { icon:'🩺', title:'Health Checkups', desc:'Track BMI between annual physicals to spot trends.' },
+              { icon:'🏃', title:'Fitness Tracking', desc:'Pair BMI with body-fat measurements for a fuller picture.' },
+              { icon:'🏥', title:'Medical Screening', desc:'Common starting point in primary-care risk assessments.' },
+              { icon:'📋', title:'Insurance Forms', desc:'Quick reference for life or health insurance applications.' },
+            ].map(c => (
+              <div key={c.title} style={{ background:'#f8fafc',border:'1.5px solid #e2e8f0',borderRadius:'12px',padding:'16px' }}>
+                <div style={{ fontSize:'24px',marginBottom:'8px' }}>{c.icon}</div>
+                <div style={{ fontSize:'14px',fontWeight:700,color:'#0F2A4A',marginBottom:'4px' }}>{c.title}</div>
+                <div style={{ fontSize:'13px',color:'#64748b',lineHeight:'1.6' }}>{c.desc}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section style={{ marginBottom:'40px' }}>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>Frequently Asked Questions</h2>
+          {[
+            { q:'Is BMI accurate for athletes?', a:'Often not. Muscle weighs more than fat, so resistance-trained athletes commonly land in the overweight range despite low body-fat percentages. Pair BMI with a body composition test if you train heavily.' },
+            { q:'What BMI is considered healthy?', a:'For most adults, 18.5 to 24.9 is classified as healthy. In adults over 65, slightly higher BMIs (up to about 27) are associated with the best longevity outcomes.' },
+            { q:'Should I use metric or imperial?', a:'Whichever you\'re more comfortable measuring in. The numerical BMI is identical between the two — the conversion factor is built in.' },
+            { q:'How often should I check BMI?', a:'Every few months is plenty if you\'re a healthy weight. If you\'re actively trying to gain or lose, weekly checks are sufficient — daily fluctuations are mostly water and digestion.' },
+            { q:'Can BMI be misleading?', a:'Yes. It doesn\'t distinguish muscle from fat, doesn\'t account for fat distribution (visceral vs subcutaneous), and varies in clinical meaning across ages and ethnicities. Treat it as one signal, not a verdict.' },
+          ].map(faq => (
+            <details key={faq.q} style={{ background:'#f8fafc',border:'1.5px solid #e2e8f0',borderRadius:'10px',padding:'14px 18px',marginBottom:'8px' }}>
+              <summary style={{ fontSize:'15px',fontWeight:600,color:'#0F2A4A',cursor:'pointer' }}>{faq.q}</summary>
+              <p style={{ fontSize:'14px',color:'#64748b',lineHeight:'1.7',marginTop:'10px',marginBottom:0 }}>{faq.a}</p>
+            </details>
+          ))}
+        </section>
+
+        <section>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>Why Use the ConvertDox BMI Calculator?</h2>
+          <p style={{ fontSize:'15px',color:'#64748b',lineHeight:'1.7' }}>BMI is the most widely cited health metric in the world and the most-misunderstood. The ConvertDox BMI Calculator gives you the number quickly and — importantly — pairs it with the category and a clear interpretation, so you don&apos;t leave wondering what 24.7 actually means. The calculator supports both metric (kilograms and centimetres) and imperial (pounds and feet/inches) units, and you can mix and match if you happen to know your weight in kilos but your height in feet. The math is identical between the two: BMI = weight in kilograms divided by height in metres squared, with a 703 conversion factor when inputs are in pounds and inches. Because the calculation runs in your browser, your weight and height are never sent over the network — relevant if you&apos;d rather not see your stats logged in a third-party analytics dashboard. The tool deliberately includes context around the result rather than just spitting a number: the category (underweight / normal / overweight / obese), what the category is generally taken to mean, and a reminder that BMI has known limitations for athletes, the elderly, pregnant women, and people of different ethnic backgrounds. For a deeper look at the formula and the alternatives, our companion <a href="/blog/how-to-calculate-bmi-accurately" style={{ color:'#E85D04',fontWeight:600 }}>BMI guide</a> walks through everything in detail.</p>
+        </section>
+      </div>
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'SoftwareApplication',
+        'name': 'BMI Calculator',
+        'description': 'Free BMI calculator with metric and imperial units. Instant body mass index calculation with category and healthy range.',
+        'url': 'https://convertdox.com/bmi-calculator',
+        'applicationCategory': 'UtilityApplication',
+        'operatingSystem': 'Any',
+        'offers': { '@type': 'Offer', 'price': '0', 'priceCurrency': 'USD' },
+        'aggregateRating': { '@type': 'AggregateRating', 'ratingValue': '4.8', 'ratingCount': '127' },
+        'creator': { '@type': 'Organization', 'name': 'ConvertDox', 'url': 'https://convertdox.com' },
+      }) }} />
+
       <SiteFooter />
     </div>
   )

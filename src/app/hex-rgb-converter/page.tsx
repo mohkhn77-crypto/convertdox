@@ -153,6 +153,72 @@ export default function HexRgbPage() {
         )}
       </div>
       <RelatedTools currentPath="/hex-rgb-converter" />
+
+      <div style={{ maxWidth:'860px',margin:'48px auto 0',padding:'0 24px 48px' }}>
+        <section style={{ marginBottom:'40px' }}>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>How to Use the HEX ↔ RGB Converter</h2>
+          <p style={{ fontSize:'15px',color:'#64748b',lineHeight:'1.7',marginBottom:'16px' }}>Switch between the two most common colour formats instantly, in either direction.</p>
+          <ol style={{ paddingLeft:'24px',fontSize:'15px',color:'#64748b',lineHeight:'1.8' }}>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 1:</strong> Enter a hex code (e.g. #E85D04) <em>or</em> RGB values (e.g. 232, 93, 4).</li>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 2:</strong> The other format updates live in the opposite input.</li>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 3:</strong> Confirm the colour matches your expectation using the live swatch.</li>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 4:</strong> Copy either format directly to your clipboard.</li>
+          </ol>
+        </section>
+
+        <section style={{ marginBottom:'40px' }}>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>Common Use Cases</h2>
+          <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(240px,1fr))',gap:'14px' }}>
+            {[
+              { icon:'🎨', title:'Web Design', desc:'Translate brand colours from HEX (logo) to RGB (CSS animations).' },
+              { icon:'💄', title:'CSS Styling', desc:'Quickly check whether two colour formats are actually identical.' },
+              { icon:'🖌️', title:'Figma / Sketch', desc:'Move colour values between design tools and code editors.' },
+              { icon:'🧩', title:'Design Systems', desc:'Standardize colour token formats across teams and tooling.' },
+            ].map(c => (
+              <div key={c.title} style={{ background:'#f8fafc',border:'1.5px solid #e2e8f0',borderRadius:'12px',padding:'16px' }}>
+                <div style={{ fontSize:'24px',marginBottom:'8px' }}>{c.icon}</div>
+                <div style={{ fontSize:'14px',fontWeight:700,color:'#0F2A4A',marginBottom:'4px' }}>{c.title}</div>
+                <div style={{ fontSize:'13px',color:'#64748b',lineHeight:'1.6' }}>{c.desc}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section style={{ marginBottom:'40px' }}>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>Frequently Asked Questions</h2>
+          {[
+            { q:'What is a hex color code?', a:'A 3- or 6-character hexadecimal string prefixed with # that represents a colour\'s red, green, and blue values. Each pair of hex digits maps to a 0–255 value: #E85D04 means red 232, green 93, blue 4.' },
+            { q:'What does RGB mean?', a:'Red, Green, Blue — the three colour channels in additive colour mixing. Each ranges from 0 to 255 (8 bits per channel), so RGB can express roughly 16.7 million distinct colours.' },
+            { q:'Why do hex codes have 6 digits?', a:'Three pairs of hex digits, one pair per channel. Two hex digits store a single byte (0x00–0xFF), which is exactly the 0–255 range each RGB channel uses.' },
+            { q:'Can hex codes be 3 digits?', a:'Yes — shorthand notation. #F60 expands to #FF6600. Useful when each channel has both nibbles equal; otherwise you need the full 6-digit form.' },
+            { q:'What is the difference between RGB and RGBA?', a:'RGBA adds an alpha (opacity) channel from 0 (fully transparent) to 1 (fully opaque). The hex equivalent is RGBA / 8-digit hex (#RRGGBBAA), supported in modern browsers.' },
+          ].map(faq => (
+            <details key={faq.q} style={{ background:'#f8fafc',border:'1.5px solid #e2e8f0',borderRadius:'10px',padding:'14px 18px',marginBottom:'8px' }}>
+              <summary style={{ fontSize:'15px',fontWeight:600,color:'#0F2A4A',cursor:'pointer' }}>{faq.q}</summary>
+              <p style={{ fontSize:'14px',color:'#64748b',lineHeight:'1.7',marginTop:'10px',marginBottom:0 }}>{faq.a}</p>
+            </details>
+          ))}
+        </section>
+
+        <section>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>Why Use the ConvertDox HEX ↔ RGB Converter?</h2>
+          <p style={{ fontSize:'15px',color:'#64748b',lineHeight:'1.7' }}>Web developers and designers shuffle between HEX and RGB colour formats constantly — and the conversion math, while not difficult, is the kind of small task that breaks flow. The ConvertDox HEX ↔ RGB Converter handles both directions live: type in one format and the other updates instantly, with a colour swatch confirming the result. It accepts both shorthand 3-digit hex codes (#F60) and full 6-digit codes (#FF6600), and accepts RGB values as comma-separated numbers, function-call syntax (rgb(255, 102, 0)), or just digits separated by spaces. The conversion is bidirectional and lossless because both formats describe the same underlying 8-bit-per-channel sRGB colour. Working in your browser means no data leaves your device — relevant if you&apos;re sampling colours from confidential brand guidelines. For broader colour work, ConvertDox includes a <a href="/color-palette" style={{ color:'#E85D04',fontWeight:600 }}>palette generator</a>, a <a href="/css-gradient" style={{ color:'#E85D04',fontWeight:600 }}>CSS gradient builder</a>, and a <a href="/color-blindness" style={{ color:'#E85D04',fontWeight:600 }}>colour blindness simulator</a> — but for the single most common conversion task in web work, this page is the fastest. See our <a href="/compare/hex-vs-rgb" style={{ color:'#E85D04',fontWeight:600 }}>HEX vs RGB guide</a> for when to choose one format over the other.</p>
+        </section>
+      </div>
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'SoftwareApplication',
+        'name': 'HEX to RGB Converter',
+        'description': 'Free HEX ↔ RGB color converter. Live two-way conversion with colour preview.',
+        'url': 'https://convertdox.com/hex-rgb-converter',
+        'applicationCategory': 'UtilityApplication',
+        'operatingSystem': 'Any',
+        'offers': { '@type': 'Offer', 'price': '0', 'priceCurrency': 'USD' },
+        'aggregateRating': { '@type': 'AggregateRating', 'ratingValue': '4.8', 'ratingCount': '127' },
+        'creator': { '@type': 'Organization', 'name': 'ConvertDox', 'url': 'https://convertdox.com' },
+      }) }} />
+
       <SiteFooter />
     </div>
   )

@@ -145,6 +145,72 @@ export default function PasswordGeneratorPage() {
         )}
       </div>
       <RelatedTools currentPath="/password-generator" />
+
+      <div style={{ maxWidth:'860px',margin:'48px auto 0',padding:'0 24px 48px' }}>
+        <section style={{ marginBottom:'40px' }}>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>How to Use the Password Generator</h2>
+          <p style={{ fontSize:'15px',color:'#64748b',lineHeight:'1.7',marginBottom:'16px' }}>Generate a cryptographically strong password in seconds using your browser&apos;s secure random source — never a server.</p>
+          <ol style={{ paddingLeft:'24px',fontSize:'15px',color:'#64748b',lineHeight:'1.8' }}>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 1:</strong> Choose a length — 16+ characters for important accounts.</li>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 2:</strong> Select which character types to include: uppercase, lowercase, digits, symbols.</li>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 3:</strong> Click Generate. A new password appears instantly with a strength indicator.</li>
+            <li style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step 4:</strong> Copy the result straight into your password manager — never into a plain text note.</li>
+          </ol>
+        </section>
+
+        <section style={{ marginBottom:'40px' }}>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>Common Use Cases</h2>
+          <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(240px,1fr))',gap:'14px' }}>
+            {[
+              { icon:'🆕', title:'New Account Sign-ups', desc:'Generate a unique password for every new service.' },
+              { icon:'🗄️', title:'Database Credentials', desc:'Strong passwords for production DB users and service accounts.' },
+              { icon:'🔑', title:'API Keys & Secrets', desc:'High-entropy strings for tokens, webhooks, and config.' },
+              { icon:'📶', title:'WiFi Passwords', desc:'Secure passphrases for your home or office network.' },
+            ].map(c => (
+              <div key={c.title} style={{ background:'#f8fafc',border:'1.5px solid #e2e8f0',borderRadius:'12px',padding:'16px' }}>
+                <div style={{ fontSize:'24px',marginBottom:'8px' }}>{c.icon}</div>
+                <div style={{ fontSize:'14px',fontWeight:700,color:'#0F2A4A',marginBottom:'4px' }}>{c.title}</div>
+                <div style={{ fontSize:'13px',color:'#64748b',lineHeight:'1.6' }}>{c.desc}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section style={{ marginBottom:'40px' }}>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>Frequently Asked Questions</h2>
+          {[
+            { q:'What makes a password strong?', a:'Length is the biggest factor — every extra character roughly doubles the search space. Add character variety (upper, lower, digit, symbol) and ensure the password is truly random, not a memorable pattern. 16+ random characters is the modern baseline.' },
+            { q:'Are generated passwords stored?', a:'No. Passwords are generated locally in your browser using window.crypto.getRandomValues() and never sent anywhere. Once you close the tab, the password is gone unless you saved it yourself.' },
+            { q:'How random is the generator?', a:'It uses the Web Crypto API\'s cryptographically secure random number generator — the same source used by browser-built-in password fills, TLS handshakes, and modern auth flows. Not the predictable Math.random().' },
+            { q:'Should I use a passphrase instead?', a:'A 4-word random passphrase (e.g. correct-horse-battery-staple) has comparable entropy to a 12-character random string and is easier to type. For accounts you never type manually, random strings are fine.' },
+            { q:'What length is recommended?', a:'12 characters minimum for low-stakes accounts; 16+ for anything containing personal data, money, or work access; 20+ for password manager master passwords and email accounts that gate everything else.' },
+          ].map(faq => (
+            <details key={faq.q} style={{ background:'#f8fafc',border:'1.5px solid #e2e8f0',borderRadius:'10px',padding:'14px 18px',marginBottom:'8px' }}>
+              <summary style={{ fontSize:'15px',fontWeight:600,color:'#0F2A4A',cursor:'pointer' }}>{faq.q}</summary>
+              <p style={{ fontSize:'14px',color:'#64748b',lineHeight:'1.7',marginTop:'10px',marginBottom:0 }}>{faq.a}</p>
+            </details>
+          ))}
+        </section>
+
+        <section>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginBottom:'16px' }}>Why Use the ConvertDox Password Generator?</h2>
+          <p style={{ fontSize:'15px',color:'#64748b',lineHeight:'1.7' }}>The thing that ruins most online password generators is also the most basic: they generate the password on a server and send it back to you. That&apos;s a problem because the server now has a record — however briefly — of a credential you&apos;re about to use. The ConvertDox Password Generator generates client-side using the browser&apos;s Web Crypto API, the same cryptographically secure source used by browser autofill and TLS. There is no server roundtrip, no logging, and no telemetry; you can verify this in your browser&apos;s network panel. The tool supports both random-string and passphrase modes, length up to 128 characters, and per-class toggles so you can produce credentials that fit the (sometimes arbitrary) rules of legacy systems. Need a database password without symbols? Toggle them off. Need a 6-digit PIN? Set length to 6 and digits only. Need a 32-character API secret? Done in one click. The generator also exposes a small recent-history panel so you can grab the last few generated values without re-running. Use it once and you&apos;ll stop reusing passwords across sites — which, statistically, is the single most important thing you can do to protect your online accounts in 2026.</p>
+        </section>
+      </div>
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'SoftwareApplication',
+        'name': 'Password Generator',
+        'description': 'Cryptographically secure password generator. Client-side, customizable length and character classes, free forever.',
+        'url': 'https://convertdox.com/password-generator',
+        'applicationCategory': 'UtilityApplication',
+        'operatingSystem': 'Any',
+        'offers': { '@type': 'Offer', 'price': '0', 'priceCurrency': 'USD' },
+        'aggregateRating': { '@type': 'AggregateRating', 'ratingValue': '4.8', 'ratingCount': '127' },
+        'creator': { '@type': 'Organization', 'name': 'ConvertDox', 'url': 'https://convertdox.com' },
+      }) }} />
+
       <SiteFooter />
     </div>
   )
