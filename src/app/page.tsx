@@ -1117,6 +1117,29 @@ export default function HomePage() {
   const [activeCat, setActiveCat] = useState('all')
   const [searchQuery, setSearchQuery] = useState('')
   const [recentTools, setRecentTools] = useState<string[]>([])
+  const [, setUploadedFile] = useState<File | null>(null)
+
+  const getFileCategory = (ext: string): string => {
+    const cats: Record<string, string> = {
+      pdf:'pdf', doc:'document', docx:'document',
+      xls:'spreadsheet', xlsx:'spreadsheet',
+      ppt:'presentation', pptx:'presentation',
+      jpg:'image', jpeg:'image', png:'image', gif:'image', webp:'image', bmp:'image',
+      txt:'text', csv:'text', json:'text'
+    }
+    return cats[ext] || 'other'
+  }
+
+  const handleFileUpload = (file: File) => {
+    setUploadedFile(file)
+    try {
+      sessionStorage.setItem('convertdox-uploaded-file', JSON.stringify({
+        name: file.name, size: file.size, type: file.type, lastModified: file.lastModified
+      }))
+    } catch { /* ignore */ }
+    const ext = file.name.split('.').pop()?.toLowerCase() ?? ''
+    window.location.href = `/convert?type=${getFileCategory(ext)}&ext=${ext}`
+  }
 
   useEffect(() => {
     try {
@@ -1164,11 +1187,36 @@ export default function HomePage() {
           <p style={{ fontSize:'clamp(15px,2vw,18px)',color:'rgba(255,255,255,0.65)',maxWidth:'540px',margin:'0 auto 40px',lineHeight:1.7 }}>
             PDF, Image, AI, Calculators, Text, QR Code and 200+ more tools. Free. Fast. No installation.
           </p>
-          <div style={{ maxWidth:'500px',margin:'0 auto 36px',position:'relative' }}>
-            <span style={{ position:'absolute',left:'16px',top:'50%',transform:'translateY(-50%)',fontSize:'18px',pointerEvents:'none' }}>🔍</span>
-            <input type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
-              placeholder="Search 105+ tools — QR Code, BMI, Unit Converter..."
-              style={{ width:'100%',padding:'15px 20px 15px 48px',borderRadius:'14px',border:'1px solid rgba(255,255,255,0.25)',background:'rgba(255,255,255,0.12)',fontFamily:'inherit',fontSize:'15px',color:'white',outline:'none',boxSizing:'border-box' }}/>
+          {/* File Upload Box */}
+          <div style={{ maxWidth:'620px',margin:'0 auto 32px' }}>
+            <div
+              onClick={() => document.getElementById('hero-file-input')?.click()}
+              onDragOver={(e) => { e.preventDefault(); (e.currentTarget as HTMLDivElement).style.borderColor='#E85D04' }}
+              onDragLeave={(e) => { (e.currentTarget as HTMLDivElement).style.borderColor='rgba(255,255,255,0.3)' }}
+              onDrop={(e) => { e.preventDefault(); const f=e.dataTransfer.files[0]; if(f) handleFileUpload(f) }}
+              style={{ background:'rgba(255,255,255,0.06)',border:'2px dashed rgba(255,255,255,0.3)',borderRadius:'16px',padding:'28px 24px',textAlign:'center' as const,cursor:'pointer',transition:'all 0.2s' }}>
+              <div style={{ width:'48px',height:'48px',background:'rgba(232,93,4,0.25)',borderRadius:'12px',margin:'0 auto 10px',display:'flex',alignItems:'center',justifyContent:'center' }}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke="#F48C42" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <polyline points="17 8 12 3 7 8" stroke="#F48C42" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <line x1="12" y1="3" x2="12" y2="15" stroke="#F48C42" strokeWidth="2" strokeLinecap="round"/>
+                </svg>
+              </div>
+              <div style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'17px',fontWeight:700,color:'white',marginBottom:'4px' }}>Drop your file here</div>
+              <div style={{ fontSize:'13px',color:'rgba(255,255,255,0.6)',marginBottom:'14px' }}>or click to browse from your computer</div>
+              <button style={{ background:'#E85D04',color:'white',padding:'10px 26px',borderRadius:'10px',border:'none',fontSize:'14px',fontWeight:700,cursor:'pointer',fontFamily:'inherit' }}>
+                Upload File →
+              </button>
+              <div style={{ fontSize:'11px',color:'rgba(255,255,255,0.4)',marginTop:'10px' }}>PDF · Word · Excel · PowerPoint · JPG · PNG · TXT · CSV · JSON</div>
+              <input id="hero-file-input" type="file" style={{ display:'none' }}
+                accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.jpg,.jpeg,.png,.gif,.webp,.txt,.csv,.json"
+                onChange={(e) => { const f=e.target.files?.[0]; if(f) handleFileUpload(f) }}/>
+            </div>
+            <div style={{ display:'flex',justifyContent:'center',gap:'16px',marginTop:'12px',flexWrap:'wrap' as const }}>
+              {[{icon:'🔒',text:'Files never stored'},{icon:'🆓',text:'100% free'},{icon:'⚡',text:'Instant'},{icon:'🚫',text:'No signup'}].map(i=>(
+                <span key={i.text} style={{ fontSize:'11px',color:'rgba(255,255,255,0.5)',display:'flex',alignItems:'center',gap:'4px' }}><span>{i.icon}</span>{i.text}</span>
+              ))}
+            </div>
           </div>
           <div style={{ display:'flex',flexWrap:'wrap',justifyContent:'center',gap:'8px' }}>
             {[{label:'📝 Word Counter',href:'/word-counter'},{label:'⚖️ BMI Calculator',href:'/bmi-calculator'},{label:'📱 QR Generator',href:'/qr-generator'},{label:'⏱ Stopwatch',href:'/stopwatch'},{label:'📐 Unit Converter',href:'/unit-converter'},{label:'🌈 CSS Gradient',href:'/css-gradient'}].map(item => (
