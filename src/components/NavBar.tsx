@@ -34,6 +34,7 @@ export default function NavBar() {
               { label:'MERGE PDF', href:'/merge-pdf' },
               { label:'SPLIT PDF', href:'/split-pdf' },
               { label:'COMPRESS PDF', href:'/compress-pdf' },
+              { label:'ROTATE PDF', href:'/rotate-pdf' },
             ].map(item => (
               <a key={item.href} href={item.href}
                 style={{ fontSize:'12px',fontWeight:700,color:'#0F2A4A',textDecoration:'none',textTransform:'uppercase' as const,letterSpacing:'0.5px' }}>
@@ -52,18 +53,18 @@ export default function NavBar() {
                 <div style={{ position:'absolute' as const,top:'28px',left:'-20px',background:'white',borderRadius:'12px',boxShadow:'0 10px 40px rgba(15,42,74,0.15)',padding:'20px',display:'flex',gap:'36px',minWidth:'480px',zIndex:10 }}>
                   {[
                     { heading:'Convert to PDF', items:[
-                      { name:'JPG to PDF', color:'#F59E0B', icon:'📷', href:'/jpg-to-pdf' },
-                      { name:'Word to PDF', color:'#2B579A', icon:'W', href:'/word-to-pdf' },
-                      { name:'PowerPoint to PDF', color:'#D24726', icon:'P', href:'/ppt-to-pdf' },
-                      { name:'Excel to PDF', color:'#217346', icon:'X', href:'/excel-to-pdf' },
-                      { name:'HTML to PDF', color:'#F59E0B', icon:'H', href:'/html-to-pdf' },
+                      { name:'JPG to PDF', color:'#F59E0B', icon:'📷', href:'/jpg-to-pdf', live:true },
+                      { name:'Word to PDF', color:'#2B579A', icon:'W', href:'/word-to-pdf', live:true },
+                      { name:'PowerPoint to PDF', color:'#D24726', icon:'P', href:'/ppt-to-pdf', live:false },
+                      { name:'Excel to PDF', color:'#217346', icon:'X', href:'/excel-to-pdf', live:false },
+                      { name:'HTML to PDF', color:'#F59E0B', icon:'H', href:'/html-to-pdf', live:false },
                     ]},
                     { heading:'Convert from PDF', items:[
-                      { name:'PDF to JPG', color:'#F59E0B', icon:'📷', href:'/pdf-to-jpg' },
-                      { name:'PDF to Word', color:'#2B579A', icon:'W', href:'/pdf-to-word' },
-                      { name:'PDF to PowerPoint', color:'#D24726', icon:'P', href:'/pdf-to-ppt' },
-                      { name:'PDF to Excel', color:'#217346', icon:'X', href:'/pdf-to-excel' },
-                      { name:'PDF to PDF/A', color:'#64748b', icon:'A', href:'/pdf-to-pdfa' },
+                      { name:'PDF to JPG', color:'#F59E0B', icon:'📷', href:'/pdf-to-jpg', live:true },
+                      { name:'PDF to Word', color:'#2B579A', icon:'W', href:'/pdf-to-word', live:true },
+                      { name:'PDF to PowerPoint', color:'#D24726', icon:'P', href:'/pdf-to-ppt', live:false },
+                      { name:'PDF to Excel', color:'#217346', icon:'X', href:'/pdf-to-excel', live:false },
+                      { name:'PDF to PDF/A', color:'#64748b', icon:'A', href:'/pdf-to-pdfa', live:false },
                     ]},
                   ].map(col => (
                     <div key={col.heading}>
@@ -72,7 +73,7 @@ export default function NavBar() {
                         <a key={item.name} href={item.href} style={{ display:'flex',alignItems:'center',gap:'8px',padding:'7px 4px',fontSize:'13px',color:'#0F2A4A',fontWeight:500,textDecoration:'none',borderRadius:'6px' }}>
                           <span style={{ width:'22px',height:'22px',background:item.color,borderRadius:'4px',display:'flex',alignItems:'center',justifyContent:'center',color:'white',fontSize:'10px',fontWeight:700,flexShrink:0 }}>{item.icon}</span>
                           <span style={{ flex:1 }}>{item.name}</span>
-                          <span style={{ background:'#FEF3C7',color:'#92400E',fontSize:'9px',padding:'2px 5px',borderRadius:'3px',fontWeight:700 }}>SOON</span>
+                          {!item.live && <span style={{ background:'#FEF3C7',color:'#92400E',fontSize:'9px',padding:'2px 5px',borderRadius:'3px',fontWeight:700 }}>SOON</span>}
                         </a>
                       ))}
                     </div>
