@@ -52,8 +52,11 @@ export default function PdfToPptPage() {
         <div style={{ maxWidth:'1100px', margin:'0 auto', display:'flex', alignItems:'center', gap:'16px' }}>
           <div style={{ width:'56px', height:'56px', background:'rgba(210,71,38,0.25)', borderRadius:'14px', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'28px' }}>📽</div>
           <div>
-            <h1 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif", fontSize:'clamp(24px,3vw,36px)', fontWeight:800, color:'white', margin:0 }}>PDF to PowerPoint</h1>
-            <p style={{ color:'rgba(255,255,255,0.65)', fontSize:'15px', margin:'6px 0 0' }}>Convert PDF pages to editable PowerPoint slides (.pptx)</p>
+            <div style={{ display:'flex', alignItems:'center', gap:'10px' }}>
+              <h1 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif", fontSize:'clamp(24px,3vw,36px)', fontWeight:800, color:'white', margin:0 }}>PDF to PowerPoint</h1>
+              <span style={{ background:'#FEF3C7', color:'#92400E', fontSize:'11px', padding:'4px 10px', borderRadius:'999px', fontWeight:700 }}>BETA</span>
+            </div>
+            <p style={{ color:'rgba(255,255,255,0.65)', fontSize:'15px', margin:'6px 0 0' }}>Convert PDF pages to PowerPoint slides (.pptx)</p>
           </div>
         </div>
       </div>
@@ -66,7 +69,18 @@ export default function PdfToPptPage() {
         </div>
       </div>
 
-      <div style={{ maxWidth:'860px', margin:'32px auto 0', padding:'0 24px' }}>
+      <div style={{ maxWidth:'860px', margin:'20px auto 0', padding:'0 24px' }}>
+        <div style={{ background:'#FEF3C7', border:'1.5px solid #FCD34D', borderRadius:'12px', padding:'14px 18px' }}>
+          <div style={{ fontSize:'14px', fontWeight:700, color:'#92400E', marginBottom:'4px' }}>
+            ℹ️ About PDF to PowerPoint conversion
+          </div>
+          <div style={{ fontSize:'13px', color:'#78350F', lineHeight:'1.5' }}>
+            Each PDF page becomes a slide in the resulting PowerPoint file. Slides contain images of the original PDF pages (not editable text). This is the most reliable method that works with any PDF. For editable text, try our <a href="/pdf-to-word" style={{ color:'#E85D04', fontWeight:700, textDecoration:'underline' }}>PDF to Word</a> tool instead.
+          </div>
+        </div>
+      </div>
+
+      <div style={{ maxWidth:'860px', margin:'16px auto 0', padding:'0 24px' }}>
         <div
           onClick={() => fileInputRef.current?.click()}
           onDragOver={e => { e.preventDefault(); (e.currentTarget as HTMLDivElement).style.borderColor='#E85D04'; (e.currentTarget as HTMLDivElement).style.background='#FFF7ED' }}
@@ -115,6 +129,7 @@ export default function PdfToPptPage() {
         <section>
           <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif", fontSize:'26px', fontWeight:800, color:'#0F2A4A', marginBottom:'16px' }}>Frequently Asked Questions</h2>
           {[
+            { q:'Are the slides editable?', a:'Each PDF page becomes a slide containing an image of that page. The slides are not editable text — they look exactly like the PDF but as PowerPoint slides. For editable text, use our PDF to Word converter.' },
             { q:'How are slides created?', a:'Each PDF page is rendered as an image and placed on its own slide. Text and objects may not be independently editable.' },
             { q:'Can I edit text on the slides?', a:'If the PDF has embedded text it may be extracted as text boxes. Complex layouts will be rendered as images.' },
             { q:'Is there a file size limit?', a:'Yes, PDFs up to 50 MB are supported.' },

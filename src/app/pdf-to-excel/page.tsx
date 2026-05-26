@@ -52,7 +52,10 @@ export default function PdfToExcelPage() {
         <div style={{ maxWidth:'1100px', margin:'0 auto', display:'flex', alignItems:'center', gap:'16px' }}>
           <div style={{ width:'56px', height:'56px', background:'rgba(33,115,70,0.25)', borderRadius:'14px', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'28px' }}>📊</div>
           <div>
-            <h1 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif", fontSize:'clamp(24px,3vw,36px)', fontWeight:800, color:'white', margin:0 }}>PDF to Excel</h1>
+            <div style={{ display:'flex', alignItems:'center', gap:'10px' }}>
+              <h1 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif", fontSize:'clamp(24px,3vw,36px)', fontWeight:800, color:'white', margin:0 }}>PDF to Excel</h1>
+              <span style={{ background:'#FEF3C7', color:'#92400E', fontSize:'11px', padding:'4px 10px', borderRadius:'999px', fontWeight:700 }}>BETA</span>
+            </div>
             <p style={{ color:'rgba(255,255,255,0.65)', fontSize:'15px', margin:'6px 0 0' }}>Extract tables from PDF and convert to editable Excel spreadsheets</p>
           </div>
         </div>
@@ -66,9 +69,14 @@ export default function PdfToExcelPage() {
         </div>
       </div>
 
-      <div style={{ maxWidth:'860px', margin:'16px auto 0', padding:'0 24px' }}>
-        <div style={{ background:'#FFF7ED', border:'1.5px solid #FED7AA', borderRadius:'10px', padding:'12px 16px', fontSize:'13px', color:'#92400E', lineHeight:'1.6' }}>
-          ⚠️ <strong>Best results:</strong> PDFs with clearly defined tables convert most accurately. Complex multi-column layouts or merged cells may not convert perfectly. Converting may take 30–60 seconds.
+      <div style={{ maxWidth:'860px', margin:'20px auto 0', padding:'0 24px' }}>
+        <div style={{ background:'#FEF3C7', border:'1.5px solid #FCD34D', borderRadius:'12px', padding:'14px 18px' }}>
+          <div style={{ fontSize:'14px', fontWeight:700, color:'#92400E', marginBottom:'4px' }}>
+            ℹ️ About PDF to Excel conversion
+          </div>
+          <div style={{ fontSize:'13px', color:'#78350F', lineHeight:'1.5' }}>
+            Works best with PDFs that contain actual data tables (financial reports, invoices, structured data). May not work well with image-based PDFs, forms, or complex layouts. Converting may take 30–60 seconds.
+          </div>
         </div>
       </div>
 
