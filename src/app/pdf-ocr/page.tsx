@@ -4,43 +4,70 @@ import NavBar from '@/components/NavBar'
 import SiteFooter from '@/components/SiteFooter'
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://convertdox-backend-production.up.railway.app'
+const LANGUAGES = [
+  { label: 'English', value: 'eng' },
+  { label: 'Spanish', value: 'spa' },
+  { label: 'French', value: 'fra' },
+  { label: 'German', value: 'deu' },
+  { label: 'Chinese (Simplified)', value: 'chi_sim' },
+]
 
-export default function PdfToExcelPage() {
+interface OcrResult {
+  text?: string
+  confidence?: number
+}
+
+export default function PdfOcrPage() {
   const [file, setFile] = useState<File | null>(null)
+  const [lang, setLang] = useState('eng')
   const [processing, setProcessing] = useState(false)
   const [error, setError] = useState('')
-  const [success, setSuccess] = useState(false)
+  const [result, setResult] = useState<OcrResult | null>(null)
+  const [copied, setCopied] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   const handleFile = (f: File | null) => {
     if (!f) return
     if (f.type !== 'application/pdf') { setError('Only PDF files are accepted'); return }
-    setFile(f); setError(''); setSuccess(false)
+    setFile(f); setError(''); setResult(null)
   }
 
-  const convert = async () => {
+  const extract = async () => {
     if (!file) return
-    setProcessing(true); setError(''); setSuccess(false)
+    setProcessing(true); setError(''); setResult(null)
     try {
       const formData = new FormData()
       formData.append('file', file)
-      const res = await fetch(`${BACKEND_URL}/api/pdf/to-excel`, { method: 'POST', body: formData })
+      formData.append('lang', lang)
+      const res = await fetch(`${BACKEND_URL}/api/ocr/pdf-to-text`, { method: 'POST', body: formData })
       if (!res.ok) {
         const data = await res.json().catch(() => ({ error: 'Unknown error' })) as { error?: string }
         throw new Error(data.error ?? `Server error: ${res.status}`)
       }
-      const blob = await res.blob()
-      const url = URL.createObjectURL(blob)
-      const a = document.createElement('a')
-      a.href = url; a.download = 'converted.xlsx'
-      document.body.appendChild(a); a.click()
-      URL.revokeObjectURL(url); document.body.removeChild(a)
-      setSuccess(true); setFile(null)
+      const data = await res.json() as OcrResult
+      setResult(data)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to convert PDF. Please try again.')
+      setError(err instanceof Error ? err.message : 'Failed to extract text. Please try again.')
     } finally {
       setProcessing(false)
     }
+  }
+
+  const copyText = async () => {
+    if (!result?.text) return
+    await navigator.clipboard.writeText(result.text)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
+  const downloadTxt = () => {
+    if (!result?.text) return
+    const blob = new Blob([result.text], { type: 'text/plain' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url; a.download = 'ocr-text.txt'
+    document.body.appendChild(a); a.click()
+    URL.revokeObjectURL(url); document.body.removeChild(a)
   }
 
   const fmt = (b: number) => b < 1_048_576 ? `${(b / 1024).toFixed(1)} KB` : `${(b / 1_048_576).toFixed(1)} MB`
@@ -50,10 +77,10 @@ export default function PdfToExcelPage() {
       <NavBar />
       <div style={{ background:'linear-gradient(135deg,#0F2A4A,#1a3a5c)', padding:'48px 24px 40px' }}>
         <div style={{ maxWidth:'1100px', margin:'0 auto', display:'flex', alignItems:'center', gap:'16px' }}>
-          <div style={{ width:'56px', height:'56px', background:'rgba(33,115,70,0.25)', borderRadius:'14px', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'28px' }}>📊</div>
+          <div style={{ width:'56px', height:'56px', background:'rgba(232,93,4,0.2)', borderRadius:'14px', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'22px' }}>📄</div>
           <div>
-            <h1 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif", fontSize:'clamp(24px,3vw,36px)', fontWeight:800, color:'white', margin:0 }}>PDF to Excel</h1>
-            <p style={{ color:'rgba(255,255,255,0.65)', fontSize:'15px', margin:'6px 0 0' }}>Extract tables from PDF and convert to editable Excel spreadsheets</p>
+            <h1 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif", fontSize:'clamp(24px,3vw,36px)', fontWeight:800, color:'white', margin:0 }}>PDF OCR</h1>
+            <p style={{ color:'rgba(255,255,255,0.65)', fontSize:'15px', margin:'6px 0 0' }}>Extract text from scanned PDF pages using optical character recognition</p>
           </div>
         </div>
       </div>
@@ -68,7 +95,7 @@ export default function PdfToExcelPage() {
 
       <div style={{ maxWidth:'860px', margin:'16px auto 0', padding:'0 24px' }}>
         <div style={{ background:'#FFF7ED', border:'1.5px solid #FED7AA', borderRadius:'10px', padding:'12px 16px', fontSize:'13px', color:'#92400E', lineHeight:'1.6' }}>
-          ⚠️ <strong>Best results:</strong> PDFs with clearly defined tables convert most accurately. Complex multi-column layouts or merged cells may not convert perfectly. Converting may take 30–60 seconds.
+          ⚠️ <strong>Note:</strong> Currently processes the first page only. Multi-page OCR is coming soon. For text-based PDFs (not scanned), use the faster <a href="/pdf-to-text" style={{ color:'#E85D04', fontWeight:700 }}>PDF to Text</a> tool instead.
         </div>
       </div>
 
@@ -79,11 +106,11 @@ export default function PdfToExcelPage() {
           onDragLeave={e => { (e.currentTarget as HTMLDivElement).style.borderColor='#cbd5e1'; (e.currentTarget as HTMLDivElement).style.background='#f8fafc' }}
           onDrop={e => { e.preventDefault(); (e.currentTarget as HTMLDivElement).style.borderColor='#cbd5e1'; (e.currentTarget as HTMLDivElement).style.background='#f8fafc'; handleFile(e.dataTransfer.files[0] ?? null) }}
           style={{ background:'#f8fafc', border:'2px dashed #cbd5e1', borderRadius:'16px', padding:'48px 24px', textAlign:'center' as const, cursor:'pointer', transition:'all 0.2s' }}>
-          <div style={{ fontSize:'56px', marginBottom:'12px' }}>📊</div>
-          <div style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif", fontSize:'20px', fontWeight:700, color:'#0F2A4A', marginBottom:'6px' }}>Drop your PDF here</div>
+          <div style={{ fontSize:'56px', marginBottom:'12px' }}>📄</div>
+          <div style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif", fontSize:'20px', fontWeight:700, color:'#0F2A4A', marginBottom:'6px' }}>Drop your scanned PDF here</div>
           <div style={{ fontSize:'14px', color:'#64748b', marginBottom:'18px' }}>or click to browse from your computer</div>
           <button style={{ background:'#E85D04', color:'white', padding:'12px 32px', borderRadius:'10px', border:'none', fontSize:'14px', fontWeight:700, cursor:'pointer', fontFamily:'inherit' }}>Select PDF</button>
-          <div style={{ fontSize:'12px', color:'#94a3b8', marginTop:'12px' }}>PDF files only · Max 50 MB</div>
+          <div style={{ fontSize:'12px', color:'#94a3b8', marginTop:'12px' }}>PDF files only · Max 20 MB · Processes first page</div>
           <input ref={fileInputRef} type="file" accept="application/pdf" style={{ display:'none' }} onChange={e => handleFile(e.target.files?.[0] ?? null)} />
         </div>
 
@@ -94,37 +121,61 @@ export default function PdfToExcelPage() {
               <div style={{ fontSize:'14px', fontWeight:600, color:'#0F2A4A', overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' as const }}>{file.name}</div>
               <div style={{ fontSize:'12px', color:'#94a3b8' }}>{fmt(file.size)}</div>
             </div>
-            <button onClick={() => setFile(null)} style={{ background:'#FEE2E2', color:'#DC2626', border:'none', borderRadius:'6px', padding:'4px 10px', cursor:'pointer', fontWeight:700, fontSize:'16px' }}>×</button>
+            <button onClick={() => { setFile(null); setResult(null) }} style={{ background:'#FEE2E2', color:'#DC2626', border:'none', borderRadius:'6px', padding:'4px 10px', cursor:'pointer', fontWeight:700, fontSize:'16px' }}>×</button>
           </div>
         )}
 
+        <div style={{ marginTop:'20px' }}>
+          <label style={{ display:'block', fontSize:'14px', fontWeight:700, color:'#0F2A4A', marginBottom:'8px' }}>Language</label>
+          <select value={lang} onChange={e => setLang(e.target.value)}
+            style={{ width:'100%', padding:'12px 14px', borderRadius:'10px', border:'1.5px solid #e2e8f0', fontSize:'14px', fontFamily:'inherit', color:'#0F2A4A', outline:'none', background:'white', boxSizing:'border-box' as const }}>
+            {LANGUAGES.map(l => <option key={l.value} value={l.value}>{l.label}</option>)}
+          </select>
+        </div>
+
         {error && <div style={{ marginTop:'16px', background:'#FEE2E2', border:'1.5px solid #FCA5A5', borderRadius:'10px', padding:'12px 16px', color:'#991B1B', fontSize:'14px', fontWeight:600 }}>⚠️ {error}</div>}
-        {success && <div style={{ marginTop:'16px', background:'#F0FDF4', border:'1.5px solid #BBF7D0', borderRadius:'10px', padding:'12px 16px', color:'#166534', fontSize:'14px', fontWeight:600 }}>✅ Converted! Your .xlsx file has downloaded.</div>}
 
         <div style={{ marginTop:'24px', textAlign:'center' as const }}>
-          <button onClick={convert} disabled={!file || processing}
+          <button onClick={extract} disabled={!file || processing}
             style={{ background: !file || processing ? '#cbd5e1' : '#E85D04', color:'white', padding:'16px 48px', borderRadius:'12px', border:'none', fontSize:'16px', fontWeight:700, cursor: !file || processing ? 'not-allowed' : 'pointer', fontFamily:'inherit', minWidth:'260px' }}>
-            {processing ? '⏳ Converting… (may take 30–60s)' : '📊 Convert to Excel'}
+            {processing ? '⏳ Extracting… (10–30 seconds)' : '📄 Extract Text via OCR'}
           </button>
         </div>
+
+        {result && result.text && (
+          <div style={{ marginTop:'28px' }}>
+            <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'10px', flexWrap:'wrap' as const, gap:'8px' }}>
+              <div style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif", fontSize:'16px', fontWeight:700, color:'#0F2A4A' }}>
+                Extracted Text
+                {result.confidence !== undefined && (
+                  <span style={{ fontSize:'13px', fontWeight:400, color: result.confidence > 70 ? '#16a34a' : '#f59e0b', marginLeft:'10px' }}>
+                    {result.confidence.toFixed(0)}% confidence
+                  </span>
+                )}
+              </div>
+              <div style={{ display:'flex', gap:'8px' }}>
+                <button onClick={copyText} style={{ background: copied ? '#D1FAE5' : '#f8fafc', color: copied ? '#166534' : '#0F2A4A', border:'1.5px solid #e2e8f0', borderRadius:'8px', padding:'8px 16px', fontSize:'13px', fontWeight:700, cursor:'pointer', fontFamily:'inherit' }}>
+                  {copied ? '✓ Copied!' : '📋 Copy'}
+                </button>
+                <button onClick={downloadTxt} style={{ background:'#E85D04', color:'white', border:'none', borderRadius:'8px', padding:'8px 16px', fontSize:'13px', fontWeight:700, cursor:'pointer', fontFamily:'inherit' }}>
+                  ⬇️ Download .txt
+                </button>
+              </div>
+            </div>
+            <textarea readOnly value={result.text}
+              style={{ width:'100%', height:'320px', padding:'16px', borderRadius:'12px', border:'1.5px solid #e2e8f0', fontSize:'14px', fontFamily:'monospace', color:'#334155', lineHeight:'1.7', resize:'vertical' as const, boxSizing:'border-box' as const, outline:'none' }} />
+          </div>
+        )}
       </div>
 
       <div style={{ maxWidth:'860px', margin:'48px auto 0', padding:'0 24px 48px' }}>
-        <section style={{ marginBottom:'40px' }}>
-          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif", fontSize:'26px', fontWeight:800, color:'#0F2A4A', marginBottom:'16px' }}>How to Convert PDF to Excel</h2>
-          <ol style={{ paddingLeft:'24px', fontSize:'15px', color:'#64748b', lineHeight:'1.8' }}>
-            {['Upload your PDF containing tables or data.','Click "Convert to Excel" and wait up to 60 seconds.','Your .xlsx file downloads automatically.','Open in Microsoft Excel or Google Sheets to edit the data.'].map((s,i) => (
-              <li key={i} style={{ marginBottom:'10px' }}><strong style={{ color:'#0F2A4A' }}>Step {i+1}:</strong> {s}</li>
-            ))}
-          </ol>
-        </section>
         <section>
           <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif", fontSize:'26px', fontWeight:800, color:'#0F2A4A', marginBottom:'16px' }}>Frequently Asked Questions</h2>
           {[
-            { q:'What PDFs work best?', a:'PDFs with well-structured tables and clear cell boundaries convert most accurately. Scanned PDFs are not supported.' },
-            { q:'How long does conversion take?', a:'Usually 30–60 seconds depending on the number of tables and pages.' },
-            { q:'Will all tables be extracted?', a:'Our tool attempts to find and extract all tables. Complex nested or borderless tables may not convert perfectly.' },
-            { q:'Is there a file size limit?', a:'Yes, PDFs up to 50 MB are supported.' },
+            { q:'When should I use PDF OCR vs PDF to Text?', a:'Use PDF OCR for scanned documents (images of paper). Use PDF to Text for digital PDFs that already have embedded text — it is much faster and more accurate.' },
+            { q:'Why is only the first page processed?', a:'Multi-page OCR is computationally intensive. Full document OCR is coming in a future update.' },
+            { q:'How accurate is the OCR?', a:'For clean scanned text, accuracy is typically 85-98%. Faded, skewed, or handwritten text reduces accuracy. Confidence score is shown after extraction.' },
+            { q:'Are my files kept private?', a:'Yes. Files are sent over HTTPS and deleted within 1 hour.' },
           ].map(faq => (
             <details key={faq.q} style={{ background:'#f8fafc', border:'1.5px solid #e2e8f0', borderRadius:'10px', padding:'14px 18px', marginBottom:'8px' }}>
               <summary style={{ fontSize:'15px', fontWeight:600, color:'#0F2A4A', cursor:'pointer' }}>{faq.q}</summary>

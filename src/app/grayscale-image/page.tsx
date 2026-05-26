@@ -6,62 +6,55 @@ import SiteFooter from '@/components/SiteFooter'
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://convertdox-backend-production.up.railway.app'
 const ACCEPTED = ['image/jpeg', 'image/png', 'image/webp']
 
-export default function CompressImagePage() {
+export default function GrayscaleImagePage() {
   const [file, setFile] = useState<File | null>(null)
-  const [quality, setQuality] = useState(70)
   const [processing, setProcessing] = useState(false)
   const [error, setError] = useState('')
-  const [result, setResult] = useState<{ originalSize: number; compressedSize: number; filename: string } | null>(null)
+  const [success, setSuccess] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   const handleFile = (f: File | null) => {
     if (!f) return
     if (!ACCEPTED.includes(f.type)) { setError('Only JPG, PNG, and WebP images are accepted'); return }
-    setFile(f); setError(''); setResult(null)
+    setFile(f); setError(''); setSuccess(false)
   }
 
-  const compress = async () => {
+  const convert = async () => {
     if (!file) return
-    setProcessing(true); setError(''); setResult(null)
-    const originalSize = file.size
+    setProcessing(true); setError(''); setSuccess(false)
     try {
       const formData = new FormData()
       formData.append('file', file)
-      formData.append('quality', String(quality))
-      const res = await fetch(`${BACKEND_URL}/api/image/compress`, { method: 'POST', body: formData })
+      const res = await fetch(`${BACKEND_URL}/api/image/grayscale`, { method: 'POST', body: formData })
       if (!res.ok) {
         const data = await res.json().catch(() => ({ error: 'Unknown error' })) as { error?: string }
         throw new Error(data.error ?? `Server error: ${res.status}`)
       }
       const blob = await res.blob()
-      const ext = file.name.split('.').pop() ?? 'jpg'
-      const filename = `compressed.${ext}`
-      setResult({ originalSize, compressedSize: blob.size, filename })
       const url = URL.createObjectURL(blob)
       const a = document.createElement('a')
-      a.href = url; a.download = filename
+      a.href = url; a.download = 'grayscale.jpg'
       document.body.appendChild(a); a.click()
       URL.revokeObjectURL(url); document.body.removeChild(a)
-      setFile(null)
+      setSuccess(true); setFile(null)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to compress image. Please try again.')
+      setError(err instanceof Error ? err.message : 'Failed to convert image. Please try again.')
     } finally {
       setProcessing(false)
     }
   }
 
   const fmt = (b: number) => b < 1_048_576 ? `${(b / 1024).toFixed(1)} KB` : `${(b / 1_048_576).toFixed(1)} MB`
-  const savings = result ? Math.round((1 - result.compressedSize / result.originalSize) * 100) : 0
 
   return (
     <div style={{ minHeight:'100vh', background:'#fff', fontFamily:"'Plus Jakarta Sans',system-ui,sans-serif" }}>
       <NavBar />
       <div style={{ background:'linear-gradient(135deg,#0F2A4A,#1a3a5c)', padding:'48px 24px 40px' }}>
         <div style={{ maxWidth:'1100px', margin:'0 auto', display:'flex', alignItems:'center', gap:'16px' }}>
-          <div style={{ width:'56px', height:'56px', background:'rgba(232,93,4,0.2)', borderRadius:'14px', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'28px' }}>📐</div>
+          <div style={{ width:'56px', height:'56px', background:'rgba(100,116,139,0.25)', borderRadius:'14px', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'28px' }}>⚫</div>
           <div>
-            <h1 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif", fontSize:'clamp(24px,3vw,36px)', fontWeight:800, color:'white', margin:0 }}>Compress Image</h1>
-            <p style={{ color:'rgba(255,255,255,0.65)', fontSize:'15px', margin:'6px 0 0' }}>Reduce image file size while controlling quality</p>
+            <h1 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif", fontSize:'clamp(24px,3vw,36px)', fontWeight:800, color:'white', margin:0 }}>Grayscale Image</h1>
+            <p style={{ color:'rgba(255,255,255,0.65)', fontSize:'15px', margin:'6px 0 0' }}>Convert a colour image to black and white with one click</p>
           </div>
         </div>
       </div>
@@ -81,17 +74,17 @@ export default function CompressImagePage() {
           onDragLeave={e => { (e.currentTarget as HTMLDivElement).style.borderColor='#cbd5e1'; (e.currentTarget as HTMLDivElement).style.background='#f8fafc' }}
           onDrop={e => { e.preventDefault(); (e.currentTarget as HTMLDivElement).style.borderColor='#cbd5e1'; (e.currentTarget as HTMLDivElement).style.background='#f8fafc'; handleFile(e.dataTransfer.files[0] ?? null) }}
           style={{ background:'#f8fafc', border:'2px dashed #cbd5e1', borderRadius:'16px', padding:'48px 24px', textAlign:'center' as const, cursor:'pointer', transition:'all 0.2s' }}>
-          <div style={{ fontSize:'56px', marginBottom:'12px' }}>📐</div>
+          <div style={{ fontSize:'56px', marginBottom:'12px' }}>⚫</div>
           <div style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif", fontSize:'20px', fontWeight:700, color:'#0F2A4A', marginBottom:'6px' }}>Drop your image here</div>
           <div style={{ fontSize:'14px', color:'#64748b', marginBottom:'18px' }}>or click to browse from your computer</div>
           <button style={{ background:'#E85D04', color:'white', padding:'12px 32px', borderRadius:'10px', border:'none', fontSize:'14px', fontWeight:700, cursor:'pointer', fontFamily:'inherit' }}>Select Image</button>
-          <div style={{ fontSize:'12px', color:'#94a3b8', marginTop:'12px' }}>JPG, PNG, WebP · Max 20 MB</div>
+          <div style={{ fontSize:'12px', color:'#94a3b8', marginTop:'12px' }}>JPG, PNG, WebP · Max 20 MB · Output is grayscale.jpg</div>
           <input ref={fileInputRef} type="file" accept="image/jpeg,image/png,image/webp" style={{ display:'none' }} onChange={e => handleFile(e.target.files?.[0] ?? null)} />
         </div>
 
         {file && (
           <div style={{ marginTop:'20px', background:'white', border:'1.5px solid #e2e8f0', borderRadius:'10px', padding:'16px', display:'flex', alignItems:'center', gap:'12px' }}>
-            <div style={{ width:'40px', height:'40px', background:'#FEF3C7', borderRadius:'8px', display:'flex', alignItems:'center', justifyContent:'center', color:'#92400E', fontWeight:700, fontSize:'10px', flexShrink:0 }}>IMG</div>
+            <div style={{ width:'40px', height:'40px', background:'#f1f5f9', borderRadius:'8px', display:'flex', alignItems:'center', justifyContent:'center', color:'#475569', fontWeight:700, fontSize:'10px', flexShrink:0 }}>IMG</div>
             <div style={{ flex:1, minWidth:0 }}>
               <div style={{ fontSize:'14px', fontWeight:600, color:'#0F2A4A', overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' as const }}>{file.name}</div>
               <div style={{ fontSize:'12px', color:'#94a3b8' }}>{fmt(file.size)}</div>
@@ -100,38 +93,13 @@ export default function CompressImagePage() {
           </div>
         )}
 
-        <div style={{ marginTop:'24px' }}>
-          <div style={{ display:'flex', justifyContent:'space-between', marginBottom:'8px' }}>
-            <label style={{ fontSize:'14px', fontWeight:700, color:'#0F2A4A' }}>Quality</label>
-            <span style={{ fontSize:'14px', fontWeight:700, color:'#E85D04' }}>{quality}%</span>
-          </div>
-          <input type="range" min={10} max={100} value={quality} onChange={e => setQuality(Number(e.target.value))}
-            style={{ width:'100%', accentColor:'#E85D04' }} />
-          <div style={{ display:'flex', justifyContent:'space-between', fontSize:'12px', color:'#94a3b8', marginTop:'4px' }}>
-            <span>10% — Smallest file</span><span>100% — Best quality</span>
-          </div>
-        </div>
-
-        {result && (
-          <div style={{ marginTop:'16px', background:'#F0FDF4', border:'1.5px solid #BBF7D0', borderRadius:'12px', padding:'16px 20px' }}>
-            <div style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif", fontSize:'16px', fontWeight:700, color:'#166534', marginBottom:'12px' }}>✅ Compressed! Download started.</div>
-            <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:'12px', textAlign:'center' as const }}>
-              {[{label:'Original',value:fmt(result.originalSize)},{label:'Compressed',value:fmt(result.compressedSize)},{label:'Saved',value:`${savings}%`}].map(s => (
-                <div key={s.label} style={{ background:'white', borderRadius:'8px', padding:'10px' }}>
-                  <div style={{ fontSize:'18px', fontWeight:800, color:'#0F2A4A' }}>{s.value}</div>
-                  <div style={{ fontSize:'12px', color:'#64748b' }}>{s.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
         {error && <div style={{ marginTop:'16px', background:'#FEE2E2', border:'1.5px solid #FCA5A5', borderRadius:'10px', padding:'12px 16px', color:'#991B1B', fontSize:'14px', fontWeight:600 }}>⚠️ {error}</div>}
+        {success && <div style={{ marginTop:'16px', background:'#F0FDF4', border:'1.5px solid #BBF7D0', borderRadius:'10px', padding:'12px 16px', color:'#166534', fontSize:'14px', fontWeight:600 }}>✅ Converted to grayscale! Your grayscale.jpg has downloaded.</div>}
 
         <div style={{ marginTop:'24px', textAlign:'center' as const }}>
-          <button onClick={compress} disabled={!file || processing}
-            style={{ background: !file || processing ? '#cbd5e1' : '#E85D04', color:'white', padding:'16px 48px', borderRadius:'12px', border:'none', fontSize:'16px', fontWeight:700, cursor: !file || processing ? 'not-allowed' : 'pointer', fontFamily:'inherit', minWidth:'220px' }}>
-            {processing ? '⏳ Compressing…' : '📐 Compress Image'}
+          <button onClick={convert} disabled={!file || processing}
+            style={{ background: !file || processing ? '#cbd5e1' : '#E85D04', color:'white', padding:'16px 48px', borderRadius:'12px', border:'none', fontSize:'16px', fontWeight:700, cursor: !file || processing ? 'not-allowed' : 'pointer', fontFamily:'inherit', minWidth:'240px' }}>
+            {processing ? '⏳ Converting…' : '⚫ Convert to Grayscale'}
           </button>
         </div>
       </div>
@@ -140,9 +108,9 @@ export default function CompressImagePage() {
         <section>
           <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif", fontSize:'26px', fontWeight:800, color:'#0F2A4A', marginBottom:'16px' }}>Frequently Asked Questions</h2>
           {[
-            { q:'What quality setting should I use?', a:'70% is a good default — noticeable compression with acceptable quality. For web images 60-75% is standard. Use 85-90% for print.' },
-            { q:'Which formats are supported?', a:'JPG, PNG, and WebP. Output format matches the input format.' },
-            { q:'Is there a file size limit?', a:'Yes, images up to 20 MB are supported.' },
+            { q:'What colour algorithm is used?', a:'We use the luminosity method — a weighted average of RGB channels (0.21R + 0.72G + 0.07B) that matches how the human eye perceives brightness. This gives more natural-looking results than simple averaging.' },
+            { q:'Can I convert back to colour?', a:'No — colour information is discarded when converting to grayscale. The process is irreversible.' },
+            { q:'What is the output format?', a:'The output is a JPG file. PNG output is planned.' },
             { q:'Are my files kept private?', a:'Yes. Files are sent over HTTPS and deleted within 1 hour.' },
           ].map(faq => (
             <details key={faq.q} style={{ background:'#f8fafc', border:'1.5px solid #e2e8f0', borderRadius:'10px', padding:'14px 18px', marginBottom:'8px' }}>

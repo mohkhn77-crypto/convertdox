@@ -4,48 +4,50 @@ import NavBar from '@/components/NavBar'
 import SiteFooter from '@/components/SiteFooter'
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://convertdox-backend-production.up.railway.app'
-const ACCEPTED = ['image/jpeg', 'image/png', 'image/webp', 'image/bmp']
-const PRESETS = [{ label: '1920px', value: 1920 }, { label: '1200px', value: 1200 }, { label: '800px', value: 800 }, { label: '600px', value: 600 }]
+const ACCEPTED = ['image/jpeg', 'image/png', 'image/webp', 'image/avif', 'image/bmp', 'image/gif', 'image/tiff']
 
-export default function ResizeImagePage() {
+interface ImageInfo {
+  width?: number
+  height?: number
+  format?: string
+  colorSpace?: string
+  channels?: number
+  hasAlpha?: boolean
+  fileSize?: number
+  density?: number
+  [key: string]: unknown
+}
+
+export default function ImageInfoPage() {
   const [file, setFile] = useState<File | null>(null)
-  const [width, setWidth] = useState('')
-  const [height, setHeight] = useState('')
   const [processing, setProcessing] = useState(false)
   const [error, setError] = useState('')
-  const [success, setSuccess] = useState(false)
+  const [info, setInfo] = useState<ImageInfo | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   const handleFile = (f: File | null) => {
     if (!f) return
-    if (!ACCEPTED.includes(f.type)) { setError('Only JPG, PNG, WebP, BMP images are accepted'); return }
-    setFile(f); setError(''); setSuccess(false)
+    if (!ACCEPTED.includes(f.type) && !f.name.match(/\.(jpe?g|png|webp|avif|bmp|gif|tiff?)$/i)) {
+      setError('Only image files are accepted'); return
+    }
+    setFile(f); setError(''); setInfo(null)
   }
 
-  const resize = async () => {
+  const analyze = async () => {
     if (!file) return
-    if (!width && !height) { setError('Please enter a width or height'); return }
-    setProcessing(true); setError(''); setSuccess(false)
+    setProcessing(true); setError(''); setInfo(null)
     try {
       const formData = new FormData()
       formData.append('file', file)
-      if (width) formData.append('width', width)
-      if (height) formData.append('height', height)
-      const res = await fetch(`${BACKEND_URL}/api/image/resize`, { method: 'POST', body: formData })
+      const res = await fetch(`${BACKEND_URL}/api/image/info`, { method: 'POST', body: formData })
       if (!res.ok) {
         const data = await res.json().catch(() => ({ error: 'Unknown error' })) as { error?: string }
         throw new Error(data.error ?? `Server error: ${res.status}`)
       }
-      const blob = await res.blob()
-      const ext = file.name.split('.').pop() ?? 'jpg'
-      const url = URL.createObjectURL(blob)
-      const a = document.createElement('a')
-      a.href = url; a.download = `resized.${ext}`
-      document.body.appendChild(a); a.click()
-      URL.revokeObjectURL(url); document.body.removeChild(a)
-      setSuccess(true); setFile(null)
+      const data = await res.json() as ImageInfo
+      setInfo(data)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to resize image. Please try again.')
+      setError(err instanceof Error ? err.message : 'Failed to read image info. Please try again.')
     } finally {
       setProcessing(false)
     }
@@ -53,15 +55,26 @@ export default function ResizeImagePage() {
 
   const fmt = (b: number) => b < 1_048_576 ? `${(b / 1024).toFixed(1)} KB` : `${(b / 1_048_576).toFixed(1)} MB`
 
+  const infoCards = info ? [
+    { label: 'Width', value: info.width ? `${info.width}px` : '—', icon: '↔' },
+    { label: 'Height', value: info.height ? `${info.height}px` : '—', icon: '↕' },
+    { label: 'Format', value: (info.format as string) ?? '—', icon: '🖼️' },
+    { label: 'File Size', value: info.fileSize ? fmt(info.fileSize) : fmt(file?.size ?? 0), icon: '💾' },
+    { label: 'Color Space', value: (info.colorSpace as string) ?? '—', icon: '🎨' },
+    { label: 'Channels', value: info.channels ?? '—', icon: '📊' },
+    { label: 'Transparency', value: info.hasAlpha ? 'Yes (alpha)' : 'No', icon: '👁️' },
+    { label: 'DPI', value: info.density ? `${info.density} DPI` : '—', icon: '🔍' },
+  ] : []
+
   return (
     <div style={{ minHeight:'100vh', background:'#fff', fontFamily:"'Plus Jakarta Sans',system-ui,sans-serif" }}>
       <NavBar />
       <div style={{ background:'linear-gradient(135deg,#0F2A4A,#1a3a5c)', padding:'48px 24px 40px' }}>
         <div style={{ maxWidth:'1100px', margin:'0 auto', display:'flex', alignItems:'center', gap:'16px' }}>
-          <div style={{ width:'56px', height:'56px', background:'rgba(232,93,4,0.2)', borderRadius:'14px', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'28px' }}>⤢</div>
+          <div style={{ width:'56px', height:'56px', background:'rgba(232,93,4,0.2)', borderRadius:'14px', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'28px' }}>📊</div>
           <div>
-            <h1 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif", fontSize:'clamp(24px,3vw,36px)', fontWeight:800, color:'white', margin:0 }}>Resize Image</h1>
-            <p style={{ color:'rgba(255,255,255,0.65)', fontSize:'15px', margin:'6px 0 0' }}>Change image dimensions — aspect ratio preserved automatically</p>
+            <h1 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif", fontSize:'clamp(24px,3vw,36px)', fontWeight:800, color:'white', margin:0 }}>Image Info</h1>
+            <p style={{ color:'rgba(255,255,255,0.65)', fontSize:'15px', margin:'6px 0 0' }}>Inspect image metadata — dimensions, format, color space, DPI, and more</p>
           </div>
         </div>
       </div>
@@ -81,12 +94,12 @@ export default function ResizeImagePage() {
           onDragLeave={e => { (e.currentTarget as HTMLDivElement).style.borderColor='#cbd5e1'; (e.currentTarget as HTMLDivElement).style.background='#f8fafc' }}
           onDrop={e => { e.preventDefault(); (e.currentTarget as HTMLDivElement).style.borderColor='#cbd5e1'; (e.currentTarget as HTMLDivElement).style.background='#f8fafc'; handleFile(e.dataTransfer.files[0] ?? null) }}
           style={{ background:'#f8fafc', border:'2px dashed #cbd5e1', borderRadius:'16px', padding:'48px 24px', textAlign:'center' as const, cursor:'pointer', transition:'all 0.2s' }}>
-          <div style={{ fontSize:'56px', marginBottom:'12px' }}>⤢</div>
+          <div style={{ fontSize:'56px', marginBottom:'12px' }}>📊</div>
           <div style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif", fontSize:'20px', fontWeight:700, color:'#0F2A4A', marginBottom:'6px' }}>Drop your image here</div>
           <div style={{ fontSize:'14px', color:'#64748b', marginBottom:'18px' }}>or click to browse from your computer</div>
           <button style={{ background:'#E85D04', color:'white', padding:'12px 32px', borderRadius:'10px', border:'none', fontSize:'14px', fontWeight:700, cursor:'pointer', fontFamily:'inherit' }}>Select Image</button>
-          <div style={{ fontSize:'12px', color:'#94a3b8', marginTop:'12px' }}>JPG, PNG, WebP, BMP · Max 20 MB</div>
-          <input ref={fileInputRef} type="file" accept="image/jpeg,image/png,image/webp,image/bmp" style={{ display:'none' }} onChange={e => handleFile(e.target.files?.[0] ?? null)} />
+          <div style={{ fontSize:'12px', color:'#94a3b8', marginTop:'12px' }}>JPG, PNG, WebP, AVIF, BMP, GIF, TIFF · No download — metadata shown here</div>
+          <input ref={fileInputRef} type="file" accept="image/*" style={{ display:'none' }} onChange={e => handleFile(e.target.files?.[0] ?? null)} />
         </div>
 
         {file && (
@@ -96,54 +109,42 @@ export default function ResizeImagePage() {
               <div style={{ fontSize:'14px', fontWeight:600, color:'#0F2A4A', overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' as const }}>{file.name}</div>
               <div style={{ fontSize:'12px', color:'#94a3b8' }}>{fmt(file.size)}</div>
             </div>
-            <button onClick={() => setFile(null)} style={{ background:'#FEE2E2', color:'#DC2626', border:'none', borderRadius:'6px', padding:'4px 10px', cursor:'pointer', fontWeight:700, fontSize:'16px' }}>×</button>
+            <button onClick={() => { setFile(null); setInfo(null) }} style={{ background:'#FEE2E2', color:'#DC2626', border:'none', borderRadius:'6px', padding:'4px 10px', cursor:'pointer', fontWeight:700, fontSize:'16px' }}>×</button>
           </div>
         )}
 
-        <div style={{ marginTop:'24px' }}>
-          <div style={{ fontSize:'14px', fontWeight:700, color:'#0F2A4A', marginBottom:'12px' }}>Common presets (width):</div>
-          <div style={{ display:'flex', gap:'8px', flexWrap:'wrap' as const, marginBottom:'16px' }}>
-            {PRESETS.map(p => (
-              <button key={p.value} onClick={() => { setWidth(String(p.value)); setHeight('') }}
-                style={{ padding:'8px 16px', borderRadius:'8px', border:'1.5px solid', borderColor: width === String(p.value) ? '#E85D04' : '#e2e8f0', background: width === String(p.value) ? '#FFF7ED' : 'white', color: width === String(p.value) ? '#E85D04' : '#0F2A4A', fontSize:'13px', fontWeight:700, cursor:'pointer', fontFamily:'inherit' }}>
-                {p.label}
-              </button>
-            ))}
-          </div>
-          <div style={{ display:'flex', gap:'16px', flexWrap:'wrap' as const }}>
-            <div style={{ flex:1, minWidth:'140px' }}>
-              <label style={{ display:'block', fontSize:'14px', fontWeight:700, color:'#0F2A4A', marginBottom:'8px' }}>Width (px)</label>
-              <input type="number" value={width} onChange={e => setWidth(e.target.value)} placeholder="e.g. 1200"
-                style={{ width:'100%', padding:'12px 14px', borderRadius:'10px', border:'1.5px solid #e2e8f0', fontSize:'14px', fontFamily:'inherit', color:'#0F2A4A', outline:'none', boxSizing:'border-box' as const }} />
-            </div>
-            <div style={{ flex:1, minWidth:'140px' }}>
-              <label style={{ display:'block', fontSize:'14px', fontWeight:700, color:'#0F2A4A', marginBottom:'8px' }}>Height (px) <span style={{ color:'#94a3b8', fontWeight:400 }}>— optional</span></label>
-              <input type="number" value={height} onChange={e => setHeight(e.target.value)} placeholder="Leave blank to maintain ratio"
-                style={{ width:'100%', padding:'12px 14px', borderRadius:'10px', border:'1.5px solid #e2e8f0', fontSize:'14px', fontFamily:'inherit', color:'#0F2A4A', outline:'none', boxSizing:'border-box' as const }} />
-            </div>
-          </div>
-          <div style={{ marginTop:'8px', fontSize:'12px', color:'#94a3b8' }}>If only width is set, height is calculated automatically to preserve the original aspect ratio.</div>
-        </div>
-
         {error && <div style={{ marginTop:'16px', background:'#FEE2E2', border:'1.5px solid #FCA5A5', borderRadius:'10px', padding:'12px 16px', color:'#991B1B', fontSize:'14px', fontWeight:600 }}>⚠️ {error}</div>}
-        {success && <div style={{ marginTop:'16px', background:'#F0FDF4', border:'1.5px solid #BBF7D0', borderRadius:'10px', padding:'12px 16px', color:'#166534', fontSize:'14px', fontWeight:600 }}>✅ Image resized! Your download has started.</div>}
 
         <div style={{ marginTop:'24px', textAlign:'center' as const }}>
-          <button onClick={resize} disabled={!file || processing}
+          <button onClick={analyze} disabled={!file || processing}
             style={{ background: !file || processing ? '#cbd5e1' : '#E85D04', color:'white', padding:'16px 48px', borderRadius:'12px', border:'none', fontSize:'16px', fontWeight:700, cursor: !file || processing ? 'not-allowed' : 'pointer', fontFamily:'inherit', minWidth:'220px' }}>
-            {processing ? '⏳ Resizing…' : '⤢ Resize Image'}
+            {processing ? '⏳ Analyzing…' : '📊 Get Image Info'}
           </button>
         </div>
+
+        {info && (
+          <div style={{ marginTop:'28px' }}>
+            <div style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif", fontSize:'18px', fontWeight:700, color:'#0F2A4A', marginBottom:'16px' }}>📋 Image Metadata</div>
+            <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(180px,1fr))', gap:'12px' }}>
+              {infoCards.map(card => (
+                <div key={card.label} style={{ background:'#f8fafc', border:'1.5px solid #e2e8f0', borderRadius:'12px', padding:'16px' }}>
+                  <div style={{ fontSize:'20px', marginBottom:'6px' }}>{card.icon}</div>
+                  <div style={{ fontSize:'12px', color:'#94a3b8', fontWeight:700, textTransform:'uppercase' as const, letterSpacing:'0.5px', marginBottom:'4px' }}>{card.label}</div>
+                  <div style={{ fontSize:'15px', fontWeight:700, color:'#0F2A4A', wordBreak:'break-word' as const }}>{String(card.value)}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       <div style={{ maxWidth:'860px', margin:'48px auto 0', padding:'0 24px 48px' }}>
         <section>
           <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif", fontSize:'26px', fontWeight:800, color:'#0F2A4A', marginBottom:'16px' }}>Frequently Asked Questions</h2>
           {[
-            { q:'Will the aspect ratio be maintained?', a:'Yes — if you only set the width, height is calculated automatically. If you set both, the image will be resized to exactly those dimensions (may distort).' },
-            { q:'What formats are supported?', a:'JPG, PNG, WebP, and BMP. The output format matches the input.' },
-            { q:'Is there a file size limit?', a:'Yes, images up to 20 MB are supported.' },
-            { q:'Are my files kept private?', a:'Yes. Files are sent over HTTPS and deleted within 1 hour.' },
+            { q:'What metadata is shown?', a:'Width, height, format, file size, colour space, channel count, alpha transparency, and DPI (density).' },
+            { q:'Does this show EXIF data?', a:'Basic EXIF data like DPI is shown. Full EXIF (GPS, camera settings) readout is planned for a future update.' },
+            { q:'Is the image uploaded?', a:'Yes — it is sent over HTTPS to read metadata, then immediately deleted. No content is stored.' },
           ].map(faq => (
             <details key={faq.q} style={{ background:'#f8fafc', border:'1.5px solid #e2e8f0', borderRadius:'10px', padding:'14px 18px', marginBottom:'8px' }}>
               <summary style={{ fontSize:'15px', fontWeight:600, color:'#0F2A4A', cursor:'pointer' }}>{faq.q}</summary>
