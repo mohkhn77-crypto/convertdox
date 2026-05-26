@@ -50,7 +50,7 @@ export default function NavBar() {
                 CONVERT PDF <span style={{ fontSize:'9px',opacity:0.6 }}>▼</span>
               </span>
               {openDropdown === 'convert' && (
-                <div style={{ position:'absolute' as const,top:'28px',left:'-20px',background:'white',borderRadius:'12px',boxShadow:'0 10px 40px rgba(15,42,74,0.15)',padding:'20px',display:'flex',gap:'36px',minWidth:'680px',zIndex:10 }}>
+                <div style={{ position:'absolute' as const,top:'28px',left:'-20px',background:'white',borderRadius:'12px',boxShadow:'0 10px 40px rgba(15,42,74,0.15)',padding:'20px',display:'flex',gap:'36px',minWidth:'900px',zIndex:10 }}>
                   {[
                     { heading:'Convert to PDF', items:[
                       { name:'JPG to PDF', color:'#F59E0B', icon:'📷', href:'/jpg-to-pdf', live:true },
@@ -86,6 +86,13 @@ export default function NavBar() {
                       { name:'Rotate PDF', color:'#E85D04', icon:'🔄', href:'/rotate-pdf' },
                       { name:'PDF Info', color:'#6366F1', icon:'ℹ', href:'/pdf-info' },
                       { name:'PDF to Text', color:'#0EA5E9', icon:'📝', href:'/pdf-to-text' },
+                      { name:'Page Numbers', color:'#F59E0B', icon:'🔢', href:'/pdf-page-numbers' },
+                      { name:'Header & Footer', color:'#8B5CF6', icon:'📋', href:'/pdf-header-footer' },
+                      { name:'Delete Pages', color:'#EF4444', icon:'🗑', href:'/pdf-delete-pages' },
+                      { name:'Reorder Pages', color:'#06B6D4', icon:'🔀', href:'/pdf-reorder-pages' },
+                      { name:'Extract Pages', color:'#10B981', icon:'✂', href:'/pdf-extract-pages' },
+                      { name:'Sign PDF', color:'#0F2A4A', icon:'✍', href:'/pdf-sign' },
+                      { name:'Annotate PDF', color:'#F59E0B', icon:'💬', href:'/pdf-annotate' },
                     ].map(item => (
                       <a key={item.name} href={item.href} style={{ display:'flex',alignItems:'center',gap:'8px',padding:'7px 4px',fontSize:'13px',color:'#0F2A4A',fontWeight:500,textDecoration:'none',borderRadius:'6px' }}>
                         <span style={{ width:'22px',height:'22px',background:item.color,borderRadius:'4px',display:'flex',alignItems:'center',justifyContent:'center',color:'white',fontSize:'10px',fontWeight:700,flexShrink:0 }}>{item.icon}</span>
@@ -118,6 +125,13 @@ export default function NavBar() {
                     { name:'Grayscale Image', color:'#64748b', icon:'⚫', href:'/grayscale-image', live:true },
                     { name:'Image Info', color:'#F59E0B', icon:'📊', href:'/image-info', live:true },
                     { name:'Background Remover', color:'#EC4899', icon:'✂', href:'/bg-remove', live:false },
+                    { name:'Batch Compress', color:'#0EA5E9', icon:'📦', href:'/compress-images-batch', live:true },
+                    { name:'Batch Resize', color:'#10B981', icon:'📦', href:'/resize-images-batch', live:true },
+                    { name:'Batch Convert', color:'#F59E0B', icon:'🔄', href:'/convert-images-batch', live:true },
+                    { name:'EXIF Stripper', color:'#10B981', icon:'🛡', href:'/exif-stripper', live:true },
+                    { name:'Watermark Image', color:'#06B6D4', icon:'💧', href:'/watermark-image', live:true },
+                    { name:'Color Picker', color:'#E85D04', icon:'🎨', href:'/image-color-picker', live:true },
+                    { name:'Blur Image', color:'#64748b', icon:'🌫', href:'/blur-image', live:true },
                   ].map(item => (
                     <a key={item.name} href={item.href} style={{ display:'flex',alignItems:'center',gap:'8px',padding:'7px 4px',fontSize:'13px',color:'#0F2A4A',fontWeight:500,textDecoration:'none',borderRadius:'6px' }}>
                       <span style={{ width:'22px',height:'22px',background:item.color,borderRadius:'4px',display:'flex',alignItems:'center',justifyContent:'center',color:'white',fontSize:'10px',fontWeight:700,flexShrink:0 }}>{item.icon}</span>
@@ -142,6 +156,32 @@ export default function NavBar() {
                   {[
                     { name:'Image to Text', color:'#E85D04', icon:'🔤', href:'/image-to-text' },
                     { name:'PDF OCR', color:'#0F2A4A', icon:'📄', href:'/pdf-ocr' },
+                  ].map(item => (
+                    <a key={item.name} href={item.href} style={{ display:'flex',alignItems:'center',gap:'8px',padding:'7px 4px',fontSize:'13px',color:'#0F2A4A',fontWeight:500,textDecoration:'none',borderRadius:'6px' }}>
+                      <span style={{ width:'22px',height:'22px',background:item.color,borderRadius:'4px',display:'flex',alignItems:'center',justifyContent:'center',color:'white',fontSize:'10px',fontWeight:700,flexShrink:0 }}>{item.icon}</span>
+                      <span style={{ flex:1 }}>{item.name}</span>
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* SPECIALTY dropdown */}
+            <div style={{ position:'relative' as const }}
+              onMouseEnter={() => setOpenDropdown('specialty')}
+              onMouseLeave={() => setOpenDropdown(null)}>
+              <span style={{ fontSize:'12px',fontWeight:700,color: openDropdown==='specialty'?'#E85D04':'#0F2A4A',cursor:'pointer',textTransform:'uppercase' as const,letterSpacing:'0.5px',display:'inline-flex',alignItems:'center',gap:'4px' }}>
+                SPECIALTY <span style={{ fontSize:'9px',opacity:0.6 }}>▼</span>
+              </span>
+              {openDropdown === 'specialty' && (
+                <div style={{ position:'absolute' as const,top:'28px',left:'-20px',background:'white',borderRadius:'12px',boxShadow:'0 10px 40px rgba(15,42,74,0.15)',padding:'20px',minWidth:'220px',zIndex:10 }}>
+                  <div style={{ fontSize:'10px',fontWeight:700,color:'#94a3b8',textTransform:'uppercase' as const,letterSpacing:'1px',marginBottom:'12px' }}>Specialty Tools</div>
+                  {[
+                    { name:'Passport Photo', color:'#E85D04', icon:'🛂', href:'/passport-photo' },
+                    { name:'Favicon Generator', color:'#F59E0B', icon:'⭐', href:'/favicon-from-image' },
+                    { name:'Social Media Crops', color:'#EC4899', icon:'📱', href:'/social-media-crops' },
+                    { name:'Instagram Square', color:'#8B5CF6', icon:'📷', href:'/instagram-square' },
+                    { name:'QR Reader', color:'#0F2A4A', icon:'📲', href:'/qr-reader' },
                   ].map(item => (
                     <a key={item.name} href={item.href} style={{ display:'flex',alignItems:'center',gap:'8px',padding:'7px 4px',fontSize:'13px',color:'#0F2A4A',fontWeight:500,textDecoration:'none',borderRadius:'6px' }}>
                       <span style={{ width:'22px',height:'22px',background:item.color,borderRadius:'4px',display:'flex',alignItems:'center',justifyContent:'center',color:'white',fontSize:'10px',fontWeight:700,flexShrink:0 }}>{item.icon}</span>
@@ -179,7 +219,7 @@ export default function NavBar() {
                       </div>
                     </a>
                   ))}
-                  <a href="/" style={{ display:'block',marginTop:'8px',padding:'9px',background:'#FFF7ED',color:'#E85D04',textAlign:'center' as const,borderRadius:'8px',fontSize:'13px',fontWeight:700,textDecoration:'none' }}>View all 105 tools →</a>
+                  <a href="/" style={{ display:'block',marginTop:'8px',padding:'9px',background:'#FFF7ED',color:'#E85D04',textAlign:'center' as const,borderRadius:'8px',fontSize:'13px',fontWeight:700,textDecoration:'none' }}>View all 158 tools →</a>
                 </div>
               )}
             </div>

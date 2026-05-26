@@ -195,4 +195,30 @@
   <url><loc>https://convertdox.com/image-to-text</loc><lastmod>2026-05-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://convertdox.com/pdf-ocr</loc><lastmod>2026-05-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 
+  <!-- PDF Page Tools — 2026-05-26 -->
+  <url><loc>https://convertdox.com/pdf-page-numbers</loc><lastmod>2026-05-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertdox.com/pdf-header-footer</loc><lastmod>2026-05-26</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://convertdox.com/pdf-delete-pages</loc><lastmod>2026-05-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertdox.com/pdf-reorder-pages</loc><lastmod>2026-05-26</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://convertdox.com/pdf-extract-pages</loc><lastmod>2026-05-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertdox.com/pdf-merge-specific</loc><lastmod>2026-05-26</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://convertdox.com/pdf-sign</loc><lastmod>2026-05-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertdox.com/pdf-annotate</loc><lastmod>2026-05-26</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- Image Tools batch 2 — 2026-05-26 -->
+  <url><loc>https://convertdox.com/compress-images-batch</loc><lastmod>2026-05-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertdox.com/resize-images-batch</loc><lastmod>2026-05-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertdox.com/convert-images-batch</loc><lastmod>2026-05-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertdox.com/exif-stripper</loc><lastmod>2026-05-26</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://convertdox.com/watermark-image</loc><lastmod>2026-05-26</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://convertdox.com/image-color-picker</loc><lastmod>2026-05-26</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://convertdox.com/blur-image</loc><lastmod>2026-05-26</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- Specialty Tools — 2026-05-26 -->
+  <url><loc>https://convertdox.com/passport-photo</loc><lastmod>2026-05-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertdox.com/favicon-from-image</loc><lastmod>2026-05-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertdox.com/social-media-crops</loc><lastmod>2026-05-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertdox.com/instagram-square</loc><lastmod>2026-05-26</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://convertdox.com/qr-reader</loc><lastmod>2026-05-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
 </urlset>

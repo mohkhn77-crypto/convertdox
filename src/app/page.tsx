@@ -1385,7 +1385,7 @@ export default function HomePage() {
         <div style={{ marginBottom:'28px' }}>
           <div style={{ fontSize:'12px',fontWeight:700,color:'#E85D04',textTransform:'uppercase',letterSpacing:'1px',marginBottom:'6px' }}>All Categories</div>
           <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'clamp(24px,3vw,34px)',fontWeight:800,color:'#0F2A4A',margin:'0 0 8px' }}>Free Online Tools</h2>
-          <p style={{ fontSize:'15px',color:'#64748b',margin:0 }}>85 tools live. No installation. Works instantly in your browser.</p>
+          <p style={{ fontSize:'15px',color:'#64748b',margin:0 }}>105 tools live. No installation. Works instantly in your browser.</p>
         </div>
         <div style={{ display:'flex',gap:'6px',flexWrap:'wrap',marginBottom:'28px' }}>
           {CATS.map(cat => (
