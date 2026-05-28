@@ -247,26 +247,36 @@ export default function LegalPage() {
                 <H2>6. AI-Generated Content</H2>
                 <P>AI-generated content is provided for assistance and informational purposes only. ConvertDox makes no guarantees about the accuracy, completeness, or suitability of AI-generated outputs. You are responsible for reviewing and verifying all AI-generated content before use.</P>
 
-                <H2>7. Service Availability</H2>
+                <H2>7. Third-Party Content &amp; Tools</H2>
+                <P>Some ConvertDox tools allow you to interact with publicly available content from third-party platforms such as YouTube. By using these tools, you acknowledge and agree:</P>
+                <ul style={{ paddingLeft:'20px',marginBottom:'12px' }}>
+                  <Li>You are responsible for ensuring your use complies with the third party&apos;s terms of service</Li>
+                  <Li>You will not violate copyright, trademark, or other intellectual property rights</Li>
+                  <Li>You will only use downloaded content for personal, educational, or fair use purposes</Li>
+                  <Li>ConvertDox is not responsible for how you use third-party content obtained through our tools</Li>
+                  <Li>You agree to indemnify ConvertDox against any claims arising from your misuse of third-party content</Li>
+                </ul>
+
+                <H2>8. Service Availability</H2>
                 <P>We strive to maintain high availability but do not guarantee uninterrupted access. We may perform maintenance, upgrades, or emergency fixes that temporarily affect availability. We are not liable for losses caused by service interruptions.</P>
 
-                <H2>8. Limitation of Liability</H2>
+                <H2>9. Limitation of Liability</H2>
                 <Notice type="info">📌 To the maximum extent permitted by law, ConvertDox shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the Service.</Notice>
                 <P>Our total liability to you for any claim arising from use of the Service shall not exceed the amount you paid to us in the 12 months preceding the claim, or $100, whichever is greater.</P>
 
-                <H2>9. Disclaimer of Warranties</H2>
+                <H2>10. Disclaimer of Warranties</H2>
                 <P>THE SERVICE IS PROVIDED "AS IS" WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED. WE DO NOT WARRANT THAT THE SERVICE WILL BE ERROR-FREE, SECURE, OR CONTINUOUSLY AVAILABLE.</P>
 
-                <H2>10. Account Suspension & Termination</H2>
+                <H2>11. Account Suspension & Termination</H2>
                 <P>We reserve the right to suspend or terminate accounts and access to the Service immediately if we determine, in our sole discretion, that you have violated these Terms. No refund of any paid subscriptions will be provided in cases of termination for violations.</P>
 
-                <H2>11. Governing Law</H2>
+                <H2>12. Governing Law</H2>
                 <P>These Terms are governed by and construed in accordance with applicable law. Any disputes shall be resolved through binding arbitration or in courts of competent jurisdiction.</P>
 
-                <H2>12. Changes to Terms</H2>
+                <H2>13. Changes to Terms</H2>
                 <P>We may update these Terms at any time. Continued use of the Service after changes constitutes acceptance. We will provide notice of material changes through the website.</P>
 
-                <H2>13. Contact</H2>
+                <H2>14. Contact</H2>
                 <P>For questions about these Terms:<br/><a href="mailto:legal@convertdox.com" style={{ color:'#E85D04' }}>legal@convertdox.com</a></P>
               </div>
             )}
@@ -372,7 +382,27 @@ export default function LegalPage() {
 
                 <Notice type="warn">❌ ConvertDox strictly prohibits the use of our platform for copyright infringement, piracy, or unauthorised distribution of copyrighted materials.</Notice>
 
-                <H2>1. Prohibited Copyright Activities</H2>
+                <H2>1. Respect for Intellectual Property</H2>
+                <P>ConvertDox respects the intellectual property rights of others and expects users to do the same. We comply with the Digital Millennium Copyright Act (DMCA) and respond promptly to legitimate takedown requests.</P>
+
+                <H2>2. Third-Party Content</H2>
+                <P>Some tools on ConvertDox allow users to interact with publicly available third-party content (such as YouTube thumbnails). These tools:</P>
+                <ul style={{ paddingLeft:'20px',marginBottom:'12px' }}>
+                  <Li>Only access publicly accessible content via official URLs</Li>
+                  <Li>Do not host, store, or modify third-party content</Li>
+                  <Li>Are intended for personal, educational, and fair use purposes only</Li>
+                </ul>
+
+                <H2>3. YouTube Content Tools</H2>
+                <P>Our YouTube Thumbnail Downloader and similar tools:</P>
+                <ul style={{ paddingLeft:'20px',marginBottom:'12px' }}>
+                  <Li>Access only publicly available thumbnail URLs that YouTube provides</Li>
+                  <Li>Do not download videos, audio, or copyrighted media content</Li>
+                  <Li>Are not affiliated with, endorsed by, or sponsored by YouTube or Google LLC</Li>
+                  <Li>YouTube is a trademark of Google LLC</Li>
+                </ul>
+
+                <H2>4. Prohibited Copyright Activities</H2>
                 <P>The following activities are strictly prohibited on ConvertDox:</P>
                 <ul style={{ paddingLeft:'20px',marginBottom:'12px' }}>
                   <Li>Uploading, converting, or distributing copyrighted files without authorisation from the rights holder</Li>
@@ -382,7 +412,7 @@ export default function LegalPage() {
                   <Li>Using our AI tools to reproduce substantial portions of copyrighted works</Li>
                 </ul>
 
-                <H2>2. DMCA Takedown Process</H2>
+                <H2>5. DMCA Takedown Process</H2>
                 <P>If you believe your copyrighted work has been infringed upon through our platform, you may submit a DMCA takedown notice to:</P>
                 <div style={{ background:'#f8fafc',border:'1.5px solid #e2e8f0',borderRadius:'12px',padding:'16px 20px',margin:'12px 0' }}>
                   <p style={{ margin:0,fontSize:'15px',color:'#0F2A4A',fontWeight:500 }}>
@@ -401,7 +431,7 @@ export default function LegalPage() {
                   <Li>Your physical or electronic signature</Li>
                 </ul>
 
-                <H2>3. Our Response Process</H2>
+                <H2>6. Our Response Process</H2>
                 <ul style={{ paddingLeft:'20px',marginBottom:'12px' }}>
                   <Li>We acknowledge valid DMCA notices within 48 hours</Li>
                   <Li>We investigate and remove infringing content as expeditiously as possible</Li>
@@ -409,7 +439,7 @@ export default function LegalPage() {
                   <Li>Users may submit a counter-notification if they believe content was removed in error</Li>
                 </ul>
 
-                <H2>4. Counter-Notification</H2>
+                <H2>7. Counter-Notification</H2>
                 <P>If you believe your content was removed in error, you may submit a counter-notification to <a href="mailto:legal@convertdox.com" style={{ color:'#E85D04' }}>legal@convertdox.com</a>. Counter-notifications must include:</P>
                 <ul style={{ paddingLeft:'20px',marginBottom:'12px' }}>
                   <Li>Your identification and contact information</Li>
@@ -419,15 +449,35 @@ export default function LegalPage() {
                   <Li>Your signature</Li>
                 </ul>
 
-                <H2>5. Repeat Infringer Policy</H2>
+                <H2>8. Repeat Infringer Policy</H2>
                 <Notice type="warn">⚠️ ConvertDox operates a strict repeat infringer policy. Users who repeatedly infringe copyright will have their accounts terminated and access permanently blocked.</Notice>
 
-                <H2>6. Abuse Reporting</H2>
+                <H2>9. Fair Use</H2>
+                <P>Many uses of copyrighted content qualify as "fair use" under copyright law, including commentary, criticism, news reporting, teaching, and research. ConvertDox tools are intended to support these legitimate uses.</P>
+
+                <H2>10. User Responsibility</H2>
+                <P>By using ConvertDox, you agree to:</P>
+                <ul style={{ paddingLeft:'20px',marginBottom:'12px' }}>
+                  <Li>Respect all intellectual property rights</Li>
+                  <Li>Only use content in ways permitted by copyright law</Li>
+                  <Li>Comply with the terms of service of third-party platforms (YouTube, etc.)</Li>
+                  <Li>Not use ConvertDox tools to violate copyright or other laws</Li>
+                </ul>
+
+                <H2>11. No Endorsement</H2>
+                <P>ConvertDox is an independent service. Reference to any specific commercial product, process, service, trademark, or company does not constitute or imply endorsement or recommendation.</P>
+
+                <H2>12. Trademark Notice</H2>
+                <P>All trademarks, service marks, and trade names referenced on this site (including YouTube™, Google™, and any others) are the property of their respective owners. ConvertDox does not claim any rights to these trademarks.</P>
+
+                <H2>13. Abuse Reporting</H2>
                 <P>To report copyright infringement or other abuse on our platform, contact:</P>
                 <ul style={{ paddingLeft:'20px',marginBottom:'12px' }}>
                   <Li>Copyright: <a href="mailto:legal@convertdox.com" style={{ color:'#E85D04' }}>legal@convertdox.com</a></Li>
                   <Li>General Abuse: <a href="mailto:info@convertdox.com" style={{ color:'#E85D04' }}>info@convertdox.com</a></Li>
                 </ul>
+
+                <P><em>Last updated: 2026-05-28</em></P>
               </div>
             )}
 
