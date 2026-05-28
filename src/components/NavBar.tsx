@@ -132,6 +132,12 @@ export default function NavBar() {
                     { name:'Watermark Image', color:'#06B6D4', icon:'💧', href:'/watermark-image', live:true },
                     { name:'Color Picker', color:'#E85D04', icon:'🎨', href:'/image-color-picker', live:true },
                     { name:'Blur Image', color:'#64748b', icon:'🌫', href:'/blur-image', live:true },
+                    { name:'HEIC to JPG', color:'#E85D04', icon:'📱', href:'/heic-to-jpg', live:true },
+                    { name:'WebP to JPG', color:'#0EA5E9', icon:'🔄', href:'/webp-to-jpg', live:true },
+                    { name:'SVG to PNG', color:'#F59E0B', icon:'🎨', href:'/svg-to-png', live:true },
+                    { name:'PNG to ICO', color:'#F59E0B', icon:'🌟', href:'/png-to-ico', live:true },
+                    { name:'Image to ICO', color:'#E85D04', icon:'⭐', href:'/image-to-ico', live:true },
+                    { name:'Add BG to Image', color:'#8B5CF6', icon:'🎨', href:'/add-image-background', live:true },
                   ].map(item => (
                     <a key={item.name} href={item.href} style={{ display:'flex',alignItems:'center',gap:'8px',padding:'7px 4px',fontSize:'13px',color:'#0F2A4A',fontWeight:500,textDecoration:'none',borderRadius:'6px' }}>
                       <span style={{ width:'22px',height:'22px',background:item.color,borderRadius:'4px',display:'flex',alignItems:'center',justifyContent:'center',color:'white',fontSize:'10px',fontWeight:700,flexShrink:0 }}>{item.icon}</span>
