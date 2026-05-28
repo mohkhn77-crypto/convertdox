@@ -3,6 +3,41 @@ import { useState, useEffect } from 'react'
 import Script from 'next/script'
 import NavBar from '@/components/NavBar'
 
+const ICON_COLORS: Record<string, string> = {
+  'pdf-unlock':'#DC2626','pdf-protect':'#16A34A','pdf-info':'#3B82F6',
+  'pdf-text':'#0EA5E9','pdf-excel':'#16A34A','excel-pdf':'#DC2626',
+  'pdf-ppt':'#D24726','ppt-pdf':'#DC2626','pdf-archive':'#64748b',
+  'html-pdf':'#F59E0B','img-compress':'#3B82F6','img-resize':'#8B5CF6',
+  'img-convert':'#06B6D4','img-crop':'#EC4899','img-rotate':'#F59E0B',
+  'img-flip':'#10B981','img-gray':'#64748b','img-info':'#3B82F6',
+  'ocr-img':'#9333EA','ocr-pdf':'#7C3AED','pdf-numbers':'#0EA5E9',
+  'pdf-hf':'#F59E0B','pdf-delete':'#DC2626','pdf-reorder':'#8B5CF6',
+  'pdf-extract':'#10B981','pdf-merge-sp':'#06B6D4','pdf-sign':'#EC4899',
+  'pdf-annotate':'#F59E0B','batch-compress':'#3B82F6','batch-resize':'#8B5CF6',
+  'batch-convert':'#06B6D4','exif':'#16A34A','img-watermark':'#06B6D4',
+  'img-colors':'#EC4899','img-blur':'#64748b','passport':'#DC2626',
+  'favicon-img':'#F59E0B','social-crops':'#EC4899','instagram-sq':'#E1306C',
+  'qr-reader':'#0EA5E9','heic':'#0EA5E9','webp':'#16A34A',
+  'svg-png':'#F59E0B','img-ico':'#8B5CF6','png-ico':'#7C3AED',
+  'add-bg':'#06B6D4','invoice':'#DC2626','receipt':'#16A34A',
+  'quote-doc':'#F59E0B','po':'#8B5CF6','letterhead':'#0F2A4A',
+  'resume':'#3B82F6','biz-card':'#EC4899','logo':'#F48C42',
+  'yt-thumb':'#FF0000','pdf-pages':'#0EA5E9','word-detail':'#8B5CF6',
+  'meta-gen':'#16A34A','emi':'#16A34A','pregnancy':'#EC4899',
+}
+
+const SimpleIcon = ({ type }: { type: string }) => {
+  const color = ICON_COLORS[type] || '#0F2A4A'
+  const label = type.split('-').map(w => w[0]?.toUpperCase() ?? '').join('').slice(0, 2)
+  return (
+    <svg width="48" height="48" viewBox="0 0 52 52">
+      <rect x="6" y="10" width="28" height="34" rx="4" fill={color + '22'} stroke={color} strokeWidth="1.5"/>
+      <rect x="20" y="6" width="26" height="32" rx="4" fill={color}/>
+      <text x="33" y="26" fontFamily="Arial" fontSize="13" fontWeight="700" fill="white" textAnchor="middle">{label}</text>
+    </svg>
+  )
+}
+
 const ToolIcon = ({ type }: { type: string }) => {
   const icons: Record<string, React.ReactElement> = {
     'word-counter': (
@@ -864,7 +899,7 @@ const ToolIcon = ({ type }: { type: string }) => {
       </svg>
     ),
   }
-  return icons[type] ?? icons['word-counter']
+  return icons[type] ?? <SimpleIcon type={type} />
 }
 
 const TOOLS = [
@@ -989,6 +1024,77 @@ const TOOLS = [
   { iconType:'animation', title:'CSS Animation Generator', desc:'Build CSS keyframe animations visually', href:'/animation-generator', cat:'dev' },
   { iconType:'favicon', title:'Favicon Generator', desc:'Generate favicons from text or initials', href:'/favicon-generator', cat:'dev' },
   { iconType:'contrast', title:'Color Contrast Checker', desc:'WCAG accessibility contrast ratio checker', href:'/color-contrast', cat:'color' },
+
+  // === PDF Tools ===
+  { iconType:'pdf-unlock',   title:'Unlock PDF',           desc:'Remove password from PDF',                href:'/unlock-pdf',                  cat:'pdf' },
+  { iconType:'pdf-protect',  title:'Protect PDF',          desc:'Password-protect PDF files',              href:'/protect-pdf',                 cat:'pdf' },
+  { iconType:'pdf-info',     title:'PDF Info',             desc:'Page count and PDF metadata',             href:'/pdf-info',                    cat:'pdf' },
+  { iconType:'pdf-text',     title:'Extract PDF Text',     desc:'Get text content from PDF',               href:'/pdf-to-text',                 cat:'pdf' },
+  { iconType:'pdf-excel',    title:'PDF to Excel',         desc:'Convert PDF to spreadsheet',              href:'/pdf-to-excel',                cat:'pdf' },
+  { iconType:'excel-pdf',    title:'Excel to PDF',         desc:'Convert spreadsheet to PDF',              href:'/excel-to-pdf',                cat:'pdf' },
+  { iconType:'pdf-ppt',      title:'PDF to PowerPoint',    desc:'Convert PDF to slides',                   href:'/pdf-to-ppt',                  cat:'pdf' },
+  { iconType:'ppt-pdf',      title:'PowerPoint to PDF',    desc:'Convert slides to PDF',                   href:'/ppt-to-pdf',                  cat:'pdf' },
+  { iconType:'pdf-archive',  title:'PDF to PDF/A',         desc:'Convert to archival format',              href:'/pdf-to-pdfa',                 cat:'pdf' },
+  { iconType:'html-pdf',     title:'HTML to PDF',          desc:'Convert HTML files to PDF',               href:'/html-to-pdf',                 cat:'pdf' },
+  { iconType:'pdf-numbers',  title:'PDF Page Numbers',     desc:'Add page numbers to PDF',                 href:'/pdf-page-numbers',            cat:'pdf' },
+  { iconType:'pdf-hf',       title:'PDF Header/Footer',    desc:'Add header and footer text',              href:'/pdf-header-footer',           cat:'pdf' },
+  { iconType:'pdf-delete',   title:'Delete PDF Pages',     desc:'Remove specific pages from PDF',          href:'/pdf-delete-pages',            cat:'pdf' },
+  { iconType:'pdf-reorder',  title:'Reorder PDF Pages',    desc:'Change page order in PDF',                href:'/pdf-reorder-pages',           cat:'pdf' },
+  { iconType:'pdf-extract',  title:'Extract PDF Pages',    desc:'Pull pages into a new PDF',               href:'/pdf-extract-pages',           cat:'pdf' },
+  { iconType:'pdf-merge-sp', title:'Merge Specific Pages', desc:'Combine specific pages from PDFs',        href:'/pdf-merge-specific',          cat:'pdf' },
+  { iconType:'pdf-sign',     title:'Sign PDF',             desc:'Add e-signature to PDF',                  href:'/pdf-sign',                    cat:'pdf' },
+  { iconType:'pdf-annotate', title:'Annotate PDF',         desc:'Add notes and highlights to PDF',         href:'/pdf-annotate',                cat:'pdf' },
+  { iconType:'pdf-pages',    title:'PDF Page Counter',     desc:'Count PDF pages and file size',           href:'/pdf-page-counter',            cat:'pdf' },
+
+  // === Image Tools ===
+  { iconType:'img-compress', title:'Compress Image',       desc:'Reduce image file size',                  href:'/compress-image',              cat:'image' },
+  { iconType:'img-resize',   title:'Resize Image',         desc:'Change image dimensions',                 href:'/resize-image',                cat:'image' },
+  { iconType:'img-convert',  title:'Convert Image Format', desc:'JPG, PNG, WebP, AVIF formats',            href:'/image-convert',               cat:'image' },
+  { iconType:'img-crop',     title:'Crop Image',           desc:'Crop to square or custom ratio',          href:'/image-crop',                  cat:'image' },
+  { iconType:'img-rotate',   title:'Rotate Image',         desc:'Rotate 90/180/270 degrees',               href:'/rotate-image',                cat:'image' },
+  { iconType:'img-flip',     title:'Flip Image',           desc:'Horizontal or vertical flip',             href:'/flip-image',                  cat:'image' },
+  { iconType:'img-gray',     title:'Grayscale Image',      desc:'Convert to black and white',              href:'/grayscale-image',             cat:'image' },
+  { iconType:'img-info',     title:'Image Info',           desc:'Get image dimensions and metadata',       href:'/image-info',                  cat:'image' },
+  { iconType:'batch-compress',title:'Batch Compress',      desc:'Compress multiple images at once',        href:'/compress-images-batch',       cat:'image' },
+  { iconType:'batch-resize', title:'Batch Resize',         desc:'Resize multiple images at once',          href:'/resize-images-batch',         cat:'image' },
+  { iconType:'batch-convert',title:'Batch Convert',        desc:'Convert multiple images at once',         href:'/convert-images-batch',        cat:'image' },
+  { iconType:'exif',         title:'EXIF Stripper',        desc:'Remove image metadata for privacy',       href:'/exif-stripper',               cat:'image' },
+  { iconType:'img-watermark',title:'Watermark Image',      desc:'Add text watermark to images',            href:'/watermark-image',             cat:'image' },
+  { iconType:'img-colors',   title:'Image Color Picker',   desc:'Extract dominant colors from image',      href:'/image-color-picker',          cat:'image' },
+  { iconType:'img-blur',     title:'Blur Image',           desc:'Apply Gaussian blur effect',              href:'/blur-image',                  cat:'image' },
+  { iconType:'heic',         title:'HEIC to JPG',          desc:'Convert iPhone HEIC photos to JPG',       href:'/heic-to-jpg',                 cat:'image' },
+  { iconType:'webp',         title:'WebP to JPG',          desc:'Convert WebP to standard JPG',            href:'/webp-to-jpg',                 cat:'image' },
+  { iconType:'svg-png',      title:'SVG to PNG',           desc:'Convert SVG vectors to PNG',              href:'/svg-to-png',                  cat:'image' },
+  { iconType:'img-ico',      title:'Image to ICO',         desc:'Create favicon ICO file',                 href:'/image-to-ico',                cat:'image' },
+  { iconType:'png-ico',      title:'PNG to ICO',           desc:'Multi-size ICO pack from PNG',            href:'/png-to-ico',                  cat:'image' },
+  { iconType:'add-bg',       title:'Add Image Background', desc:'Add solid color background to image',     href:'/add-image-background',        cat:'image' },
+
+  // === OCR Tools ===
+  { iconType:'ocr-img',      title:'Image to Text (OCR)',  desc:'Extract text from images',                href:'/image-to-text',               cat:'ocr' },
+  { iconType:'ocr-pdf',      title:'PDF OCR',              desc:'Extract text from scanned PDFs',          href:'/pdf-ocr',                     cat:'ocr' },
+
+  // === Specialty Tools ===
+  { iconType:'passport',     title:'Passport Photo Maker', desc:'Create 2×2 inch passport photos',         href:'/passport-photo',              cat:'specialty' },
+  { iconType:'favicon-img',  title:'Favicon from Image',   desc:'Generate favicon sizes from image',       href:'/favicon-from-image',          cat:'specialty' },
+  { iconType:'social-crops', title:'Social Media Crops',   desc:'Auto-crop for Instagram, FB, Twitter',    href:'/social-media-crops',          cat:'specialty' },
+  { iconType:'instagram-sq', title:'Instagram Square',     desc:'Crop image to 1:1 ratio',                 href:'/instagram-square',            cat:'specialty' },
+  { iconType:'qr-reader',    title:'QR Code Reader',       desc:'Decode QR codes from images',             href:'/qr-reader',                   cat:'specialty' },
+
+  // === Document Tools ===
+  { iconType:'invoice',      title:'Invoice Generator',    desc:'Create professional invoices',            href:'/invoice-generator',           cat:'docs' },
+  { iconType:'receipt',      title:'Receipt Generator',    desc:'Create and print receipts',               href:'/receipt-generator',           cat:'docs' },
+  { iconType:'po',           title:'Purchase Order',       desc:'Generate purchase orders',                href:'/purchase-order-generator',    cat:'docs' },
+  { iconType:'letterhead',   title:'Letterhead Generator', desc:'Professional letterhead creator',         href:'/letterhead-generator',        cat:'docs' },
+  { iconType:'resume',       title:'Resume Builder',       desc:'Build ATS-friendly resume',               href:'/resume-builder',              cat:'docs' },
+  { iconType:'biz-card',     title:'Business Card',        desc:'Design business card PDF',                href:'/business-card-generator',     cat:'docs' },
+  { iconType:'logo',         title:'Logo Maker',           desc:'Simple text-based logo creator',          href:'/logo-maker',                  cat:'docs' },
+
+  // === Utility ===
+  { iconType:'yt-thumb',     title:'YouTube Thumbnail',    desc:'Download YouTube thumbnails',             href:'/youtube-thumbnail',           cat:'util' },
+  { iconType:'word-detail',  title:'Detailed Word Count',  desc:'Reading time, readability, top words',    href:'/detailed-word-counter',       cat:'util' },
+  { iconType:'meta-gen',     title:'Meta Tag Generator',   desc:'SEO meta tags and Open Graph',            href:'/meta-description-generator',  cat:'util' },
+  { iconType:'emi',          title:'Loan EMI Calculator',  desc:'Calculate monthly loan EMI',              href:'/loan-emi-calculator',         cat:'calc' },
+  { iconType:'pregnancy',    title:'Pregnancy Calculator', desc:'Due date and pregnancy tracker',          href:'/pregnancy-due-date-calculator',cat:'calc' },
 ]
 
 const COMING = [
@@ -1075,17 +1181,62 @@ const CatIcon = ({ type, active }: { type: string, active: boolean }) => {
         <circle cx="18" cy="18" r="3" fill={accent}/>
       </svg>
     ),
+    pdf: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <rect x="4" y="2" width="12" height="16" rx="2" fill="none" stroke={color} strokeWidth="1.8"/>
+        <path d="M12 2v6h6" fill="none" stroke={color} strokeWidth="1.8" strokeLinejoin="round"/>
+        <text x="10" y="22" fontFamily="Arial" fontSize="6" fontWeight="700" fill={accent} textAnchor="middle">PDF</text>
+      </svg>
+    ),
+    image: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke={color} strokeWidth="1.8"/>
+        <circle cx="8" cy="10" r="1.5" fill={accent}/>
+        <path d="M3 17l5-5 4 4 3-3 6 5" stroke={color} strokeWidth="1.5" strokeLinejoin="round"/>
+      </svg>
+    ),
+    ocr: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <rect x="3" y="3" width="12" height="12" rx="1.5" fill="none" stroke={color} strokeWidth="1.8"/>
+        <rect x="5" y="5" width="8" height="8" rx="0.5" fill={accent} opacity="0.3"/>
+        <path d="M17 8h4M17 12h4M17 16h4M8 17v4" stroke={color} strokeWidth="1.5" strokeLinecap="round"/>
+      </svg>
+    ),
+    specialty: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" fill="none" stroke={color} strokeWidth="1.8" strokeLinejoin="round"/>
+        <circle cx="12" cy="12" r="2" fill={accent}/>
+      </svg>
+    ),
+    docs: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <rect x="4" y="3" width="16" height="18" rx="2" fill="none" stroke={color} strokeWidth="1.8"/>
+        <path d="M8 8h8M8 12h8M8 16h5" stroke={accent} strokeWidth="1.8" strokeLinecap="round"/>
+      </svg>
+    ),
+    util: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="3" fill={accent}/>
+        <path d="M12 4v2M12 18v2M4 12H2M22 12h-2M6.3 6.3l1.4 1.4M16.3 16.3l1.4 1.4M6.3 17.7l1.4-1.4M16.3 7.7l1.4-1.4" stroke={color} strokeWidth="1.8" strokeLinecap="round"/>
+      </svg>
+    ),
   }
   return icons[type] ?? icons['all']
 }
 
 const CATS = [
   { id:'all',      label:'All Tools',    iconType:'all' },
+  { id:'pdf',      label:'PDF',          iconType:'pdf' },
+  { id:'image',    label:'Image',        iconType:'image' },
   { id:'text',     label:'Text',         iconType:'text' },
   { id:'calc',     label:'Calculators',  iconType:'calc' },
-  { id:'security', label:'Security',     iconType:'security' },
   { id:'dev',      label:'Developer',    iconType:'dev' },
   { id:'color',    label:'Colour',       iconType:'color' },
+  { id:'docs',     label:'Documents',    iconType:'docs' },
+  { id:'specialty',label:'Specialty',    iconType:'specialty' },
+  { id:'ocr',      label:'OCR',          iconType:'ocr' },
+  { id:'util',     label:'Utility',      iconType:'util' },
+  { id:'security', label:'Security',     iconType:'security' },
   { id:'qr',       label:'QR Code',      iconType:'qr' },
   { id:'fun',      label:'Fun & Random', iconType:'fun' },
 ]
@@ -1097,7 +1248,7 @@ const JSON_LD = [
     'name': 'ConvertDox',
     'url': 'https://convertdox.com',
     'logo': 'https://convertdox.com/og-image.png',
-    'description': '105+ free online tools — no signup, files never stored',
+    'description': '175+ free online tools — no signup, files never stored',
   },
   {
     '@context': 'https://schema.org',
@@ -1178,7 +1329,7 @@ export default function HomePage() {
         <div style={{ maxWidth:'760px',margin:'0 auto' }}>
           <div style={{ display:'inline-flex',alignItems:'center',gap:'6px',background:'rgba(255,255,255,0.1)',border:'1px solid rgba(255,255,255,0.2)',borderRadius:'999px',padding:'5px 16px',fontSize:'13px',color:'rgba(255,255,255,0.85)',marginBottom:'28px' }}>
             <span style={{ background:'#E85D04',borderRadius:'999px',padding:'1px 8px',fontWeight:700,color:'white',fontSize:'11px' }}>FREE</span>
-            105 Tools Live — 200+ Coming Soon
+            {TOOLS.length}+ Tools Live
           </div>
           <h1 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'clamp(24px,5vw,56px)',fontWeight:800,color:'white',lineHeight:1.15,letterSpacing:'-0.5px',margin:'0 0 18px' }}>
             Every Online Tool<br/>You Need —{' '}
@@ -1239,7 +1390,7 @@ export default function HomePage() {
             type="text"
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
-            placeholder="Search 105+ tools (e.g. word counter, json, calculator)..."
+            placeholder={`Search ${TOOLS.length}+ tools — try "PDF", "JSON", "QR Code"...`}
             style={{ width:'100%',padding:'15px 48px 15px 48px',borderRadius:'16px',border:'2px solid #0F2A4A',background:'white',fontFamily:'inherit',fontSize:'15px',color:'#0F2A4A',outline:'none',boxSizing:'border-box',boxShadow:'0 8px 24px rgba(15,42,74,0.12)' }}
           />
           {searchQuery && (
@@ -1260,7 +1411,7 @@ export default function HomePage() {
       {/* Stats bar */}
       <div style={{ background:'#0a1f38',padding:'16px 24px',marginTop:'40px' }}>
         <div style={{ maxWidth:'1200px',margin:'0 auto',display:'flex',justifyContent:'center',gap:'48px',flexWrap:'wrap' }}>
-          {[{num:'105',label:'Tools Live'},{num:'200+',label:'Coming Soon'},{num:'100%',label:'Free to Use'},{num:'0',label:'Sign-up Needed'}].map(s => (
+          {[{num:`${TOOLS.length}+`,label:'Tools Live'},{num:'100%',label:'Free to Use'},{num:'0',label:'Sign-up Needed'},{num:'∞',label:'No File Limit'}].map(s => (
             <div key={s.label} style={{ textAlign:'center' }}>
               <div style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'22px',fontWeight:800,color:'#F48C42' }}>{s.num}</div>
               <div style={{ fontSize:'11.5px',color:'rgba(255,255,255,0.45)',marginTop:'2px',textTransform:'uppercase',letterSpacing:'0.5px' }}>{s.label}</div>
@@ -1385,7 +1536,7 @@ export default function HomePage() {
         <div style={{ marginBottom:'28px' }}>
           <div style={{ fontSize:'12px',fontWeight:700,color:'#E85D04',textTransform:'uppercase',letterSpacing:'1px',marginBottom:'6px' }}>All Categories</div>
           <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'clamp(24px,3vw,34px)',fontWeight:800,color:'#0F2A4A',margin:'0 0 8px' }}>Free Online Tools</h2>
-          <p style={{ fontSize:'15px',color:'#64748b',margin:0 }}>105 tools live. No installation. Works instantly in your browser.</p>
+          <p style={{ fontSize:'15px',color:'#64748b',margin:0 }}>{TOOLS.length}+ tools live. No installation. Works instantly in your browser.</p>
         </div>
         <div style={{ display:'flex',gap:'6px',flexWrap:'wrap',marginBottom:'28px' }}>
           {CATS.map(cat => (

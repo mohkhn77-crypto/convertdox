@@ -225,7 +225,7 @@ export default function NavBar() {
                       </div>
                     </a>
                   ))}
-                  <a href="/" style={{ display:'block',marginTop:'8px',padding:'9px',background:'#FFF7ED',color:'#E85D04',textAlign:'center' as const,borderRadius:'8px',fontSize:'13px',fontWeight:700,textDecoration:'none' }}>View all 158 tools →</a>
+                  <a href="/" style={{ display:'block',marginTop:'8px',padding:'9px',background:'#FFF7ED',color:'#E85D04',textAlign:'center' as const,borderRadius:'8px',fontSize:'13px',fontWeight:700,textDecoration:'none' }}>View all 175+ tools →</a>
                 </div>
               )}
             </div>

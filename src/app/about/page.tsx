@@ -37,15 +37,15 @@ export default function AboutPage() {
             Every Online Tool You Need — Free, Fast, Private
           </h2>
           <p style={{ fontSize:'16px',color:'#64748b',lineHeight:'1.8',maxWidth:'600px',margin:'0 auto' }}>
-            We believe powerful productivity tools should be accessible to everyone. ConvertDox provides 20+ free tools — from PDF conversion to calculators to developer utilities — with no sign-up, no ads interrupting your work, and no permanent storage of your files.
+            We believe powerful productivity tools should be accessible to everyone. ConvertDox provides 175+ free tools — from PDF conversion to calculators to developer utilities — with no sign-up, no ads interrupting your work, and no permanent storage of your files.
           </p>
         </div>
 
         {/* Stats */}
         <div style={{ display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'16px',marginBottom:'48px' }}>
           {[
-            { num:'20+', label:'Free Tools', icon:'🛠' },
-            { num:'200+', label:'Coming Soon', icon:'🚀' },
+            { num:'175+', label:'Free Tools', icon:'🛠' },
+            { num:'$0', label:'Always Free', icon:'🚀' },
             { num:'$0', label:'Cost to Use', icon:'💚' },
             { num:'0', label:'Files Stored', icon:'🔒' },
           ].map(s => (
