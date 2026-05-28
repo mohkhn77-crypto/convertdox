@@ -2,6 +2,8 @@
 import { useState, useRef } from 'react'
 import NavBar from '@/components/NavBar'
 import SiteFooter from '@/components/SiteFooter'
+import LegalNoticeHigh from '@/components/LegalNoticeHigh'
+import LegalFooter from '@/components/LegalFooter'
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://convertdox-backend-production.up.railway.app'
 const ACCEPTED = ['image/jpeg', 'image/png', 'image/webp', 'image/bmp', 'image/tiff']
@@ -25,6 +27,7 @@ export default function ImageToTextPage() {
   const [error, setError] = useState('')
   const [result, setResult] = useState<OcrResult | null>(null)
   const [copied, setCopied] = useState(false)
+  const [acknowledged, setAcknowledged] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   const handleFile = (f: File | null) => {
@@ -96,6 +99,8 @@ export default function ImageToTextPage() {
         </div>
       </div>
 
+      <LegalNoticeHigh type="privacy" toolName="Image to Text" acknowledged={acknowledged} onAcknowledge={setAcknowledged} />
+
       <div style={{ maxWidth:'860px', margin:'32px auto 0', padding:'0 24px' }}>
         <div
           onClick={() => fileInputRef.current?.click()}
@@ -133,9 +138,9 @@ export default function ImageToTextPage() {
         {error && <div style={{ marginTop:'16px', background:'#FEE2E2', border:'1.5px solid #FCA5A5', borderRadius:'10px', padding:'12px 16px', color:'#991B1B', fontSize:'14px', fontWeight:600 }}>⚠️ {error}</div>}
 
         <div style={{ marginTop:'24px', textAlign:'center' as const }}>
-          <button onClick={extract} disabled={!file || processing}
-            style={{ background: !file || processing ? '#cbd5e1' : '#E85D04', color:'white', padding:'16px 48px', borderRadius:'12px', border:'none', fontSize:'16px', fontWeight:700, cursor: !file || processing ? 'not-allowed' : 'pointer', fontFamily:'inherit', minWidth:'260px' }}>
-            {processing ? '⏳ Extracting… (10–30 seconds)' : '🔤 Extract Text'}
+          <button onClick={extract} disabled={!file || !acknowledged || processing}
+            style={{ background: !file || !acknowledged || processing ? '#cbd5e1' : '#E85D04', color:'white', padding:'16px 48px', borderRadius:'12px', border:'none', fontSize:'16px', fontWeight:700, cursor: !file || !acknowledged || processing ? 'not-allowed' : 'pointer', fontFamily:'inherit', minWidth:'260px' }}>
+            {processing ? '⏳ Extracting… (10–30 seconds)' : !acknowledged ? '☑️ Check box to continue' : '🔤 Extract Text'}
           </button>
         </div>
 
@@ -182,6 +187,7 @@ export default function ImageToTextPage() {
           ))}
         </section>
       </div>
+      <LegalFooter toolName="Image to Text" type="privacy" />
       <SiteFooter />
     </div>
   )

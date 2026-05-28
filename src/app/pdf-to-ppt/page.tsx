@@ -2,6 +2,8 @@
 import { useState, useRef } from 'react'
 import NavBar from '@/components/NavBar'
 import SiteFooter from '@/components/SiteFooter'
+import LegalNoticeHigh from '@/components/LegalNoticeHigh'
+import LegalFooter from '@/components/LegalFooter'
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://convertdox-backend-production.up.railway.app'
 
@@ -10,6 +12,7 @@ export default function PdfToPptPage() {
   const [processing, setProcessing] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
+  const [acknowledged, setAcknowledged] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   const handleFile = (f: File | null) => {
@@ -69,6 +72,9 @@ export default function PdfToPptPage() {
         </div>
       </div>
 
+      <LegalNoticeHigh type="copyright" toolName="PDF to PowerPoint" acknowledged={acknowledged} onAcknowledge={setAcknowledged}
+        customMessage="When extracting content from PDFs, ensure you have the right to use the extracted content." />
+
       <div style={{ maxWidth:'860px', margin:'20px auto 0', padding:'0 24px' }}>
         <div style={{ background:'#FEF3C7', border:'1.5px solid #FCD34D', borderRadius:'12px', padding:'14px 18px' }}>
           <div style={{ fontSize:'14px', fontWeight:700, color:'#92400E', marginBottom:'4px' }}>
@@ -110,9 +116,9 @@ export default function PdfToPptPage() {
         {success && <div style={{ marginTop:'16px', background:'#F0FDF4', border:'1.5px solid #BBF7D0', borderRadius:'10px', padding:'12px 16px', color:'#166534', fontSize:'14px', fontWeight:600 }}>✅ Converted! Your .pptx file has downloaded.</div>}
 
         <div style={{ marginTop:'24px', textAlign:'center' as const }}>
-          <button onClick={convert} disabled={!file || processing}
-            style={{ background: !file || processing ? '#cbd5e1' : '#E85D04', color:'white', padding:'16px 48px', borderRadius:'12px', border:'none', fontSize:'16px', fontWeight:700, cursor: !file || processing ? 'not-allowed' : 'pointer', fontFamily:'inherit', minWidth:'260px' }}>
-            {processing ? '⏳ Converting…' : '📽 Convert to PowerPoint'}
+          <button onClick={convert} disabled={!file || !acknowledged || processing}
+            style={{ background: !file || !acknowledged || processing ? '#cbd5e1' : '#E85D04', color:'white', padding:'16px 48px', borderRadius:'12px', border:'none', fontSize:'16px', fontWeight:700, cursor: !file || !acknowledged || processing ? 'not-allowed' : 'pointer', fontFamily:'inherit', minWidth:'260px' }}>
+            {processing ? '⏳ Converting…' : !acknowledged ? '☑️ Check box to continue' : '📽 Convert to PowerPoint'}
           </button>
         </div>
       </div>
@@ -142,6 +148,7 @@ export default function PdfToPptPage() {
           ))}
         </section>
       </div>
+      <LegalFooter toolName="PDF to PowerPoint" type="copyright" />
       <SiteFooter />
     </div>
   )

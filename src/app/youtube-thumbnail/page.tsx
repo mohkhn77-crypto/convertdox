@@ -2,6 +2,8 @@
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
 import SiteFooter from '@/components/SiteFooter'
+import LegalNoticeHigh from '@/components/LegalNoticeHigh'
+import LegalFooter from '@/components/LegalFooter'
 
 interface Thumbnail {
   label: string
@@ -90,45 +92,7 @@ export default function YouTubeThumbnailPage() {
         </div>
       </div>
 
-      {/* Legal Disclaimer */}
-      <div style={{ maxWidth: '860px', margin: '20px auto 0', padding: '0 24px' }}>
-        <div style={{ background: '#FEF3C7', border: '1.5px solid #FCD34D', borderRadius: '12px', padding: '16px 20px' }}>
-          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
-            <div style={{ fontSize: '20px', flexShrink: 0 }}>⚖️</div>
-            <div>
-              <div style={{ fontSize: '14px', fontWeight: 700, color: '#92400E', marginBottom: '8px' }}>
-                Legal Notice &amp; Fair Use
-              </div>
-              <div style={{ fontSize: '13px', color: '#78350F', lineHeight: '1.6' }}>
-                <p style={{ margin: '0 0 8px' }}>
-                  <strong>All thumbnails belong to their respective owners and creators.</strong> This tool only retrieves publicly available thumbnail images that YouTube provides through their official URLs. ConvertDox does not host, store, or modify any YouTube content.
-                </p>
-                <p style={{ margin: '0 0 8px' }}>
-                  <strong>Permitted uses:</strong> Personal reference, fair use commentary, criticism, news reporting, teaching, and research as defined under copyright law.
-                </p>
-                <p style={{ margin: '0' }}>
-                  <strong>Not permitted:</strong> Republishing thumbnails as your own content, commercial use without permission from the copyright holder, or violating YouTube&apos;s Terms of Service. Always respect creators&apos; intellectual property rights.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Acknowledgment Checkbox */}
-      <div style={{ maxWidth: '700px', margin: '20px auto 0', padding: '0 24px' }}>
-        <label style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', cursor: 'pointer', background: '#f8fafc', border: '1.5px solid #e2e8f0', borderRadius: '10px', padding: '12px 16px' }}>
-          <input
-            type="checkbox"
-            checked={acknowledged}
-            onChange={(e) => setAcknowledged(e.target.checked)}
-            style={{ marginTop: '2px', width: '16px', height: '16px', cursor: 'pointer', accentColor: '#E85D04' }}
-          />
-          <span style={{ fontSize: '13px', color: '#475569', lineHeight: '1.5' }}>
-            I understand that thumbnails are the property of their original creators, and I will use them in accordance with copyright law and YouTube&apos;s Terms of Service.
-          </span>
-        </label>
-      </div>
+      <LegalNoticeHigh type="thirdparty" toolName="YouTube Thumbnail Downloader" acknowledged={acknowledged} onAcknowledge={setAcknowledged} />
 
       {/* URL input */}
       <div style={{ maxWidth: '700px', margin: '16px auto 0', padding: '0 24px' }}>
@@ -234,21 +198,7 @@ export default function YouTubeThumbnailPage() {
         </section>
       </div>
 
-      {/* Footer disclaimer */}
-      <div style={{ maxWidth: '860px', margin: '40px auto 0', padding: '0 24px 20px' }}>
-        <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '10px', padding: '14px 18px', fontSize: '12px', color: '#64748b', lineHeight: '1.6' }}>
-          <p style={{ margin: '0 0 6px' }}>
-            <strong style={{ color: '#0F2A4A' }}>DMCA Notice:</strong> If you are a copyright owner and believe your content is being misused via this tool, please <a href="/contact" style={{ color: '#E85D04', fontWeight: 600 }}>contact us</a>. We will respond to legitimate DMCA takedown requests promptly.
-          </p>
-          <p style={{ margin: '0 0 6px' }}>
-            <strong style={{ color: '#0F2A4A' }}>YouTube Trademark:</strong> YouTube is a trademark of Google LLC. ConvertDox is not affiliated with, endorsed by, or sponsored by YouTube or Google. Use of YouTube&apos;s name and logo is for descriptive purposes only.
-          </p>
-          <p style={{ margin: '0' }}>
-            <strong style={{ color: '#0F2A4A' }}>Privacy:</strong> URLs you enter are not stored. We only fetch publicly accessible thumbnail URLs and do not access video data, user information, or analytics.
-          </p>
-        </div>
-      </div>
-
+      <LegalFooter toolName="YouTube Thumbnail Downloader" type="thirdparty" thirdParty="YouTube" />
       <SiteFooter />
     </div>
   )

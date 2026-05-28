@@ -48,6 +48,7 @@ export default function SiteFooter() {
             <a href="/blog" style={{ color:'rgba(255,255,255,0.4)',fontSize:'13px',textDecoration:'none' }}>Blog</a>
             <a href="/legal#privacy" style={{ color:'rgba(255,255,255,0.4)',fontSize:'13px',textDecoration:'none' }}>Privacy</a>
             <a href="/legal#terms" style={{ color:'rgba(255,255,255,0.4)',fontSize:'13px',textDecoration:'none' }}>Terms</a>
+            <a href="/legal#dmca" style={{ color:'rgba(255,255,255,0.4)',fontSize:'13px',textDecoration:'none' }}>DMCA</a>
             <a href="/contact" style={{ color:'rgba(255,255,255,0.4)',fontSize:'13px',textDecoration:'none' }}>Contact</a>
           </div>
         </div>

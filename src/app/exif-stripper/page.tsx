@@ -2,6 +2,8 @@
 import { useState, useRef } from 'react'
 import NavBar from '@/components/NavBar'
 import SiteFooter from '@/components/SiteFooter'
+import LegalNoticeMedium from '@/components/LegalNoticeMedium'
+import LegalFooter from '@/components/LegalFooter'
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://convertdox-backend-production.up.railway.app'
 
@@ -65,6 +67,8 @@ export default function ExifStripperPage() {
           ))}
         </div>
       </div>
+
+      <LegalNoticeMedium type="privacy" />
 
       <div style={{ maxWidth:'860px', margin:'20px auto 0', padding:'0 24px' }}>
         <div style={{ background:'#EFF6FF', border:'1.5px solid #BFDBFE', borderRadius:'12px', padding:'14px 18px' }}>
@@ -145,6 +149,7 @@ export default function ExifStripperPage() {
           ))}
         </section>
       </div>
+      <LegalFooter toolName="EXIF Stripper" type="privacy" />
       <SiteFooter />
     </div>
   )

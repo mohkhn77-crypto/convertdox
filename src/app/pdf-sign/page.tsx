@@ -2,6 +2,8 @@
 import { useState, useRef } from 'react'
 import NavBar from '@/components/NavBar'
 import SiteFooter from '@/components/SiteFooter'
+import LegalNoticeMedium from '@/components/LegalNoticeMedium'
+import LegalFooter from '@/components/LegalFooter'
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://convertdox-backend-production.up.railway.app'
 
@@ -76,6 +78,8 @@ export default function PdfSignPage() {
           ))}
         </div>
       </div>
+
+      <LegalNoticeMedium type="legal" />
 
       <div style={{ maxWidth:'860px', margin:'32px auto 0', padding:'0 24px' }}>
         <div
@@ -162,6 +166,7 @@ export default function PdfSignPage() {
           ))}
         </section>
       </div>
+      <LegalFooter toolName="Sign PDF" type="privacy" />
       <SiteFooter />
     </div>
   )

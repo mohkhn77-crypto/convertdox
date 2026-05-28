@@ -2,6 +2,8 @@
 import { useState, useRef } from 'react'
 import NavBar from '@/components/NavBar'
 import SiteFooter from '@/components/SiteFooter'
+import LegalNoticeHigh from '@/components/LegalNoticeHigh'
+import LegalFooter from '@/components/LegalFooter'
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://convertdox-backend-production.up.railway.app'
 
@@ -12,6 +14,7 @@ export default function ProtectPdfPage() {
   const [processing, setProcessing] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
+  const [acknowledged, setAcknowledged] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   const handleFile = (f: File | null) => {
@@ -74,6 +77,8 @@ export default function ProtectPdfPage() {
         </div>
       </div>
 
+      <LegalNoticeHigh type="security" toolName="Protect PDF" acknowledged={acknowledged} onAcknowledge={setAcknowledged} />
+
       <div style={{ maxWidth:'860px', margin:'32px auto 0', padding:'0 24px' }}>
         <div
           onClick={() => fileInputRef.current?.click()}
@@ -129,9 +134,9 @@ export default function ProtectPdfPage() {
         {success && <div style={{ marginTop:'16px', background:'#F0FDF4', border:'1.5px solid #BBF7D0', borderRadius:'10px', padding:'12px 16px', color:'#166534', fontSize:'14px', fontWeight:600 }}>✅ PDF protected! Remember your password — it cannot be recovered. Download started.</div>}
 
         <div style={{ marginTop:'24px', textAlign:'center' as const }}>
-          <button onClick={protect} disabled={!file || processing}
-            style={{ background: !file || processing ? '#cbd5e1' : '#E85D04', color:'white', padding:'16px 48px', borderRadius:'12px', border:'none', fontSize:'16px', fontWeight:700, cursor: !file || processing ? 'not-allowed' : 'pointer', fontFamily:'inherit', minWidth:'220px' }}>
-            {processing ? '⏳ Protecting…' : '🔒 Protect PDF'}
+          <button onClick={protect} disabled={!file || !acknowledged || processing}
+            style={{ background: !file || !acknowledged || processing ? '#cbd5e1' : '#E85D04', color:'white', padding:'16px 48px', borderRadius:'12px', border:'none', fontSize:'16px', fontWeight:700, cursor: !file || !acknowledged || processing ? 'not-allowed' : 'pointer', fontFamily:'inherit', minWidth:'220px' }}>
+            {processing ? '⏳ Protecting…' : !acknowledged ? '☑️ Check box to continue' : '🔒 Protect PDF'}
           </button>
         </div>
       </div>
@@ -160,6 +165,7 @@ export default function ProtectPdfPage() {
           ))}
         </section>
       </div>
+      <LegalFooter toolName="Protect PDF" type="security" />
       <SiteFooter />
     </div>
   )

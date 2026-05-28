@@ -2,6 +2,8 @@
 import { useState, useRef } from 'react'
 import NavBar from '@/components/NavBar'
 import SiteFooter from '@/components/SiteFooter'
+import LegalNoticeHigh from '@/components/LegalNoticeHigh'
+import LegalFooter from '@/components/LegalFooter'
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://convertdox-backend-production.up.railway.app'
 
@@ -16,6 +18,7 @@ export default function QrReaderPage() {
   const [error, setError] = useState('')
   const [result, setResult] = useState<string | null>(null)
   const [copied, setCopied] = useState(false)
+  const [acknowledged, setAcknowledged] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   const handleFile = (f: File | null) => {
@@ -76,6 +79,9 @@ export default function QrReaderPage() {
         </div>
       </div>
 
+      <LegalNoticeHigh type="privacy" toolName="QR Code Reader" acknowledged={acknowledged} onAcknowledge={setAcknowledged}
+        customMessage="QR codes may contain URLs to external sites. ConvertDox is not responsible for content of decoded URLs. Be cautious of URLs from unknown sources." />
+
       <div style={{ maxWidth:'860px', margin:'32px auto 0', padding:'0 24px' }}>
         <div
           onClick={() => fileInputRef.current?.click()}
@@ -119,9 +125,9 @@ export default function QrReaderPage() {
         )}
 
         <div style={{ marginTop:'24px', textAlign:'center' as const }}>
-          <button onClick={decode} disabled={!file || processing}
-            style={{ background: !file || processing ? '#cbd5e1' : '#E85D04', color:'white', padding:'16px 48px', borderRadius:'12px', border:'none', fontSize:'16px', fontWeight:700, cursor: !file || processing ? 'not-allowed' : 'pointer', fontFamily:'inherit', minWidth:'260px' }}>
-            {processing ? '⏳ Decoding QR code…' : '📲 Decode QR Code'}
+          <button onClick={decode} disabled={!file || !acknowledged || processing}
+            style={{ background: !file || !acknowledged || processing ? '#cbd5e1' : '#E85D04', color:'white', padding:'16px 48px', borderRadius:'12px', border:'none', fontSize:'16px', fontWeight:700, cursor: !file || !acknowledged || processing ? 'not-allowed' : 'pointer', fontFamily:'inherit', minWidth:'260px' }}>
+            {processing ? '⏳ Decoding QR code…' : !acknowledged ? '☑️ Check box to continue' : '📲 Decode QR Code'}
           </button>
         </div>
       </div>
@@ -150,6 +156,7 @@ export default function QrReaderPage() {
           ))}
         </section>
       </div>
+      <LegalFooter toolName="QR Code Reader" type="privacy" />
       <SiteFooter />
     </div>
   )
