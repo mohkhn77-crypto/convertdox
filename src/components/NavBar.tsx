@@ -101,14 +101,14 @@ const IMG_CONVERT: NavItem[] = [
 ]
 
 const AI_ITEMS: NavItem[] = [
-  { name:'AI Summarizer',   color:'#8B5CF6', icon:'✨', href:'/ai-summarizer',       live:false },
-  { name:'Grammar Checker', color:'#10B981', icon:'✓',  href:'/ai-grammar',           live:false },
-  { name:'Paraphraser',     color:'#E85D04', icon:'↺',  href:'/ai-paraphraser',       live:false },
-  { name:'Resume Improver', color:'#2B579A', icon:'📄', href:'/ai-resume-improver',   live:false },
-  { name:'Cover Letter',    color:'#0EA5E9', icon:'📝', href:'/ai-cover-letter',      live:false },
-  { name:'Email Writer',    color:'#F59E0B', icon:'✉',  href:'/ai-email-writer',      live:false },
-  { name:'AI Translator',   color:'#06B6D4', icon:'🌐', href:'/ai-translator',        live:false },
-  { name:'Tone Changer',    color:'#EC4899', icon:'🎭', href:'/ai-tone-changer',      live:false },
+  { name:'AI Summarizer',              color:'#8B5CF6', icon:'✨', href:'/ai-summarizer' },
+  { name:'AI Grammar Checker',         color:'#10B981', icon:'✓',  href:'/ai-grammar' },
+  { name:'AI Paraphraser',             color:'#E85D04', icon:'↺',  href:'/ai-paraphraser' },
+  { name:'AI Resume Improver',         color:'#2B579A', icon:'📄', href:'/ai-resume-improver' },
+  { name:'AI Cover Letter Generator',  color:'#0EA5E9', icon:'📝', href:'/ai-cover-letter' },
+  { name:'AI Email Writer',            color:'#F59E0B', icon:'✉',  href:'/ai-email-writer' },
+  { name:'AI Translator',              color:'#06B6D4', icon:'🌐', href:'/ai-translator' },
+  { name:'AI Tone Changer',            color:'#EC4899', icon:'🎭', href:'/ai-tone-changer' },
 ]
 
 const DOCS_ITEMS: NavItem[] = [
@@ -200,8 +200,8 @@ export default function NavBar() {
       {label:'EXIF Stripper',href:'/exif-stripper'},{label:'HEIC to JPG',href:'/heic-to-jpg'},
     ]},
     { key:'ai', title:'AI Tools', links:[
-      {label:'AI Summarizer',href:'/ai-summarizer'},{label:'Grammar Checker',href:'/ai-grammar'},
-      {label:'Paraphraser',href:'/ai-paraphraser'},{label:'Email Writer',href:'/ai-email-writer'},
+      {label:'AI Summarizer',href:'/ai-summarizer'},{label:'AI Grammar Checker',href:'/ai-grammar'},
+      {label:'AI Paraphraser',href:'/ai-paraphraser'},{label:'AI Email Writer',href:'/ai-email-writer'},
     ]},
     { key:'docs', title:'Documents', links:[
       {label:'Invoice Generator',href:'/invoice-generator'},{label:'Resume Builder',href:'/resume-builder'},

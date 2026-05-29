@@ -1097,14 +1097,14 @@ const TOOLS = [
   { iconType:'pregnancy',    title:'Pregnancy Calculator', desc:'Due date and pregnancy tracker',          href:'/pregnancy-due-date-calculator',cat:'calc' },
 
   // === AI Tools ===
-  { iconType:'ai', title:'AI Summarizer',         desc:'Summarize long text instantly',        href:'/ai-summarizer',       cat:'ai' },
-  { iconType:'ai', title:'Grammar Checker',        desc:'Fix grammar and spelling errors',      href:'/ai-grammar',          cat:'ai' },
-  { iconType:'ai', title:'AI Paraphraser',         desc:'Rewrite text in different styles',     href:'/ai-paraphraser',      cat:'ai' },
-  { iconType:'ai', title:'Resume Improver',        desc:'Enhance resume bullet points',         href:'/ai-resume-improver',  cat:'ai' },
-  { iconType:'ai', title:'Cover Letter Generator', desc:'Create professional cover letters',    href:'/ai-cover-letter',     cat:'ai' },
-  { iconType:'ai', title:'Email Writer',           desc:'Write professional emails',            href:'/ai-email-writer',     cat:'ai' },
-  { iconType:'ai', title:'AI Translator',          desc:'Translate to 30+ languages',           href:'/ai-translator',       cat:'ai' },
-  { iconType:'ai', title:'Tone Changer',           desc:'Adjust text tone (formal, casual)',    href:'/ai-tone-changer',     cat:'ai' },
+  { iconType:'ai', title:'AI Summarizer',              desc:'Summarize long text instantly',        href:'/ai-summarizer',       cat:'ai' },
+  { iconType:'ai', title:'AI Grammar Checker',         desc:'Fix grammar and spelling errors',      href:'/ai-grammar',          cat:'ai' },
+  { iconType:'ai', title:'AI Paraphraser',             desc:'Rewrite text in different styles',     href:'/ai-paraphraser',      cat:'ai' },
+  { iconType:'ai', title:'AI Resume Improver',         desc:'Enhance resume bullet points',         href:'/ai-resume-improver',  cat:'ai' },
+  { iconType:'ai', title:'AI Cover Letter Generator',  desc:'Create professional cover letters',    href:'/ai-cover-letter',     cat:'ai' },
+  { iconType:'ai', title:'AI Email Writer',            desc:'Write professional emails',            href:'/ai-email-writer',     cat:'ai' },
+  { iconType:'ai', title:'AI Translator',              desc:'Translate to 30+ languages',           href:'/ai-translator',       cat:'ai' },
+  { iconType:'ai', title:'AI Tone Changer',            desc:'Adjust text tone (formal, casual)',    href:'/ai-tone-changer',     cat:'ai' },
 ]
 
 const COMING = [
