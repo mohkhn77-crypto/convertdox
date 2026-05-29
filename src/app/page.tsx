@@ -1662,40 +1662,6 @@ export default function HomePage() {
           </div>
         </div>
       </div>
-
-      <footer style={{ background:'#0F2A4A',padding:'48px 24px 28px' }}>
-        <div style={{ maxWidth:'1200px',margin:'0 auto' }}>
-          <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(200px,1fr))',gap:'40px',marginBottom:'40px' }}>
-            <div>
-              <div style={{ display:'flex',alignItems:'center',gap:'8px',marginBottom:'14px' }}>
-                <div style={{ width:'30px',height:'30px',background:'#E85D04',borderRadius:'7px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'15px' }}>📄</div>
-                <span style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'18px',fontWeight:800,color:'white' }}>Convert<span style={{ color:'#F48C42' }}>Dox</span></span>
-              </div>
-              <p style={{ fontSize:'13.5px',color:'rgba(255,255,255,0.4)',lineHeight:'1.7',maxWidth:'260px',margin:0 }}>Every online tool you need in one place. Free, fast, and private.</p>
-            </div>
-            {[
-              {title:'Tools',links:[{label:'Word Counter',href:'/word-counter'},{label:'QR Generator',href:'/qr-generator'},{label:'Unit Converter',href:'/unit-converter'},{label:'CSS Gradient',href:'/css-gradient'},{label:'Stopwatch',href:'/stopwatch'}]},
-              {title:'Categories',links:[{label:'PDF Tools',href:'/#tools'},{label:'Image Tools',href:'/#tools'},{label:'AI Tools',href:'/#tools'},{label:'Calculators',href:'/#tools'},{label:'Developer Tools',href:'/#tools'}]},
-              {title:'Company',links:[{label:'About',href:'/about'},{label:'Privacy Policy',href:'/legal'},{label:'Terms of Use',href:'/legal'},{label:'Contact',href:'/contact'}]},
-            ].map(col => (
-              <div key={col.title}>
-                <div style={{ fontSize:'12px',fontWeight:700,color:'rgba(255,255,255,0.45)',textTransform:'uppercase',letterSpacing:'0.8px',marginBottom:'14px' }}>{col.title}</div>
-                {col.links.map(link => (
-                  <a key={link.label} href={link.href} style={{ display:'block',fontSize:'13.5px',color:'rgba(255,255,255,0.4)',textDecoration:'none',marginBottom:'8px' }}>{link.label}</a>
-                ))}
-              </div>
-            ))}
-          </div>
-          <div style={{ borderTop:'1px solid rgba(255,255,255,0.08)',paddingTop:'20px',display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:'10px' }}>
-            <p style={{ fontSize:'13px',color:'rgba(255,255,255,0.3)',margin:0 }}>© 2025 ConvertDox — Every Online Tool You Need</p>
-            <div style={{ display:'flex',gap:'20px' }}>
-              {[{label:'Privacy',href:'/legal'},{label:'Terms',href:'/legal'},{label:'Contact',href:'/contact'}].map(l => (
-                <a key={l.label} href={l.href} style={{ fontSize:'13px',color:'rgba(255,255,255,0.3)',textDecoration:'none' }}>{l.label}</a>
-              ))}
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   )
 }
