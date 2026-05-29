@@ -1,0 +1,16 @@
+{
+  "name": "ConvertDox - Free Online Tools",
+  "short_name": "ConvertDox",
+  "description": "184+ free online tools for PDF, images, AI, and more",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0F2A4A",
+  "theme_color": "#E85D04",
+  "icons": [
+    {
+      "src": "/og-image.png",
+      "sizes": "1200x630",
+      "type": "image/png"
+    }
+  ]
+}

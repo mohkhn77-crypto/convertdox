@@ -5,33 +5,36 @@ import CookieBanner from '@/components/CookieBanner'
 import SiteFooter from '@/components/SiteFooter'
 
 export const metadata: Metadata = {
-  title: 'ConvertDox — 85+ Free Online Tools, No Signup Required',
-  description: 'Free online tools: Word Counter, JSON Formatter, QR Generator, BMI Calculator, Password Generator and 80+ more. No signup. Files never stored.',
-  keywords: 'online tools, free tools, word counter, qr generator, bmi calculator, json formatter, password generator, csv to json, uuid generator, text diff, online converter',
+  metadataBase: new URL('https://convertdox.com'),
+  title: {
+    default: 'ConvertDox — 184+ Free Online Tools, No Signup Required',
+    template: '%s | ConvertDox',
+  },
+  description: '184+ free online tools for PDF conversion, image processing, AI writing, calculators, and developer utilities. No signup, no installation, files never stored.',
+  keywords: ['free online tools', 'pdf converter', 'image converter', 'ai tools', 'free calculators', 'developer tools', 'online utilities', 'convertdox'],
   authors: [{ name: 'ConvertDox' }],
   creator: 'ConvertDox',
   publisher: 'ConvertDox',
+  formatDetection: { email: false, address: false, telephone: false },
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+  },
+  manifest: '/manifest.json',
   openGraph: {
-    title: 'ConvertDox — 85+ Free Online Tools, No Signup Required',
-    description: 'Free online tools: Word Counter, JSON Formatter, QR Generator, BMI Calculator, Password Generator and 80+ more. No signup. Files never stored.',
+    type: 'website',
+    locale: 'en_US',
     url: 'https://convertdox.com',
     siteName: 'ConvertDox',
-    images: [
-      {
-        url: 'https://convertdox.com/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'ConvertDox — Every Online Tool You Need',
-      },
-    ],
-    locale: 'en_US',
-    type: 'website',
+    title: 'ConvertDox — 184+ Free Online Tools',
+    description: 'Every online tool you need in one place. Free, fast, and private.',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'ConvertDox — Free Online Tools' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ConvertDox — 85+ Free Online Tools',
-    description: '85+ free online tools. No signup. Files never stored. 100% free forever.',
-    images: ['https://convertdox.com/og-image.png'],
+    title: 'ConvertDox — 184+ Free Online Tools',
+    description: '184+ free online tools. No signup. Files never stored. 100% free forever.',
+    images: ['/og-image.png'],
     creator: '@convertdox',
   },
   robots: {
@@ -40,26 +43,21 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
+      'max-video-preview': -1,
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
   },
-  alternates: {
-    canonical: 'https://convertdox.com',
-  },
+  alternates: { canonical: 'https://convertdox.com' },
+  verification: { google: 'mLMYPJpfYqdB5u1Dsc7GFINCVxFR8sTxS2yhzaytrTQ' },
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="google-site-verification" content="mLMYPJpfYqdB5u1Dsc7GFINCVxFR8sTxS2yhzaytrTQ" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
@@ -73,11 +71,60 @@ export default function RootLayout({
         {children}
         <SiteFooter />
         <CookieBanner />
-        {/* Google Analytics — must use next/script outside <head> in App Router */}
+
+        {/* Organization schema — helps Google display site name + logo in search */}
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-93F3LQWNSN"
+          id="organization-schema"
+          type="application/ld+json"
           strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'ConvertDox',
+              alternateName: 'ConvertDox - Free Online Tools',
+              url: 'https://convertdox.com',
+              logo: 'https://convertdox.com/og-image.png',
+              description: '184+ free online tools for PDF conversion, image processing, AI writing, calculators, and more. No signup, no installation, files never stored.',
+              foundingDate: '2026',
+              areaServed: 'Worldwide',
+              knowsAbout: ['PDF tools', 'Image conversion', 'AI writing tools', 'Document generators', 'Online calculators', 'Developer tools'],
+              contactPoint: {
+                '@type': 'ContactPoint',
+                contactType: 'Customer Support',
+                email: 'support@convertdox.com',
+                availableLanguage: ['English'],
+                url: 'https://convertdox.com/contact',
+              },
+            }),
+          }}
         />
+
+        {/* WebSite schema — enables Google Sitelinks Search Box */}
+        <Script
+          id="website-schema"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'WebSite',
+              name: 'ConvertDox',
+              url: 'https://convertdox.com',
+              potentialAction: {
+                '@type': 'SearchAction',
+                target: {
+                  '@type': 'EntryPoint',
+                  urlTemplate: 'https://convertdox.com/?q={search_term_string}',
+                },
+                'query-input': 'required name=search_term_string',
+              },
+            }),
+          }}
+        />
+
+        {/* Google Analytics */}
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-93F3LQWNSN" strategy="afterInteractive" />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
