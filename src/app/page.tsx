@@ -1095,6 +1095,16 @@ const TOOLS = [
   { iconType:'meta-gen',     title:'Meta Tag Generator',   desc:'SEO meta tags and Open Graph',            href:'/meta-description-generator',  cat:'util' },
   { iconType:'emi',          title:'Loan EMI Calculator',  desc:'Calculate monthly loan EMI',              href:'/loan-emi-calculator',         cat:'calc' },
   { iconType:'pregnancy',    title:'Pregnancy Calculator', desc:'Due date and pregnancy tracker',          href:'/pregnancy-due-date-calculator',cat:'calc' },
+
+  // === AI Tools ===
+  { iconType:'ai', title:'AI Summarizer',         desc:'Summarize long text instantly',        href:'/ai-summarizer',       cat:'ai' },
+  { iconType:'ai', title:'Grammar Checker',        desc:'Fix grammar and spelling errors',      href:'/ai-grammar',          cat:'ai' },
+  { iconType:'ai', title:'AI Paraphraser',         desc:'Rewrite text in different styles',     href:'/ai-paraphraser',      cat:'ai' },
+  { iconType:'ai', title:'Resume Improver',        desc:'Enhance resume bullet points',         href:'/ai-resume-improver',  cat:'ai' },
+  { iconType:'ai', title:'Cover Letter Generator', desc:'Create professional cover letters',    href:'/ai-cover-letter',     cat:'ai' },
+  { iconType:'ai', title:'Email Writer',           desc:'Write professional emails',            href:'/ai-email-writer',     cat:'ai' },
+  { iconType:'ai', title:'AI Translator',          desc:'Translate to 30+ languages',           href:'/ai-translator',       cat:'ai' },
+  { iconType:'ai', title:'Tone Changer',           desc:'Adjust text tone (formal, casual)',    href:'/ai-tone-changer',     cat:'ai' },
 ]
 
 const COMING = [
@@ -1220,6 +1230,14 @@ const CatIcon = ({ type, active }: { type: string, active: boolean }) => {
         <path d="M12 4v2M12 18v2M4 12H2M22 12h-2M6.3 6.3l1.4 1.4M16.3 16.3l1.4 1.4M6.3 17.7l1.4-1.4M16.3 7.7l1.4-1.4" stroke={color} strokeWidth="1.8" strokeLinecap="round"/>
       </svg>
     ),
+    ai: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="9" r="4" stroke={color} strokeWidth="1.8" fill="none"/>
+        <path d="M8 9h8M12 5v8" stroke={accent} strokeWidth="1.8" strokeLinecap="round"/>
+        <path d="M6 17c0-2 2.7-3 6-3s6 1 6 3" stroke={color} strokeWidth="1.8" strokeLinecap="round"/>
+        <circle cx="18" cy="6" r="2" fill={accent}/>
+      </svg>
+    ),
   }
   return icons[type] ?? icons['all']
 }
@@ -1235,6 +1253,7 @@ const CATS = [
   { id:'docs',     label:'Documents',    iconType:'docs' },
   { id:'specialty',label:'Specialty',    iconType:'specialty' },
   { id:'ocr',      label:'OCR',          iconType:'ocr' },
+  { id:'ai',        label:'AI Tools',     iconType:'ai' },
   { id:'util',     label:'Utility',      iconType:'util' },
   { id:'security', label:'Security',     iconType:'security' },
   { id:'qr',       label:'QR Code',      iconType:'qr' },

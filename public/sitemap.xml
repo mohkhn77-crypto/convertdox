@@ -250,4 +250,14 @@
   <url><loc>https://convertdox.com/cookie-policy</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://convertdox.com/disclaimer</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
 
+  <!-- AI Tools — 2026-05-29 -->
+  <url><loc>https://convertdox.com/ai-summarizer</loc><lastmod>2026-05-29</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://convertdox.com/ai-grammar</loc><lastmod>2026-05-29</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://convertdox.com/ai-paraphraser</loc><lastmod>2026-05-29</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://convertdox.com/ai-resume-improver</loc><lastmod>2026-05-29</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://convertdox.com/ai-cover-letter</loc><lastmod>2026-05-29</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://convertdox.com/ai-email-writer</loc><lastmod>2026-05-29</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://convertdox.com/ai-translator</loc><lastmod>2026-05-29</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://convertdox.com/ai-tone-changer</loc><lastmod>2026-05-29</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+
 </urlset>
