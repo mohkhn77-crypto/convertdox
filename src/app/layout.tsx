@@ -84,7 +84,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               name: 'ConvertDox',
               alternateName: 'ConvertDox - Free Online Tools',
               url: 'https://convertdox.com',
-              logo: 'https://convertdox.com/og-image.png',
+              logo: 'https://convertdox.com/logo.png',
               description: '184+ free online tools for PDF conversion, image processing, AI writing, calculators, and more. No signup, no installation, files never stored.',
               foundingDate: '2026',
               areaServed: 'Worldwide',
