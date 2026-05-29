@@ -7,7 +7,6 @@
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
 import TrustStrip from '@/components/TrustStrip'
-import SiteFooter from '@/components/SiteFooter'
 
 type CalcType = 'whatpct'|'pctof'|'change'|'increase'|'decrease'
 
@@ -116,7 +115,6 @@ export default function PercentageCalculatorPage() {
           ))}
         </div>
       </div>
-      <SiteFooter />
     </div>
   )
 }

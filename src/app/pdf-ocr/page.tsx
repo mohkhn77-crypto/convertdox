@@ -1,7 +1,6 @@
 'use client'
 import { useState, useRef } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import LegalNoticeHigh from '@/components/LegalNoticeHigh'
 import LegalFooter from '@/components/LegalFooter'
 
@@ -190,7 +189,6 @@ export default function PdfOcrPage() {
         </section>
       </div>
       <LegalFooter toolName="PDF OCR" type="privacy" />
-      <SiteFooter />
     </div>
   )
 }

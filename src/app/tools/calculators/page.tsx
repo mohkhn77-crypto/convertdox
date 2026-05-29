@@ -1,6 +1,5 @@
 'use client'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 const OTHER_CATS = [
@@ -255,8 +254,6 @@ export default function CalculatorsPage() {
           </div>
         </div>
       </div>
-
-      <SiteFooter />
     </div>
   )
 }

@@ -1,6 +1,5 @@
 'use client'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 
 export default function ComingSoonPage() {
   return (
@@ -22,7 +21,6 @@ export default function ComingSoonPage() {
           <a href="/contact" style={{ color:'#E85D04', fontWeight:700 }}>Contact us</a>
         </div>
       </div>
-      <SiteFooter />
     </div>
   )
 }

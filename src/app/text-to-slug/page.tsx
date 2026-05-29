@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 function toSlug(text: string, sep: string, maxLen: number, prefix: string, suffix: string): string {
@@ -127,8 +126,6 @@ export default function TextToSlugPage() {
           </button>
         </div>
       </div>
-
-      <SiteFooter />
     </div>
   )
 }

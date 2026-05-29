@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import LegalNoticeHigh from '@/components/LegalNoticeHigh'
 import LegalFooter from '@/components/LegalFooter'
 
@@ -199,7 +198,6 @@ export default function YouTubeThumbnailPage() {
       </div>
 
       <LegalFooter toolName="YouTube Thumbnail Downloader" type="thirdparty" thirdParty="YouTube" />
-      <SiteFooter />
     </div>
   )
 }

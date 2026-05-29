@@ -1,7 +1,6 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 interface SpeechRecognitionLike {
@@ -147,7 +146,6 @@ export default function SpeechToTextPage() {
           </>
         )}
       </div>
-      <SiteFooter />
     </div>
   )
 }

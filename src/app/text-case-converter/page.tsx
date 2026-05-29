@@ -7,7 +7,6 @@
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
 import TrustStrip from '@/components/TrustStrip'
-import SiteFooter from '@/components/SiteFooter'
 import RelatedTools from '@/components/RelatedTools'
 
 export default function TextCaseConverterPage() {
@@ -94,7 +93,6 @@ export default function TextCaseConverterPage() {
         </div>
       </div>
       <RelatedTools currentPath="/text-case-converter" />
-      <SiteFooter />
     </div>
   )
 }

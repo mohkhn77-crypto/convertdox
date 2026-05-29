@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 const parseMarkdown = (md: string): string => {
@@ -132,7 +131,6 @@ export default function MarkdownToHTMLPage() {
           </div>
         </div>
       </div>
-      <SiteFooter />
     </div>
   )
 }

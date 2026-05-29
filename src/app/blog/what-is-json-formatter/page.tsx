@@ -1,5 +1,4 @@
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 
 const H2: React.CSSProperties = { fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginTop:'40px',marginBottom:'14px',letterSpacing:'-0.3px' }
 const H3: React.CSSProperties = { fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'19px',fontWeight:700,color:'#0F2A4A',marginTop:'24px',marginBottom:'10px' }
@@ -189,8 +188,6 @@ export default function Page() {
         'author': { '@type': 'Organization', 'name': 'ConvertDox', 'url': 'https://convertdox.com' },
         'publisher': { '@type': 'Organization', 'name': 'ConvertDox', 'logo': { '@type': 'ImageObject', 'url': 'https://convertdox.com/og-image.png' } },
       }) }} />
-
-      <SiteFooter />
     </div>
   )
 }

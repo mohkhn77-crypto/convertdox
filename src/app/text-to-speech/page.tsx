@@ -1,7 +1,6 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 export default function TextToSpeechPage() {
@@ -122,7 +121,6 @@ export default function TextToSpeechPage() {
           <strong>Note:</strong> Browser playback only — no audio file download. Available voices depend on your operating system.
         </div>
       </div>
-      <SiteFooter />
     </div>
   )
 }

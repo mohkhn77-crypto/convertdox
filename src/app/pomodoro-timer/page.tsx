@@ -1,7 +1,6 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 type Mode = 'work' | 'short' | 'long'
@@ -157,7 +156,6 @@ export default function PomodoroTimerPage() {
           <div style={{ fontSize: '12px', color: '#94a3b8', marginTop: '8px' }}>Every 4 pomodoros → Long Break</div>
         </div>
       </div>
-      <SiteFooter />
     </div>
   )
 }

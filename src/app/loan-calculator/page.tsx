@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import RelatedTools from '@/components/RelatedTools'
 import TrustStrip from '@/components/TrustStrip'
 
@@ -122,7 +121,6 @@ export default function LoanCalculatorPage() {
         )}
       </div>
       <RelatedTools currentPath="/loan-calculator" />
-      <SiteFooter />
     </div>
   )
 }

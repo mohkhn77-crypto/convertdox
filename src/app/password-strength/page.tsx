@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 const COMMON = ['password','123456','password1','qwerty','abc123','letmein','monkey','1234567890','admin','welcome','login','master','hello','dragon','passw0rd','iloveyou','sunshine','princess','football','shadow']
@@ -159,8 +158,6 @@ export default function PasswordStrengthPage() {
           </div>
         )}
       </div>
-
-      <SiteFooter />
     </div>
   )
 }

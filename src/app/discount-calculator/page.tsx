@@ -8,7 +8,6 @@
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
 import TrustStrip from '@/components/TrustStrip'
-import SiteFooter from '@/components/SiteFooter'
 
 export default function DiscountCalculatorPage() {
   const [original, setOriginal] = useState('')
@@ -91,7 +90,6 @@ export default function DiscountCalculatorPage() {
           </div>
         </div>
       </div>
-      <SiteFooter />
     </div>
   )
 }

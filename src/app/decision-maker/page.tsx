@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 type HistoryEntry = { question: string; result: string; mode: string }
@@ -147,7 +146,6 @@ export default function DecisionMakerPage() {
           </div>
         )}
       </div>
-      <SiteFooter />
     </div>
   )
 }

@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 function generateSlug(text: string, separator: string, maxLen: number): string {
@@ -114,7 +113,6 @@ export default function SlugGeneratorPage() {
           </div>
         </div>
       </div>
-      <SiteFooter />
     </div>
   )
 }

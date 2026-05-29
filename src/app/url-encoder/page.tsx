@@ -6,7 +6,6 @@
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
 import TrustStrip from '@/components/TrustStrip'
-import SiteFooter from '@/components/SiteFooter'
 import RelatedTools from '@/components/RelatedTools'
 
 export default function URLEncoderPage() {
@@ -170,7 +169,6 @@ export default function URLEncoderPage() {
         </div>
       </div>
       <RelatedTools currentPath="/url-encoder" />
-      <SiteFooter />
     </div>
   )
 }

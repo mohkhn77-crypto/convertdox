@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 // Simple YAML parser
@@ -239,7 +238,6 @@ export default function YAMLToJSONPage() {
           </div>
         </div>
       </div>
-      <SiteFooter />
     </div>
   )
 }

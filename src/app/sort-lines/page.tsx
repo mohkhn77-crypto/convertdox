@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 type SortMode = 'az' | 'za' | 'len-asc' | 'len-desc' | 'random'
@@ -143,8 +142,6 @@ export default function SortLinesPage() {
           </button>
         </div>
       </div>
-
-      <SiteFooter />
     </div>
   )
 }

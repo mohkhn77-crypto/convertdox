@@ -1,7 +1,6 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 type Shape = 'square' | 'rounded' | 'circle'
@@ -144,7 +143,6 @@ export default function FaviconGeneratorPage() {
           <pre style={{ margin: 0, fontFamily: 'monospace', fontSize: '13px', color: '#a5f3fc', whiteSpace: 'pre-wrap' }}>{`<link rel="icon" type="image/png" href="favicon.png">`}</pre>
         </div>
       </div>
-      <SiteFooter />
     </div>
   )
 }

@@ -8,7 +8,6 @@
 */
 'use client'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 
 export default function AboutPage() {
   return (
@@ -117,7 +116,6 @@ export default function AboutPage() {
           </div>
         </div>
       </div>
-      <SiteFooter />
     </div>
   )
 }

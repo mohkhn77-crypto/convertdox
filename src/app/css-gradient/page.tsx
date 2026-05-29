@@ -6,7 +6,6 @@
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
 import TrustStrip from '@/components/TrustStrip'
-import SiteFooter from '@/components/SiteFooter'
 import RelatedTools from '@/components/RelatedTools'
 
 const PRESETS = [
@@ -168,7 +167,6 @@ export default function CSSGradientPage() {
         </div>
       </div>
       <RelatedTools currentPath="/css-gradient" />
-      <SiteFooter />
     </div>
   )
 }

@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 const GRADE_POINTS: Record<string, number> = {
@@ -111,7 +110,6 @@ export default function GPACalculatorPage() {
           </div>
         </div>
       </div>
-      <SiteFooter />
     </div>
   )
 }

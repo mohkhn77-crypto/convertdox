@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 function decodeEntities(text: string): string {
@@ -125,8 +124,6 @@ export default function StripHtmlPage() {
           </button>
         </div>
       </div>
-
-      <SiteFooter />
     </div>
   )
 }

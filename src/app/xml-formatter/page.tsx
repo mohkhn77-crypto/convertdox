@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 function formatXML(xml: string): { result: string; error: string | null } {
@@ -144,7 +143,6 @@ export default function XMLFormatterPage() {
           </div>
         </div>
       </div>
-      <SiteFooter />
     </div>
   )
 }

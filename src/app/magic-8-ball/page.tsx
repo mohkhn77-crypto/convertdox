@@ -1,7 +1,6 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 type Response = { text: string; type: 'positive' | 'neutral' | 'negative' }
@@ -160,7 +159,6 @@ export default function Magic8BallPage() {
           </div>
         )}
       </div>
-      <SiteFooter />
     </div>
   )
 }

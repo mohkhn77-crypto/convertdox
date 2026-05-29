@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 type Base = 'binary' | 'decimal' | 'hex' | 'octal'
@@ -105,8 +104,6 @@ export default function BinaryDecimalPage() {
           </p>
         </div>
       </div>
-
-      <SiteFooter />
     </div>
   )
 }

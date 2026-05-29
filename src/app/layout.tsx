@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Script from 'next/script'
 import './globals.css'
 import CookieBanner from '@/components/CookieBanner'
+import SiteFooter from '@/components/SiteFooter'
 
 export const metadata: Metadata = {
   title: 'ConvertDox — 85+ Free Online Tools, No Signup Required',
@@ -70,6 +71,7 @@ export default function RootLayout({
       </head>
       <body style={{ margin: 0, padding: 0, fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}>
         {children}
+        <SiteFooter />
         <CookieBanner />
         {/* Google Analytics — must use next/script outside <head> in App Router */}
         <Script

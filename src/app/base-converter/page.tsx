@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 const BASES = [
@@ -105,7 +104,6 @@ export default function BaseConverterPage() {
           })}
         </div>
       </div>
-      <SiteFooter />
     </div>
   )
 }

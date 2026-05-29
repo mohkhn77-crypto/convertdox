@@ -1,7 +1,6 @@
 'use client'
 import { useState, useMemo } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 const WORD_SET = new Set<string>([
@@ -119,7 +118,6 @@ export default function AnagramGeneratorPage() {
           )}
         </div>
       </div>
-      <SiteFooter />
     </div>
   )
 }

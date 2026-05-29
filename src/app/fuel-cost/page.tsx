@@ -1,7 +1,6 @@
 'use client'
 import { useState, useMemo } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 type DistUnit = 'mi' | 'km'
@@ -122,7 +121,6 @@ export default function FuelCostPage() {
           ))}
         </div>
       </div>
-      <SiteFooter />
     </div>
   )
 }

@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 function businessDays(start: Date, end: Date) {
@@ -107,7 +106,6 @@ export default function DateDifferencePage() {
           </div>
         )}
       </div>
-      <SiteFooter />
     </div>
   )
 }

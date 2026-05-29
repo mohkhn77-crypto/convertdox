@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import RelatedTools from '@/components/RelatedTools'
 import TrustStrip from '@/components/TrustStrip'
 
@@ -181,7 +180,6 @@ export default function RegexTesterPage() {
         )}
       </div>
       <RelatedTools currentPath="/regex-tester" />
-      <SiteFooter />
     </div>
   )
 }

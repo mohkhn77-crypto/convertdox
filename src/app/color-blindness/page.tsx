@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 type Mat = [[number, number, number], [number, number, number], [number, number, number]]
@@ -107,8 +106,6 @@ export default function ColorBlindnessPage() {
         </div>
         <p style={{ fontSize: '12px', color: '#94a3b8', marginTop: '16px' }}>Click any swatch to copy its HEX value</p>
       </div>
-
-      <SiteFooter />
     </div>
   )
 }

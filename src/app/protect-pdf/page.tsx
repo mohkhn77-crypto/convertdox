@@ -1,7 +1,6 @@
 'use client'
 import { useState, useRef } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import LegalNoticeHigh from '@/components/LegalNoticeHigh'
 import LegalFooter from '@/components/LegalFooter'
 
@@ -166,7 +165,6 @@ export default function ProtectPdfPage() {
         </section>
       </div>
       <LegalFooter toolName="Protect PDF" type="security" />
-      <SiteFooter />
     </div>
   )
 }

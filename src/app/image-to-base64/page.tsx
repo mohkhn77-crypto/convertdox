@@ -1,7 +1,6 @@
 'use client'
 import { useState, useRef, useCallback } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 type OutputTab = 'dataurl' | 'base64' | 'css'
@@ -161,7 +160,6 @@ export default function ImageToBase64Page() {
           <div style={{ color: '#166534', fontSize: '13px' }}>Your images are processed entirely in your browser using the FileReader API. No data is uploaded to any server.</div>
         </div>
       </div>
-      <SiteFooter />
     </div>
   )
 }

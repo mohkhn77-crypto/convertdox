@@ -1,7 +1,6 @@
 'use client'
 import { useState, useMemo } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 type Gender = 'M' | 'F'
@@ -141,7 +140,6 @@ export default function BodyFatCalculatorPage() {
           </div>
         </div>
       </div>
-      <SiteFooter />
     </div>
   )
 }

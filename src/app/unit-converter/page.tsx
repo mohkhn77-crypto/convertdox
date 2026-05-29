@@ -6,7 +6,6 @@
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
 import TrustStrip from '@/components/TrustStrip'
-import SiteFooter from '@/components/SiteFooter'
 
 type Category = 'length'|'weight'|'temperature'|'area'|'speed'|'volume'
 
@@ -173,7 +172,6 @@ export default function UnitConverterPage() {
           </div>
         )}
       </div>
-      <SiteFooter />
     </div>
   )
 }

@@ -6,7 +6,6 @@
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
 import TrustStrip from '@/components/TrustStrip'
-import SiteFooter from '@/components/SiteFooter'
 
 const DICE_FACES = ['', '⚀', '⚁', '⚂', '⚃', '⚄', '⚅']
 
@@ -209,7 +208,6 @@ export default function CoinFlipPage() {
           </div>
         )}
       </div>
-      <SiteFooter />
     </div>
   )
 }

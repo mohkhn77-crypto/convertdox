@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 const ONES: Record<string, number> = {
@@ -131,7 +130,6 @@ export default function WordsToNumberPage() {
           </ul>
         </div>
       </div>
-      <SiteFooter />
     </div>
   )
 }

@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 const flipMap: Record<string, string> = {
@@ -116,8 +115,6 @@ export default function ReverseTextPage() {
           </button>
         </div>
       </div>
-
-      <SiteFooter />
     </div>
   )
 }

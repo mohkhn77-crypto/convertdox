@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 function relativeTime(ms: number): string {
@@ -142,7 +141,6 @@ export default function TimestampConverterPage() {
           </div>
         )}
       </div>
-      <SiteFooter />
     </div>
   )
 }

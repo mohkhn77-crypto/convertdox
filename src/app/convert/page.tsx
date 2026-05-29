@@ -2,7 +2,6 @@
 import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 
 interface FileInfo {
   name: string
@@ -162,8 +161,6 @@ function ConvertContent() {
         </div>
 
       </div>
-
-      <SiteFooter />
     </div>
   )
 }

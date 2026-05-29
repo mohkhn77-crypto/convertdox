@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 type Lang = 'json' | 'html' | 'css' | 'js' | 'sql' | 'xml'
@@ -243,7 +242,6 @@ export default function CodeBeautifierPage() {
           </div>
         </div>
       </div>
-      <SiteFooter />
     </div>
   )
 }

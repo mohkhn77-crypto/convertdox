@@ -1,7 +1,6 @@
 'use client'
 import { useState, useMemo } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 function hexToRgb(hex: string): [number, number, number] {
@@ -109,7 +108,6 @@ export default function ColorContrastPage() {
           </div>
         )}
       </div>
-      <SiteFooter />
     </div>
   )
 }

@@ -1,7 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import RelatedTools from '@/components/RelatedTools'
 import TrustStrip from '@/components/TrustStrip'
 
@@ -162,7 +161,6 @@ export default function TimezoneConverterPage() {
         </div>
       </div>
       <RelatedTools currentPath="/timezone-converter" />
-      <SiteFooter />
     </div>
   )
 }

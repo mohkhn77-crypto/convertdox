@@ -1,7 +1,6 @@
 'use client'
 import { useState, useMemo } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 type Dir = 'row' | 'column' | 'row-reverse' | 'column-reverse'
@@ -120,7 +119,6 @@ export default function FlexboxGeneratorPage() {
           <pre style={{ margin: 0, fontFamily: 'monospace', fontSize: '13.5px', color: '#a5f3fc', whiteSpace: 'pre-wrap' }}>{css}</pre>
         </div>
       </div>
-      <SiteFooter />
     </div>
   )
 }

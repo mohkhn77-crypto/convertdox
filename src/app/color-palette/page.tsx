@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 function hexToHsl(hex: string): [number, number, number] {
@@ -184,8 +183,6 @@ export default function ColorPalettePage() {
         </div>
         <p style={{ fontSize: '12px', color: '#94a3b8', marginTop: '8px' }}>Click any swatch to copy its HEX value</p>
       </div>
-
-      <SiteFooter />
     </div>
   )
 }

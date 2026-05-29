@@ -6,7 +6,6 @@
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
 import TrustStrip from '@/components/TrustStrip'
-import SiteFooter from '@/components/SiteFooter'
 import RelatedTools from '@/components/RelatedTools'
 
 export default function JSONFormatterPage() {
@@ -212,8 +211,6 @@ export default function JSONFormatterPage() {
         'aggregateRating': { '@type': 'AggregateRating', 'ratingValue': '4.8', 'ratingCount': '127' },
         'creator': { '@type': 'Organization', 'name': 'ConvertDox', 'url': 'https://convertdox.com' },
       }) }} />
-
-      <SiteFooter />
     </div>
   )
 }

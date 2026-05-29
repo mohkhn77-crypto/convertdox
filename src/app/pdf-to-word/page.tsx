@@ -1,7 +1,6 @@
 'use client'
 import { useState, useRef } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import LegalNoticeHigh from '@/components/LegalNoticeHigh'
 import LegalFooter from '@/components/LegalFooter'
 
@@ -141,7 +140,6 @@ export default function PdfToWordPage() {
         </section>
       </div>
       <LegalFooter toolName="PDF to Word" type="copyright" />
-      <SiteFooter />
     </div>
   )
 }

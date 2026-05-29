@@ -1,5 +1,4 @@
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 
 const POSTS = [
   {
@@ -91,8 +90,6 @@ export default function BlogIndexPage() {
           ))}
         </div>
       </div>
-
-      <SiteFooter />
     </div>
   )
 }

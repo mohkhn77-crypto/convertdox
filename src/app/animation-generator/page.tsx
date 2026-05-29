@@ -1,7 +1,6 @@
 'use client'
 import { useState, useMemo, useEffect } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 type Easing = 'linear' | 'ease' | 'ease-in' | 'ease-out' | 'ease-in-out'
@@ -186,7 +185,6 @@ export default function AnimationGeneratorPage() {
           <pre style={{ margin: 0, fontFamily: 'monospace', fontSize: '13px', color: '#a5f3fc', whiteSpace: 'pre-wrap' }}>{keyframesCSS}{'\n\n.element {\n  ' + animProp + '\n}'}</pre>
         </div>
       </div>
-      <SiteFooter />
     </div>
   )
 }

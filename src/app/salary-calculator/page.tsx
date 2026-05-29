@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 type Freq = 'hourly' | 'daily' | 'weekly' | 'biweekly' | 'monthly' | 'yearly'
@@ -100,7 +99,6 @@ export default function SalaryCalculatorPage() {
           </div>
         )}
       </div>
-      <SiteFooter />
     </div>
   )
 }

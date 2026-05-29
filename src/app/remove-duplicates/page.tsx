@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 export default function RemoveDuplicatesPage() {
@@ -143,8 +142,6 @@ export default function RemoveDuplicatesPage() {
           </button>
         </div>
       </div>
-
-      <SiteFooter />
     </div>
   )
 }

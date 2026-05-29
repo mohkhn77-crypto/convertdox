@@ -6,7 +6,6 @@
 import { useState, useEffect, useRef } from 'react'
 import NavBar from '@/components/NavBar'
 import TrustStrip from '@/components/TrustStrip'
-import SiteFooter from '@/components/SiteFooter'
 
 const fmt = (ms: number) => {
   const h = Math.floor(ms / 3600000)
@@ -251,7 +250,6 @@ export default function StopwatchPage() {
           </div>
         )}
       </div>
-      <SiteFooter />
     </div>
   )
 }

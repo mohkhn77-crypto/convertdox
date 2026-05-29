@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 interface Corners { tl: number; tr: number; br: number; bl: number }
@@ -149,8 +148,6 @@ export default function BorderRadiusPage() {
           </div>
         </div>
       </div>
-
-      <SiteFooter />
     </div>
   )
 }

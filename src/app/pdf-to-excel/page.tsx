@@ -1,7 +1,6 @@
 'use client'
 import { useState, useRef } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import LegalNoticeHigh from '@/components/LegalNoticeHigh'
 import LegalFooter from '@/components/LegalFooter'
 
@@ -148,7 +147,6 @@ export default function PdfToExcelPage() {
         </section>
       </div>
       <LegalFooter toolName="PDF to Excel" type="copyright" />
-      <SiteFooter />
     </div>
   )
 }

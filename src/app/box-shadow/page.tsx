@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 interface Shadow {
@@ -165,8 +164,6 @@ export default function BoxShadowPage() {
           </div>
         </div>
       </div>
-
-      <SiteFooter />
     </div>
   )
 }

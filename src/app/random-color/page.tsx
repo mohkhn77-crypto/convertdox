@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 type ColorMode = 'any' | 'pastel' | 'vibrant' | 'dark' | 'earth'
@@ -166,7 +165,6 @@ export default function RandomColorPage() {
           <p style={{ fontSize: '12px', color: '#94a3b8', margin: 0 }}>Click any hex value to copy. Lock colors before regenerating to keep them.</p>
         </div>
       </div>
-      <SiteFooter />
     </div>
   )
 }

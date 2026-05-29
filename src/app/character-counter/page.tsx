@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 const STOP_WORDS = new Set(['the','a','an','is','in','it','to','of','and','or','that','this','was','for','on','are','with','as','at','be','by','from','has','had','he','she','they','we','you','i','but'])
@@ -155,8 +154,6 @@ export default function CharacterCounterPage() {
           </div>
         </div>
       </div>
-
-      <SiteFooter />
     </div>
   )
 }

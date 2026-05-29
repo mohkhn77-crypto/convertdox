@@ -14,7 +14,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 
 type Tab = 'privacy'|'terms'|'security'|'dmca'|'aup'|'ai'
 
@@ -641,7 +640,6 @@ export default function LegalPage() {
           </div>
         </div>
       </div>
-      <SiteFooter />
     </div>
   )
 }

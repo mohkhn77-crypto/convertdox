@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 type Format = 'spaced' | 'nospace' | 'prefix'
@@ -124,7 +123,6 @@ export default function TextToBinaryPage() {
           </div>
         )}
       </div>
-      <SiteFooter />
     </div>
   )
 }

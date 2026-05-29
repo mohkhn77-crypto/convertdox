@@ -1,7 +1,6 @@
 'use client'
 import { useState, useMemo } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 export default function MortgageAdvancedPage() {
@@ -163,7 +162,6 @@ export default function MortgageAdvancedPage() {
           </table>
         </div>
       </div>
-      <SiteFooter />
     </div>
   )
 }

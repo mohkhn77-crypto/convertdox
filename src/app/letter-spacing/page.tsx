@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 const STYLES = [
@@ -70,7 +69,6 @@ export default function LetterSpacingPage() {
           </div>
         </div>
       </div>
-      <SiteFooter />
     </div>
   )
 }

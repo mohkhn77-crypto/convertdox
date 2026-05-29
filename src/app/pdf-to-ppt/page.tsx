@@ -1,7 +1,6 @@
 'use client'
 import { useState, useRef } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import LegalNoticeHigh from '@/components/LegalNoticeHigh'
 import LegalFooter from '@/components/LegalFooter'
 
@@ -149,7 +148,6 @@ export default function PdfToPptPage() {
         </section>
       </div>
       <LegalFooter toolName="PDF to PowerPoint" type="copyright" />
-      <SiteFooter />
     </div>
   )
 }

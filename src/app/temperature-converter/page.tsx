@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 function toCelsius(val: number, unit: string): number {
@@ -135,7 +134,6 @@ export default function TemperatureConverterPage() {
           })}
         </div>
       </div>
-      <SiteFooter />
     </div>
   )
 }

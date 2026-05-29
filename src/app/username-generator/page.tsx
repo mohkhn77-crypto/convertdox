@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 const ADJECTIVES = ['Cool','Fast','Bold','Dark','Neon','Swift','Brave','Wild','Calm','Epic','Fierce','Mighty','Royal','Sunny','Shadow','Silver','Golden','Iron','Stealth','Cyber','Mystic','Cosmic','Storm','Thunder','Crystal','Phantom','Omega','Alpha','Ultra','Hyper','Prime','Turbo','Quantum','Nova','Blaze','Frost','Ember','Jade','Violet','Azure']
@@ -100,8 +99,6 @@ export default function UsernameGeneratorPage() {
           </div>
         )}
       </div>
-
-      <SiteFooter />
     </div>
   )
 }

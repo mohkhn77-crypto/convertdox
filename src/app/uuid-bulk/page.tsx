@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 export default function UuidBulkPage() {
@@ -133,7 +132,6 @@ export default function UuidBulkPage() {
           </div>
         )}
       </div>
-      <SiteFooter />
     </div>
   )
 }

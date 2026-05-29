@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 const TEAM_COLORS = [
@@ -140,7 +139,6 @@ export default function TeamPickerPage() {
           </div>
         )}
       </div>
-      <SiteFooter />
     </div>
   )
 }

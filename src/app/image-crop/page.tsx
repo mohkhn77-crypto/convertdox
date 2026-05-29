@@ -1,7 +1,6 @@
 'use client'
 import { useState, useRef } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://convertdox-backend-production.up.railway.app'
 const ACCEPTED = ['image/jpeg', 'image/png', 'image/webp']
@@ -126,7 +125,6 @@ export default function ImageCropPage() {
           ))}
         </section>
       </div>
-      <SiteFooter />
     </div>
   )
 }

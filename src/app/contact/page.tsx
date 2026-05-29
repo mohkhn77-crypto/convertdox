@@ -6,7 +6,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name:'', email:'', subject:'general', message:'' })
@@ -146,7 +145,6 @@ export default function ContactPage() {
           </div>
         </div>
       </div>
-      <SiteFooter />
     </div>
   )
 }

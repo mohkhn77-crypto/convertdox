@@ -1,7 +1,6 @@
 'use client'
 import { useState, useRef } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://convertdox-backend-production.up.railway.app'
 type Format = 'jpg' | 'png' | 'webp'
@@ -142,7 +141,6 @@ export default function ConvertImagesBatchPage() {
           ))}
         </section>
       </div>
-      <SiteFooter />
     </div>
   )
 }

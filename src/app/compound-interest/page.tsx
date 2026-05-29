@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 const COMPOUNDS = [
@@ -117,7 +116,6 @@ export default function CompoundInterestPage() {
           </>
         )}
       </div>
-      <SiteFooter />
     </div>
   )
 }

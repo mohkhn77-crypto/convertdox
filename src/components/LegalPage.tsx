@@ -1,7 +1,6 @@
 import fs from 'fs'
 import path from 'path'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 
 interface LegalPageProps {
   title: string
@@ -175,7 +174,6 @@ export default function LegalPage({ title, fileName }: LegalPageProps) {
           </div>
         </div>
       </main>
-      <SiteFooter />
     </div>
   )
 }

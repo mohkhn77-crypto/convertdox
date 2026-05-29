@@ -1,7 +1,6 @@
 'use client'
 import { useState, useMemo } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 const PASTELS = ['#FEE2E2','#FED7AA','#FEF3C7','#DCFCE7','#DBEAFE','#E0E7FF','#F3E8FF','#FCE7F3','#CFFAFE']
@@ -94,7 +93,6 @@ export default function GridGeneratorPage() {
           <pre style={{ margin: 0, fontFamily: 'monospace', fontSize: '13.5px', color: '#a5f3fc', whiteSpace: 'pre-wrap' }}>{css}</pre>
         </div>
       </div>
-      <SiteFooter />
     </div>
   )
 }

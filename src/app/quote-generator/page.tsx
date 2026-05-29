@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 const QUOTES = [
@@ -157,8 +156,6 @@ export default function QuoteGeneratorPage() {
 
         <p style={{ fontSize: '13px', color: '#94a3b8', marginTop: '16px' }}>{filtered.length} quotes in &ldquo;{cat}&rdquo; category</p>
       </div>
-
-      <SiteFooter />
     </div>
   )
 }

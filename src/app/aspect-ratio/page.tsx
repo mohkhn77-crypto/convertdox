@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 function gcd(a: number, b: number): number { return b === 0 ? a : gcd(b, a % b) }
@@ -167,7 +166,6 @@ export default function AspectRatioPage() {
           </div>
         </div>
       </div>
-      <SiteFooter />
     </div>
   )
 }

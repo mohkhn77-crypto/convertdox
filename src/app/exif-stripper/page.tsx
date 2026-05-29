@@ -1,7 +1,6 @@
 'use client'
 import { useState, useRef } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import LegalNoticeMedium from '@/components/LegalNoticeMedium'
 import LegalFooter from '@/components/LegalFooter'
 
@@ -150,7 +149,6 @@ export default function ExifStripperPage() {
         </section>
       </div>
       <LegalFooter toolName="EXIF Stripper" type="privacy" />
-      <SiteFooter />
     </div>
   )
 }

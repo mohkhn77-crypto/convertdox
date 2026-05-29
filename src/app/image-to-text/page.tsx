@@ -1,7 +1,6 @@
 'use client'
 import { useState, useRef } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import LegalNoticeHigh from '@/components/LegalNoticeHigh'
 import LegalFooter from '@/components/LegalFooter'
 
@@ -188,7 +187,6 @@ export default function ImageToTextPage() {
         </section>
       </div>
       <LegalFooter toolName="Image to Text" type="privacy" />
-      <SiteFooter />
     </div>
   )
 }

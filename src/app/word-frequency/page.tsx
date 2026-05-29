@@ -1,7 +1,6 @@
 'use client'
 import { useState, useMemo } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 const STOP_WORDS = new Set([
@@ -145,7 +144,6 @@ export default function WordFrequencyPage() {
           </div>
         )}
       </div>
-      <SiteFooter />
     </div>
   )
 }

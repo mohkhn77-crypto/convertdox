@@ -1,7 +1,6 @@
 'use client'
 import { useState, useRef } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import LegalNoticeHigh from '@/components/LegalNoticeHigh'
 import LegalFooter from '@/components/LegalFooter'
 
@@ -157,7 +156,6 @@ export default function QrReaderPage() {
         </section>
       </div>
       <LegalFooter toolName="QR Code Reader" type="privacy" />
-      <SiteFooter />
     </div>
   )
 }

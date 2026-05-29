@@ -1,7 +1,6 @@
 'use client'
 import { useState, useMemo } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 type Country = 'US' | 'UK' | 'CA' | 'AU'
@@ -191,7 +190,6 @@ export default function TaxCalculatorPage() {
           <strong>Disclaimer:</strong> Estimate only. Doesn&apos;t include state/provincial tax, FICA/NI, or all deductions. Consult a tax professional for advice.
         </div>
       </div>
-      <SiteFooter />
     </div>
   )
 }

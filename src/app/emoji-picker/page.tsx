@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 interface EmojiItem { e: string; n: string; c: string }
@@ -175,7 +174,6 @@ export default function EmojiPickerPage() {
           </div>
         </div>
       </div>
-      <SiteFooter />
     </div>
   )
 }

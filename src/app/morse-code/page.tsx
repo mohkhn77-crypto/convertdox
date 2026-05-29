@@ -1,7 +1,6 @@
 'use client'
 import { useState, useRef } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 const MORSE: Record<string, string> = {
@@ -133,7 +132,6 @@ export default function MorseCodePage() {
           ))}
         </div>
       </div>
-      <SiteFooter />
     </div>
   )
 }

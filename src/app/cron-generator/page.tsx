@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
@@ -209,7 +208,6 @@ export default function CronGeneratorPage() {
           {parseError && <div style={{ color: '#DC2626', fontSize: '13px', marginTop: '8px' }}>{parseError}</div>}
         </div>
       </div>
-      <SiteFooter />
     </div>
   )
 }

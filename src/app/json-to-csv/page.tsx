@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 function escapeCSV(val: unknown): string {
@@ -177,7 +176,6 @@ export default function JSONToCSVPage() {
           </div>
         </div>
       </div>
-      <SiteFooter />
     </div>
   )
 }

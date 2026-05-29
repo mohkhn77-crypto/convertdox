@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
-import SiteFooter from '@/components/SiteFooter'
 import TrustStrip from '@/components/TrustStrip'
 
 const BIG: Record<string, string[]> = {
@@ -195,7 +194,6 @@ export default function AsciiArtPage() {
           </ul>
         </div>
       </div>
-      <SiteFooter />
     </div>
   )
 }
