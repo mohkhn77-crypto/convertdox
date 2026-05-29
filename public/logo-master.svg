@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <!-- White background (square, for Google compatibility) -->
+  <rect width="1024" height="1024" fill="#ffffff"/>
+  
+  <!-- Rounded square container in navy -->
+  <rect x="112" y="112" width="800" height="800" rx="160" ry="160" fill="#0F2A4A"/>
+  
+  <!-- White document (back) -->
+  <rect x="280" y="288" width="288" height="384" rx="32" ry="32" fill="#ffffff" opacity="0.95"/>
+  
+  <!-- Orange document (front, overlapping) -->
+  <rect x="456" y="352" width="288" height="384" rx="32" ry="32" fill="#E85D04"/>
+  
+  <!-- Subtle shadow line on orange doc for depth -->
+  <rect x="456" y="352" width="288" height="384" rx="32" ry="32" fill="none" stroke="#D14F00" stroke-width="2"/>
+</svg>
