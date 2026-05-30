@@ -49,7 +49,6 @@ const PDF_OPS: NavItem[] = [
   { name:'Rotate PDF',      color:'#8B5CF6', icon:'🔄', href:'/rotate-pdf' },
   { name:'Unlock PDF',      color:'#10B981', icon:'🔓', href:'/unlock-pdf' },
   { name:'Protect PDF',     color:'#0F2A4A', icon:'🔒', href:'/protect-pdf' },
-  { name:'Watermark PDF',   color:'#06B6D4', icon:'💧', href:'/watermark-pdf' },
   { name:'Sign PDF',        color:'#0F2A4A', icon:'✍', href:'/pdf-sign' },
   { name:'Annotate PDF',    color:'#F59E0B', icon:'💬', href:'/pdf-annotate' },
   { name:'Page Numbers',    color:'#F59E0B', icon:'🔢', href:'/pdf-page-numbers' },
@@ -112,21 +111,13 @@ const AI_ITEMS: NavItem[] = [
 ]
 
 const DOCS_ITEMS: NavItem[] = [
-  { name:'Invoice Generator', color:'#10B981', icon:'🧾', href:'/invoice-generator' },
-  { name:'Receipt Generator', color:'#0EA5E9', icon:'🧾', href:'/receipt-generator' },
-  { name:'Quote Generator',   color:'#F59E0B', icon:'💬', href:'/quote-generator' },
-  { name:'Purchase Order',    color:'#8B5CF6', icon:'📋', href:'/purchase-order-generator' },
-  { name:'Letterhead',        color:'#2B579A', icon:'📃', href:'/letterhead-generator' },
-  { name:'Resume Builder',    color:'#E85D04', icon:'📄', href:'/resume-builder' },
-  { name:'Business Card',     color:'#06B6D4', icon:'🃏', href:'/business-card-generator' },
-  { name:'Logo Maker',        color:'#EC4899', icon:'🎨', href:'/logo-maker' },
+  { name:'Quote Generator', color:'#F59E0B', icon:'💬', href:'/quote-generator' },
 ]
 
 const CALC_HEALTH: NavItem[] = [
   { name:'BMI Calculator',     color:'#10B981', icon:'⚖',  href:'/bmi-calculator' },
   { name:'Age Calculator',     color:'#8B5CF6', icon:'🎂', href:'/age-calculator' },
   { name:'Calorie Calculator', color:'#E85D04', icon:'🔥', href:'/calorie-calculator' },
-  { name:'Pregnancy Due Date', color:'#EC4899', icon:'🤱', href:'/pregnancy-due-date-calculator' },
   { name:'Water Intake',       color:'#0EA5E9', icon:'💧', href:'/water-intake' },
 ]
 
@@ -138,8 +129,8 @@ const CALC_TIME: NavItem[] = [
 ]
 
 const CALC_FINANCE: NavItem[] = [
-  { name:'Mortgage Calculator', color:'#0F2A4A', icon:'🏠', href:'/mortgage-calculator' },
-  { name:'Loan EMI',            color:'#E85D04', icon:'💳', href:'/loan-emi-calculator' },
+  { name:'Mortgage Calculator', color:'#0F2A4A', icon:'🏠', href:'/mortgage-advanced' },
+  { name:'Loan EMI',            color:'#E85D04', icon:'💳', href:'/loan-calculator' },
   { name:'Tip Calculator',      color:'#10B981', icon:'🍽', href:'/tip-calculator' },
   { name:'Percentage',          color:'#8B5CF6', icon:'%',  href:'/percentage-calculator' },
   { name:'Salary Calculator',   color:'#2B579A', icon:'💼', href:'/salary-calculator' },
@@ -169,9 +160,7 @@ const MORE_TEXT: NavItem[] = [
 
 const MORE_UTILITY: NavItem[] = [
   { name:'YouTube Thumbnail',   color:'#EF4444', icon:'▶',  href:'/youtube-thumbnail' },
-  { name:'PDF Page Count',      color:'#6366F1', icon:'🔢', href:'/pdf-page-counter' },
   { name:'QR Generator',        color:'#0F2A4A', icon:'📱', href:'/qr-generator' },
-  { name:'Meta Description',    color:'#F59E0B', icon:'🏷',  href:'/meta-description-generator' },
 ]
 
 export default function NavBar() {
@@ -204,12 +193,11 @@ export default function NavBar() {
       {label:'AI Paraphraser',href:'/ai-paraphraser'},{label:'AI Email Writer',href:'/ai-email-writer'},
     ]},
     { key:'docs', title:'Documents', links:[
-      {label:'Invoice Generator',href:'/invoice-generator'},{label:'Resume Builder',href:'/resume-builder'},
-      {label:'Quote Generator',href:'/quote-generator'},{label:'Business Card',href:'/business-card-generator'},
+      {label:'Quote Generator',href:'/quote-generator'},
     ]},
     { key:'calc', title:'Calculators', links:[
-      {label:'BMI Calculator',href:'/bmi-calculator'},{label:'Mortgage Calculator',href:'/mortgage-calculator'},
-      {label:'Loan EMI',href:'/loan-emi-calculator'},{label:'Tip Calculator',href:'/tip-calculator'},
+      {label:'BMI Calculator',href:'/bmi-calculator'},{label:'Mortgage Calculator',href:'/mortgage-advanced'},
+      {label:'Loan EMI',href:'/loan-calculator'},{label:'Tip Calculator',href:'/tip-calculator'},
       {label:'Age Calculator',href:'/age-calculator'},{label:'Tax Calculator',href:'/tax-calculator'},
     ]},
     { key:'more', title:'More', links:[
@@ -249,7 +237,7 @@ export default function NavBar() {
                   <div style={{ flex:1 }}>
                     <ColHead label="Convert PDF" />
                     {PDF_CONVERT.map(item => <Row key={item.name} {...item} />)}
-                    <ViewAll href="/tools/pdf" label="View All PDF Tools →" />
+                    <ViewAll href="/" label="View All PDF Tools →" />
                   </div>
                 </div>
               </div>
@@ -269,7 +257,7 @@ export default function NavBar() {
                   <div style={{ flex:1 }}>
                     <ColHead label="Convert & More" />
                     {IMG_CONVERT.map(item => <Row key={item.name} {...item} />)}
-                    <ViewAll href="/tools/image" label="View All Image Tools →" />
+                    <ViewAll href="/" label="View All Image Tools →" />
                   </div>
                 </div>
               </div>
@@ -283,7 +271,7 @@ export default function NavBar() {
               <div style={{ ...PANEL_BASE, left:0, minWidth:'240px' }}>
                 <ColHead label="AI-Powered Tools" />
                 {AI_ITEMS.map(item => <Row key={item.name} {...item} />)}
-                <ViewAll href="/tools/ai" label="View All AI Tools →" />
+                <ViewAll href="/" label="View All AI Tools →" />
               </div>
             )}
           </div>
@@ -295,7 +283,7 @@ export default function NavBar() {
               <div style={{ ...PANEL_BASE, left:0, minWidth:'240px' }}>
                 <ColHead label="Document Generators" />
                 {DOCS_ITEMS.map(item => <Row key={item.name} {...item} />)}
-                <ViewAll href="/tools/documents" label="View All Document Tools →" />
+                <ViewAll href="/" label="View All Document Tools →" />
               </div>
             )}
           </div>
@@ -315,7 +303,7 @@ export default function NavBar() {
                   <div style={{ flex:1 }}>
                     <ColHead label="Finance" />
                     {CALC_FINANCE.map(item => <Row key={item.name} {...item} />)}
-                    <ViewAll href="/tools/calculators" label="View All Calculators →" />
+                    <ViewAll href="/" label="View All Calculators →" />
                   </div>
                 </div>
               </div>
