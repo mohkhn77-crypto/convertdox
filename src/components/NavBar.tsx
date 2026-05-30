@@ -1,380 +1,579 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import DarkModeToggle from '@/components/DarkModeToggle'
 
+// ─── Logo ────────────────────────────────────────────────────────────────────
 const Logo = () => (
-  <div style={{ width:'44px',height:'44px',background:'#0F2A4A',borderRadius:'10px',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0 }}>
-    <svg width="28" height="28" viewBox="0 0 44 44" fill="none">
-      <rect x="6" y="10" width="13" height="17" rx="2" fill="white" opacity="0.95"/>
-      <rect x="25" y="17" width="13" height="17" rx="2" fill="#E85D04"/>
-      <polygon points="20,20 24,22 20,24" fill="white"/>
+  <div style={{ width: '40px', height: '40px', background: '#0F2A4A', borderRadius: '9px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+    <svg width="26" height="26" viewBox="0 0 44 44" fill="none">
+      <rect x="6" y="10" width="13" height="17" rx="2" fill="white" opacity="0.95" />
+      <rect x="25" y="17" width="13" height="17" rx="2" fill="#E85D04" />
+      <polygon points="20,20 24,22 20,24" fill="white" />
     </svg>
   </div>
 )
 
-type NavItem = { name: string; color: string; icon: string; href: string; live?: boolean }
+// ─── Mega Menu Data ───────────────────────────────────────────────────────────
+interface Tool { name: string; href: string }
+interface Group { title: string; tools: Tool[] }
+interface Category { label: string; groups: Group[] }
+type MegaMenu = Record<string, Category>
 
-function Row({ name, color, icon, href, live = true }: NavItem) {
-  return (
-    <a href={href} style={{ display:'flex',alignItems:'center',gap:'8px',padding:'6px 4px',fontSize:'13px',color:'#0F2A4A',fontWeight:500,textDecoration:'none',borderRadius:'6px' }}>
-      <span style={{ width:'20px',height:'20px',background:color,borderRadius:'4px',display:'flex',alignItems:'center',justifyContent:'center',color:'white',fontSize:'10px',fontWeight:700,flexShrink:0 }}>{icon}</span>
-      <span style={{ flex:1 }}>{name}</span>
-      {!live && <span style={{ background:'#FEF3C7',color:'#92400E',fontSize:'9px',padding:'2px 5px',borderRadius:'3px',fontWeight:700 }}>SOON</span>}
-    </a>
+const MEGA_MENU: MegaMenu = {
+  pdf: {
+    label: 'PDF Tools',
+    groups: [
+      { title: 'Organize PDF', tools: [
+        { name: 'Merge PDF', href: '/merge-pdf' },
+        { name: 'Split PDF', href: '/split-pdf' },
+        { name: 'Delete Pages', href: '/pdf-delete-pages' },
+        { name: 'Extract Pages', href: '/pdf-extract-pages' },
+        { name: 'Reorder Pages', href: '/pdf-reorder-pages' },
+        { name: 'PDF Page Counter', href: '/pdf-page-counter' },
+      ]},
+      { title: 'Optimize PDF', tools: [
+        { name: 'Compress PDF', href: '/compress-pdf' },
+        { name: 'PDF OCR', href: '/pdf-ocr' },
+        { name: 'PDF to PDF/A', href: '/pdf-to-pdfa' },
+        { name: 'PDF Info', href: '/pdf-info' },
+      ]},
+      { title: 'Convert to PDF', tools: [
+        { name: 'JPG to PDF', href: '/jpg-to-pdf' },
+        { name: 'Word to PDF', href: '/word-to-pdf' },
+        { name: 'Excel to PDF', href: '/excel-to-pdf' },
+        { name: 'PowerPoint to PDF', href: '/ppt-to-pdf' },
+        { name: 'HTML to PDF', href: '/html-to-pdf' },
+      ]},
+      { title: 'Convert from PDF', tools: [
+        { name: 'PDF to JPG', href: '/pdf-to-jpg' },
+        { name: 'PDF to Word', href: '/pdf-to-word' },
+        { name: 'PDF to Excel', href: '/pdf-to-excel' },
+        { name: 'PDF to PowerPoint', href: '/pdf-to-ppt' },
+        { name: 'PDF to Text', href: '/pdf-to-text' },
+      ]},
+      { title: 'Edit PDF', tools: [
+        { name: 'Rotate PDF', href: '/rotate-pdf' },
+        { name: 'Page Numbers', href: '/pdf-page-numbers' },
+        { name: 'Header & Footer', href: '/pdf-header-footer' },
+        { name: 'Annotate PDF', href: '/pdf-annotate' },
+      ]},
+      { title: 'PDF Security', tools: [
+        { name: 'Unlock PDF', href: '/unlock-pdf' },
+        { name: 'Protect PDF', href: '/protect-pdf' },
+        { name: 'Sign PDF', href: '/pdf-sign' },
+      ]},
+    ],
+  },
+
+  image: {
+    label: 'Image Tools',
+    groups: [
+      { title: 'Optimize Images', tools: [
+        { name: 'Compress Image', href: '/compress-image' },
+        { name: 'Batch Compress', href: '/compress-images-batch' },
+        { name: 'Strip EXIF', href: '/exif-stripper' },
+      ]},
+      { title: 'Resize & Crop', tools: [
+        { name: 'Resize Image', href: '/resize-image' },
+        { name: 'Crop Image', href: '/image-crop' },
+        { name: 'Batch Resize', href: '/resize-images-batch' },
+        { name: 'Aspect Ratio', href: '/aspect-ratio' },
+      ]},
+      { title: 'Convert Images', tools: [
+        { name: 'HEIC to JPG', href: '/heic-to-jpg' },
+        { name: 'WebP to JPG', href: '/webp-to-jpg' },
+        { name: 'SVG to PNG', href: '/svg-to-png' },
+        { name: 'Convert Format', href: '/image-convert' },
+        { name: 'Batch Convert', href: '/convert-images-batch' },
+        { name: 'Image to ICO', href: '/image-to-ico' },
+      ]},
+      { title: 'Edit Images', tools: [
+        { name: 'Rotate Image', href: '/rotate-image' },
+        { name: 'Flip Image', href: '/flip-image' },
+        { name: 'Grayscale', href: '/grayscale-image' },
+        { name: 'Blur Image', href: '/blur-image' },
+        { name: 'Watermark Image', href: '/watermark-image' },
+        { name: 'Image Colors', href: '/image-color-picker' },
+      ]},
+      { title: 'Special Tools', tools: [
+        { name: 'Background Remover', href: '/bg-remove' },
+        { name: 'Passport Photo', href: '/passport-photo' },
+        { name: 'Image to Text (OCR)', href: '/image-to-text' },
+        { name: 'Favicon Generator', href: '/favicon-generator' },
+        { name: 'Social Media Crops', href: '/social-media-crops' },
+        { name: 'YouTube Thumbnail', href: '/youtube-thumbnail' },
+      ]},
+    ],
+  },
+
+  ai: {
+    label: 'AI Tools',
+    groups: [
+      { title: 'Writing Assistants', tools: [
+        { name: 'AI Summarizer', href: '/ai-summarizer' },
+        { name: 'AI Paraphraser', href: '/ai-paraphraser' },
+        { name: 'AI Grammar Checker', href: '/ai-grammar' },
+        { name: 'AI Tone Changer', href: '/ai-tone-changer' },
+      ]},
+      { title: 'Career Tools', tools: [
+        { name: 'AI Resume Improver', href: '/ai-resume-improver' },
+        { name: 'AI Cover Letter', href: '/ai-cover-letter' },
+        { name: 'AI Email Writer', href: '/ai-email-writer' },
+      ]},
+      { title: 'Translation', tools: [
+        { name: 'AI Translator', href: '/ai-translator' },
+      ]},
+    ],
+  },
+
+  documents: {
+    label: 'Documents',
+    groups: [
+      { title: 'Business Documents', tools: [
+        { name: 'Invoice Generator', href: '/invoice-generator' },
+        { name: 'Receipt Generator', href: '/receipt-generator' },
+        { name: 'Purchase Order', href: '/purchase-order-generator' },
+        { name: 'Letterhead', href: '/letterhead-generator' },
+      ]},
+      { title: 'Career & Brand', tools: [
+        { name: 'Resume Builder', href: '/resume-builder' },
+        { name: 'Business Card', href: '/business-card-generator' },
+        { name: 'Logo Maker', href: '/logo-maker' },
+        { name: 'Quote Generator', href: '/quote-generator' },
+      ]},
+    ],
+  },
+
+  calculators: {
+    label: 'Calculators',
+    groups: [
+      { title: 'Financial', tools: [
+        { name: 'Loan EMI Calculator', href: '/loan-emi-calculator' },
+        { name: 'Loan Calculator', href: '/loan-calculator' },
+        { name: 'Mortgage Calculator', href: '/mortgage-advanced' },
+        { name: 'Compound Interest', href: '/compound-interest' },
+        { name: 'Investment Calculator', href: '/investment-calculator' },
+        { name: 'Tax Calculator', href: '/tax-calculator' },
+        { name: 'Salary Calculator', href: '/salary-calculator' },
+        { name: 'Tip Calculator', href: '/tip-calculator' },
+      ]},
+      { title: 'Health & Fitness', tools: [
+        { name: 'BMI Calculator', href: '/bmi-calculator' },
+        { name: 'Body Fat', href: '/body-fat-calculator' },
+        { name: 'Calorie Calculator', href: '/calorie-calculator' },
+        { name: 'Macro Calculator', href: '/macro-calculator' },
+        { name: 'Water Intake', href: '/water-intake' },
+        { name: 'Pregnancy Calculator', href: '/pregnancy-due-date-calculator' },
+      ]},
+      { title: 'Math & Utility', tools: [
+        { name: 'Percentage', href: '/percentage-calculator' },
+        { name: 'Age Calculator', href: '/age-calculator' },
+        { name: 'GPA Calculator', href: '/gpa-calculator' },
+        { name: 'Fuel Cost', href: '/fuel-cost' },
+        { name: 'Discount Calculator', href: '/discount-calculator' },
+        { name: 'Bitrate', href: '/bitrate-calculator' },
+      ]},
+    ],
+  },
+
+  developer: {
+    label: 'Developer',
+    groups: [
+      { title: 'Data Formats', tools: [
+        { name: 'JSON Formatter', href: '/json-formatter' },
+        { name: 'XML Formatter', href: '/xml-formatter' },
+        { name: 'SQL Formatter', href: '/sql-formatter' },
+        { name: 'YAML to JSON', href: '/yaml-to-json' },
+        { name: 'CSV to JSON', href: '/csv-to-json' },
+        { name: 'JSON to CSV', href: '/json-to-csv' },
+      ]},
+      { title: 'Encoding', tools: [
+        { name: 'Base64 Encoder', href: '/base64-encoder' },
+        { name: 'URL Encoder', href: '/url-encoder' },
+        { name: 'HTML Entities', href: '/html-entities' },
+        { name: 'JWT Decoder', href: '/jwt-decoder' },
+        { name: 'Hash Generator', href: '/hash-generator' },
+      ]},
+      { title: 'CSS Tools', tools: [
+        { name: 'CSS Gradient', href: '/css-gradient' },
+        { name: 'Box Shadow', href: '/box-shadow' },
+        { name: 'Border Radius', href: '/border-radius' },
+        { name: 'Flexbox Generator', href: '/flexbox-generator' },
+        { name: 'Grid Generator', href: '/grid-generator' },
+        { name: 'Animation', href: '/animation-generator' },
+      ]},
+      { title: 'Web Tools', tools: [
+        { name: 'Regex Tester', href: '/regex-tester' },
+        { name: 'Cron Generator', href: '/cron-generator' },
+        { name: 'HTML to Markdown', href: '/html-to-markdown' },
+        { name: 'Code Beautifier', href: '/code-beautifier' },
+      ]},
+      { title: 'SEO & Generators', tools: [
+        { name: 'Meta Description', href: '/meta-description-generator' },
+        { name: 'Slug Generator', href: '/slug-generator' },
+        { name: 'UUID Generator', href: '/uuid-generator' },
+        { name: 'Color Picker', href: '/hex-rgb-converter' },
+      ]},
+    ],
+  },
+
+  text: {
+    label: 'Text Tools',
+    groups: [
+      { title: 'Count & Analyze', tools: [
+        { name: 'Word Counter', href: '/word-counter' },
+        { name: 'Detailed Word Counter', href: '/detailed-word-counter' },
+        { name: 'Character Counter', href: '/character-counter' },
+        { name: 'Sentence Counter', href: '/sentence-counter' },
+        { name: 'Word Frequency', href: '/word-frequency' },
+      ]},
+      { title: 'Transform Text', tools: [
+        { name: 'Case Converter', href: '/text-case-converter' },
+        { name: 'Reverse Text', href: '/reverse-text' },
+        { name: 'Sort Lines', href: '/sort-lines' },
+        { name: 'Remove Duplicates', href: '/remove-duplicates' },
+        { name: 'Find & Replace', href: '/find-replace' },
+        { name: 'Strip HTML', href: '/strip-html' },
+      ]},
+      { title: 'Generators', tools: [
+        { name: 'Lorem Ipsum', href: '/lorem-ipsum' },
+        { name: 'Markdown Editor', href: '/markdown-editor' },
+        { name: 'Text Diff', href: '/text-diff' },
+        { name: 'ASCII Art', href: '/ascii-art' },
+      ]},
+    ],
+  },
+
+  utilities: {
+    label: 'Utilities',
+    groups: [
+      { title: 'Generators', tools: [
+        { name: 'QR Generator', href: '/qr-generator' },
+        { name: 'QR Reader', href: '/qr-reader' },
+        { name: 'Password Generator', href: '/password-generator' },
+        { name: 'PIN Generator', href: '/pin-generator' },
+        { name: 'Username Generator', href: '/username-generator' },
+        { name: 'Random Number', href: '/random-number-generator' },
+      ]},
+      { title: 'Converters', tools: [
+        { name: 'Unit Converter', href: '/unit-converter' },
+        { name: 'Length', href: '/length-converter' },
+        { name: 'Weight', href: '/weight-converter' },
+        { name: 'Temperature', href: '/temperature-converter' },
+        { name: 'Timezone', href: '/timezone-converter' },
+      ]},
+      { title: 'Time & Productivity', tools: [
+        { name: 'Stopwatch', href: '/stopwatch' },
+        { name: 'Pomodoro Timer', href: '/pomodoro-timer' },
+        { name: 'Date Difference', href: '/date-difference' },
+        { name: 'Coin Flip', href: '/coin-flip' },
+      ]},
+    ],
+  },
+}
+
+// Flatten all tools for search
+const ALL_TOOLS: { name: string; href: string; category: string }[] =
+  Object.values(MEGA_MENU).flatMap(cat =>
+    cat.groups.flatMap(g => g.tools.map(t => ({ ...t, category: cat.label })))
   )
-}
 
-function ColHead({ label, mt = false }: { label: string; mt?: boolean }) {
-  return <div style={{ fontSize:'10px',fontWeight:700,color:'#94a3b8',textTransform:'uppercase' as const,letterSpacing:'1px',marginBottom:'10px',marginTop: mt ? '14px' : '0' }}>{label}</div>
-}
-
-function ViewAll({ href, label }: { href: string; label: string }) {
-  return <a href={href} style={{ display:'block',marginTop:'10px',padding:'8px',background:'#FFF7ED',color:'#E85D04',textAlign:'center' as const,borderRadius:'8px',fontSize:'12px',fontWeight:700,textDecoration:'none' }}>{label}</a>
-}
-
-const PANEL_BASE: React.CSSProperties = {
-  position: 'absolute',
-  top: '34px',
-  background: 'white',
-  borderRadius: '12px',
-  boxShadow: '0 10px 40px rgba(15,42,74,0.15)',
-  padding: '20px',
-  zIndex: 10,
-}
-
-const PDF_OPS: NavItem[] = [
-  { name:'Merge PDF',       color:'#E85D04', icon:'⊕', href:'/merge-pdf' },
-  { name:'Split PDF',       color:'#F59E0B', icon:'✂', href:'/split-pdf' },
-  { name:'Compress PDF',    color:'#10B981', icon:'📦', href:'/compress-pdf' },
-  { name:'Rotate PDF',      color:'#8B5CF6', icon:'🔄', href:'/rotate-pdf' },
-  { name:'Unlock PDF',      color:'#10B981', icon:'🔓', href:'/unlock-pdf' },
-  { name:'Protect PDF',     color:'#0F2A4A', icon:'🔒', href:'/protect-pdf' },
-  { name:'Sign PDF',        color:'#0F2A4A', icon:'✍', href:'/pdf-sign' },
-  { name:'Annotate PDF',    color:'#F59E0B', icon:'💬', href:'/pdf-annotate' },
-  { name:'Page Numbers',    color:'#F59E0B', icon:'🔢', href:'/pdf-page-numbers' },
-  { name:'Header & Footer', color:'#8B5CF6', icon:'📋', href:'/pdf-header-footer' },
-  { name:'Delete Pages',    color:'#EF4444', icon:'🗑', href:'/pdf-delete-pages' },
-  { name:'Reorder Pages',   color:'#06B6D4', icon:'🔀', href:'/pdf-reorder-pages' },
-  { name:'Extract Pages',   color:'#10B981', icon:'✂', href:'/pdf-extract-pages' },
-]
-
-const PDF_CONVERT: NavItem[] = [
-  { name:'PDF to Word',   color:'#2B579A', icon:'W', href:'/pdf-to-word' },
-  { name:'PDF to Excel',  color:'#217346', icon:'X', href:'/pdf-to-excel' },
-  { name:'PDF to PPT',    color:'#D24726', icon:'P', href:'/pdf-to-ppt' },
-  { name:'PDF to JPG',    color:'#F59E0B', icon:'📷', href:'/pdf-to-jpg' },
-  { name:'PDF to Text',   color:'#0EA5E9', icon:'📝', href:'/pdf-to-text' },
-  { name:'PDF to PDF/A',  color:'#64748b', icon:'A', href:'/pdf-to-pdfa' },
-  { name:'Word to PDF',   color:'#2B579A', icon:'W', href:'/word-to-pdf' },
-  { name:'Excel to PDF',  color:'#217346', icon:'X', href:'/excel-to-pdf' },
-  { name:'PPT to PDF',    color:'#D24726', icon:'P', href:'/ppt-to-pdf' },
-  { name:'JPG to PDF',    color:'#F59E0B', icon:'📷', href:'/jpg-to-pdf' },
-  { name:'HTML to PDF',   color:'#E85D04', icon:'H', href:'/html-to-pdf' },
-]
-
-const IMG_TRANSFORM: NavItem[] = [
-  { name:'Compress Image',  color:'#0EA5E9', icon:'📦', href:'/compress-image' },
-  { name:'Resize Image',    color:'#10B981', icon:'⤢',  href:'/resize-image' },
-  { name:'Crop Image',      color:'#E85D04', icon:'✂',  href:'/image-crop' },
-  { name:'Rotate Image',    color:'#8B5CF6', icon:'🔄', href:'/rotate-image' },
-  { name:'Flip Image',      color:'#06B6D4', icon:'⇄',  href:'/flip-image' },
-  { name:'Grayscale',       color:'#64748b', icon:'⚫', href:'/grayscale-image' },
-  { name:'Blur Image',      color:'#64748b', icon:'🌫', href:'/blur-image' },
-  { name:'Watermark Image', color:'#06B6D4', icon:'💧', href:'/watermark-image' },
-  { name:'EXIF Stripper',   color:'#10B981', icon:'🛡', href:'/exif-stripper' },
-  { name:'Color Picker',    color:'#E85D04', icon:'🎨', href:'/image-color-picker' },
-]
-
-const IMG_CONVERT: NavItem[] = [
-  { name:'Convert Format',  color:'#F59E0B', icon:'↔',  href:'/image-convert' },
-  { name:'HEIC to JPG',     color:'#E85D04', icon:'📱', href:'/heic-to-jpg' },
-  { name:'WebP to JPG',     color:'#0EA5E9', icon:'🔄', href:'/webp-to-jpg' },
-  { name:'SVG to PNG',      color:'#F59E0B', icon:'🎨', href:'/svg-to-png' },
-  { name:'PNG to ICO',      color:'#F59E0B', icon:'🌟', href:'/png-to-ico' },
-  { name:'Image to ICO',    color:'#E85D04', icon:'⭐', href:'/image-to-ico' },
-  { name:'Add Background',  color:'#8B5CF6', icon:'🖼',  href:'/add-image-background' },
-  { name:'Image to Base64', color:'#9333EA', icon:'B',  href:'/image-to-base64' },
-  { name:'Batch Compress',  color:'#0EA5E9', icon:'📦', href:'/compress-images-batch' },
-  { name:'Batch Resize',    color:'#10B981', icon:'📦', href:'/resize-images-batch' },
-  { name:'Batch Convert',   color:'#F59E0B', icon:'🔄', href:'/convert-images-batch' },
-]
-
-const AI_ITEMS: NavItem[] = [
-  { name:'AI Summarizer',              color:'#8B5CF6', icon:'✨', href:'/ai-summarizer' },
-  { name:'AI Grammar Checker',         color:'#10B981', icon:'✓',  href:'/ai-grammar' },
-  { name:'AI Paraphraser',             color:'#E85D04', icon:'↺',  href:'/ai-paraphraser' },
-  { name:'AI Resume Improver',         color:'#2B579A', icon:'📄', href:'/ai-resume-improver' },
-  { name:'AI Cover Letter Generator',  color:'#0EA5E9', icon:'📝', href:'/ai-cover-letter' },
-  { name:'AI Email Writer',            color:'#F59E0B', icon:'✉',  href:'/ai-email-writer' },
-  { name:'AI Translator',              color:'#06B6D4', icon:'🌐', href:'/ai-translator' },
-  { name:'AI Tone Changer',            color:'#EC4899', icon:'🎭', href:'/ai-tone-changer' },
-]
-
-const DOCS_ITEMS: NavItem[] = [
-  { name:'Quote Generator', color:'#F59E0B', icon:'💬', href:'/quote-generator' },
-]
-
-const CALC_HEALTH: NavItem[] = [
-  { name:'BMI Calculator',     color:'#10B981', icon:'⚖',  href:'/bmi-calculator' },
-  { name:'Age Calculator',     color:'#8B5CF6', icon:'🎂', href:'/age-calculator' },
-  { name:'Calorie Calculator', color:'#E85D04', icon:'🔥', href:'/calorie-calculator' },
-  { name:'Water Intake',       color:'#0EA5E9', icon:'💧', href:'/water-intake' },
-]
-
-const CALC_TIME: NavItem[] = [
-  { name:'Stopwatch',          color:'#F59E0B', icon:'⏱',  href:'/stopwatch' },
-  { name:'Timestamp',          color:'#6366F1', icon:'⏰', href:'/timestamp-converter' },
-  { name:'Timezone Converter', color:'#0EA5E9', icon:'🌍', href:'/timezone-converter' },
-  { name:'Unit Converter',     color:'#10B981', icon:'📐', href:'/unit-converter' },
-]
-
-const CALC_FINANCE: NavItem[] = [
-  { name:'Mortgage Calculator', color:'#0F2A4A', icon:'🏠', href:'/mortgage-advanced' },
-  { name:'Loan EMI',            color:'#E85D04', icon:'💳', href:'/loan-calculator' },
-  { name:'Tip Calculator',      color:'#10B981', icon:'🍽', href:'/tip-calculator' },
-  { name:'Percentage',          color:'#8B5CF6', icon:'%',  href:'/percentage-calculator' },
-  { name:'Salary Calculator',   color:'#2B579A', icon:'💼', href:'/salary-calculator' },
-  { name:'Tax Calculator',      color:'#EF4444', icon:'📊', href:'/tax-calculator' },
-  { name:'Retirement',          color:'#F59E0B', icon:'🏦', href:'/retirement-calculator' },
-]
-
-const MORE_OCR: NavItem[] = [
-  { name:'Image to Text', color:'#E85D04', icon:'🔤', href:'/image-to-text' },
-  { name:'PDF OCR',       color:'#0F2A4A', icon:'📄', href:'/pdf-ocr' },
-]
-
-const MORE_SPECIALTY: NavItem[] = [
-  { name:'Passport Photo',    color:'#E85D04', icon:'🛂', href:'/passport-photo' },
-  { name:'Favicon Generator', color:'#F59E0B', icon:'⭐', href:'/favicon-from-image' },
-  { name:'Social Media Crops',color:'#EC4899', icon:'📱', href:'/social-media-crops' },
-  { name:'Instagram Square',  color:'#8B5CF6', icon:'📷', href:'/instagram-square' },
-  { name:'QR Reader',         color:'#0F2A4A', icon:'📲', href:'/qr-reader' },
-]
-
-const MORE_TEXT: NavItem[] = [
-  { name:'Word Counter',   color:'#0EA5E9', icon:'📝', href:'/word-counter' },
-  { name:'Text Diff',      color:'#10B981', icon:'⊕',  href:'/text-diff' },
-  { name:'Slug Generator', color:'#8B5CF6', icon:'🔗', href:'/slug-generator' },
-  { name:'Case Converter', color:'#F59E0B', icon:'Aa', href:'/text-case-converter' },
-]
-
-const MORE_UTILITY: NavItem[] = [
-  { name:'YouTube Thumbnail',   color:'#EF4444', icon:'▶',  href:'/youtube-thumbnail' },
-  { name:'QR Generator',        color:'#0F2A4A', icon:'📱', href:'/qr-generator' },
-]
-
+// ─── Component ────────────────────────────────────────────────────────────────
 export default function NavBar() {
-  const [open, setOpen] = useState<string | null>(null)
+  const [activeMenu, setActiveMenu] = useState<string | null>(null)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [mobileSection, setMobileSection] = useState<string | null>(null)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [searchResults, setSearchResults] = useState<typeof ALL_TOOLS>([])
+  const [showSearch, setShowSearch] = useState(false)
+  const searchRef = useRef<HTMLDivElement>(null)
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const router = useRouter()
 
-  const trigger = (id: string, label: string, badge?: string): React.ReactNode => (
-    <span style={{ fontSize:'12px',fontWeight:700,color: open===id?'#E85D04':'#0F2A4A',cursor:'pointer',textTransform:'uppercase' as const,letterSpacing:'0.5px',display:'inline-flex',alignItems:'center',gap:'4px',whiteSpace:'nowrap' as const }}>
-      {label}
-      {badge && <span style={{ background:'#E85D04',color:'white',fontSize:'8px',padding:'1px 4px',borderRadius:'3px',fontWeight:700 }}>{badge}</span>}
-      <span style={{ fontSize:'9px',opacity:0.6 }}>▼</span>
-    </span>
-  )
+  // Search
+  useEffect(() => {
+    if (searchQuery.length < 2) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setSearchResults([])
+      return
+    }
+    const q = searchQuery.toLowerCase()
+    setSearchResults(
+      ALL_TOOLS.filter(t =>
+        t.name.toLowerCase().includes(q) || t.category.toLowerCase().includes(q)
+      ).slice(0, 8)
+    )
+  }, [searchQuery])
 
-  const mobileSections = [
-    { key:'pdf', title:'PDF Tools', links:[
-      {label:'Merge PDF',href:'/merge-pdf'},{label:'Split PDF',href:'/split-pdf'},
-      {label:'Compress PDF',href:'/compress-pdf'},{label:'PDF to Word',href:'/pdf-to-word'},
-      {label:'Word to PDF',href:'/word-to-pdf'},{label:'Unlock PDF',href:'/unlock-pdf'},
-      {label:'Sign PDF',href:'/pdf-sign'},{label:'Annotate PDF',href:'/pdf-annotate'},
-    ]},
-    { key:'img', title:'Image Tools', links:[
-      {label:'Compress Image',href:'/compress-image'},{label:'Resize Image',href:'/resize-image'},
-      {label:'Crop Image',href:'/image-crop'},{label:'Convert Format',href:'/image-convert'},
-      {label:'EXIF Stripper',href:'/exif-stripper'},{label:'HEIC to JPG',href:'/heic-to-jpg'},
-    ]},
-    { key:'ai', title:'AI Tools', links:[
-      {label:'AI Summarizer',href:'/ai-summarizer'},{label:'AI Grammar Checker',href:'/ai-grammar'},
-      {label:'AI Paraphraser',href:'/ai-paraphraser'},{label:'AI Email Writer',href:'/ai-email-writer'},
-    ]},
-    { key:'docs', title:'Documents', links:[
-      {label:'Quote Generator',href:'/quote-generator'},
-    ]},
-    { key:'calc', title:'Calculators', links:[
-      {label:'BMI Calculator',href:'/bmi-calculator'},{label:'Mortgage Calculator',href:'/mortgage-advanced'},
-      {label:'Loan EMI',href:'/loan-calculator'},{label:'Tip Calculator',href:'/tip-calculator'},
-      {label:'Age Calculator',href:'/age-calculator'},{label:'Tax Calculator',href:'/tax-calculator'},
-    ]},
-    { key:'more', title:'More', links:[
-      {label:'Image to Text',href:'/image-to-text'},{label:'PDF OCR',href:'/pdf-ocr'},
-      {label:'Passport Photo',href:'/passport-photo'},{label:'QR Reader',href:'/qr-reader'},
-      {label:'YouTube Thumbnail',href:'/youtube-thumbnail'},{label:'Word Counter',href:'/word-counter'},
-    ]},
-    { key:'pages', title:'Pages', links:[
-      {label:'All Tools',href:'/'},{label:'Blog',href:'/blog'},
-      {label:'About',href:'/about'},{label:'Contact',href:'/contact'},
-    ]},
-  ]
+  // Click outside closes search
+  useEffect(() => {
+    function handler(e: MouseEvent) {
+      if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
+        setShowSearch(false)
+      }
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [])
+
+  function openMenu(key: string) {
+    if (closeTimer.current) clearTimeout(closeTimer.current)
+    setActiveMenu(key)
+  }
+  function scheduleClose() {
+    closeTimer.current = setTimeout(() => setActiveMenu(null), 120)
+  }
+  function cancelClose() {
+    if (closeTimer.current) clearTimeout(closeTimer.current)
+  }
+
+  function handleSelectTool(href: string) {
+    setSearchQuery('')
+    setShowSearch(false)
+    setMobileOpen(false)
+    setActiveMenu(null)
+    router.push(href)
+  }
+
+  const category = activeMenu ? MEGA_MENU[activeMenu] : null
+  const cols = category ? Math.min(category.groups.length, 4) : 3
 
   return (
-    <nav style={{ position:'sticky',top:0,zIndex:100,background:'white',borderBottom:'1px solid #e2e8f0',boxShadow:'0 1px 3px rgba(15,42,74,0.04)' }}>
-      <div style={{ maxWidth:'1280px',margin:'0 auto',padding:'0 20px',height:'68px',display:'flex',alignItems:'center',justifyContent:'space-between' }}>
+    <>
+      <style>{`
+        .cdx-desktop { display: flex; }
+        .cdx-mobile-toggle { display: none; }
+        .cdx-search-w { width: 260px; }
+        @media (max-width: 1100px) {
+          .cdx-desktop { display: none !important; }
+          .cdx-mobile-toggle { display: flex !important; }
+          .cdx-search-w { width: 180px; }
+        }
+        @media (max-width: 560px) {
+          .cdx-search-w { width: 140px; }
+        }
+      `}</style>
 
-        {/* Left: Brand + Dropdowns */}
-        <div style={{ display:'flex',alignItems:'center',gap:'4px' }}>
+      <nav style={{ position: 'sticky', top: 0, zIndex: 200, background: 'white', borderBottom: '1.5px solid #e2e8f0', boxShadow: '0 1px 4px rgba(15,42,74,0.05)', fontFamily: '-apple-system,BlinkMacSystemFont,sans-serif' }}>
+
+        {/* ── Top Bar ── */}
+        <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 20px', height: '64px', display: 'flex', alignItems: 'center', gap: '16px', justifyContent: 'space-between' }}>
 
           {/* Logo */}
-          <Link href="/" style={{ textDecoration:'none',display:'flex',alignItems:'center',gap:'9px',marginRight:'14px',flexShrink:0 }}>
-            <Logo/>
-            <span style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'22px',fontWeight:800,color:'#0F2A4A',letterSpacing:'-0.5px' }}>Convert<span style={{ color:'#E85D04' }}>Dox</span></span>
+          <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '9px', flexShrink: 0 }}>
+            <Logo />
+            <span style={{ fontFamily: "'Space Grotesk',system-ui,sans-serif", fontSize: '21px', fontWeight: 800, color: '#0F2A4A', letterSpacing: '-0.5px' }}>
+              Convert<span style={{ color: '#E85D04' }}>Dox</span>
+            </span>
           </Link>
 
-          {/* ── PDF TOOLS ── */}
-          <div style={{ position:'relative' as const }} onMouseEnter={() => setOpen('pdf')} onMouseLeave={() => setOpen(null)}>
-            <span style={{ padding:'8px 10px',display:'inline-block' }}>{trigger('pdf','PDF Tools')}</span>
-            {open === 'pdf' && (
-              <div style={{ ...PANEL_BASE, left:0, minWidth:'560px' }}>
-                <div style={{ display:'flex',gap:'28px' }}>
-                  <div style={{ flex:1 }}>
-                    <ColHead label="Operations" />
-                    {PDF_OPS.map(item => <Row key={item.name} {...item} />)}
-                  </div>
-                  <div style={{ flex:1 }}>
-                    <ColHead label="Convert PDF" />
-                    {PDF_CONVERT.map(item => <Row key={item.name} {...item} />)}
-                    <ViewAll href="/" label="View All PDF Tools →" />
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* ── IMAGE TOOLS ── */}
-          <div style={{ position:'relative' as const }} onMouseEnter={() => setOpen('image')} onMouseLeave={() => setOpen(null)}>
-            <span style={{ padding:'8px 10px',display:'inline-block' }}>{trigger('image','Image Tools')}</span>
-            {open === 'image' && (
-              <div style={{ ...PANEL_BASE, left:0, minWidth:'500px' }}>
-                <div style={{ display:'flex',gap:'28px' }}>
-                  <div style={{ flex:1 }}>
-                    <ColHead label="Transform" />
-                    {IMG_TRANSFORM.map(item => <Row key={item.name} {...item} />)}
-                  </div>
-                  <div style={{ flex:1 }}>
-                    <ColHead label="Convert & More" />
-                    {IMG_CONVERT.map(item => <Row key={item.name} {...item} />)}
-                    <ViewAll href="/" label="View All Image Tools →" />
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* ── AI TOOLS ── */}
-          <div style={{ position:'relative' as const }} onMouseEnter={() => setOpen('ai')} onMouseLeave={() => setOpen(null)}>
-            <span style={{ padding:'8px 10px',display:'inline-block' }}>{trigger('ai','AI Tools','NEW')}</span>
-            {open === 'ai' && (
-              <div style={{ ...PANEL_BASE, left:0, minWidth:'240px' }}>
-                <ColHead label="AI-Powered Tools" />
-                {AI_ITEMS.map(item => <Row key={item.name} {...item} />)}
-                <ViewAll href="/" label="View All AI Tools →" />
-              </div>
-            )}
-          </div>
-
-          {/* ── DOCUMENTS ── */}
-          <div style={{ position:'relative' as const }} onMouseEnter={() => setOpen('docs')} onMouseLeave={() => setOpen(null)}>
-            <span style={{ padding:'8px 10px',display:'inline-block' }}>{trigger('docs','Documents')}</span>
-            {open === 'docs' && (
-              <div style={{ ...PANEL_BASE, left:0, minWidth:'240px' }}>
-                <ColHead label="Document Generators" />
-                {DOCS_ITEMS.map(item => <Row key={item.name} {...item} />)}
-                <ViewAll href="/" label="View All Document Tools →" />
-              </div>
-            )}
-          </div>
-
-          {/* ── CALCULATORS ── */}
-          <div style={{ position:'relative' as const }} onMouseEnter={() => setOpen('calc')} onMouseLeave={() => setOpen(null)}>
-            <span style={{ padding:'8px 10px',display:'inline-block' }}>{trigger('calc','Calculators')}</span>
-            {open === 'calc' && (
-              <div style={{ ...PANEL_BASE, left:0, minWidth:'400px' }}>
-                <div style={{ display:'flex',gap:'28px' }}>
-                  <div style={{ flex:1 }}>
-                    <ColHead label="Health & Life" />
-                    {CALC_HEALTH.map(item => <Row key={item.name} {...item} />)}
-                    <ColHead label="Time & Units" mt />
-                    {CALC_TIME.map(item => <Row key={item.name} {...item} />)}
-                  </div>
-                  <div style={{ flex:1 }}>
-                    <ColHead label="Finance" />
-                    {CALC_FINANCE.map(item => <Row key={item.name} {...item} />)}
-                    <ViewAll href="/" label="View All Calculators →" />
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* ── MORE ── */}
-          <div style={{ position:'relative' as const }} onMouseEnter={() => setOpen('more')} onMouseLeave={() => setOpen(null)}>
-            <span style={{ padding:'8px 10px',display:'inline-block' }}>{trigger('more','More')}</span>
-            {open === 'more' && (
-              <div style={{ ...PANEL_BASE, left:0, minWidth:'480px' }}>
-                <div style={{ display:'flex',gap:'28px' }}>
-                  <div style={{ flex:1 }}>
-                    <ColHead label="OCR" />
-                    {MORE_OCR.map(item => <Row key={item.name} {...item} />)}
-                    <ColHead label="Specialty" mt />
-                    {MORE_SPECIALTY.map(item => <Row key={item.name} {...item} />)}
-                  </div>
-                  <div style={{ flex:1 }}>
-                    <ColHead label="Text & Writing" />
-                    {MORE_TEXT.map(item => <Row key={item.name} {...item} />)}
-                    <ColHead label="Utility" mt />
-                    {MORE_UTILITY.map(item => <Row key={item.name} {...item} />)}
-                    <ViewAll href="/" label="All 176+ Tools →" />
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-        </div>
-
-        {/* Right: All Tools + Blog + Dark + Pro + Hamburger */}
-        <div style={{ display:'flex',alignItems:'center',gap:'8px',flexShrink:0 }}>
-          <Link href="/" style={{ fontSize:'13px',color:'#64748b',textDecoration:'none',fontWeight:600,whiteSpace:'nowrap' as const }}>All Tools</Link>
-          <a href="/blog" style={{ fontSize:'13px',color:'#64748b',textDecoration:'none',fontWeight:500 }}>Blog</a>
-          <DarkModeToggle />
-          <a href="#" style={{ background:'#E85D04',color:'white',padding:'8px 14px',borderRadius:'8px',fontSize:'13px',fontWeight:700,textDecoration:'none',whiteSpace:'nowrap' as const }}>Get Pro</a>
-          <button onClick={() => setMobileOpen(!mobileOpen)}
-            style={{ background:'none',border:'none',cursor:'pointer',padding:'4px',display:'flex',flexDirection:'column' as const,gap:'4px',marginLeft:'4px' }}
-            aria-label="Menu">
-            <span style={{ width:'22px',height:'2px',background:'#0F2A4A',borderRadius:'2px',display:'block' }}/>
-            <span style={{ width:'22px',height:'2px',background:'#0F2A4A',borderRadius:'2px',display:'block' }}/>
-            <span style={{ width:'22px',height:'2px',background:'#0F2A4A',borderRadius:'2px',display:'block' }}/>
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile menu */}
-      {mobileOpen && (
-        <div style={{ background:'white',borderTop:'1px solid #e2e8f0',padding:'8px 24px 16px',maxHeight:'80vh',overflowY:'auto' as const }}>
-          {mobileSections.map(({ key, title, links }) => (
-            <div key={key}>
+          {/* Desktop category buttons */}
+          <div className="cdx-desktop" style={{ alignItems: 'center', gap: '0', flex: 1, justifyContent: 'center' }}>
+            {Object.entries(MEGA_MENU).map(([key, cat]) => (
               <button
-                onClick={() => setMobileSection(mobileSection === key ? null : key)}
-                style={{ width:'100%',textAlign:'left' as const,background:'none',border:'none',borderBottom:'1px solid #f1f5f9',padding:'12px 0',fontSize:'13px',fontWeight:700,color:'#0F2A4A',cursor:'pointer',display:'flex',justifyContent:'space-between',alignItems:'center' }}>
-                {title}
-                <span style={{ fontSize:'10px',opacity:0.5 }}>{mobileSection === key ? '▲' : '▼'}</span>
+                key={key}
+                onMouseEnter={() => openMenu(key)}
+                onMouseLeave={scheduleClose}
+                style={{
+                  padding: '20px 12px',
+                  background: 'transparent',
+                  border: 'none',
+                  fontSize: '13.5px',
+                  fontWeight: 600,
+                  color: activeMenu === key ? '#E85D04' : '#334155',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '3px',
+                  fontFamily: 'inherit',
+                  borderBottom: activeMenu === key ? '2px solid #E85D04' : '2px solid transparent',
+                  whiteSpace: 'nowrap',
+                  transition: 'color 0.15s',
+                }}>
+                {cat.label}
+                <svg width="10" height="7" viewBox="0 0 10 7" style={{ opacity: 0.5 }}>
+                  <path d="M1 1.5L5 5.5L9 1.5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                </svg>
               </button>
-              {mobileSection === key && (
-                <div style={{ paddingLeft:'12px',paddingBottom:'8px' }}>
-                  {links.map(l => (
-                    <a key={l.href} href={l.href} style={{ display:'block',padding:'9px 0',fontSize:'14px',color:'#475569',textDecoration:'none',fontWeight:500,borderBottom:'1px solid #f8fafc' }}>{l.label}</a>
-                  ))}
+            ))}
+          </div>
+
+          {/* Right side: search + blog + dark mode + mobile toggle */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
+
+            {/* Search */}
+            <div ref={searchRef} className="cdx-search-w" style={{ position: 'relative' }}>
+              <input
+                type="text"
+                placeholder="Search 200+ tools…"
+                value={searchQuery}
+                onChange={e => setSearchQuery(e.target.value)}
+                onFocus={() => setShowSearch(true)}
+                style={{
+                  width: '100%',
+                  padding: '8px 14px 8px 34px',
+                  border: '1.5px solid #e2e8f0',
+                  borderRadius: '999px',
+                  fontSize: '13px',
+                  fontFamily: 'inherit',
+                  outline: 'none',
+                  background: '#f8fafc',
+                  boxSizing: 'border-box',
+                  transition: 'border-color 0.15s',
+                }}
+                onMouseEnter={e => (e.currentTarget.style.borderColor = '#0F2A4A')}
+                onMouseLeave={e => (e.currentTarget.style.borderColor = '#e2e8f0')}
+              />
+              <svg width="15" height="15" viewBox="0 0 15 15" style={{ position: 'absolute', left: '11px', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8', pointerEvents: 'none' }}>
+                <circle cx="6" cy="6" r="4.5" fill="none" stroke="currentColor" strokeWidth="1.5" />
+                <path d="M9.5 9.5L13 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
+
+              {/* Search dropdown */}
+              {showSearch && searchQuery.length >= 2 && (
+                <div style={{ position: 'absolute', top: 'calc(100% + 6px)', left: 0, right: 0, background: 'white', border: '1.5px solid #e2e8f0', borderRadius: '10px', boxShadow: '0 8px 32px rgba(15,42,74,0.12)', zIndex: 300, overflow: 'hidden' }}>
+                  {searchResults.length > 0 ? (
+                    searchResults.map(tool => (
+                      <button
+                        key={tool.href}
+                        onMouseDown={() => handleSelectTool(tool.href)}
+                        style={{ width: '100%', padding: '11px 14px', background: 'transparent', border: 'none', textAlign: 'left', cursor: 'pointer', fontFamily: 'inherit', borderBottom: '1px solid #f8fafc' }}
+                        onMouseEnter={e => (e.currentTarget.style.background = '#f8fafc')}
+                        onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
+                      >
+                        <div style={{ fontSize: '13px', fontWeight: 600, color: '#0F2A4A' }}>{tool.name}</div>
+                        <div style={{ fontSize: '11px', color: '#94a3b8', marginTop: '2px' }}>{tool.category}</div>
+                      </button>
+                    ))
+                  ) : (
+                    <div style={{ padding: '14px', fontSize: '13px', color: '#94a3b8', textAlign: 'center' }}>
+                      No tools found for &quot;{searchQuery}&quot;
+                    </div>
+                  )}
                 </div>
               )}
             </div>
-          ))}
+
+            {/* Blog link (desktop only) */}
+            <Link href="/blog" className="cdx-desktop" style={{ fontSize: '13px', fontWeight: 500, color: '#64748b', textDecoration: 'none', whiteSpace: 'nowrap' }}>Blog</Link>
+
+            <DarkModeToggle />
+
+            {/* Mobile hamburger */}
+            <button
+              className="cdx-mobile-toggle"
+              onClick={() => setMobileOpen(o => !o)}
+              aria-label="Toggle menu"
+              style={{ background: 'transparent', border: 'none', cursor: 'pointer', padding: '6px', color: '#0F2A4A', alignItems: 'center', justifyContent: 'center' }}>
+              <svg width="22" height="22" viewBox="0 0 22 22">
+                {mobileOpen ? (
+                  <path d="M4 4L18 18M4 18L18 4" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" />
+                ) : (
+                  <>
+                    <line x1="2" y1="6" x2="20" y2="6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                    <line x1="2" y1="11" x2="20" y2="11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                    <line x1="2" y1="16" x2="20" y2="16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                  </>
+                )}
+              </svg>
+            </button>
+          </div>
         </div>
-      )}
-    </nav>
+
+        {/* ── Mega Dropdown Panel ── */}
+        {category && (
+          <div
+            onMouseEnter={cancelClose}
+            onMouseLeave={scheduleClose}
+            style={{
+              position: 'absolute',
+              left: 0,
+              right: 0,
+              background: 'white',
+              borderTop: '1px solid #f1f5f9',
+              borderBottom: '1.5px solid #e2e8f0',
+              boxShadow: '0 12px 40px rgba(15,42,74,0.10)',
+              zIndex: 190,
+              animation: 'cdxFadeIn 0.12s ease',
+            }}>
+            <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '28px 20px', display: 'grid', gridTemplateColumns: `repeat(${cols}, 1fr)`, gap: '28px' }}>
+              {category.groups.map(group => (
+                <div key={group.title}>
+                  <div style={{ fontSize: '11px', fontWeight: 700, color: '#E85D04', textTransform: 'uppercase', letterSpacing: '0.7px', marginBottom: '12px', paddingBottom: '8px', borderBottom: '1.5px solid #f8fafc' }}>
+                    {group.title}
+                  </div>
+                  {group.tools.map(tool => (
+                    <Link
+                      key={tool.href}
+                      href={tool.href}
+                      onClick={() => setActiveMenu(null)}
+                      style={{ display: 'block', padding: '5px 8px', fontSize: '13px', color: '#334155', textDecoration: 'none', borderRadius: '6px', fontWeight: 500, lineHeight: 1.5, transition: 'background 0.1s, color 0.1s' }}
+                      onMouseEnter={e => { e.currentTarget.style.background = '#FFF7ED'; e.currentTarget.style.color = '#E85D04' }}
+                      onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#334155' }}
+                    >
+                      {tool.name}
+                    </Link>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ── Mobile Menu ── */}
+        {mobileOpen && (
+          <div style={{ background: 'white', borderTop: '1.5px solid #e2e8f0', maxHeight: '80vh', overflowY: 'auto', padding: '8px 20px 24px' }}>
+            {Object.entries(MEGA_MENU).map(([key, cat]) => (
+              <details key={key} style={{ borderBottom: '1px solid #f1f5f9' }}>
+                <summary style={{ fontSize: '14px', fontWeight: 700, color: '#0F2A4A', padding: '13px 0', cursor: 'pointer', listStyle: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  {cat.label}
+                  <svg width="12" height="8" viewBox="0 0 12 8" style={{ opacity: 0.4 }}>
+                    <path d="M1 1.5L6 6.5L11 1.5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  </svg>
+                </summary>
+                <div style={{ paddingLeft: '12px', paddingBottom: '12px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 16px' }}>
+                  {cat.groups.map(group => (
+                    <div key={group.title} style={{ marginBottom: '16px' }}>
+                      <div style={{ fontSize: '10px', fontWeight: 700, color: '#E85D04', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '8px', marginTop: '8px' }}>
+                        {group.title}
+                      </div>
+                      {group.tools.map(tool => (
+                        <Link
+                          key={tool.href}
+                          href={tool.href}
+                          onClick={() => setMobileOpen(false)}
+                          style={{ display: 'block', padding: '6px 0', fontSize: '13px', color: '#334155', textDecoration: 'none', fontWeight: 500 }}
+                        >
+                          {tool.name}
+                        </Link>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              </details>
+            ))}
+
+            {/* Mobile footer links */}
+            <div style={{ display: 'flex', gap: '16px', paddingTop: '16px', flexWrap: 'wrap' }}>
+              {[
+                { label: 'All Tools', href: '/' },
+                { label: 'Blog', href: '/blog' },
+                { label: 'About', href: '/about' },
+                { label: 'Contact', href: '/contact' },
+              ].map(l => (
+                <Link key={l.href} href={l.href} onClick={() => setMobileOpen(false)}
+                  style={{ fontSize: '13px', fontWeight: 600, color: '#64748b', textDecoration: 'none' }}>
+                  {l.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+      </nav>
+
+      {/* Keyframe for dropdown fade */}
+      <style>{`@keyframes cdxFadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }`}</style>
+    </>
   )
 }
