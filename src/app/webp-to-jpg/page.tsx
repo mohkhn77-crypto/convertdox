@@ -54,7 +54,7 @@ export default function WebpToJpgPage() {
           <div style={{ width:'56px', height:'56px', background:'rgba(232,93,4,0.2)', borderRadius:'14px', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'28px' }}>🔄</div>
           <div>
             <h1 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif", fontSize:'clamp(24px,3vw,36px)', fontWeight:800, color:'white', margin:0 }}>WebP to JPG Converter</h1>
-            <p style={{ color:'rgba(255,255,255,0.65)', fontSize:'15px', margin:'6px 0 0' }}>Convert Google's WebP format to standard, universally compatible JPG</p>
+            <p style={{ color:'rgba(255,255,255,0.65)', fontSize:'15px', margin:'6px 0 0' }}>Convert Google&apos;s WebP format to standard, universally compatible JPG</p>
           </div>
         </div>
       </div>

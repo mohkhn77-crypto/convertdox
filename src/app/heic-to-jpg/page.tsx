@@ -72,7 +72,7 @@ export default function HeicToJpgPage() {
         <div style={{ background:'#EFF6FF', border:'1.5px solid #BFDBFE', borderRadius:'12px', padding:'14px 18px' }}>
           <div style={{ fontSize:'14px', fontWeight:700, color:'#1E40AF', marginBottom:'4px' }}>📱 Why iPhones use HEIC</div>
           <div style={{ fontSize:'13px', color:'#1E3A8A', lineHeight:'1.6' }}>
-            HEIC (High Efficiency Image Container) takes up half the space of JPG with the same quality — great for phone storage. However, Windows, Android, and many apps don't support HEIC natively. Converting to JPG makes photos universally viewable.
+            HEIC (High Efficiency Image Container) takes up half the space of JPG with the same quality — great for phone storage. However, Windows, Android, and many apps don&apos;t support HEIC natively. Converting to JPG makes photos universally viewable.
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import Link from 'next/link'
 import DarkModeToggle from '@/components/DarkModeToggle'
 
 const Logo = () => (
@@ -219,10 +220,10 @@ export default function NavBar() {
         <div style={{ display:'flex',alignItems:'center',gap:'4px' }}>
 
           {/* Logo */}
-          <a href="/" style={{ textDecoration:'none',display:'flex',alignItems:'center',gap:'9px',marginRight:'14px',flexShrink:0 }}>
+          <Link href="/" style={{ textDecoration:'none',display:'flex',alignItems:'center',gap:'9px',marginRight:'14px',flexShrink:0 }}>
             <Logo/>
             <span style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'22px',fontWeight:800,color:'#0F2A4A',letterSpacing:'-0.5px' }}>Convert<span style={{ color:'#E85D04' }}>Dox</span></span>
-          </a>
+          </Link>
 
           {/* ── PDF TOOLS ── */}
           <div style={{ position:'relative' as const }} onMouseEnter={() => setOpen('pdf')} onMouseLeave={() => setOpen(null)}>
@@ -338,7 +339,7 @@ export default function NavBar() {
 
         {/* Right: All Tools + Blog + Dark + Pro + Hamburger */}
         <div style={{ display:'flex',alignItems:'center',gap:'8px',flexShrink:0 }}>
-          <a href="/" style={{ fontSize:'13px',color:'#64748b',textDecoration:'none',fontWeight:600,whiteSpace:'nowrap' as const }}>All Tools</a>
+          <Link href="/" style={{ fontSize:'13px',color:'#64748b',textDecoration:'none',fontWeight:600,whiteSpace:'nowrap' as const }}>All Tools</Link>
           <a href="/blog" style={{ fontSize:'13px',color:'#64748b',textDecoration:'none',fontWeight:500 }}>Blog</a>
           <DarkModeToggle />
           <a href="#" style={{ background:'#E85D04',color:'white',padding:'8px 14px',borderRadius:'8px',fontSize:'13px',fontWeight:700,textDecoration:'none',whiteSpace:'nowrap' as const }}>Get Pro</a>

@@ -108,7 +108,7 @@ export default function LoremIpsumPage() {
               {startWithLorem && <span style={{ color:'white',fontSize:'13px',fontWeight:700 }}>✓</span>}
             </div>
             <div>
-              <div style={{ fontSize:'14px',fontWeight:600,color:'#0F2A4A' }}>Start with "Lorem ipsum"</div>
+              <div style={{ fontSize:'14px',fontWeight:600,color:'#0F2A4A' }}>Start with &quot;Lorem ipsum&quot;</div>
               <div style={{ fontSize:'12px',color:'#94a3b8' }}>Classic lorem ipsum opening</div>
             </div>
           </label>

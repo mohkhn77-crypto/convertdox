@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link'
 import RelatedTools from '@/components/RelatedTools'
 import { useState, useEffect } from 'react'
 
@@ -15,11 +16,11 @@ const Logo = () => (
 const NAV = () => (
   <nav style={{ position:'sticky',top:0,zIndex:100,background:'rgba(255,255,255,0.97)',backdropFilter:'blur(12px)',borderBottom:'1px solid #e2e8f0',boxShadow:'0 1px 8px rgba(15,42,74,0.06)' }}>
     <div style={{ maxWidth:'1100px',margin:'0 auto',padding:'0 24px',height:'62px',display:'flex',alignItems:'center',justifyContent:'space-between' }}>
-      <a href="/" style={{ textDecoration:'none',display:'flex',alignItems:'center',gap:'9px' }}>
+      <Link href="/" style={{ textDecoration:'none',display:'flex',alignItems:'center',gap:'9px' }}>
         <Logo/>
         <span style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'30px',fontWeight:800,color:'#0F2A4A' }}>Convert<span style={{ color:'#E85D04' }}>Dox</span></span>
-      </a>
-      <a href="/" style={{ fontSize:'13px',color:'#64748b',textDecoration:'none',fontWeight:500 }}>← All Tools</a>
+      </Link>
+      <Link href="/" style={{ fontSize:'13px',color:'#64748b',textDecoration:'none',fontWeight:500 }}>← All Tools</Link>
     </div>
   </nav>
 )
@@ -64,6 +65,7 @@ export default function UuidGeneratorPage() {
   const [copiedAll, setCopiedAll] = useState(false)
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setUuids([generateUUID()])
   }, [])
 

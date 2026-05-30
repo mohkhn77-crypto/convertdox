@@ -48,8 +48,6 @@ export default function CompressImagesBatchPage() {
     }
   }
 
-  const fmt = (b: number) => b < 1_048_576 ? `${(b / 1024).toFixed(1)} KB` : `${(b / 1_048_576).toFixed(1)} MB`
-
   return (
     <div style={{ minHeight:'100vh', background:'#fff', fontFamily:"'Plus Jakarta Sans',system-ui,sans-serif" }}>
       <NavBar />

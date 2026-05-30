@@ -35,6 +35,24 @@ function syntaxHighlight(json: string): string {
 
 const SAMPLE_JWT = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
 
+function JsonBlock({ obj, label, keyName, copied, onCopy }: {
+  obj: object; label: string; keyName: string; copied: string | null; onCopy: (text: string, key: string) => void
+}) {
+  return (
+    <div style={{ marginBottom: '16px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
+        <div style={{ fontSize: '12px', fontWeight: 700, color: '#64748b', textTransform: 'uppercase' }}>{label}</div>
+        <button onClick={() => onCopy(JSON.stringify(obj, null, 2), keyName)}
+          style={{ fontSize: '11px', padding: '3px 10px', borderRadius: '6px', border: '1px solid #e2e8f0', background: copied === keyName ? '#16A34A' : 'white', color: copied === keyName ? 'white' : '#64748b', cursor: 'pointer', fontFamily: 'inherit' }}>
+          {copied === keyName ? 'Copied!' : 'Copy'}
+        </button>
+      </div>
+      <pre style={{ background: '#0F2A4A', borderRadius: '10px', padding: '16px', margin: 0, overflowX: 'auto', fontSize: '13px', lineHeight: '1.6' }}
+        dangerouslySetInnerHTML={{ __html: syntaxHighlight(JSON.stringify(obj, null, 2)) }} />
+    </div>
+  )
+}
+
 export default function JWTDecoderPage() {
   const [token, setToken] = useState(SAMPLE_JWT)
   const [copied, setCopied] = useState<string | null>(null)
@@ -61,20 +79,6 @@ export default function JWTDecoderPage() {
     setCopied(key)
     setTimeout(() => setCopied(null), 2000)
   }
-
-  const JsonBlock = ({ obj, label, keyName }: { obj: object; label: string; keyName: string }) => (
-    <div style={{ marginBottom: '16px' }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
-        <div style={{ fontSize: '12px', fontWeight: 700, color: '#64748b', textTransform: 'uppercase' }}>{label}</div>
-        <button onClick={() => copy(JSON.stringify(obj, null, 2), keyName)}
-          style={{ fontSize: '11px', padding: '3px 10px', borderRadius: '6px', border: '1px solid #e2e8f0', background: copied === keyName ? '#16A34A' : 'white', color: copied === keyName ? 'white' : '#64748b', cursor: 'pointer', fontFamily: 'inherit' }}>
-          {copied === keyName ? 'Copied!' : 'Copy'}
-        </button>
-      </div>
-      <pre style={{ background: '#0F2A4A', borderRadius: '10px', padding: '16px', margin: 0, overflowX: 'auto', fontSize: '13px', lineHeight: '1.6' }}
-        dangerouslySetInnerHTML={{ __html: syntaxHighlight(JSON.stringify(obj, null, 2)) }} />
-    </div>
-  )
 
   return (
     <div style={{ minHeight: '100vh', background: '#fff', fontFamily: "'Plus Jakarta Sans',system-ui,sans-serif" }}>
@@ -109,8 +113,8 @@ export default function JWTDecoderPage() {
         {decoded ? (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(400px,1fr))', gap: '20px' }}>
             <div>
-              <JsonBlock obj={decoded.header} label="Header" keyName="header" />
-              <JsonBlock obj={decoded.payload} label="Payload" keyName="payload" />
+              <JsonBlock obj={decoded.header} label="Header" keyName="header" copied={copied} onCopy={copy} />
+              <JsonBlock obj={decoded.payload} label="Payload" keyName="payload" copied={copied} onCopy={copy} />
             </div>
             <div>
               <div style={{ marginBottom: '16px' }}>

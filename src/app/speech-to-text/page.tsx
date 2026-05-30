@@ -42,6 +42,7 @@ export default function SpeechToTextPage() {
     if (typeof window === 'undefined') return
     const w = window as unknown as { SpeechRecognition?: SRConstructor; webkitSpeechRecognition?: SRConstructor }
     const SR = w.SpeechRecognition || w.webkitSpeechRecognition
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setSupported(!!SR)
   }, [])
 

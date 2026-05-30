@@ -16,6 +16,31 @@ interface ColorsResult {
   [key: string]: unknown
 }
 
+function ColorCard({ color, label, copied, onCopy }: { color: ColorInfo; label: string; copied: string | null; onCopy: (val: string) => void }) {
+  return (
+    <div style={{ background:'white', border:'1.5px solid #e2e8f0', borderRadius:'10px', overflow:'hidden' }}>
+      <div style={{ height:'64px', background: color.hex, width:'100%' }} />
+      <div style={{ padding:'12px' }}>
+        <div style={{ fontSize:'12px', color:'#94a3b8', fontWeight:600, marginBottom:'4px' }}>{label}</div>
+        <div style={{ display:'flex', alignItems:'center', gap:'6px', marginBottom:'4px' }}>
+          <span style={{ fontSize:'13px', fontWeight:700, color:'#0F2A4A', fontFamily:'monospace' }}>{color.hex}</span>
+          <button onClick={() => onCopy(color.hex)}
+            style={{ background: copied === color.hex ? '#F0FDF4' : '#f8fafc', color: copied === color.hex ? '#166534' : '#64748b', border:'1px solid #e2e8f0', borderRadius:'4px', padding:'2px 8px', cursor:'pointer', fontSize:'11px', fontWeight:600 }}>
+            {copied === color.hex ? 'Copied!' : 'Copy'}
+          </button>
+        </div>
+        <div style={{ display:'flex', alignItems:'center', gap:'6px' }}>
+          <span style={{ fontSize:'12px', color:'#64748b', fontFamily:'monospace' }}>{color.rgb}</span>
+          <button onClick={() => onCopy(color.rgb)}
+            style={{ background: copied === color.rgb ? '#F0FDF4' : '#f8fafc', color: copied === color.rgb ? '#166534' : '#64748b', border:'1px solid #e2e8f0', borderRadius:'4px', padding:'2px 8px', cursor:'pointer', fontSize:'11px', fontWeight:600 }}>
+            {copied === color.rgb ? 'Copied!' : 'Copy'}
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function ImageColorPickerPage() {
   const [file, setFile] = useState<File | null>(null)
   const [processing, setProcessing] = useState(false)
@@ -58,29 +83,6 @@ export default function ImageColorPickerPage() {
   }
 
   const fmt = (b: number) => b < 1_048_576 ? `${(b / 1024).toFixed(1)} KB` : `${(b / 1_048_576).toFixed(1)} MB`
-
-  const ColorCard = ({ color, label }: { color: ColorInfo; label: string }) => (
-    <div style={{ background:'white', border:'1.5px solid #e2e8f0', borderRadius:'10px', overflow:'hidden' }}>
-      <div style={{ height:'64px', background: color.hex, width:'100%' }} />
-      <div style={{ padding:'12px' }}>
-        <div style={{ fontSize:'12px', color:'#94a3b8', fontWeight:600, marginBottom:'4px' }}>{label}</div>
-        <div style={{ display:'flex', alignItems:'center', gap:'6px', marginBottom:'4px' }}>
-          <span style={{ fontSize:'13px', fontWeight:700, color:'#0F2A4A', fontFamily:'monospace' }}>{color.hex}</span>
-          <button onClick={() => copyColor(color.hex)}
-            style={{ background: copied === color.hex ? '#F0FDF4' : '#f8fafc', color: copied === color.hex ? '#166534' : '#64748b', border:'1px solid #e2e8f0', borderRadius:'4px', padding:'2px 8px', cursor:'pointer', fontSize:'11px', fontWeight:600 }}>
-            {copied === color.hex ? 'Copied!' : 'Copy'}
-          </button>
-        </div>
-        <div style={{ display:'flex', alignItems:'center', gap:'6px' }}>
-          <span style={{ fontSize:'12px', color:'#64748b', fontFamily:'monospace' }}>{color.rgb}</span>
-          <button onClick={() => copyColor(color.rgb)}
-            style={{ background: copied === color.rgb ? '#F0FDF4' : '#f8fafc', color: copied === color.rgb ? '#166534' : '#64748b', border:'1px solid #e2e8f0', borderRadius:'4px', padding:'2px 8px', cursor:'pointer', fontSize:'11px', fontWeight:600 }}>
-            {copied === color.rgb ? 'Copied!' : 'Copy'}
-          </button>
-        </div>
-      </div>
-    </div>
-  )
 
   return (
     <div style={{ minHeight:'100vh', background:'#fff', fontFamily:"'Plus Jakarta Sans',system-ui,sans-serif" }}>
@@ -137,7 +139,7 @@ export default function ImageColorPickerPage() {
               <div style={{ marginBottom:'20px' }}>
                 <div style={{ fontSize:'14px', fontWeight:700, color:'#0F2A4A', marginBottom:'12px' }}>Dominant Color</div>
                 <div style={{ maxWidth:'200px' }}>
-                  <ColorCard color={result.dominant} label="Dominant" />
+                  <ColorCard color={result.dominant} label="Dominant" copied={copied} onCopy={copyColor} />
                 </div>
               </div>
             )}
@@ -146,7 +148,7 @@ export default function ImageColorPickerPage() {
                 <div style={{ fontSize:'14px', fontWeight:700, color:'#0F2A4A', marginBottom:'12px' }}>Color Palette</div>
                 <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(140px,1fr))', gap:'12px' }}>
                   {result.palette.map((c, i) => (
-                    <ColorCard key={i} color={c} label={`Color ${i + 1}`} />
+                    <ColorCard key={i} color={c} label={`Color ${i + 1}`} copied={copied} onCopy={copyColor} />
                   ))}
                 </div>
               </div>

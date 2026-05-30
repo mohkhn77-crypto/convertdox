@@ -31,6 +31,7 @@ export default function QRGeneratorPage() {
 
   useEffect(() => {
     const content = getContent()
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (!content.trim()) { setQrUrl(''); return }
     QRCode.toDataURL(content, {
       width: size, margin: 2,

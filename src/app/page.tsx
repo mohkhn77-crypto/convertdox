@@ -1314,6 +1314,7 @@ export default function HomePage() {
   useEffect(() => {
     try {
       const saved = localStorage.getItem('convertdox-recent-tools')
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       if (saved) setRecentTools(JSON.parse(saved) as string[])
     } catch { /* ignore */ }
   }, [])

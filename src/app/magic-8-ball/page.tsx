@@ -86,6 +86,7 @@ export default function Magic8BallPage() {
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '28px' }}>
           <div style={{
             transition: 'transform 0.1s',
+            // eslint-disable-next-line react-hooks/purity
             transform: shaking ? `rotate(${Math.sin(Date.now() / 50) * 8}deg)` : 'rotate(0deg)',
             animation: shaking ? 'shake 0.8s ease-in-out' : 'none',
           }}>

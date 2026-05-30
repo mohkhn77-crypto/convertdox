@@ -54,6 +54,12 @@ export default function TimezoneConverterPage() {
   const [nowFrom, setNowFrom] = useState('')
   const [nowTo, setNowTo] = useState('')
 
+  function updateNow(ftz: string, ttz: string) {
+    const now = new Date()
+    setNowFrom(formatInTZ(now, ftz))
+    setNowTo(formatInTZ(now, ttz))
+  }
+
   useEffect(() => {
     const now = new Date()
     const y = now.getFullYear()
@@ -61,21 +67,16 @@ export default function TimezoneConverterPage() {
     const d = String(now.getDate()).padStart(2, '0')
     const hh = String(now.getHours()).padStart(2, '0')
     const mm = String(now.getMinutes()).padStart(2, '0')
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setDateStr(`${y}-${m}-${d}`)
     setTimeStr(`${hh}:${mm}`)
     updateNow(fromTZ, toTZ)
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const id = setInterval(() => updateNow(fromTZ, toTZ), 1000)
     return () => clearInterval(id)
   }, [fromTZ, toTZ])
-
-  function updateNow(ftz: string, ttz: string) {
-    const now = new Date()
-    setNowFrom(formatInTZ(now, ftz))
-    setNowTo(formatInTZ(now, ttz))
-  }
 
   function convert() {
     if (!dateStr || !timeStr) return

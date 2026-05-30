@@ -26,6 +26,7 @@ export default function SortLinesPage() {
     }
     if (sortMode === 'random') {
       for (let i = lines.length - 1; i > 0; i--) {
+        // eslint-disable-next-line react-hooks/purity
         const j = Math.floor(Math.random() * (i + 1));
         [lines[i], lines[j]] = [lines[j], lines[i]]
       }

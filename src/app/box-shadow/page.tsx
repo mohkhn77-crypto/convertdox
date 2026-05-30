@@ -26,6 +26,23 @@ function shadowToCss(s: Shadow): string {
   return `${s.inset ? 'inset ' : ''}${s.h}px ${s.v}px ${s.blur}px ${s.spread}px rgba(${r},${g},${b},${(s.opacity / 100).toFixed(2)})`
 }
 
+function SliderRow({ label, field, min, max, value, onUpdate }: {
+  label: string; field: keyof Shadow; min: number; max: number;
+  value: number; onUpdate: (field: keyof Shadow, val: number) => void
+}) {
+  return (
+    <div style={{ marginBottom: '16px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
+        <label style={{ fontSize: '13px', fontWeight: 700, color: '#0F2A4A' }}>{label}</label>
+        <span style={{ fontSize: '13px', fontWeight: 700, color: '#E85D04', minWidth: '40px', textAlign: 'right' as const }}>{value}px</span>
+      </div>
+      <input type="range" min={min} max={max} value={value}
+        onChange={e => onUpdate(field, Number(e.target.value))}
+        style={{ width: '100%', accentColor: '#E85D04' }} />
+    </div>
+  )
+}
+
 export default function BoxShadowPage() {
   const [shadows, setShadows] = useState<Shadow[]>([{ ...DEFAULT }])
   const [active, setActive] = useState(0)
@@ -58,18 +75,6 @@ export default function BoxShadowPage() {
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
-
-  const SliderRow = ({ label, field, min, max }: { label: string; field: keyof Shadow; min: number; max: number }) => (
-    <div style={{ marginBottom: '16px' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
-        <label style={{ fontSize: '13px', fontWeight: 700, color: '#0F2A4A' }}>{label}</label>
-        <span style={{ fontSize: '13px', fontWeight: 700, color: '#E85D04', minWidth: '40px', textAlign: 'right' as const }}>{s[field] as number}px</span>
-      </div>
-      <input type="range" min={min} max={max} value={s[field] as number}
-        onChange={e => update(field, Number(e.target.value))}
-        style={{ width: '100%', accentColor: '#E85D04' }} />
-    </div>
-  )
 
   return (
     <div style={{ minHeight: '100vh', background: '#fff', fontFamily: "'Plus Jakarta Sans',system-ui,sans-serif" }}>
@@ -137,10 +142,10 @@ export default function BoxShadowPage() {
               ))}
             </div>
 
-            <SliderRow label="H-Offset" field="h" min={-100} max={100} />
-            <SliderRow label="V-Offset" field="v" min={-100} max={100} />
-            <SliderRow label="Blur" field="blur" min={0} max={100} />
-            <SliderRow label="Spread" field="spread" min={-50} max={50} />
+            <SliderRow label="H-Offset" field="h" min={-100} max={100} value={s.h} onUpdate={update} />
+            <SliderRow label="V-Offset" field="v" min={-100} max={100} value={s.v} onUpdate={update} />
+            <SliderRow label="Blur" field="blur" min={0} max={100} value={s.blur} onUpdate={update} />
+            <SliderRow label="Spread" field="spread" min={-50} max={50} value={s.spread} onUpdate={update} />
 
             <div style={{ marginBottom: '16px' }}>
               <label style={{ fontSize: '13px', fontWeight: 700, color: '#0F2A4A', marginBottom: '6px', display: 'block' }}>Color</label>

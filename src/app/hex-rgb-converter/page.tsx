@@ -65,7 +65,7 @@ export default function HexRgbPage() {
         {/* Mode tabs */}
         <div style={{ display:'flex',background:'#f1f5f9',borderRadius:'12px',padding:'4px',marginBottom:'24px' }}>
           {[{id:'hex2rgb',label:'HEX → RGB'},{id:'rgb2hex',label:'RGB → HEX'}].map(t => (
-            <button key={t.id} onClick={() => setActiveTab(t.id as any)}
+            <button key={t.id} onClick={() => setActiveTab(t.id as 'hex2rgb' | 'rgb2hex')}
               style={{ flex:1,padding:'10px',borderRadius:'9px',border:'none',background:activeTab===t.id?'white':'transparent',fontFamily:'inherit',fontSize:'14px',fontWeight:700,color:activeTab===t.id?'#0F2A4A':'#64748b',cursor:'pointer',boxShadow:activeTab===t.id?'0 2px 6px rgba(0,0,0,0.08)':'none',transition:'all 0.2s' }}>
               {t.label}
             </button>

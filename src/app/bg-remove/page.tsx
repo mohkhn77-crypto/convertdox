@@ -1,5 +1,6 @@
 'use client'
 import NavBar from '@/components/NavBar'
+import Link from 'next/link'
 
 export default function ComingSoonPage() {
   return (
@@ -13,9 +14,9 @@ export default function ComingSoonPage() {
         <p style={{ fontSize:'15px', color:'#64748b', lineHeight:'1.6', marginBottom:'24px' }}>
           We are building Background Remover right now. This tool requires backend processing and will launch in our next release. In the meantime, explore our 105 free browser-based tools.
         </p>
-        <a href="/" style={{ background:'#E85D04', color:'white', padding:'12px 28px', borderRadius:'10px', textDecoration:'none', fontWeight:700, fontSize:'14px', display:'inline-block' }}>
+        <Link href="/" style={{ background:'#E85D04', color:'white', padding:'12px 28px', borderRadius:'10px', textDecoration:'none', fontWeight:700, fontSize:'14px', display:'inline-block' }}>
           Browse 105 Free Tools →
-        </a>
+        </Link>
         <div style={{ marginTop:'28px', padding:'16px', background:'#FFF7ED', borderRadius:'12px', fontSize:'13px', color:'#92400E' }}>
           💡 Want to be notified when this launches?{' '}
           <a href="/contact" style={{ color:'#E85D04', fontWeight:700 }}>Contact us</a>

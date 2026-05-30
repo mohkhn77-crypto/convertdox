@@ -15,16 +15,12 @@ export default function RandomNumberPage() {
   const [results, setResults] = useState<number[]>([])
   const [history, setHistory] = useState<number[][]>([])
   const [copied, setCopied] = useState(false)
-  const [animating, setAnimating] = useState(false)
-
   const generate = () => {
     const lo = parseInt(min) || 0
     const hi = parseInt(max) || 100
     if (lo >= hi) return
     if (noDupes && count > (hi - lo + 1)) return
 
-    setAnimating(true)
-    setTimeout(() => setAnimating(false), 300)
 
     const nums: number[] = []
     const used = new Set<number>()

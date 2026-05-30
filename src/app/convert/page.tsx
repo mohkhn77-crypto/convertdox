@@ -2,6 +2,7 @@
 import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import NavBar from '@/components/NavBar'
+import Link from 'next/link'
 
 interface FileInfo {
   name: string
@@ -68,6 +69,7 @@ function ConvertContent() {
   useEffect(() => {
     try {
       const s = sessionStorage.getItem('convertdox-uploaded-file')
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       if (s) setFileInfo(JSON.parse(s) as FileInfo)
     } catch { /* ignore */ }
   }, [])
@@ -81,9 +83,9 @@ function ConvertContent() {
 
       <div style={{ maxWidth:'760px', margin:'0 auto', padding:'40px 24px' }}>
 
-        <a href="/" style={{ display:'inline-flex', alignItems:'center', gap:'6px', fontSize:'13px', color:'#64748b', textDecoration:'none', marginBottom:'20px', fontWeight:500 }}>
+        <Link href="/" style={{ display:'inline-flex', alignItems:'center', gap:'6px', fontSize:'13px', color:'#64748b', textDecoration:'none', marginBottom:'20px', fontWeight:500 }}>
           ← Back to home
-        </a>
+        </Link>
 
         {/* File info card */}
         {fileInfo && (
@@ -130,7 +132,7 @@ function ConvertContent() {
 
         {/* Actions */}
         <div style={{ display:'flex', gap:'10px', justifyContent:'center' }}>
-          <a href="/" style={{ background:'white', color:'#0F2A4A', padding:'11px 28px', borderRadius:'10px', border:'1.5px solid #e2e8f0', fontSize:'14px', fontWeight:600, textDecoration:'none' }}>Cancel</a>
+          <Link href="/" style={{ background:'white', color:'#0F2A4A', padding:'11px 28px', borderRadius:'10px', border:'1.5px solid #e2e8f0', fontSize:'14px', fontWeight:600, textDecoration:'none' }}>Cancel</Link>
           <button
             disabled={!selectedFormat}
             onClick={() => alert('Full conversion is coming in Phase 3!')}

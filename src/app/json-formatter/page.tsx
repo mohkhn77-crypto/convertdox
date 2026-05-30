@@ -32,8 +32,8 @@ export default function JSONFormatterPage() {
         arrays: (str.match(/\[/g) || []).length,
         objects: (str.match(/\{/g) || []).length,
       })
-    } catch (e: any) {
-      setError(e.message)
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : String(e))
       setOutput('')
     }
   }
@@ -44,8 +44,8 @@ export default function JSONFormatterPage() {
       const parsed = JSON.parse(input)
       setOutput(JSON.stringify(parsed))
       setError('')
-    } catch (e: any) {
-      setError(e.message)
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : String(e))
     }
   }
 

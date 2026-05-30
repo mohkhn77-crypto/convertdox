@@ -110,8 +110,8 @@ export default function MorseCodePage() {
         </div>
 
         <div style={{ display:'flex', gap:'8px', flexWrap:'wrap', marginBottom:'32px' }}>
-          <button onClick={() => setInput('SOS')} style={{ padding:'8px 16px', borderRadius:'8px', border:'1.5px solid #e2e8f0', background:'white', color:'#64748b', fontFamily:'inherit', fontSize:'13px', fontWeight:600, cursor:'pointer' }}>Try "SOS"</button>
-          <button onClick={() => setInput('HELLO WORLD')} style={{ padding:'8px 16px', borderRadius:'8px', border:'1.5px solid #e2e8f0', background:'white', color:'#64748b', fontFamily:'inherit', fontSize:'13px', fontWeight:600, cursor:'pointer' }}>Try "HELLO WORLD"</button>
+          <button onClick={() => setInput('SOS')} style={{ padding:'8px 16px', borderRadius:'8px', border:'1.5px solid #e2e8f0', background:'white', color:'#64748b', fontFamily:'inherit', fontSize:'13px', fontWeight:600, cursor:'pointer' }}>Try &quot;SOS&quot;</button>
+          <button onClick={() => setInput('HELLO WORLD')} style={{ padding:'8px 16px', borderRadius:'8px', border:'1.5px solid #e2e8f0', background:'white', color:'#64748b', fontFamily:'inherit', fontSize:'13px', fontWeight:600, cursor:'pointer' }}>Try &quot;HELLO WORLD&quot;</button>
           <button onClick={() => { if (output) navigator.clipboard.writeText(output) }}
             style={{ padding:'8px 16px', borderRadius:'8px', border:'1.5px solid #e2e8f0', background:'white', color:'#64748b', fontFamily:'inherit', fontSize:'13px', fontWeight:600, cursor:'pointer' }}>📋 Copy Output</button>
           {!playing

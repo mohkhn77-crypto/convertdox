@@ -43,7 +43,7 @@ const CATEGORIES = {
 }
 
 const convertTemp = (val: number, from: string, to: string) => {
-  let c = from === 'Celsius' ? val : from === 'Fahrenheit' ? (val-32)*5/9 : val - 273.15
+  const c = from === 'Celsius' ? val : from === 'Fahrenheit' ? (val-32)*5/9 : val - 273.15
   if (to === 'Celsius') return c
   if (to === 'Fahrenheit') return c*9/5 + 32
   return c + 273.15
@@ -63,8 +63,8 @@ export default function UnitConverterPage() {
     if (cat === 'temperature') {
       return convertTemp(num, from, to).toFixed(6).replace(/\.?0+$/, '')
     }
-    const base = (currentCat.toBase as any)[from]
-    const target = (currentCat.toBase as any)[to]
+    const base = (currentCat.toBase as Record<string, number>)[from]
+    const target = (currentCat.toBase as Record<string, number>)[to]
     if (!base || !target) return ''
     return ((num * base) / target).toFixed(8).replace(/\.?0+$/, '')
   }

@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link'
 import { useState, useEffect } from 'react'
 
 const Logo = () => (
@@ -14,11 +15,11 @@ const Logo = () => (
 const NAV = () => (
   <nav style={{ position:'sticky',top:0,zIndex:100,background:'rgba(255,255,255,0.97)',backdropFilter:'blur(12px)',borderBottom:'1px solid #e2e8f0',boxShadow:'0 1px 8px rgba(15,42,74,0.06)' }}>
     <div style={{ maxWidth:'1100px',margin:'0 auto',padding:'0 24px',height:'62px',display:'flex',alignItems:'center',justifyContent:'space-between' }}>
-      <a href="/" style={{ textDecoration:'none',display:'flex',alignItems:'center',gap:'9px' }}>
+      <Link href="/" style={{ textDecoration:'none',display:'flex',alignItems:'center',gap:'9px' }}>
         <Logo/>
         <span style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'30px',fontWeight:800,color:'#0F2A4A' }}>Convert<span style={{ color:'#E85D04' }}>Dox</span></span>
-      </a>
-      <a href="/" style={{ fontSize:'13px',color:'#64748b',textDecoration:'none',fontWeight:500 }}>← All Tools</a>
+      </Link>
+      <Link href="/" style={{ fontSize:'13px',color:'#64748b',textDecoration:'none',fontWeight:500 }}>← All Tools</Link>
     </div>
   </nav>
 )
@@ -37,7 +38,7 @@ type DiffLine = { type: 'add' | 'remove' | 'same'; text: string }
 
 function computeDiff(original: string, modified: string, ignoreWs: boolean, ignoreCase: boolean): DiffLine[] {
   const norm = (s: string) => {
-    let r = ignoreWs ? s.trim() : s
+    const r = ignoreWs ? s.trim() : s
     return ignoreCase ? r.toLowerCase() : r
   }
   const a = original.split('\n')
@@ -91,6 +92,7 @@ export default function TextDiffPage() {
   useEffect(() => {
     const aLen = original.split('\n').length
     const bLen = modified.split('\n').length
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setTooLarge(aLen > 300 || bLen > 300)
   }, [original, modified])
 

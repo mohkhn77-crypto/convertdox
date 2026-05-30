@@ -93,7 +93,7 @@ export default function PercentageCalculatorPage() {
         {result ? (
           <div style={{ background:'linear-gradient(135deg,#0F2A4A,#1a3a5c)',borderRadius:'16px',padding:'28px',textAlign:'center',boxShadow:'0 8px 32px rgba(15,42,74,0.2)' }}>
             <div style={{ fontSize:'13px',color:'rgba(255,255,255,0.6)',fontWeight:600,textTransform:'uppercase',letterSpacing:'0.5px',marginBottom:'8px' }}>{result.label}</div>
-            <div style={{ fontFamily:"'Space Grotesk', system-ui, sans-serif",fontSize:'52px',fontWeight:800,color: (result as any).positive===false?'#FCA5A5':(result as any).positive===true?'#86EFAC':'#F48C42',lineHeight:1 }}>
+            <div style={{ fontFamily:"'Space Grotesk', system-ui, sans-serif",fontSize:'52px',fontWeight:800,color: (result as { positive?: boolean }).positive===false?'#FCA5A5':(result as { positive?: boolean }).positive===true?'#86EFAC':'#F48C42',lineHeight:1 }}>
               {result.display}
             </div>
           </div>

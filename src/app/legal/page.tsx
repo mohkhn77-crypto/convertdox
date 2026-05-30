@@ -102,7 +102,7 @@ export default function LegalPage() {
                   <span style={{ fontSize:'32px' }}>🔒</span>
                   <h1 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'28px',fontWeight:800,color:'#0F2A4A',margin:0 }}>Privacy Policy</h1>
                 </div>
-                <P>This Privacy Policy explains how ConvertDox ("we", "our", or "us") collects, uses, and protects your information when you use our website at convertdox.com.</P>
+                <P>This Privacy Policy explains how ConvertDox (&quot;we&quot;, &quot;our&quot;, or &quot;us&quot;) collects, uses, and protects your information when you use our website at convertdox.com.</P>
 
                 <Notice type="success">✅ ConvertDox does not permanently store uploaded files. All files processed through our platform are automatically deleted after processing and are never retained on our servers.</Notice>
 
@@ -163,7 +163,7 @@ export default function LegalPage() {
                 </ul>
 
                 <H2>6. Browser Storage</H2>
-                <P>Some of our tools use your browser's local storage (localStorage) to save your preferences and settings locally on your device. This data never leaves your device and is not transmitted to our servers. You can clear this data through your browser settings.</P>
+                <P>Some of our tools use your browser&apos;s local storage (localStorage) to save your preferences and settings locally on your device. This data never leaves your device and is not transmitted to our servers. You can clear this data through your browser settings.</P>
 
                 <H2>7. Data Retention</H2>
                 <ul style={{ paddingLeft:'20px',marginBottom:'12px' }}>
@@ -178,7 +178,7 @@ export default function LegalPage() {
                 <ul style={{ paddingLeft:'20px',marginBottom:'12px' }}>
                   <Li><strong>Access:</strong> Request a copy of the personal data we hold about you</Li>
                   <Li><strong>Correction:</strong> Request correction of inaccurate data</Li>
-                  <Li><strong>Deletion:</strong> Request deletion of your personal data ("right to be forgotten")</Li>
+                  <Li><strong>Deletion:</strong> Request deletion of your personal data (&quot;right to be forgotten&quot;)</Li>
                   <Li><strong>Portability:</strong> Receive your data in a portable format</Li>
                   <Li><strong>Objection:</strong> Object to processing of your data for certain purposes</Li>
                   <Li><strong>Withdraw Consent:</strong> Withdraw consent at any time where processing is based on consent</Li>
@@ -191,7 +191,7 @@ export default function LegalPage() {
                 <H2>10. International Transfers</H2>
                 <P>ConvertDox operates globally. Your data may be processed in countries other than your own. We ensure appropriate safeguards are in place for international transfers in accordance with applicable data protection laws.</P>
 
-                <H2>11. Children's Privacy</H2>
+                <H2>11. Children&apos;s Privacy</H2>
                 <P>Our services are not directed to children under the age of 13. We do not knowingly collect personal information from children under 13. If you believe we have collected information from a child, please contact us immediately at <a href="mailto:legal@convertdox.com" style={{ color:'#E85D04' }}>legal@convertdox.com</a></P>
 
                 <H2>12. Changes to This Policy</H2>
@@ -209,7 +209,7 @@ export default function LegalPage() {
                   <span style={{ fontSize:'32px' }}>📋</span>
                   <h1 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'28px',fontWeight:800,color:'#0F2A4A',margin:0 }}>Terms of Service</h1>
                 </div>
-                <P>By using ConvertDox ("the Service"), you agree to these Terms of Service. Please read them carefully before using our platform.</P>
+                <P>By using ConvertDox (&quot;the Service&quot;), you agree to these Terms of Service. Please read them carefully before using our platform.</P>
 
                 <Notice type="warn">⚠️ Users are solely responsible for the files and content they upload, convert, generate, or process using this platform.</Notice>
 
@@ -264,7 +264,7 @@ export default function LegalPage() {
                 <P>Our total liability to you for any claim arising from use of the Service shall not exceed the amount you paid to us in the 12 months preceding the claim, or $100, whichever is greater.</P>
 
                 <H2>10. Disclaimer of Warranties</H2>
-                <P>THE SERVICE IS PROVIDED "AS IS" WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED. WE DO NOT WARRANT THAT THE SERVICE WILL BE ERROR-FREE, SECURE, OR CONTINUOUSLY AVAILABLE.</P>
+                <P>THE SERVICE IS PROVIDED &quot;AS IS&quot; WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED. WE DO NOT WARRANT THAT THE SERVICE WILL BE ERROR-FREE, SECURE, OR CONTINUOUSLY AVAILABLE.</P>
 
                 <H2>11. Account Suspension & Termination</H2>
                 <P>We reserve the right to suspend or terminate accounts and access to the Service immediately if we determine, in our sole discretion, that you have violated these Terms. No refund of any paid subscriptions will be provided in cases of termination for violations.</P>
@@ -323,7 +323,7 @@ export default function LegalPage() {
                   <Li>Uploaded files are stored in isolated, temporary environments only</Li>
                   <Li>Files are processed in memory where possible (never written to persistent disk)</Li>
                   <Li>Temporary storage is encrypted at rest</Li>
-                  <Li>Files are completely segregated — no user's files can be accessed by another user</Li>
+                  <Li>Files are completely segregated — no user&apos;s files can be accessed by another user</Li>
                   <Li>No file content is indexed, searchable, or accessible to staff</Li>
                 </ul>
 
@@ -452,7 +452,7 @@ export default function LegalPage() {
                 <Notice type="warn">⚠️ ConvertDox operates a strict repeat infringer policy. Users who repeatedly infringe copyright will have their accounts terminated and access permanently blocked.</Notice>
 
                 <H2>9. Fair Use</H2>
-                <P>Many uses of copyrighted content qualify as "fair use" under copyright law, including commentary, criticism, news reporting, teaching, and research. ConvertDox tools are intended to support these legitimate uses.</P>
+                <P>Many uses of copyrighted content qualify as &quot;fair use&quot; under copyright law, including commentary, criticism, news reporting, teaching, and research. ConvertDox tools are intended to support these legitimate uses.</P>
 
                 <H2>10. User Responsibility</H2>
                 <P>By using ConvertDox, you agree to:</P>

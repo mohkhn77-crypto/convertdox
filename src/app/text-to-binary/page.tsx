@@ -90,7 +90,7 @@ export default function TextToBinaryPage() {
             <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'8px' }}>
               <span style={{ fontSize:'13px', fontWeight:700, color:'#0F2A4A' }}>{mode==='encode'?'Text Input':'Binary Input'}</span>
               <button onClick={() => setInput('Hello')}
-                style={{ fontSize:'12px', fontWeight:600, color:'#E85D04', background:'transparent', border:'none', cursor:'pointer', fontFamily:'inherit' }}>Try "Hello"</button>
+                style={{ fontSize:'12px', fontWeight:600, color:'#E85D04', background:'transparent', border:'none', cursor:'pointer', fontFamily:'inherit' }}>Try &quot;Hello&quot;</button>
             </div>
             <textarea value={input} onChange={e => setInput(e.target.value)}
               placeholder={mode==='encode' ? 'Enter text to convert...' : 'Enter binary code (e.g. 01001000 01101001)'}

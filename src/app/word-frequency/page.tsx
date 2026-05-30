@@ -19,7 +19,7 @@ export default function WordFrequencyPage() {
     const filtered = excludeStop ? words.filter(w => !STOP_WORDS.has(w)) : words
     const map: Record<string, number> = {}
     filtered.forEach(w => { map[w] = (map[w] || 0) + 1 })
-    let entries = Object.entries(map)
+    const entries = Object.entries(map)
     switch (sortKey) {
       case 'freq-desc': entries.sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])); break
       case 'freq-asc': entries.sort((a, b) => a[1] - b[1] || a[0].localeCompare(b[0])); break
