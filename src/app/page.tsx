@@ -1083,9 +1083,19 @@ const TOOLS = [
   { iconType:'qr-reader',    title:'QR Code Reader',       desc:'Decode QR codes from images',             href:'/qr-reader',                   cat:'specialty' },
   { iconType:'favicon',      title:'Logo Maker',           desc:'Create simple text logos',                 href:'/logo-maker',                  cat:'specialty' },
 
+  // === Document Tools ===
+  { iconType:'invoice',       title:'Invoice Generator',       desc:'Create professional invoices',           href:'/invoice-generator',           cat:'docs' },
+  { iconType:'receipt',       title:'Receipt Generator',       desc:'Generate receipts instantly',            href:'/receipt-generator',           cat:'docs' },
+  { iconType:'po',            title:'Purchase Order',          desc:'Create purchase orders',                 href:'/purchase-order-generator',    cat:'docs' },
+  { iconType:'letterhead',    title:'Letterhead Generator',    desc:'Design business letterheads',            href:'/letterhead-generator',        cat:'docs' },
+  { iconType:'resume',        title:'Resume Builder',          desc:'Build professional resumes',             href:'/resume-builder',              cat:'docs' },
+  { iconType:'biz-card',      title:'Business Card Maker',     desc:'Design business cards',                  href:'/business-card-generator',     cat:'docs' },
+
   // === Utility ===
-  { iconType:'yt-thumb',     title:'YouTube Thumbnail',    desc:'Download YouTube thumbnails',             href:'/youtube-thumbnail',           cat:'util' },
-  { iconType:'emi',          title:'Loan Calculator',      desc:'Calculate monthly loan payments',          href:'/loan-calculator',             cat:'calc' },
+  { iconType:'pdf-pages',     title:'PDF Page Counter',        desc:'Count pages in PDF files',               href:'/pdf-page-counter',            cat:'util' },
+  { iconType:'meta-gen',      title:'Meta Description',        desc:'Generate SEO meta descriptions',         href:'/meta-description-generator',  cat:'dev' },
+  { iconType:'yt-thumb',      title:'YouTube Thumbnail',       desc:'Download YouTube thumbnails',            href:'/youtube-thumbnail',           cat:'util' },
+  { iconType:'emi',           title:'Loan Calculator',         desc:'Calculate monthly loan payments',         href:'/loan-calculator',             cat:'calc' },
 
   // === AI Tools ===
   { iconType:'ai', title:'AI Summarizer',              desc:'Summarize long text instantly',        href:'/ai-summarizer',       cat:'ai' },

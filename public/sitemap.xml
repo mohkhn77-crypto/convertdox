@@ -264,4 +264,13 @@
     <priority>0.9</priority>
   </url>
 
+  <!-- Document & Utility Tools — 2026-05-30 -->
+  <url><loc>https://convertdox.com/invoice-generator</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertdox.com/receipt-generator</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertdox.com/purchase-order-generator</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertdox.com/letterhead-generator</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertdox.com/resume-builder</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertdox.com/business-card-generator</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertdox.com/pdf-page-counter</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertdox.com/meta-description-generator</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
 </urlset>
