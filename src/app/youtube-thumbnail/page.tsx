@@ -1,4 +1,5 @@
 'use client'
+import Image from 'next/image'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
 import LegalNoticeHigh from '@/components/LegalNoticeHigh'
@@ -140,9 +141,11 @@ export default function YouTubeThumbnailPage() {
           <div style={{ display: 'flex', flexDirection: 'column' as const, gap: '20px' }}>
             {thumbnails.map(thumb => (
               <div key={thumb.label} style={{ background: '#f8fafc', border: '1.5px solid #e2e8f0', borderRadius: '14px', padding: '20px', display: 'flex', flexWrap: 'wrap' as const, gap: '20px', alignItems: 'center' }}>
-                <img
+                <Image
                   src={thumb.url}
                   alt={thumb.label}
+                  width={thumb.width}
+                  height={thumb.height}
                   style={{ width: '180px', height: 'auto', borderRadius: '8px', border: '1px solid #e2e8f0', flexShrink: 0, objectFit: 'cover' }}
                   onError={e => { (e.currentTarget as HTMLImageElement).style.display = 'none' }}
                 />

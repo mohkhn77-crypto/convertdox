@@ -292,7 +292,6 @@ export default function WordCounterPage() {
             {[
               { href: '/text-case-converter', icon: '🔤', name: 'Text Case Converter',  desc: 'UPPER, lower, Title case' },
               { href: '/lorem-ipsum',          icon: '📄', name: 'Lorem Ipsum Generator', desc: 'Placeholder text' },
-              { href: '/remove-spaces',        icon: '🧹', name: 'Remove Extra Spaces',   desc: 'Clean messy text' },
               { href: '/password-generator',   icon: '🔑', name: 'Password Generator',    desc: 'Secure passwords' },
             ].map(tool => (
               <a key={tool.href} href={tool.href} style={{ background: 'white', border: '1.5px solid #e2e8f0', borderRadius: '12px', padding: '14px', textDecoration: 'none', display: 'flex', gap: '10px', alignItems: 'flex-start', transition: 'all 0.2s', boxShadow: '0 2px 8px rgba(15,42,74,0.04)' }}>

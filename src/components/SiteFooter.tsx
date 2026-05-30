@@ -5,8 +5,8 @@ export default function SiteFooter() {
     {
       title: 'Tools',
       links: [
-        { label: 'PDF Tools',       href: '/tools/pdf' },
-        { label: 'Image Tools',     href: '/tools/image' },
+        { label: 'PDF Tools',       href: '/all-tools' },
+        { label: 'Image Tools',     href: '/all-tools' },
         { label: 'Text Tools',      href: '/tools/text' },
         { label: 'Calculators',     href: '/tools/calculators' },
         { label: 'Developer Tools', href: '/tools/developer' },

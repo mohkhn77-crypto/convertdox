@@ -1044,7 +1044,6 @@ const TOOLS = [
   { iconType:'pdf-merge-sp', title:'Merge Specific Pages', desc:'Combine specific pages from PDFs',        href:'/pdf-merge-specific',          cat:'pdf' },
   { iconType:'pdf-sign',     title:'Sign PDF',             desc:'Add e-signature to PDF',                  href:'/pdf-sign',                    cat:'pdf' },
   { iconType:'pdf-annotate', title:'Annotate PDF',         desc:'Add notes and highlights to PDF',         href:'/pdf-annotate',                cat:'pdf' },
-  { iconType:'pdf-pages',    title:'PDF Page Counter',     desc:'Count PDF pages and file size',           href:'/pdf-page-counter',            cat:'pdf' },
 
   // === Image Tools ===
   { iconType:'img-compress', title:'Compress Image',       desc:'Reduce image file size',                  href:'/compress-image',              cat:'image' },
@@ -1080,21 +1079,9 @@ const TOOLS = [
   { iconType:'instagram-sq', title:'Instagram Square',     desc:'Crop image to 1:1 ratio',                 href:'/instagram-square',            cat:'specialty' },
   { iconType:'qr-reader',    title:'QR Code Reader',       desc:'Decode QR codes from images',             href:'/qr-reader',                   cat:'specialty' },
 
-  // === Document Tools ===
-  { iconType:'invoice',      title:'Invoice Generator',    desc:'Create professional invoices',            href:'/invoice-generator',           cat:'docs' },
-  { iconType:'receipt',      title:'Receipt Generator',    desc:'Create and print receipts',               href:'/receipt-generator',           cat:'docs' },
-  { iconType:'po',           title:'Purchase Order',       desc:'Generate purchase orders',                href:'/purchase-order-generator',    cat:'docs' },
-  { iconType:'letterhead',   title:'Letterhead Generator', desc:'Professional letterhead creator',         href:'/letterhead-generator',        cat:'docs' },
-  { iconType:'resume',       title:'Resume Builder',       desc:'Build ATS-friendly resume',               href:'/resume-builder',              cat:'docs' },
-  { iconType:'biz-card',     title:'Business Card',        desc:'Design business card PDF',                href:'/business-card-generator',     cat:'docs' },
-  { iconType:'logo',         title:'Logo Maker',           desc:'Simple text-based logo creator',          href:'/logo-maker',                  cat:'docs' },
-
   // === Utility ===
   { iconType:'yt-thumb',     title:'YouTube Thumbnail',    desc:'Download YouTube thumbnails',             href:'/youtube-thumbnail',           cat:'util' },
-  { iconType:'word-detail',  title:'Detailed Word Count',  desc:'Reading time, readability, top words',    href:'/detailed-word-counter',       cat:'util' },
-  { iconType:'meta-gen',     title:'Meta Tag Generator',   desc:'SEO meta tags and Open Graph',            href:'/meta-description-generator',  cat:'util' },
-  { iconType:'emi',          title:'Loan EMI Calculator',  desc:'Calculate monthly loan EMI',              href:'/loan-emi-calculator',         cat:'calc' },
-  { iconType:'pregnancy',    title:'Pregnancy Calculator', desc:'Due date and pregnancy tracker',          href:'/pregnancy-due-date-calculator',cat:'calc' },
+  { iconType:'emi',          title:'Loan Calculator',      desc:'Calculate monthly loan payments',          href:'/loan-calculator',             cat:'calc' },
 
   // === AI Tools ===
   { iconType:'ai', title:'AI Summarizer',              desc:'Summarize long text instantly',        href:'/ai-summarizer',       cat:'ai' },

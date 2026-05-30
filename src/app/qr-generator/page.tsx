@@ -4,7 +4,8 @@
   NEEDS: npm install qrcode @types/qrcode (already done)
 */
 'use client'
-import { useState, useEffect } from 'react'
+import Image from 'next/image'
+import { useCallback, useEffect, useState } from 'react'
 import NavBar from '@/components/NavBar'
 import TrustStrip from '@/components/TrustStrip'
 import RelatedTools from '@/components/RelatedTools'
@@ -23,11 +24,11 @@ export default function QRGeneratorPage() {
   const [emailTo, setEmailTo] = useState('')
   const [emailSub, setEmailSub] = useState('')
 
-  const getContent = () => {
+  const getContent = useCallback(() => {
     if (activeTab === 'wifi') return `WIFI:T:${wifiSec};S:${wifiSsid};P:${wifiPass};;`
     if (activeTab === 'email') return `mailto:${emailTo}?subject=${encodeURIComponent(emailSub)}`
     return text
-  }
+  }, [activeTab, emailSub, emailTo, text, wifiPass, wifiSec, wifiSsid])
 
   useEffect(() => {
     const content = getContent()
@@ -38,7 +39,7 @@ export default function QRGeneratorPage() {
       color: { dark: color, light: bgColor },
       errorCorrectionLevel: 'H'
     }).then(setQrUrl).catch(() => setQrUrl(''))
-  }, [text, activeTab, color, bgColor, size, wifiSsid, wifiPass, wifiSec, emailTo, emailSub])
+  }, [getContent, color, bgColor, size])
 
   const download = () => {
     if (!qrUrl) return
@@ -152,7 +153,7 @@ export default function QRGeneratorPage() {
             <div style={{ background:'white',border:'1.5px solid #e2e8f0',borderRadius:'20px',padding:'24px',textAlign:'center',boxShadow:'0 4px 20px rgba(15,42,74,0.07)' }}>
               <div style={{ fontSize:'13px',fontWeight:600,color:'#64748b',textTransform:'uppercase',letterSpacing:'0.5px',marginBottom:'16px' }}>Your QR Code</div>
               {qrUrl
-                ? <img src={qrUrl} alt="QR Code" style={{ width:'100%',maxWidth:'240px',borderRadius:'10px',border:'1px solid #e2e8f0' }}/>
+                ? <Image src={qrUrl} alt="QR Code" width={240} height={240} unoptimized style={{ width:'100%',maxWidth:'240px',height:'auto',borderRadius:'10px',border:'1px solid #e2e8f0' }}/>
                 : <div style={{ width:'240px',height:'240px',margin:'0 auto',background:'#f8fafc',borderRadius:'10px',border:'2px dashed #e2e8f0',display:'flex',alignItems:'center',justifyContent:'center',color:'#94a3b8',fontSize:'13px' }}>Type something to generate</div>
               }
               {qrUrl && (
