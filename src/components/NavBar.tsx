@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import DarkModeToggle from '@/components/DarkModeToggle'
+
 
 // ─── Logo ────────────────────────────────────────────────────────────────────
 const Logo = () => (
@@ -457,8 +457,6 @@ export default function NavBar() {
 
             {/* Blog link (desktop only) */}
             <Link href="/blog" className="cdx-desktop" style={{ fontSize: '13px', fontWeight: 500, color: '#64748b', textDecoration: 'none', whiteSpace: 'nowrap' }}>Blog</Link>
-
-            <DarkModeToggle />
 
             {/* Mobile hamburger */}
             <button
