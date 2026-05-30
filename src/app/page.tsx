@@ -1011,6 +1011,7 @@ const TOOLS = [
   { iconType:'stt', title:'Speech to Text', desc:'Voice transcription in your browser', href:'/speech-to-text', cat:'text' },
   { iconType:'letter-space', title:'Letter Spacing Generator', desc:'Add spaces/separators between letters', href:'/letter-spacing', cat:'text' },
   { iconType:'sentence', title:'Sentence Counter', desc:'Sentence stats and readability scores', href:'/sentence-counter', cat:'text' },
+  { iconType:'word-counter', title:'Detailed Word Counter', desc:'Analyze text in detail', href:'/detailed-word-counter', cat:'text' },
   { iconType:'tax', title:'Tax Calculator', desc:'Estimate income tax for US, UK, Canada, Australia', href:'/tax-calculator', cat:'calc' },
   { iconType:'invest', title:'Investment Calculator', desc:'Project stock/savings growth over time', href:'/investment-calculator', cat:'calc' },
   { iconType:'mortgage', title:'Advanced Mortgage', desc:'Full PITI calculator with PMI and amortization', href:'/mortgage-advanced', cat:'calc' },
@@ -1019,6 +1020,8 @@ const TOOLS = [
   { iconType:'macro', title:'Macro Calculator', desc:'Daily protein, carbs, and fat targets by goal', href:'/macro-calculator', cat:'calc' },
   { iconType:'water', title:'Water Intake Calculator', desc:'Daily hydration needs based on weight and activity', href:'/water-intake', cat:'calc' },
   { iconType:'fuel', title:'Fuel Cost Calculator', desc:'Estimate trip fuel cost and per-person share', href:'/fuel-cost', cat:'calc' },
+  { iconType:'loan', title:'Loan EMI Calculator', desc:'Calculate monthly payments', href:'/loan-emi-calculator', cat:'calc' },
+  { iconType:'calorie', title:'Pregnancy Calculator', desc:'Pregnancy due date calculator', href:'/pregnancy-due-date-calculator', cat:'calc' },
   { iconType:'flexbox', title:'CSS Flexbox Generator', desc:'Visual flexbox layout builder with live preview', href:'/flexbox-generator', cat:'dev' },
   { iconType:'grid-gen', title:'CSS Grid Generator', desc:'Visual CSS Grid builder with live preview', href:'/grid-generator', cat:'dev' },
   { iconType:'animation', title:'CSS Animation Generator', desc:'Build CSS keyframe animations visually', href:'/animation-generator', cat:'dev' },
@@ -1078,6 +1081,7 @@ const TOOLS = [
   { iconType:'social-crops', title:'Social Media Crops',   desc:'Auto-crop for Instagram, FB, Twitter',    href:'/social-media-crops',          cat:'specialty' },
   { iconType:'instagram-sq', title:'Instagram Square',     desc:'Crop image to 1:1 ratio',                 href:'/instagram-square',            cat:'specialty' },
   { iconType:'qr-reader',    title:'QR Code Reader',       desc:'Decode QR codes from images',             href:'/qr-reader',                   cat:'specialty' },
+  { iconType:'favicon',      title:'Logo Maker',           desc:'Create simple text logos',                 href:'/logo-maker',                  cat:'specialty' },
 
   // === Utility ===
   { iconType:'yt-thumb',     title:'YouTube Thumbnail',    desc:'Download YouTube thumbnails',             href:'/youtube-thumbnail',           cat:'util' },
