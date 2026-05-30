@@ -17,7 +17,12 @@ export const metadata: Metadata = {
   publisher: 'ConvertDox',
   formatDetection: { email: false, address: false, telephone: false },
   icons: {
-    icon: '/favicon.ico',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon-32.png', type: 'image/png', sizes: '32x32' },
+      { url: '/favicon-16.png', type: 'image/png', sizes: '16x16' },
+    ],
+    apple: '/apple-icon.png',
     shortcut: '/favicon.ico',
   },
   manifest: '/manifest.json',
