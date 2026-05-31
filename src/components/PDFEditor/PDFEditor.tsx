@@ -1,6 +1,7 @@
 'use client'
 import { useState, useRef, useCallback } from 'react'
-import type { PDFDocumentProxy } from 'pdfjs-dist'
+import { getPdfJs } from '@/lib/pdf-config'
+import type { PDFDocumentProxy } from '@/lib/pdf-config'
 import type { PageState, SplitRange, PDFEditorProps, UploadSessionResponse } from '@/types/pdf-editor'
 import PDFThumbnail from './PDFThumbnail'
 import ZoomPanel from './ZoomPanel'
@@ -53,9 +54,9 @@ export default function PDFEditor({ mode, features = ['delete', 'rotate', 'zoom'
 
       // Load PDF for thumbnail rendering
       setLoadingThumbnails(true)
-      const { pdfjsLib } = await import('@/lib/pdf-config')
+      const pdfjs = await getPdfJs()
       const arrayBuffer = await uploadedFile.arrayBuffer()
-      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise
+      const pdf = await pdfjs.getDocument({ data: arrayBuffer }).promise
       pdfRef.current = pdf
 
       await renderThumbnails(pdf, data.pageCount)
