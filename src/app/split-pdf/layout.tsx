@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 export const metadata: Metadata = {
-  title: 'Split PDF — Split PDF Pages Online Free | ConvertDox',
-  description: 'Split PDF files into separate pages or custom ranges online. Free PDF splitter, no signup, instant download.',
+  title: 'Split PDF - Visual Page Editor | ConvertDox',
+  description: 'Split PDF files into multiple PDFs visually. Select page ranges, rotate pages, preview thumbnails, and download as ZIP. Free, no signup.',
   alternates: { canonical: 'https://convertdox.com/split-pdf' },
   openGraph: {
     title: 'Split PDF — Split PDF Pages Online Free',
