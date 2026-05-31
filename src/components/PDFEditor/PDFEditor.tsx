@@ -75,9 +75,10 @@ export default function PDFEditor({ mode, features = ['delete', 'rotate', 'zoom'
         const page = await pdf.getPage(pageNum)
         const viewport = page.getViewport({ scale: 0.4 })
         const canvas = document.createElement('canvas')
+        const context = canvas.getContext('2d')!
         canvas.width = viewport.width
         canvas.height = viewport.height
-        await page.render({ canvas, viewport }).promise
+        await page.render({ canvasContext: context, viewport }).promise
         cache.set(pageNum, canvas.toDataURL('image/jpeg', 0.75))
         setThumbnailCache(new Map(cache))
       } catch {

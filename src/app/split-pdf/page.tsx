@@ -1,7 +1,17 @@
 'use client'
-import PDFEditor from '@/components/PDFEditor/PDFEditor'
+import dynamic from 'next/dynamic'
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://convertdox-backend-production.up.railway.app'
+
+// pdfjs-dist requires browser APIs (Canvas, Worker) — disable SSR entirely
+const PDFEditor = dynamic(() => import('@/components/PDFEditor/PDFEditor'), {
+  ssr: false,
+  loading: () => (
+    <div style={{ minHeight: '100vh', background: '#f8fafc', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: '-apple-system,sans-serif', color: '#64748b', fontSize: '15px' }}>
+      Loading editor…
+    </div>
+  ),
+})
 
 export default function SplitPDFPage() {
   function handleComplete(blob: Blob, filename: string) {
