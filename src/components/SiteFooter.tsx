@@ -16,6 +16,7 @@ export default function SiteFooter() {
       title: 'Company',
       links: [
         { label: 'About',   href: '/about' },
+        { label: 'Blog',    href: '/blog' },
         { label: 'Contact', href: '/contact' },
         { label: 'Support', href: 'mailto:support@convertdox.com' },
       ],

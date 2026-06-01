@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import Script from 'next/script'
 import NavBar from '@/components/NavBar'
+import LatestBlogPosts from '@/components/LatestBlogPosts'
 
 const ICON_COLORS: Record<string, string> = {
   'pdf-unlock':'#DC2626','pdf-protect':'#16A34A','pdf-info':'#3B82F6',
@@ -1657,6 +1658,8 @@ export default function HomePage() {
           </div>
         </div>
       </div>
+
+      <LatestBlogPosts />
 
       {/* Browse by Category */}
       <div style={{ background:'#f8fafc',padding:'48px 24px',borderTop:'1px solid #e2e8f0' }}>
