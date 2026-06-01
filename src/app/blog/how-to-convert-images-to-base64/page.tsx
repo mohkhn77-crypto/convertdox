@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import NavBar from '@/components/NavBar'
 
 const H2: React.CSSProperties = { fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'26px',fontWeight:800,color:'#0F2A4A',marginTop:'40px',marginBottom:'14px',letterSpacing:'-0.3px' }
@@ -21,7 +22,7 @@ export default function Page() {
       <NavBar />
 
       <article style={{ maxWidth:'780px',margin:'0 auto',padding:'48px 24px' }}>
-        <a href="/blog" style={{ color:'#E85D04',fontSize:'14px',fontWeight:600,textDecoration:'none' }}>← Back to Blog</a>
+        <Link href="/blog" style={{ color:'#E85D04',fontSize:'14px',fontWeight:600,textDecoration:'none' }}>← Back to Blog</Link>
 
         <div style={{ display:'flex',gap:'12px',alignItems:'center',marginTop:'24px',marginBottom:'18px',flexWrap:'wrap' }}>
           <span style={{ background:'#FFF7ED',color:'#C2410C',fontSize:'11.5px',fontWeight:700,padding:'4px 10px',borderRadius:'999px',textTransform:'uppercase',letterSpacing:'0.5px' }}>Developer Tools</span>
@@ -157,14 +158,14 @@ with open("logo-copy.png", "wb") as f:
         <div style={{ marginTop:'48px' }}>
           <h3 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'18px',fontWeight:800,color:'#0F2A4A',marginBottom:'14px' }}>Related Articles</h3>
           <div style={{ display:'grid',gridTemplateColumns:'1fr 1fr',gap:'12px' }}>
-            <a href="/blog/what-is-json-formatter" style={{ background:'white',border:'1.5px solid #e2e8f0',borderRadius:'12px',padding:'16px',textDecoration:'none' }}>
+            <Link href="/blog/what-is-json-formatter" style={{ background:'white',border:'1.5px solid #e2e8f0',borderRadius:'12px',padding:'16px',textDecoration:'none' }}>
               <div style={{ fontSize:'12px',color:'#E85D04',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.5px',marginBottom:'6px' }}>Developer Tools</div>
               <div style={{ fontSize:'14px',fontWeight:700,color:'#0F2A4A',lineHeight:1.4 }}>What Is a JSON Formatter and Why Every Developer Needs One</div>
-            </a>
-            <a href="/blog/best-free-password-generators-2026" style={{ background:'white',border:'1.5px solid #e2e8f0',borderRadius:'12px',padding:'16px',textDecoration:'none' }}>
+            </Link>
+            <Link href="/blog/best-free-password-generators-2026" style={{ background:'white',border:'1.5px solid #e2e8f0',borderRadius:'12px',padding:'16px',textDecoration:'none' }}>
               <div style={{ fontSize:'12px',color:'#E85D04',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.5px',marginBottom:'6px' }}>Security</div>
               <div style={{ fontSize:'14px',fontWeight:700,color:'#0F2A4A',lineHeight:1.4 }}>10 Best Free Password Generators in 2026</div>
-            </a>
+            </Link>
           </div>
         </div>
       </article>

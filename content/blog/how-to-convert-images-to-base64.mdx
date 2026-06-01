@@ -1,0 +1,66 @@
+---
+title: "How to Convert Images to Base64: Complete Guide for Developers"
+description: "When Base64-encoded images speed up your site and when they slow it down — plus copy-paste examples for HTML, CSS, JS, and Python."
+date: "2026-05-27"
+category: "Developer Tools"
+tags: ["base64", "images", "developer tools", "web development"]
+author: "ConvertDox Team"
+---
+
+Base64 encoding converts binary image data into a text string that can be embedded directly in HTML, CSS, or JavaScript — no separate HTTP request required.
+
+## When to Use Base64 Images
+
+**Good use cases:**
+- Small icons and logos (under 10 KB) embedded in CSS
+- Images in email templates (many email clients block external images)
+- Offline-capable apps and PWAs
+- Data URIs in SVG files
+
+**Bad use cases:**
+- Large photos — Base64 increases file size by ~33%
+- Images used on multiple pages — you lose browser caching
+- Anything where lazy loading matters
+
+## How to Convert
+
+The fastest way: use [ConvertDox's Image to Base64 converter](/image-to-base64). Paste the result into your code.
+
+## Using Base64 Images in HTML
+
+```html
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA..." alt="Logo">
+```
+
+## In CSS
+
+```css
+.icon {
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz...');
+}
+```
+
+## In JavaScript
+
+```javascript
+const img = new Image()
+img.src = 'data:image/jpeg;base64,' + base64String
+document.body.appendChild(img)
+```
+
+## In Python
+
+```python
+import base64
+
+with open('image.png', 'rb') as f:
+    encoded = base64.b64encode(f.read()).decode('utf-8')
+
+data_uri = f'data:image/png;base64,{encoded}'
+```
+
+## Size Increase Calculation
+
+Base64 encodes every 3 bytes as 4 characters, adding ~33% overhead. A 9 KB PNG becomes ~12 KB as a Base64 string.
+
+The rule of thumb: if the image is under 10 KB and used in exactly one place, Base64 is worth it. Otherwise, use a regular `src` URL and let the browser cache it.
