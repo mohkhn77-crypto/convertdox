@@ -14,6 +14,7 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     // Third-party minified files served from public/
     "public/pdf.worker.min.mjs",
+    "public/pdf.worker.min.js",
   ]),
 ]);
 
