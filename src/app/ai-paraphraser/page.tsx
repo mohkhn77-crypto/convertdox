@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
+import ToolPageSEO from '@/components/ToolPageSEO'
 
 const BACKEND = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://convertdox-backend-production.up.railway.app'
 
@@ -87,6 +88,112 @@ export default function AIParaphraser() {
           )}
         </div>
       </div>
+
+      <ToolPageSEO
+        toolName="AI Paraphraser"
+        whatIs="An AI paraphraser is a tool that rewrites text in different words while preserving its original meaning. It uses advanced language models to understand context, identify key concepts, and express them using alternative vocabulary and sentence structures. The result is content that says the same thing differently — useful for avoiding repetition, evading plagiarism detection, improving readability, or adapting tone for different audiences."
+        whatIsExtended="Unlike a simple thesaurus that just swaps individual words, modern AI paraphrasers rephrase entire sentences and paragraphs, restructuring grammar and rephrasing concepts naturally. This produces more readable, human-sounding text than older word-substitution methods. The ConvertDox AI Paraphraser uses OpenAI's GPT models to deliver high-quality rewrites in multiple styles."
+        howToUse={[
+          'Paste or type the text you want to rewrite in the input box (minimum 20 characters)',
+          'Select your preferred writing style — Standard for general use, Formal for business, Casual for blogs, Creative for narratives, or Academic for research',
+          'Click the Paraphrase button and wait a few seconds for processing',
+          'Review the rewritten text in the output box',
+          'Click Copy to use the paraphrased version, or run it again with a different style',
+          'Edit the output to match your voice — AI is a starting point, not the final word',
+        ]}
+        useCases={[
+          {
+            title: 'Academic Writing',
+            description: 'Students and researchers can rewrite quoted text to integrate ideas into their own work while maintaining proper attribution and avoiding plagiarism flags.',
+          },
+          {
+            title: 'Content Creation',
+            description: 'Bloggers and writers create unique versions of similar content for different audiences, platforms, or content calendars.',
+          },
+          {
+            title: 'Email Rewriting',
+            description: 'Soften or formalize draft emails to match the recipient\'s communication style and improve clarity before sending.',
+          },
+          {
+            title: 'SEO Variations',
+            description: 'Marketers generate multiple variations of product descriptions, ad copy, or meta descriptions for A/B testing and avoiding duplicate content.',
+          },
+          {
+            title: 'Language Practice',
+            description: 'Language learners see how the same meaning can be expressed multiple ways, expanding vocabulary and sentence pattern recognition.',
+          },
+          {
+            title: 'Clarity Improvement',
+            description: 'Anyone struggling with awkward phrasing can get a cleaner, more readable version that flows naturally.',
+          },
+        ]}
+        tips={[
+          'Provide context — longer text (50+ words) typically produces better results than single sentences',
+          'Try different styles — Formal, Casual, and Creative produce very different results from the same input',
+          'Review and edit — AI gets the gist right but may miss nuance specific to your topic or industry',
+          'Fact-check key terms — paraphrasing technical or scientific content can occasionally change meaning subtly',
+          'Use it iteratively — paraphrase, edit, paraphrase again for the best final output',
+          'Maintain your voice — don\'t blindly accept AI rewrites; make them sound like your natural writing',
+          'Don\'t paraphrase quotes — direct quotes should stay verbatim with proper attribution',
+        ]}
+        faqs={[
+          {
+            question: 'Is the AI Paraphraser free?',
+            answer: 'Yes, completely free with no signup required. There are reasonable usage limits to ensure the service stays available for everyone, but typical use cases like rewriting essays, emails, or blog posts work fine within free limits.',
+          },
+          {
+            question: 'Will this help me pass plagiarism checkers?',
+            answer: 'AI paraphrasing significantly changes wording and sentence structure, which usually helps with plagiarism detection. However, the best practice is always to cite sources and write in your own voice rather than relying solely on paraphrasing tools.',
+          },
+          {
+            question: 'How is this different from a thesaurus?',
+            answer: 'A thesaurus only swaps individual words with synonyms. AI paraphrasing rewrites entire sentences and paragraphs, restructuring grammar and rephrasing concepts naturally. This produces much more readable, human-sounding text than word-swapping methods.',
+          },
+          {
+            question: 'Is my text stored or used to train AI?',
+            answer: 'No. Your input text is processed and immediately discarded. We don\'t store, log, or use your text to train any models. The conversion happens in real-time and nothing persists after you close the page.',
+          },
+          {
+            question: 'What writing styles are available?',
+            answer: 'Five styles: Standard (balanced), Formal (business and professional), Casual (conversational and friendly), Creative (varied vocabulary and structure), and Academic (scholarly tone with precise language).',
+          },
+          {
+            question: 'Can I paraphrase very long text?',
+            answer: 'The tool works best with text under 5000 characters per request. For longer documents, paraphrase in sections of 1-2 paragraphs at a time, then combine the results.',
+          },
+          {
+            question: 'Does it work for non-English languages?',
+            answer: 'Currently the tool is optimized for English. It can process other languages but quality varies. We\'re working on dedicated support for additional languages.',
+          },
+        ]}
+        relatedTools={[
+          {
+            name: 'AI Summarizer',
+            slug: 'ai-summarizer',
+            description: 'Condense long articles into key points',
+          },
+          {
+            name: 'AI Grammar Checker',
+            slug: 'ai-grammar',
+            description: 'Fix grammar and writing errors',
+          },
+          {
+            name: 'AI Tone Changer',
+            slug: 'ai-tone-changer',
+            description: 'Adjust the tone of your writing',
+          },
+          {
+            name: 'Word Counter',
+            slug: 'word-counter',
+            description: 'Count words and characters in text',
+          },
+          {
+            name: 'AI Translator',
+            slug: 'ai-translator',
+            description: 'Translate between languages',
+          },
+        ]}
+      />
     </div>
   )
 }
