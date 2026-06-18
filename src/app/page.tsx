@@ -1109,16 +1109,6 @@ const TOOLS = [
   { iconType:'ai', title:'AI Tone Changer',            desc:'Adjust text tone (formal, casual)',    href:'/ai-tone-changer',     cat:'ai' },
 ]
 
-const COMING = [
-  { icon:'📄', title:'PDF to Word',         desc:'Convert PDF to editable Word' },
-  { icon:'🖼', title:'Image Compressor',    desc:'Reduce image size instantly' },
-  { icon:'✂️', title:'Background Remover',  desc:'AI removes image backgrounds' },
-  { icon:'🌐', title:'IP Address Lookup',   desc:'Find IP location info' },
-  { icon:'📧', title:'Email Validator',     desc:'Validate email addresses' },
-  { icon:'🔑', title:'MD5 Hash Generator',  desc:'Generate MD5 hashes instantly' },
-  { icon:'📋', title:'HTML Formatter',      desc:'Beautify HTML code' },
-]
-
 const CatIcon = ({ type, active }: { type: string, active: boolean }) => {
   const color = active ? '#ffffff' : '#64748b'
   const accent = active ? '#F48C42' : '#E85D04'
@@ -1636,22 +1626,6 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Coming soon */}
-        <div style={{ marginTop:'48px' }}>
-          <div style={{ display:'flex',alignItems:'center',gap:'12px',marginBottom:'20px' }}>
-            <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'22px',fontWeight:800,color:'#0F2A4A',margin:0 }}>Coming Soon</h2>
-            <span style={{ background:'#FFF7ED',border:'1.5px solid #FED7AA',color:'#C2410C',fontSize:'12px',fontWeight:700,padding:'3px 10px',borderRadius:'999px' }}>Building now</span>
-          </div>
-          <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(240px,1fr))',gap:'14px' }}>
-            {COMING.map(tool => (
-              <div key={tool.title} style={{ background:'#f8fafc',border:'1.5px dashed #e2e8f0',borderRadius:'16px',padding:'20px' }}>
-                <div style={{ width:'44px',height:'44px',background:'#f1f5f9',borderRadius:'11px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'22px',marginBottom:'10px' }}>{tool.icon}</div>
-                <div style={{ fontSize:'14px',fontWeight:700,color:'#94a3b8',marginBottom:'4px' }}>{tool.title}</div>
-                <div style={{ fontSize:'12px',color:'#cbd5e1' }}>{tool.desc}</div>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
 
       <LatestBlogPosts />
