@@ -1,6 +1,7 @@
 'use client'
 import { useState, useRef } from 'react'
 import NavBar from '@/components/NavBar'
+import FileAutoDeletedNotice from '@/components/FileAutoDeletedNotice'
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://convertdox-backend-production.up.railway.app'
 
@@ -131,6 +132,7 @@ export default function PdfToTextPage() {
               value={text}
               style={{ width:'100%', height:'360px', padding:'16px', borderRadius:'12px', border:'1.5px solid #e2e8f0', fontSize:'14px', fontFamily:'monospace', color:'#334155', lineHeight:'1.7', resize:'vertical' as const, boxSizing:'border-box' as const, outline:'none' }}
             />
+            <FileAutoDeletedNotice />
           </div>
         )}
       </div>

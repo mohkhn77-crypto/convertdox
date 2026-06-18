@@ -1,6 +1,7 @@
 'use client'
 import { useState, useRef } from 'react'
 import NavBar from '@/components/NavBar'
+import FileAutoDeletedNotice from '@/components/FileAutoDeletedNotice'
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://convertdox-backend-production.up.railway.app'
 const ACCEPTED = ['image/jpeg', 'image/png', 'image/webp', 'image/bmp']
@@ -126,6 +127,7 @@ export default function ResizeImagePage() {
 
         {error && <div style={{ marginTop:'16px', background:'#FEE2E2', border:'1.5px solid #FCA5A5', borderRadius:'10px', padding:'12px 16px', color:'#991B1B', fontSize:'14px', fontWeight:600 }}>⚠️ {error}</div>}
         {success && <div style={{ marginTop:'16px', background:'#F0FDF4', border:'1.5px solid #BBF7D0', borderRadius:'10px', padding:'12px 16px', color:'#166534', fontSize:'14px', fontWeight:600 }}>✅ Image resized! Your download has started.</div>}
+        {success && <FileAutoDeletedNotice />}
 
         <div style={{ marginTop:'24px', textAlign:'center' as const }}>
           <button onClick={resize} disabled={!file || processing}
