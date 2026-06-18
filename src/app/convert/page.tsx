@@ -23,28 +23,24 @@ interface FormatOption {
 
 const FORMAT_OPTIONS: Record<string, FormatOption[]> = {
   pdf: [
-    { id:'word',  name:'Word',       desc:'.docx file',     color:'#2B579A', icon:'W',   available:false },
-    { id:'excel', name:'Excel',      desc:'.xlsx file',     color:'#217346', icon:'X',   available:false },
-    { id:'jpg',   name:'JPG',        desc:'Image format',   color:'#F59E0B', icon:'J',   available:false },
-    { id:'png',   name:'PNG',        desc:'With transparency', color:'#64748b', icon:'P', available:false },
-    { id:'pptx',  name:'PowerPoint', desc:'.pptx file',     color:'#D24726', icon:'PP',  available:false },
+    { id:'word',  name:'Word',       desc:'.docx file',        color:'#2B579A', icon:'W',   available:true, href:'/pdf-to-word' },
+    { id:'excel', name:'Excel',      desc:'.xlsx file',        color:'#217346', icon:'X',   available:true, href:'/pdf-to-excel' },
+    { id:'jpg',   name:'JPG',        desc:'Image format',      color:'#F59E0B', icon:'J',   available:true, href:'/pdf-to-jpg' },
+    { id:'png',   name:'PNG',        desc:'With transparency', color:'#64748b', icon:'P',   available:true, href:'/pdf-to-png' },
+    { id:'pptx',  name:'PowerPoint', desc:'.pptx file',        color:'#D24726', icon:'PP',  available:true, href:'/pdf-to-ppt' },
   ],
   image: [
     { id:'base64', name:'Base64',  desc:'Encoded text',      color:'#9333EA', icon:'B64', available:true, href:'/image-to-base64' },
-    { id:'jpg',    name:'JPG',     desc:'Standard image',    color:'#F59E0B', icon:'J',   available:false },
-    { id:'png',    name:'PNG',     desc:'With transparency', color:'#64748b', icon:'P',   available:false },
-    { id:'webp',   name:'WebP',    desc:'Modern format',     color:'#10B981', icon:'W',   available:false },
-    { id:'pdf',    name:'PDF',     desc:'Document',          color:'#DC2626', icon:'PDF', available:false },
+    { id:'jpg',    name:'JPG',     desc:'Standard image',    color:'#F59E0B', icon:'J',   available:true, href:'/image-convert' },
+    { id:'png',    name:'PNG',     desc:'With transparency', color:'#64748b', icon:'P',   available:true, href:'/image-convert' },
+    { id:'webp',   name:'WebP',    desc:'Modern format',     color:'#10B981', icon:'W',   available:true, href:'/image-convert' },
+    { id:'pdf',    name:'PDF',     desc:'Document',          color:'#DC2626', icon:'PDF', available:true, href:'/jpg-to-pdf' },
   ],
   document: [
-    { id:'pdf',  name:'PDF',  desc:'Standard PDF', color:'#DC2626', icon:'PDF', available:false },
-    { id:'txt',  name:'Text', desc:'Plain text',   color:'#64748b', icon:'T',   available:false },
-    { id:'html', name:'HTML', desc:'Web format',   color:'#F59E0B', icon:'H',   available:false },
+    { id:'pdf',  name:'PDF',  desc:'Standard PDF', color:'#DC2626', icon:'PDF', available:true, href:'/word-to-pdf' },
   ],
   spreadsheet: [
-    { id:'pdf',  name:'PDF',  desc:'Standard PDF',     color:'#DC2626', icon:'PDF', available:false },
-    { id:'csv',  name:'CSV',  desc:'Comma separated',  color:'#0EA5E9', icon:'CSV', available:false },
-    { id:'json', name:'JSON', desc:'Data format',      color:'#16A34A', icon:'{}',  available:false },
+    { id:'pdf',  name:'PDF',  desc:'Standard PDF', color:'#DC2626', icon:'PDF', available:true, href:'/excel-to-pdf' },
   ],
   text: [
     { id:'json-format', name:'Format JSON',    desc:'Beautify JSON',    color:'#16A34A', icon:'{}',  available:true, href:'/json-formatter' },
@@ -133,12 +129,6 @@ function ConvertContent() {
         {/* Actions */}
         <div style={{ display:'flex', gap:'10px', justifyContent:'center' }}>
           <Link href="/" style={{ background:'white', color:'#0F2A4A', padding:'11px 28px', borderRadius:'10px', border:'1.5px solid #e2e8f0', fontSize:'14px', fontWeight:600, textDecoration:'none' }}>Cancel</Link>
-          <button
-            disabled={!selectedFormat}
-            onClick={() => alert('Full conversion is coming in Phase 3!')}
-            style={{ background: selectedFormat ? '#E85D04' : '#e2e8f0', color: selectedFormat ? 'white' : '#94a3b8', padding:'11px 28px', borderRadius:'10px', border:'none', fontSize:'14px', fontWeight:700, cursor: selectedFormat ? 'pointer' : 'not-allowed', fontFamily:'inherit' }}>
-            Convert &amp; Download →
-          </button>
         </div>
 
         {/* Available tools hint */}
