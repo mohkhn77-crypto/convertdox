@@ -1630,31 +1630,33 @@ export default function HomePage() {
 
       <LatestBlogPosts />
 
-      {/* Browse by Category */}
-      <div style={{ background:'#f8fafc',padding:'48px 24px',borderTop:'1px solid #e2e8f0' }}>
-        <div style={{ maxWidth:'1100px',margin:'0 auto' }}>
-          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'24px',fontWeight:800,color:'#0F2A4A',marginBottom:'24px',textAlign:'center' }}>Browse Tools by Category</h2>
-          <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(220px,1fr))',gap:'14px' }}>
-            {[
-              { icon:'📝', title:'Text Tools',       desc:'15 tools', href:'/tools/text' },
-              { icon:'🔢', title:'Calculators',      desc:'21 tools', href:'/tools/calculators' },
-              { icon:'💻', title:'Developer Tools',  desc:'25 tools', href:'/tools/developer' },
-              { icon:'🎨', title:'Color Tools',      desc:'7 tools',  href:'/tools/color' },
-              { icon:'🔒', title:'Security Tools',   desc:'4 tools',  href:'/tools/security' },
-              { icon:'📱', title:'QR Code Tools',    desc:'1 tool',   href:'/tools/qr' },
-              { icon:'🎲', title:'Fun Tools',        desc:'10 tools', href:'/tools/fun' },
-            ].map(c => (
-              <a key={c.href} href={c.href} style={{ background:'white',border:'1.5px solid #e2e8f0',borderRadius:'14px',padding:'20px',textDecoration:'none',display:'flex',alignItems:'center',gap:'14px' }}>
-                <div style={{ fontSize:'32px' }}>{c.icon}</div>
-                <div>
-                  <div style={{ fontSize:'15px',fontWeight:700,color:'#0F2A4A' }}>{c.title}</div>
-                  <div style={{ fontSize:'13px',color:'#94a3b8' }}>{c.desc} →</div>
-                </div>
-              </a>
-            ))}
+      {/* Browse by Category - hidden, set true to restore */}
+      {false && (
+        <div style={{ background:'#f8fafc',padding:'48px 24px',borderTop:'1px solid #e2e8f0' }}>
+          <div style={{ maxWidth:'1100px',margin:'0 auto' }}>
+            <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'24px',fontWeight:800,color:'#0F2A4A',marginBottom:'24px',textAlign:'center' }}>Browse Tools by Category</h2>
+            <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(220px,1fr))',gap:'14px' }}>
+              {[
+                { icon:'📝', title:'Text Tools',       desc:'15 tools', href:'/tools/text' },
+                { icon:'🔢', title:'Calculators',      desc:'21 tools', href:'/tools/calculators' },
+                { icon:'💻', title:'Developer Tools',  desc:'25 tools', href:'/tools/developer' },
+                { icon:'🎨', title:'Color Tools',      desc:'7 tools',  href:'/tools/color' },
+                { icon:'🔒', title:'Security Tools',   desc:'4 tools',  href:'/tools/security' },
+                { icon:'📱', title:'QR Code Tools',    desc:'1 tool',   href:'/tools/qr' },
+                { icon:'🎲', title:'Fun Tools',        desc:'10 tools', href:'/tools/fun' },
+              ].map(c => (
+                <a key={c.href} href={c.href} style={{ background:'white',border:'1.5px solid #e2e8f0',borderRadius:'14px',padding:'20px',textDecoration:'none',display:'flex',alignItems:'center',gap:'14px' }}>
+                  <div style={{ fontSize:'32px' }}>{c.icon}</div>
+                  <div>
+                    <div style={{ fontSize:'15px',fontWeight:700,color:'#0F2A4A' }}>{c.title}</div>
+                    <div style={{ fontSize:'13px',color:'#94a3b8' }}>{c.desc} →</div>
+                  </div>
+                </a>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }
