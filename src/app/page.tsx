@@ -1391,11 +1391,6 @@ export default function HomePage() {
               ))}
             </div>
           </div>
-          <div style={{ display:'flex',flexWrap:'wrap',justifyContent:'center',gap:'8px' }}>
-            {[{label:'📝 Word Counter',href:'/word-counter'},{label:'⚖️ BMI Calculator',href:'/bmi-calculator'},{label:'📱 QR Generator',href:'/qr-generator'},{label:'⏱ Stopwatch',href:'/stopwatch'},{label:'📐 Unit Converter',href:'/unit-converter'},{label:'🌈 CSS Gradient',href:'/css-gradient'}].map(item => (
-              <a key={item.href} href={item.href} style={{ background:'rgba(255,255,255,0.1)',border:'1px solid rgba(255,255,255,0.2)',borderRadius:'999px',padding:'7px 16px',fontSize:'13px',color:'rgba(255,255,255,0.9)',textDecoration:'none',whiteSpace:'nowrap' }}>{item.label}</a>
-            ))}
-          </div>
         </div>
       </div>
 
