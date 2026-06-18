@@ -27,8 +27,10 @@ export default function SiteFooter() {
         { label: 'Privacy Policy',   href: '/privacy-policy' },
         { label: 'Terms of Service', href: '/terms-of-service' },
         { label: 'Cookie Policy',    href: '/cookie-policy' },
+        { label: 'File Security',    href: '/security' },
+        { label: 'DMCA',             href: '/dmca' },
+        { label: 'Acceptable Use',   href: '/acceptable-use' },
         { label: 'Disclaimer',       href: '/disclaimer' },
-        { label: 'DMCA',             href: '/legal#dmca' },
       ],
     },
   ]
@@ -75,7 +77,7 @@ export default function SiteFooter() {
             <a href="/terms-of-service" style={{ color: 'rgba(255,255,255,0.4)', fontSize: '13px', textDecoration: 'none' }}>Terms</a>
             <a href="/cookie-policy" style={{ color: 'rgba(255,255,255,0.4)', fontSize: '13px', textDecoration: 'none' }}>Cookies</a>
             <a href="/disclaimer" style={{ color: 'rgba(255,255,255,0.4)', fontSize: '13px', textDecoration: 'none' }}>Disclaimer</a>
-            <a href="/legal#dmca" style={{ color: 'rgba(255,255,255,0.4)', fontSize: '13px', textDecoration: 'none' }}>DMCA</a>
+            <a href="/dmca" style={{ color: 'rgba(255,255,255,0.4)', fontSize: '13px', textDecoration: 'none' }}>DMCA</a>
             <a href="/contact" style={{ color: 'rgba(255,255,255,0.4)', fontSize: '13px', textDecoration: 'none' }}>Contact</a>
           </div>
         </div>

@@ -239,6 +239,9 @@
   <url><loc>https://convertdox.com/terms-of-service</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://convertdox.com/cookie-policy</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://convertdox.com/disclaimer</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://convertdox.com/security</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://convertdox.com/dmca</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://convertdox.com/acceptable-use</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
 
   <!-- Rotate PDF — 2026-05-29 -->
   <url><loc>https://convertdox.com/rotate-pdf</loc><lastmod>2026-05-29</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
