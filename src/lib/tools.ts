@@ -163,6 +163,16 @@ export const TOOLS: Tool[] = [
   { iconType:'pdf-merge-sp', title:'Merge Specific Pages', desc:'Combine specific pages from PDFs',        href:'/pdf-merge-specific',          cat:'pdf' },
   { iconType:'pdf-sign',     title:'Sign PDF',             desc:'Add e-signature to PDF',                  href:'/pdf-sign',                    cat:'pdf' },
   { iconType:'pdf-annotate', title:'Annotate PDF',         desc:'Add notes and highlights to PDF',         href:'/pdf-annotate',                cat:'pdf' },
+  { iconType:'pdf-archive',  title:'Compress PDF',         desc:'Reduce PDF file size online',             href:'/compress-pdf',                cat:'pdf' },
+  { iconType:'pdf-merge-sp', title:'Merge PDF',            desc:'Combine multiple PDFs into one',          href:'/merge-pdf',                   cat:'pdf' },
+  { iconType:'pdf-extract',  title:'Split PDF',            desc:'Split PDF into pages or ranges',          href:'/split-pdf',                   cat:'pdf' },
+  { iconType:'pdf-reorder',  title:'Rotate PDF',           desc:'Rotate PDF pages permanently',            href:'/rotate-pdf',                  cat:'pdf' },
+  { iconType:'pdf-annotate', title:'PDF Editor',           desc:'Reorder, rotate & delete PDF pages',      href:'/pdf-editor',                  cat:'pdf' },
+  { iconType:'pdf-text',     title:'PDF to JPG',           desc:'Convert PDF pages to JPG images',         href:'/pdf-to-jpg',                  cat:'pdf' },
+  { iconType:'pdf-text',     title:'PDF to PNG',           desc:'Convert PDF pages to PNG images',         href:'/pdf-to-png',                  cat:'pdf' },
+  { iconType:'pdf-text',     title:'PDF to Word',          desc:'Convert PDF to editable Word',            href:'/pdf-to-word',                 cat:'pdf' },
+  { iconType:'html-pdf',     title:'PNG to PDF',           desc:'Convert PNG images to PDF',               href:'/png-to-pdf',                  cat:'pdf' },
+  { iconType:'html-pdf',     title:'Word to PDF',          desc:'Convert Word documents to PDF',           href:'/word-to-pdf',                 cat:'pdf' },
 
   // === Image Tools ===
   { iconType:'img-compress', title:'Compress Image',       desc:'Reduce image file size',                  href:'/compress-image',              cat:'image' },
@@ -186,6 +196,8 @@ export const TOOLS: Tool[] = [
   { iconType:'img-ico',      title:'Image to ICO',         desc:'Create favicon ICO file',                 href:'/image-to-ico',                cat:'image' },
   { iconType:'png-ico',      title:'PNG to ICO',           desc:'Multi-size ICO pack from PNG',            href:'/png-to-ico',                  cat:'image' },
   { iconType:'add-bg',       title:'Add Image Background', desc:'Add solid color background to image',     href:'/add-image-background',        cat:'image' },
+  { iconType:'batch-convert',title:'Merge Images',         desc:'Combine multiple images into one',        href:'/merge-images',                cat:'image' },
+  { iconType:'img-gray',     title:'Background Remover',   desc:'Remove image backgrounds, get transparent PNG', href:'/bg-remove',             cat:'image' },
 
   // === OCR Tools ===
   { iconType:'ocr-img',      title:'Image to Text (OCR)',  desc:'Extract text from images',                href:'/image-to-text',               cat:'ocr' },
@@ -206,6 +218,7 @@ export const TOOLS: Tool[] = [
   { iconType:'letterhead',   title:'Letterhead Generator', desc:'Design business letterheads',             href:'/letterhead-generator',        cat:'docs' },
   { iconType:'resume',       title:'Resume Builder',       desc:'Build professional resumes',              href:'/resume-builder',              cat:'docs' },
   { iconType:'biz-card',     title:'Business Card Maker',  desc:'Design business cards',                   href:'/business-card-generator',     cat:'docs' },
+  { iconType:'quote-doc',    title:'Price Quote Generator',desc:'Create professional price quotes',         href:'/price-quote-generator',       cat:'docs' },
 
   // === Utility ===
   { iconType:'pdf-pages',    title:'PDF Page Counter',     desc:'Count pages in PDF files',                href:'/pdf-page-counter',            cat:'util' },
