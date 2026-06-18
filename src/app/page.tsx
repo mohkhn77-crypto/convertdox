@@ -1399,6 +1399,37 @@ export default function HomePage() {
         </div>
       </div>
 
+      {/* Search bar — below hero */}
+      <div style={{ background:'white',padding:'32px 24px 0',display:'flex',flexDirection:'column',alignItems:'center' }}>
+        <div style={{ maxWidth:'700px',width:'100%',position:'relative' }}>
+          <div style={{ position:'absolute',left:'16px',top:'50%',transform:'translateY(-50%)',pointerEvents:'none' }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <circle cx="11" cy="11" r="7" stroke="#64748b" strokeWidth="2"/>
+              <path d="M16.5 16.5l4 4" stroke="#64748b" strokeWidth="2" strokeLinecap="round"/>
+            </svg>
+          </div>
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
+            placeholder={`Search ${TOOLS.length}+ tools — try "PDF", "JSON", "QR Code"...`}
+            style={{ width:'100%',padding:'15px 48px 15px 48px',borderRadius:'16px',border:'2px solid #0F2A4A',background:'white',fontFamily:'inherit',fontSize:'15px',color:'#0F2A4A',outline:'none',boxSizing:'border-box',boxShadow:'0 8px 24px rgba(15,42,74,0.12)' }}
+          />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery('')}
+              style={{ position:'absolute',right:'14px',top:'50%',transform:'translateY(-50%)',background:'none',border:'none',cursor:'pointer',padding:'4px',fontSize:'18px',color:'#64748b',lineHeight:1 }}
+              aria-label="Clear search"
+            >✕</button>
+          )}
+        </div>
+        {searchQuery && (
+          <div style={{ marginTop:'10px',fontSize:'13px',color:'#64748b',paddingBottom:'0' }}>
+            {filtered.length > 0 ? `Found ${filtered.length} tool${filtered.length !== 1 ? 's' : ''}` : 'No tools found'}
+          </div>
+        )}
+      </div>
+
       {/* Stats bar */}
       <div style={{ background:'#0a1f38',padding:'16px 24px',marginTop:'40px' }}>
         <div style={{ maxWidth:'1200px',margin:'0 auto',display:'flex',justifyContent:'center',gap:'48px',flexWrap:'wrap' }}>
@@ -1524,6 +1555,68 @@ export default function HomePage() {
 
       {/* Tools grid */}
       <div id="tools" style={{ maxWidth:'1200px',margin:'0 auto',padding:'56px 24px' }}>
+        <div style={{ marginBottom:'28px' }}>
+          <div style={{ fontSize:'12px',fontWeight:700,color:'#E85D04',textTransform:'uppercase',letterSpacing:'1px',marginBottom:'6px' }}>All Categories</div>
+          <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'clamp(24px,3vw,34px)',fontWeight:800,color:'#0F2A4A',margin:'0 0 8px' }}>Free Online Tools</h2>
+          <p style={{ fontSize:'15px',color:'#64748b',margin:0 }}>{TOOLS.length}+ tools live. No installation. Works instantly in your browser.</p>
+        </div>
+        <div style={{ display:'flex',gap:'6px',flexWrap:'wrap',marginBottom:'28px' }}>
+          {CATS.map(cat => (
+            <button key={cat.id} onClick={() => setActiveCat(cat.id)}
+              style={{ padding:'8px 16px',borderRadius:'999px',border:'1.5px solid',borderColor:activeCat===cat.id?'#0F2A4A':'#e2e8f0',background:activeCat===cat.id?'#0F2A4A':'white',color:activeCat===cat.id?'white':'#64748b',fontFamily:'inherit',fontSize:'13px',fontWeight:600,cursor:'pointer',whiteSpace:'nowrap',display:'flex',alignItems:'center',gap:'7px',transition:'all 0.15s' }}>
+              <CatIcon type={cat.iconType} active={activeCat===cat.id} />
+              {cat.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Recently Used */}
+        {recentTools.length > 0 && !searchQuery && activeCat === 'all' && (
+          <div style={{ marginBottom:'32px' }}>
+            <div style={{ fontSize:'12px',fontWeight:700,color:'#E85D04',textTransform:'uppercase',letterSpacing:'1px',marginBottom:'12px' }}>Recently Used</div>
+            <div style={{ display:'flex',gap:'10px',flexWrap:'wrap' }}>
+              {recentTools.map(href => {
+                const tool = TOOLS.find(t => t.href === href)
+                if (!tool) return null
+                return (
+                  <a key={href} href={href}
+                    onClick={() => trackToolClick(href)}
+                    style={{ background:'#FFF7ED',border:'1.5px solid #FED7AA',borderRadius:'10px',padding:'14px',textDecoration:'none',display:'flex',alignItems:'center',gap:'10px',minWidth:'180px' }}>
+                    <div style={{ flex:1 }}>
+                      <div style={{ fontSize:'13px',fontWeight:700,color:'#0F2A4A' }}>{tool.title}</div>
+                      <div style={{ fontSize:'12px',color:'#C2410C',marginTop:'2px' }}>Open again →</div>
+                    </div>
+                  </a>
+                )
+              })}
+            </div>
+          </div>
+        )}
+
+        {filtered.length > 0 ? (
+          <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(240px,1fr))',gap:'14px',marginBottom:'14px' }}>
+            {filtered.map(tool => (
+              <a key={tool.href} href={tool.href}
+                onClick={() => trackToolClick(tool.href)}
+                style={{ background:'white',border:'1.5px solid #e2e8f0',borderRadius:'16px',padding:'20px',textDecoration:'none',display:'flex',flexDirection:'column',gap:'12px',boxShadow:'0 2px 8px rgba(15,42,74,0.04)' }}>
+                <div style={{ marginBottom:'4px' }}><ToolIcon type={tool.iconType} /></div>
+                <div>
+                  <div style={{ fontSize:'14px',fontWeight:700,color:'#0F2A4A',marginBottom:'4px' }}>{tool.title}</div>
+                  <div style={{ fontSize:'12.5px',color:'#94a3b8',lineHeight:'1.4' }}>{tool.desc}</div>
+                </div>
+                <div style={{ marginTop:'auto' }}>
+                  <span style={{ fontSize:'12px',fontWeight:600,color:'#E85D04',background:'#FFF7ED',padding:'4px 12px',borderRadius:'999px' }}>Open Tool →</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        ) : (
+          <div style={{ textAlign:'center',padding:'48px',color:'#94a3b8' }}>
+            <div style={{ fontSize:'36px',marginBottom:'10px' }}>🔍</div>
+            <p>No tools found for &ldquo;{searchQuery}&rdquo;</p>
+          </div>
+        )}
+
         {/* Security badges */}
         <div style={{ background:'white',padding:'40px 0',borderTop:'1px solid #e2e8f0',borderBottom:'1px solid #e2e8f0',marginTop:'48px' }}>
           <div style={{ textAlign:'center' }}>
@@ -1548,6 +1641,22 @@ export default function HomePage() {
           </div>
         </div>
 
+        {/* Coming soon */}
+        <div style={{ marginTop:'48px' }}>
+          <div style={{ display:'flex',alignItems:'center',gap:'12px',marginBottom:'20px' }}>
+            <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:'22px',fontWeight:800,color:'#0F2A4A',margin:0 }}>Coming Soon</h2>
+            <span style={{ background:'#FFF7ED',border:'1.5px solid #FED7AA',color:'#C2410C',fontSize:'12px',fontWeight:700,padding:'3px 10px',borderRadius:'999px' }}>Building now</span>
+          </div>
+          <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(240px,1fr))',gap:'14px' }}>
+            {COMING.map(tool => (
+              <div key={tool.title} style={{ background:'#f8fafc',border:'1.5px dashed #e2e8f0',borderRadius:'16px',padding:'20px' }}>
+                <div style={{ width:'44px',height:'44px',background:'#f1f5f9',borderRadius:'11px',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'22px',marginBottom:'10px' }}>{tool.icon}</div>
+                <div style={{ fontSize:'14px',fontWeight:700,color:'#94a3b8',marginBottom:'4px' }}>{tool.title}</div>
+                <div style={{ fontSize:'12px',color:'#cbd5e1' }}>{tool.desc}</div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
       <LatestBlogPosts />
