@@ -1286,7 +1286,7 @@ const JSON_LD = [
 ]
 
 export default function HomePage() {
-  const [activeCat, setActiveCat] = useState('all')
+  const [activeCat, setActiveCat] = useState('pdf')
   const [searchQuery, setSearchQuery] = useState('')
   const [recentTools, setRecentTools] = useState<string[]>([])
   const [, setUploadedFile] = useState<File | null>(null)
@@ -1561,7 +1561,7 @@ export default function HomePage() {
           <p style={{ fontSize:'15px',color:'#64748b',margin:0 }}>{TOOLS.length}+ tools live. No installation. Works instantly in your browser.</p>
         </div>
         <div style={{ display:'flex',gap:'6px',flexWrap:'wrap',marginBottom:'28px' }}>
-          {CATS.map(cat => (
+          {CATS.filter(cat => cat.id !== 'all').map(cat => (
             <button key={cat.id} onClick={() => setActiveCat(cat.id)}
               style={{ padding:'8px 16px',borderRadius:'999px',border:'1.5px solid',borderColor:activeCat===cat.id?'#0F2A4A':'#e2e8f0',background:activeCat===cat.id?'#0F2A4A':'white',color:activeCat===cat.id?'white':'#64748b',fontFamily:'inherit',fontSize:'13px',fontWeight:600,cursor:'pointer',whiteSpace:'nowrap',display:'flex',alignItems:'center',gap:'7px',transition:'all 0.15s' }}>
               <CatIcon type={cat.iconType} active={activeCat===cat.id} />
@@ -1571,7 +1571,7 @@ export default function HomePage() {
         </div>
 
         {/* Recently Used */}
-        {recentTools.length > 0 && !searchQuery && activeCat === 'all' && (
+        {recentTools.length > 0 && !searchQuery && (
           <div style={{ marginBottom:'32px' }}>
             <div style={{ fontSize:'12px',fontWeight:700,color:'#E85D04',textTransform:'uppercase',letterSpacing:'1px',marginBottom:'12px' }}>Recently Used</div>
             <div style={{ display:'flex',gap:'10px',flexWrap:'wrap' }}>
