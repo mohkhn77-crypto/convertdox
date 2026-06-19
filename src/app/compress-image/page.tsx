@@ -2,6 +2,7 @@
 import { useState, useRef } from 'react'
 import NavBar from '@/components/NavBar'
 import FileAutoDeletedNotice from '@/components/FileAutoDeletedNotice'
+import ToolPageSEO from '@/components/ToolPageSEO'
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://convertdox-backend-production.up.railway.app'
 const ACCEPTED = ['image/jpeg', 'image/png', 'image/webp']
@@ -153,6 +154,50 @@ export default function CompressImagePage() {
           ))}
         </section>
       </div>
+      <ToolPageSEO
+        toolName="Image Compressor"
+        whatIs="Compressing an image means reducing its file size while keeping it looking as close to the original as possible. Photos from phones and cameras are often several megabytes each — far larger than needed for websites, email, or messaging. An image compressor removes redundant data and optimizes how the image is stored, producing a much smaller file that loads faster and uploads easily, with little or no visible difference in quality."
+        whatIsExtended="There are two kinds of compression: lossy, which removes some image data to achieve much smaller sizes (ideal for photos), and lossless, which shrinks the file without discarding any detail. ConvertDox balances size and quality so your images stay sharp while getting dramatically lighter. Files are processed securely and deleted within minutes, with no watermark. Smaller images don't just save space — they make websites faster, which improves user experience and search ranking."
+        howToUse={[
+          'Upload the image you want to compress by clicking the upload area or dragging it in',
+          'Wait a moment while the file uploads and the compressor processes it',
+          'The tool optimizes the image to reduce its size while preserving quality',
+          'Compare the new file size against the original',
+          'Download the compressed image, ready to upload, email, or post',
+          'Your original file is automatically deleted from our servers within minutes',
+        ]}
+        useCases={[
+          { title: 'Faster Websites', description: 'Large images are the most common cause of slow-loading pages. Compress them to speed up your site and improve SEO.' },
+          { title: 'Email Attachments', description: 'Shrink photos so they fit under email size limits and send without bouncing.' },
+          { title: 'Social Media Uploads', description: 'Compress images for quicker uploads and to stay within platform size requirements.' },
+          { title: 'Saving Storage', description: 'Reduce the size of photo libraries to free up space on devices and cloud storage.' },
+          { title: 'Online Forms', description: 'Many forms and portals cap image upload sizes. Compression brings photos within the allowed limit.' },
+          { title: 'Faster Sharing', description: 'Smaller images send and download faster over messaging apps and slow connections.' },
+        ]}
+        tips={[
+          'Photos compress the most — images with lots of color detail have the most redundant data to remove',
+          'For web use, you rarely need images larger than the display size — resize first, then compress',
+          'Check the result at full size to make sure quality is still acceptable for your needs',
+          'JPEG is best for photos; PNG is better for graphics with text or transparency',
+          'Compress after resizing for the smallest possible file',
+          'Keep an original copy if you may need the full-quality version later',
+        ]}
+        faqs={[
+          { question: 'Is the image compressor free?', answer: 'Yes, completely free with no signup and no watermark added to your images.' },
+          { question: 'Will compression make my image look bad?', answer: 'The tool balances size and quality, so most images look virtually identical at a much smaller size. Very high compression can soften fine detail, so review the result if quality is critical.' },
+          { question: 'How much smaller will my image get?', answer: 'It varies by image, but photos often shrink by 50–80% with little visible difference. Images that are already optimized compress less.' },
+          { question: 'What formats are supported?', answer: 'Common formats including JPG, PNG, and WebP are supported. For converting between formats, use our Image Converter tool.' },
+          { question: 'Are my images private?', answer: 'Yes. Your image is uploaded securely, compressed, and automatically deleted from our servers within minutes. We never store or share your files.' },
+          { question: 'Can I compress several images at once?', answer: 'For multiple images, use our Batch Image Compressor to compress them all in one go.' },
+        ]}
+        relatedTools={[
+          { name: 'Resize Image', slug: 'resize-image', description: 'Change image dimensions in pixels' },
+          { name: 'Image Converter', slug: 'image-convert', description: 'Convert between JPG, PNG, WebP, and AVIF' },
+          { name: 'Batch Compress', slug: 'compress-images-batch', description: 'Compress multiple images at once' },
+          { name: 'Compress PDF', slug: 'compress-pdf', description: 'Reduce PDF file size for easier sharing' },
+          { name: 'Crop Image', slug: 'image-crop', description: 'Crop images to the size you need' },
+        ]}
+      />
     </div>
   )
 }

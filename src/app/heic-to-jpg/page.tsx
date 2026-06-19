@@ -2,6 +2,7 @@
 import { useState, useRef } from 'react'
 import NavBar from '@/components/NavBar'
 import FileAutoDeletedNotice from '@/components/FileAutoDeletedNotice'
+import ToolPageSEO from '@/components/ToolPageSEO'
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://convertdox-backend-production.up.railway.app'
 
@@ -140,6 +141,50 @@ export default function HeicToJpgPage() {
           ))}
         </section>
       </div>
+      <ToolPageSEO
+        toolName="HEIC to JPG"
+        whatIs="HEIC is the image format iPhones use by default to save photos — it stores high quality in a small file. The problem is that HEIC isn't widely supported outside Apple devices: many Windows PCs, websites, and apps can't open it. Converting HEIC to JPG turns your iPhone photos into the universal JPG format that works everywhere, so you can share, upload, edit, and view them on any device without compatibility issues."
+        whatIsExtended="If you've ever emailed an iPhone photo to someone on Windows and they couldn't open it, HEIC was the reason. Apple adopted HEIC because it saves space while keeping quality, but the rest of the world still runs on JPG. ConvertDox converts HEIC (and HEIF) files to clean JPG images, preserving the quality of your photos. Files are processed securely and deleted within minutes, with no watermark — so you can convert personal photos with confidence."
+        howToUse={[
+          'Upload your HEIC photo by clicking the upload area or dragging it in',
+          'Wait while the file uploads and converts',
+          'The tool turns the HEIC image into a standard JPG',
+          'Adjust quality if the option is available',
+          'Download your JPG, ready to use on any device or platform',
+          'Your original file is automatically deleted from our servers within minutes',
+        ]}
+        useCases={[
+          { title: 'Sharing With Windows Users', description: 'Convert iPhone photos to JPG so friends, family, or colleagues on Windows can open them without special software.' },
+          { title: 'Uploading to Websites', description: 'Many sites and forms reject HEIC. Convert to JPG so your photos upload successfully.' },
+          { title: 'Editing in Any App', description: 'Get your photos into JPG so they open in any image editor, not just Apple apps.' },
+          { title: 'Printing Photos', description: 'Print services often require JPG. Convert your iPhone photos before ordering prints.' },
+          { title: 'Posting Online', description: 'Convert to JPG for platforms and forums that don\'t accept HEIC uploads.' },
+          { title: 'Long-Term Storage', description: 'Save photos in the universal JPG format so they stay openable on any future device.' },
+        ]}
+        tips={[
+          'You can stop the problem at the source: set your iPhone to capture in "Most Compatible" (JPG) under Camera settings',
+          'JPG files are slightly larger than HEIC but work everywhere',
+          'Convert before sharing important photos so the recipient can definitely open them',
+          'Quality is preserved in conversion — your JPG looks the same as the HEIC original',
+          'For many photos at once, convert in batches to save time',
+          'Keep the HEIC originals if you want to preserve the smaller file size on your own device',
+        ]}
+        faqs={[
+          { question: 'Is HEIC to JPG free?', answer: 'Yes, completely free with no signup and no watermark added to your photos.' },
+          { question: 'Why won\'t my iPhone photos open on Windows?', answer: 'iPhones save photos as HEIC by default, which many Windows PCs and apps can\'t read. Converting to JPG fixes this — JPG opens on virtually any device.' },
+          { question: 'Will I lose quality converting HEIC to JPG?', answer: 'The conversion preserves your photo\'s quality. JPG files are slightly larger than HEIC but look the same and work everywhere.' },
+          { question: 'Can I stop my iPhone saving as HEIC?', answer: 'Yes. Go to Settings > Camera > Formats and choose "Most Compatible" to capture photos as JPG instead of HEIC.' },
+          { question: 'Are my photos private?', answer: 'Yes. Your photo is uploaded securely, converted, and automatically deleted from our servers within minutes. We never store, view, or share your images.' },
+          { question: 'Does it work with HEIF files too?', answer: 'Yes. HEIF files (closely related to HEIC) are also supported and convert to JPG the same way.' },
+        ]}
+        relatedTools={[
+          { name: 'Image Converter', slug: 'image-convert', description: 'Convert between JPG, PNG, WebP, and AVIF' },
+          { name: 'Compress Image', slug: 'compress-image', description: 'Reduce image file size' },
+          { name: 'Resize Image', slug: 'resize-image', description: 'Change image dimensions' },
+          { name: 'WebP to JPG', slug: 'webp-to-jpg', description: 'Convert WebP images to JPG' },
+          { name: 'JPG to PDF', slug: 'jpg-to-pdf', description: 'Combine images into a PDF' },
+        ]}
+      />
     </div>
   )
 }

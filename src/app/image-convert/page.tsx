@@ -1,6 +1,7 @@
 'use client'
 import { useState, useRef } from 'react'
 import NavBar from '@/components/NavBar'
+import ToolPageSEO from '@/components/ToolPageSEO'
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://convertdox-backend-production.up.railway.app'
 const ACCEPTED = ['image/jpeg', 'image/png', 'image/webp', 'image/avif', 'image/bmp', 'image/gif']
@@ -145,6 +146,50 @@ export default function ImageConvertPage() {
           ))}
         </section>
       </div>
+      <ToolPageSEO
+        toolName="Image Converter"
+        whatIs="An image converter changes a picture from one file format to another — for example JPG to PNG, PNG to WebP, or HEIC to JPG. Different formats are good at different things: JPG is small and universal for photos, PNG supports transparency and sharp graphics, and WebP and AVIF are modern formats that offer excellent quality at much smaller sizes. Converting lets you use the right format for the job, or change a file into something a particular app or website will accept."
+        whatIsExtended="Choosing the right format matters more than people realize. JPG is ideal for photographs where small size matters. PNG is best for logos, screenshots, and anything needing transparency. WebP and AVIF deliver the same quality as JPG or PNG at a fraction of the size, which is why modern websites prefer them. ConvertDox converts between all of these formats in your browser-facing workflow, processing securely and deleting your file within minutes, with no watermark."
+        howToUse={[
+          'Upload the image you want to convert by clicking the upload area or dragging it in',
+          'Choose the output format — JPG, PNG, WebP, or AVIF',
+          'Adjust quality settings if available',
+          'Convert the image to the new format',
+          'Download the converted file, ready to use',
+          'Your original file is automatically deleted from our servers within minutes',
+        ]}
+        useCases={[
+          { title: 'Web Optimization', description: 'Convert JPG or PNG images to WebP or AVIF to make your website load faster without losing quality.' },
+          { title: 'Adding Transparency', description: 'Convert a JPG to PNG when you need a transparent background for a logo or graphic.' },
+          { title: 'Compatibility', description: 'Convert HEIC or WebP images to JPG so they open in apps that don\'t support newer formats.' },
+          { title: 'Smaller Photos', description: 'Convert large PNG photos to JPG or WebP to dramatically reduce file size.' },
+          { title: 'Print Preparation', description: 'Convert images to a format your print service requires.' },
+          { title: 'Platform Requirements', description: 'Switch to the format a specific website, app, or upload form will accept.' },
+        ]}
+        tips={[
+          'Use JPG for photos, PNG for graphics with text or transparency, WebP/AVIF for the web',
+          'Converting PNG photos to JPG or WebP usually shrinks them a lot',
+          'WebP and AVIF give the best size-to-quality ratio but aren\'t supported everywhere — use JPG for maximum compatibility',
+          'Converting from a lossy format (JPG) to a lossless one (PNG) won\'t restore lost detail',
+          'Check the output before relying on it for important uses',
+          'Combine conversion with our compressor for the smallest final file',
+        ]}
+        faqs={[
+          { question: 'Is the image converter free?', answer: 'Yes, completely free with no signup and no watermark added to your images.' },
+          { question: 'Which formats can I convert between?', answer: 'You can convert between JPG, PNG, WebP, and AVIF. For HEIC files specifically, our HEIC to JPG tool is purpose-built.' },
+          { question: 'Which format should I choose?', answer: 'Use JPG for photos and broad compatibility, PNG for graphics and transparency, and WebP or AVIF for the smallest size on modern websites.' },
+          { question: 'Will converting reduce quality?', answer: 'Converting to a lossy format like JPG involves some compression. Converting to PNG is lossless but produces larger files. The tool aims to preserve quality.' },
+          { question: 'Are my images private?', answer: 'Yes. Your image is uploaded securely, converted, and automatically deleted from our servers within minutes. We never store or share your files.' },
+          { question: 'Can I convert many images at once?', answer: 'For multiple files, use our Batch Image Converter to convert them together.' },
+        ]}
+        relatedTools={[
+          { name: 'HEIC to JPG', slug: 'heic-to-jpg', description: 'Convert iPhone HEIC photos to JPG' },
+          { name: 'Compress Image', slug: 'compress-image', description: 'Reduce image file size' },
+          { name: 'WebP to JPG', slug: 'webp-to-jpg', description: 'Convert WebP images to JPG' },
+          { name: 'SVG to PNG', slug: 'svg-to-png', description: 'Convert SVG vector images to PNG' },
+          { name: 'Resize Image', slug: 'resize-image', description: 'Change image dimensions' },
+        ]}
+      />
     </div>
   )
 }

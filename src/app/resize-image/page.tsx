@@ -2,6 +2,7 @@
 import { useState, useRef } from 'react'
 import NavBar from '@/components/NavBar'
 import FileAutoDeletedNotice from '@/components/FileAutoDeletedNotice'
+import ToolPageSEO from '@/components/ToolPageSEO'
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://convertdox-backend-production.up.railway.app'
 const ACCEPTED = ['image/jpeg', 'image/png', 'image/webp', 'image/bmp']
@@ -153,6 +154,50 @@ export default function ResizeImagePage() {
           ))}
         </section>
       </div>
+      <ToolPageSEO
+        toolName="Image Resizer"
+        whatIs="Resizing an image means changing its dimensions — the width and height measured in pixels. This is different from compressing: resizing changes how big the image is, while compression changes how much space it takes up. You resize an image to fit a specific space: a profile picture that needs to be a certain size, a banner with exact dimensions, or a photo that's simply too large for where you want to use it."
+        whatIsExtended="Most images straight from a camera or phone are far larger than they need to be — often several thousand pixels wide. Resizing them down to the size you actually need makes them load faster and fit properly. ConvertDox lets you set exact dimensions or scale by percentage, with the option to keep the original proportions so the image doesn't look stretched. Files are processed securely and deleted within minutes, with no watermark."
+        howToUse={[
+          'Upload the image you want to resize by clicking the upload area or dragging it in',
+          'Enter the new width and height in pixels, or scale by a percentage',
+          'Keep the "maintain aspect ratio" option on to avoid stretching the image',
+          'Preview the new dimensions before applying',
+          'Resize and download the new image, ready to use',
+          'Your original file is automatically deleted from our servers within minutes',
+        ]}
+        useCases={[
+          { title: 'Profile Pictures', description: 'Resize a photo to the exact dimensions a platform requires for avatars or profile images.' },
+          { title: 'Social Media Graphics', description: 'Fit images to the precise sizes each platform uses for posts, stories, and banners.' },
+          { title: 'Website Images', description: 'Scale images down to their display size so pages load faster and look crisp.' },
+          { title: 'Email Signatures', description: 'Resize a logo or photo to fit neatly within an email signature.' },
+          { title: 'Printing', description: 'Adjust image dimensions to match the size you intend to print.' },
+          { title: 'Thumbnails', description: 'Create small, consistent thumbnail versions of larger images for galleries or listings.' },
+        ]}
+        tips={[
+          'Keep aspect ratio locked to avoid a stretched or squashed look',
+          'Resizing down keeps quality; enlarging a small image can make it blurry',
+          'Know the exact dimensions you need before resizing — check the platform\'s requirements',
+          'Resize first, then compress, for the smallest possible file',
+          'For web, match the image to its display size rather than uploading something much larger',
+          'Keep the original if you might need a larger version later',
+        ]}
+        faqs={[
+          { question: 'Is the image resizer free?', answer: 'Yes, completely free with no signup and no watermark added to your images.' },
+          { question: 'What\'s the difference between resizing and compressing?', answer: 'Resizing changes the image dimensions (width and height in pixels). Compressing reduces the file size without necessarily changing dimensions. You can do both for the smallest, best-fitting image.' },
+          { question: 'Will resizing reduce quality?', answer: 'Resizing down preserves quality well. Enlarging a small image beyond its original size can make it look blurry, since there\'s no extra detail to add.' },
+          { question: 'Can I keep the proportions?', answer: 'Yes. Keep the "maintain aspect ratio" option enabled and the image scales proportionally without stretching.' },
+          { question: 'Are my images private?', answer: 'Yes. Your image is uploaded securely, resized, and automatically deleted from our servers within minutes. We never store or share your files.' },
+          { question: 'What formats can I resize?', answer: 'Common image formats including JPG, PNG, and WebP are supported.' },
+        ]}
+        relatedTools={[
+          { name: 'Compress Image', slug: 'compress-image', description: 'Reduce image file size' },
+          { name: 'Crop Image', slug: 'image-crop', description: 'Crop images to a specific area' },
+          { name: 'Image Converter', slug: 'image-convert', description: 'Convert between JPG, PNG, WebP, and AVIF' },
+          { name: 'Batch Resize', slug: 'resize-images-batch', description: 'Resize multiple images at once' },
+          { name: 'Aspect Ratio Calculator', slug: 'aspect-ratio', description: 'Work out dimensions and ratios' },
+        ]}
+      />
     </div>
   )
 }
