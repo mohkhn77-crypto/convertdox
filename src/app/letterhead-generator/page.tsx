@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
 import TrustStrip from '@/components/TrustStrip'
+import ToolPageSEO from '@/components/ToolPageSEO'
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://convertdox-backend-production.up.railway.app'
 
@@ -122,6 +123,50 @@ export default function LetterheadGeneratorPage() {
           </p>
         </div>
       </div>
+      <ToolPageSEO
+        toolName="Letterhead Generator"
+        whatIs="A letterhead generator creates a professional branded header for your business documents and letters. A letterhead typically sits at the top of a page and includes your company name, logo, and contact details, giving official correspondence a consistent, credible appearance. Instead of recreating this header every time, a generator lets you design it once and produce a clean template you can use for letters, quotes, and other documents."
+        whatIsExtended="Letterhead matters because it signals professionalism and authenticity — a letter on branded letterhead reads as official in a way a plain page doesn't. The key elements are your company name, logo, address, phone, email, and website, arranged cleanly so they frame the document without crowding the content. The ConvertDox Letterhead Generator helps you assemble these into a polished header. You enter your details directly, with no account required, and download a letterhead ready to use."
+        howToUse={[
+          'Enter your company or organization name',
+          'Add your logo if you have one',
+          'Fill in your contact details — address, phone, email, and website',
+          'Choose a layout that positions your branding cleanly',
+          'Preview to check the header looks balanced and leaves room for your content',
+          'Download your letterhead, ready to use for letters and documents',
+        ]}
+        useCases={[
+          { title: 'Business Correspondence', description: 'Give official letters and communications a professional, branded appearance.' },
+          { title: 'Quotes and Proposals', description: 'Add credibility to quotes and proposals with consistent company branding.' },
+          { title: 'Invoices and Statements', description: 'Top financial documents with a branded header for a polished, official look.' },
+          { title: 'New Businesses', description: 'Establish a consistent brand identity across all your documents from day one.' },
+          { title: 'Freelancers and Consultants', description: 'Look established and professional when sending client documents.' },
+          { title: 'Nonprofits and Clubs', description: 'Create official-looking letterhead for organizational correspondence.' },
+        ]}
+        tips={[
+          'Keep the header clean — it should frame your document, not dominate the page',
+          'Use consistent branding (logo, colors, fonts) that matches your other materials',
+          'Include the essentials: name, logo, and the main ways to contact you',
+          'Leave plenty of space below the header for the actual content of your document',
+          'Make sure contact details are accurate and current',
+          'Save your letterhead as a reusable template so every document stays consistent',
+        ]}
+        faqs={[
+          { question: 'Is the letterhead generator free?', answer: 'Yes, completely free with no signup and no watermark.' },
+          { question: 'What should a letterhead include?', answer: 'Typically your company name, logo, address, phone, email, and website — arranged cleanly at the top of the page so it frames your content without crowding it.' },
+          { question: 'Can I add my own logo?', answer: 'Where the tool supports it, you can include your logo to reinforce your branding.' },
+          { question: 'Do I need an account?', answer: 'No. You can create and download letterhead without registering — you enter your details directly into the tool.' },
+          { question: 'Can I reuse the letterhead for multiple documents?', answer: 'Yes. Once you\'ve created it, you can use the letterhead as a consistent header across all your business documents.' },
+          { question: 'Is it suitable for official business use?', answer: 'Yes, the letterhead is free for personal and commercial use, giving your correspondence a professional, branded appearance.' },
+        ]}
+        relatedTools={[
+          { name: 'Business Card Generator', slug: 'business-card-generator', description: 'Create professional business cards' },
+          { name: 'Logo Maker', slug: 'logo-maker', description: 'Create a simple logo for your brand' },
+          { name: 'Invoice Generator', slug: 'invoice-generator', description: 'Create professional invoices' },
+          { name: 'Price Quote Generator', slug: 'price-quote-generator', description: 'Create professional price quotes' },
+          { name: 'Purchase Order Generator', slug: 'purchase-order-generator', description: 'Create purchase orders' },
+        ]}
+      />
     </div>
   )
 }

@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
 import TrustStrip from '@/components/TrustStrip'
+import ToolPageSEO from '@/components/ToolPageSEO'
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://convertdox-backend-production.up.railway.app'
 
@@ -157,6 +158,50 @@ export default function BusinessCardGeneratorPage() {
           </p>
         </div>
       </div>
+      <ToolPageSEO
+        toolName="Business Card Generator"
+        whatIs="A business card generator lets you design a professional business card by entering your details into a ready-made layout, without needing graphic design software. You add your name, title, company, and contact information, and the tool arranges it into a clean, balanced card design you can download and print. It's a fast way to get a professional-looking card whether you're starting a business, attending an event, or just need cards in a hurry."
+        whatIsExtended="A business card is often the first tangible impression you leave, so clarity matters more than clutter. The essentials are your name, title, company, phone, email, and website — arranged with enough space to read easily. The ConvertDox Business Card Generator focuses on clean, professional layouts that put your information first. You enter your details directly into the tool, with no account required, and download a card ready to print or share digitally."
+        howToUse={[
+          'Enter your name and job title',
+          'Add your company name and logo if you have one',
+          'Fill in your contact details — phone, email, website, and address',
+          'Choose a layout or style that fits your profession',
+          'Preview the card to check the balance and readability',
+          'Download your finished card, ready to print or share',
+        ]}
+        useCases={[
+          { title: 'New Businesses', description: 'Get professional cards quickly when launching a business or brand.' },
+          { title: 'Networking Events', description: 'Have cards ready to hand out at conferences, meetups, and trade shows.' },
+          { title: 'Freelancers', description: 'Present yourself professionally to potential clients with a clean, branded card.' },
+          { title: 'Job Seekers', description: 'Carry a simple personal card with your contact details to networking opportunities.' },
+          { title: 'Small Teams', description: 'Create consistent cards for everyone on a small team in the same style.' },
+          { title: 'Side Businesses', description: 'Produce affordable cards for a side hustle without hiring a designer.' },
+        ]}
+        tips={[
+          'Keep it clean — white space makes a card look more professional than crammed information',
+          'Include only the essentials: name, title, company, and the best ways to reach you',
+          'Make sure text is large enough to read easily; avoid tiny fonts',
+          'Use consistent branding (colors, logo) that matches your other materials',
+          'Double-check every contact detail — a typo in a phone number or email defeats the purpose',
+          'If printing, confirm the dimensions and resolution your print service requires',
+        ]}
+        faqs={[
+          { question: 'Is the business card generator free?', answer: 'Yes, completely free with no signup and no watermark on your card.' },
+          { question: 'Do I need design skills?', answer: 'No. The tool arranges your details into a balanced, professional layout for you — you just fill in your information.' },
+          { question: 'Can I add my logo?', answer: 'Where the tool supports it, you can include a logo to reinforce your branding. Keep it clear and appropriately sized.' },
+          { question: 'What information should a business card include?', answer: 'The essentials are your name, job title, company, phone, email, and website. Keep it focused — too much information makes a card hard to read.' },
+          { question: 'Can I print these cards?', answer: 'Yes. Download your design and print it yourself or send it to a print service. Check the size and resolution requirements of your printer or provider.' },
+          { question: 'Do I need an account?', answer: 'No. You can create and download a business card without registering.' },
+        ]}
+        relatedTools={[
+          { name: 'Logo Maker', slug: 'logo-maker', description: 'Create a simple logo for your brand' },
+          { name: 'Letterhead Generator', slug: 'letterhead-generator', description: 'Create branded letterhead' },
+          { name: 'Resume Builder', slug: 'resume-builder', description: 'Build a professional resume' },
+          { name: 'QR Code Generator', slug: 'qr-generator', description: 'Add a QR code to your card' },
+          { name: 'Invoice Generator', slug: 'invoice-generator', description: 'Create professional invoices' },
+        ]}
+      />
     </div>
   )
 }

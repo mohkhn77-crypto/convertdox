@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import NavBar from '@/components/NavBar'
 import TrustStrip from '@/components/TrustStrip'
+import ToolPageSEO from '@/components/ToolPageSEO'
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://convertdox-backend-production.up.railway.app'
 
@@ -185,6 +186,50 @@ export default function ResumeBuilderPage() {
           </p>
         </div>
       </div>
+      <ToolPageSEO
+        toolName="Resume Builder"
+        whatIs="A resume builder helps you create a clean, professional resume by filling in your information into a structured layout, rather than wrestling with formatting in a word processor. You add your contact details, work experience, education, and skills, and the tool arranges them into a polished document you can download. It takes the design work off your plate so you can focus on the content — what you've done and what you're good at."
+        whatIsExtended="A strong resume is clear, well-organized, and easy to scan in the few seconds a recruiter typically spends on it. It also needs to be readable by applicant tracking systems (ATS) — the software many companies use to filter resumes — which favor clean structure and standard section headings over heavy graphics. The ConvertDox Resume Builder produces a tidy, professional layout that balances good looks with ATS-friendliness. You enter your details directly, with no account required."
+        howToUse={[
+          'Enter your name and contact information',
+          'Add a short professional summary highlighting your strengths',
+          'List your work experience with roles, dates, and key achievements',
+          'Add your education, skills, and any relevant certifications',
+          'Review the layout and adjust the wording for clarity and impact',
+          'Download your finished resume, ready to submit to applications',
+        ]}
+        useCases={[
+          { title: 'Job Applications', description: 'Create a clean, professional resume tailored to the roles you\'re applying for.' },
+          { title: 'Career Changes', description: 'Reframe your experience around transferable skills when moving into a new field.' },
+          { title: 'Students and Graduates', description: 'Build a first resume that highlights education, projects, and internships.' },
+          { title: 'Freelancers', description: 'Present your experience and skills professionally when pitching for contracts.' },
+          { title: 'Updating an Old Resume', description: 'Quickly produce a fresh, modern version instead of reformatting an outdated file.' },
+          { title: 'Multiple Versions', description: 'Create tailored resumes for different roles by adjusting the emphasis each time.' },
+        ]}
+        tips={[
+          'Tailor your resume to each role — mirror keywords from the job description where they genuinely apply',
+          'Lead achievements with action verbs and quantify results where you can (e.g. "increased sales 20%")',
+          'Keep it concise — one page for less experience, two at most for extensive careers',
+          'Use standard section headings (Experience, Education, Skills) so ATS software reads it correctly',
+          'Proofread carefully — typos are one of the fastest ways to get screened out',
+          'Save and submit as PDF unless the employer specifically asks for another format',
+        ]}
+        faqs={[
+          { question: 'Is the resume builder free?', answer: 'Yes, completely free with no signup and no watermark on your resume.' },
+          { question: 'Will my resume work with ATS software?', answer: 'The builder uses a clean, well-structured layout with standard headings, which helps applicant tracking systems read it correctly. Avoid cramming in heavy graphics if ATS compatibility is a priority.' },
+          { question: 'Do I need an account?', answer: 'No. You can build and download a resume without registering — you enter your details directly into the tool.' },
+          { question: 'How long should my resume be?', answer: 'Generally one page if you have limited experience, and no more than two pages for extensive careers. Keep it concise and focused on relevant achievements.' },
+          { question: 'What format should I submit?', answer: 'PDF is the safest choice for preserving your layout, unless an employer specifically requests a different format like Word.' },
+          { question: 'Can I make different versions for different jobs?', answer: 'Yes. It\'s good practice to tailor your resume for each role by adjusting which experience and skills you emphasize.' },
+        ]}
+        relatedTools={[
+          { name: 'AI Resume Improver', slug: 'ai-resume-improver', description: 'Improve your resume wording with AI' },
+          { name: 'AI Cover Letter', slug: 'ai-cover-letter', description: 'Generate a tailored cover letter' },
+          { name: 'Business Card Generator', slug: 'business-card-generator', description: 'Create professional business cards' },
+          { name: 'PDF to Word', slug: 'pdf-to-word', description: 'Convert a PDF resume to editable Word' },
+          { name: 'Word Counter', slug: 'word-counter', description: 'Check length and word count' },
+        ]}
+      />
     </div>
   )
 }

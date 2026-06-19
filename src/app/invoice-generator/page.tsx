@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
 import TrustStrip from '@/components/TrustStrip'
+import ToolPageSEO from '@/components/ToolPageSEO'
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://convertdox-backend-production.up.railway.app'
 
@@ -198,6 +199,50 @@ export default function InvoiceGeneratorPage() {
           </p>
         </div>
       </div>
+      <ToolPageSEO
+        toolName="Invoice Generator"
+        whatIs="An invoice generator lets you create professional, properly formatted invoices without needing accounting software or design skills. You fill in your business details, your client's details, the items or services provided, and the amounts — and the tool produces a clean, ready-to-send invoice you can download. It's especially useful for freelancers, contractors, and small businesses who need to bill clients quickly and look professional doing it."
+        whatIsExtended="A good invoice does more than request payment — it sets clear expectations and creates a record for both parties. It should include a unique invoice number, dates, an itemized breakdown, the total due, and payment terms. The ConvertDox Invoice Generator builds all of this into a polished layout you can download and send. You enter your information directly into the tool, so you stay in control of your data — there's no account required to create an invoice."
+        howToUse={[
+          'Enter your business name, address, and contact details',
+          'Add your client\'s name and billing information',
+          'Set an invoice number and the invoice and due dates',
+          'List each item or service with its description, quantity, and price',
+          'Add any tax, discount, or notes, then review the calculated total',
+          'Download your finished invoice, ready to send to your client',
+        ]}
+        useCases={[
+          { title: 'Freelancers', description: 'Bill clients for design, writing, development, or consulting work with a professional invoice that gets you paid faster.' },
+          { title: 'Small Businesses', description: 'Create invoices for products or services without investing in accounting software.' },
+          { title: 'Contractors', description: 'Itemize labor and materials clearly for clients on a per-job basis.' },
+          { title: 'Side Projects', description: 'Send a polished invoice for occasional or one-off work without setting up a billing system.' },
+          { title: 'Tutors and Coaches', description: 'Bill for sessions or packages with a clear, professional record.' },
+          { title: 'Service Providers', description: 'Generate consistent invoices for recurring clients and keep your billing tidy.' },
+        ]}
+        tips={[
+          'Use a unique, sequential invoice number for every invoice to stay organized and aid record-keeping',
+          'Always include clear payment terms — like "due within 14 days" — to set expectations',
+          'Itemize work clearly so clients understand exactly what they\'re paying for',
+          'Include your preferred payment method and details to make paying easy',
+          'Double-check the totals and tax before sending',
+          'Keep a copy of every invoice you send for your own records and tax purposes',
+        ]}
+        faqs={[
+          { question: 'Is the invoice generator free?', answer: 'Yes, completely free with no signup and no watermark on your invoice.' },
+          { question: 'Do I need an account?', answer: 'No. You can create and download an invoice without registering. You enter your details directly into the tool.' },
+          { question: 'What should an invoice include?', answer: 'A professional invoice includes your business details, the client\'s details, a unique invoice number, the invoice and due dates, an itemized list of goods or services, the total due, and payment terms.' },
+          { question: 'Can I add tax and discounts?', answer: 'Yes. You can add tax and discounts, and the tool calculates the adjusted total for you.' },
+          { question: 'Can I use this for my business legally?', answer: 'Yes, the invoices are free for personal and commercial use. Note that specific invoicing and tax requirements vary by country — check your local rules or consult an accountant if unsure.' },
+          { question: 'How do I send the invoice?', answer: 'Download the finished invoice and send it to your client by email or your preferred method.' },
+        ]}
+        relatedTools={[
+          { name: 'Receipt Generator', slug: 'receipt-generator', description: 'Create receipts for payments' },
+          { name: 'Price Quote Generator', slug: 'price-quote-generator', description: 'Create professional price quotes' },
+          { name: 'Purchase Order Generator', slug: 'purchase-order-generator', description: 'Create purchase orders' },
+          { name: 'Letterhead Generator', slug: 'letterhead-generator', description: 'Create branded letterhead' },
+          { name: 'Tax Calculator', slug: 'tax-calculator', description: 'Estimate tax amounts' },
+        ]}
+      />
     </div>
   )
 }
