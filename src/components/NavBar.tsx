@@ -41,6 +41,7 @@ const MEGA_MENU: MegaMenu = {
       ]},
       { title: 'Convert to PDF', tools: [
         { name: 'JPG to PDF', href: '/jpg-to-pdf' },
+        { name: 'PNG to PDF', href: '/png-to-pdf' },
         { name: 'Word to PDF', href: '/word-to-pdf' },
         { name: 'Excel to PDF', href: '/excel-to-pdf' },
         { name: 'PowerPoint to PDF', href: '/ppt-to-pdf' },
@@ -48,12 +49,14 @@ const MEGA_MENU: MegaMenu = {
       ]},
       { title: 'Convert from PDF', tools: [
         { name: 'PDF to JPG', href: '/pdf-to-jpg' },
+        { name: 'PDF to PNG', href: '/pdf-to-png' },
         { name: 'PDF to Word', href: '/pdf-to-word' },
         { name: 'PDF to Excel', href: '/pdf-to-excel' },
         { name: 'PDF to PowerPoint', href: '/pdf-to-ppt' },
         { name: 'PDF to Text', href: '/pdf-to-text' },
       ]},
       { title: 'Edit PDF', tools: [
+        { name: 'PDF Editor', href: '/pdf-editor' },
         { name: 'Rotate PDF', href: '/rotate-pdf' },
         { name: 'Page Numbers', href: '/pdf-page-numbers' },
         { name: 'Header & Footer', href: '/pdf-header-footer' },
@@ -90,6 +93,7 @@ const MEGA_MENU: MegaMenu = {
         { name: 'Image to ICO', href: '/image-to-ico' },
       ]},
       { title: 'Edit Images', tools: [
+        { name: 'Merge Images', href: '/merge-images' },
         { name: 'Rotate Image', href: '/rotate-image' },
         { name: 'Flip Image', href: '/flip-image' },
         { name: 'Grayscale', href: '/grayscale-image' },
@@ -135,6 +139,7 @@ const MEGA_MENU: MegaMenu = {
         { name: 'Invoice Generator', href: '/invoice-generator' },
         { name: 'Receipt Generator', href: '/receipt-generator' },
         { name: 'Purchase Order', href: '/purchase-order-generator' },
+        { name: 'Price Quote', href: '/price-quote-generator' },
         { name: 'Letterhead', href: '/letterhead-generator' },
       ]},
       { title: 'Career & Brand', tools: [
