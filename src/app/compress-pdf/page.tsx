@@ -1,6 +1,7 @@
 'use client'
 import { useState, useRef } from 'react'
 import NavBar from '@/components/NavBar'
+import ToolPageSEO from '@/components/ToolPageSEO'
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://convertdox-backend-production.up.railway.app'
 
@@ -142,6 +143,50 @@ export default function CompressPdfPage() {
           ))}
         </section>
       </div>
+      <ToolPageSEO
+        toolName="Compress PDF"
+        whatIs="Compressing a PDF means reducing its file size while keeping the document readable and intact. PDFs often balloon in size because of high-resolution images, embedded fonts, and scanned pages. A PDF compressor shrinks these elements — downsampling images, removing redundant data, and optimizing the file structure — so the document is small enough to email, upload, or store without hitting size limits."
+        whatIsExtended="ConvertDox compresses PDFs on its server and deletes your file within minutes of processing. The goal is the best balance between smaller size and acceptable quality: text stays crisp and readable, while bulky images are optimized to cut the most weight. This is especially useful for email attachments (most providers cap at 25MB), web uploads, and government or job-application portals that enforce strict size limits."
+        howToUse={[
+          'Upload the PDF you want to shrink by clicking the upload area or dragging the file in',
+          'Wait a moment while the file uploads and the compressor analyzes it',
+          'The tool automatically optimizes images and removes redundant data',
+          'Review the new file size compared to the original',
+          'Download the compressed PDF — ready to email, upload, or archive',
+          'Your original file is automatically deleted from our servers within minutes',
+        ]}
+        useCases={[
+          { title: 'Email Attachments', description: 'Get a large PDF under the 25MB limit most email providers enforce, so your attachment actually sends.' },
+          { title: 'Job & Government Portals', description: 'Many application portals reject files over a few megabytes. Compression brings your document within the allowed size.' },
+          { title: 'Faster Website Uploads', description: 'Smaller PDFs upload and load faster, improving experience for anyone downloading documents from your site.' },
+          { title: 'Saving Storage Space', description: 'Compress archives of scanned receipts, contracts, or records to free up disk and cloud storage.' },
+          { title: 'Scanned Document Cleanup', description: 'Scans are notoriously heavy. Compression dramatically reduces the size of image-based PDFs.' },
+          { title: 'Sharing Over Slow Connections', description: 'A lighter file is far quicker to send and receive on limited or mobile data.' },
+        ]}
+        tips={[
+          'Image-heavy PDFs compress the most — text-only files are already small and shrink less',
+          'If you need a specific target size, compress, check the result, and re-run if needed',
+          'For scanned documents, compression makes the biggest difference in file size',
+          'Compress AFTER merging if you\'re combining files, so the whole document is optimized at once',
+          'Very high compression can soften image detail — review the output if image clarity matters',
+          'Keep an original copy if you may need the full-resolution version later',
+        ]}
+        faqs={[
+          { question: 'Is compressing PDFs free?', answer: 'Yes, completely free with no signup and no watermark added to your document.' },
+          { question: 'Will compression ruin my document quality?', answer: 'Text remains sharp and readable. Images are optimized, which can slightly reduce their resolution, but the tool aims for a balance that keeps the document looking good.' },
+          { question: 'Are my files private?', answer: 'Yes. Your PDF is uploaded securely, compressed, and automatically deleted from our servers within minutes. We never store or read your files.' },
+          { question: 'How much smaller will my file get?', answer: 'It depends on the content. Image-heavy and scanned PDFs can shrink by 50% or more, while text-only files compress less because they\'re already small.' },
+          { question: 'Can I compress a password-protected PDF?', answer: 'Remove the password first with our Unlock PDF tool, then compress the unlocked file.' },
+          { question: 'Is there a file size limit?', answer: 'You can compress large files, though very large uploads take longer to process. If a file is extremely large, compress it in stages.' },
+        ]}
+        relatedTools={[
+          { name: 'Merge PDF', slug: 'merge-pdf', description: 'Combine multiple PDFs into one file' },
+          { name: 'Split PDF', slug: 'split-pdf', description: 'Split a PDF into separate files or ranges' },
+          { name: 'Compress Image', slug: 'compress-image', description: 'Reduce image file size online' },
+          { name: 'PDF to Word', slug: 'pdf-to-word', description: 'Convert PDF to an editable Word document' },
+          { name: 'Unlock PDF', slug: 'unlock-pdf', description: 'Remove passwords from PDF files' },
+        ]}
+      />
     </div>
   )
 }

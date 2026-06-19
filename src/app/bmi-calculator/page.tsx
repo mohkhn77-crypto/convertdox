@@ -7,6 +7,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import NavBar from '@/components/NavBar'
+import ToolPageSEO from '@/components/ToolPageSEO'
 import TrustStrip from '@/components/TrustStrip'
 import RelatedTools from '@/components/RelatedTools'
 
@@ -235,6 +236,50 @@ export default function BMICalculatorPage() {
         'aggregateRating': { '@type': 'AggregateRating', 'ratingValue': '4.8', 'ratingCount': '127' },
         'creator': { '@type': 'Organization', 'name': 'ConvertDox', 'url': 'https://convertdox.com' },
       }) }} />
+      <ToolPageSEO
+        toolName="BMI Calculator"
+        whatIs="A BMI calculator works out your Body Mass Index — a number that estimates whether your weight is in a healthy range for your height. BMI is calculated by dividing your weight by the square of your height, and the result places you into categories: underweight, normal weight, overweight, or obese. It's a quick, widely-used screening tool that gives a general sense of whether weight may be affecting your health."
+        whatIsExtended="This calculator supports both metric (kilograms and centimetres) and imperial (pounds and feet/inches) units, and computes your BMI instantly in your browser — nothing is uploaded or stored. While BMI is a useful starting point, it's a general indicator rather than a complete picture of health: it doesn't distinguish muscle from fat, so very muscular people may read as 'overweight' despite low body fat. Use it as one signal among many, alongside guidance from a healthcare professional."
+        howToUse={[
+          'Choose your unit system — metric (kg/cm) or imperial (lb/ft-in)',
+          'Enter your height in the selected units',
+          'Enter your current weight',
+          'The calculator instantly displays your BMI value',
+          'See which category your BMI falls into — underweight, normal, overweight, or obese',
+          'Use the result as a general guide, and consult a professional for personalized advice',
+        ]}
+        useCases={[
+          { title: 'General Health Check', description: 'Get a quick snapshot of whether your weight sits in a generally healthy range for your height.' },
+          { title: 'Fitness Goal Setting', description: 'Use BMI as one reference point when planning weight-loss, maintenance, or muscle-gain goals.' },
+          { title: 'Tracking Progress', description: 'Recalculate periodically to see how your BMI shifts as your weight changes over time.' },
+          { title: 'Doctor Visit Prep', description: 'Know your BMI before an appointment so you can discuss it knowledgeably with your physician.' },
+          { title: 'Insurance & Forms', description: 'Some health forms and insurance applications ask for BMI — calculate it quickly when needed.' },
+          { title: 'Family Awareness', description: 'Check BMI for yourself and family members to stay generally informed about healthy weight ranges.' },
+        ]}
+        tips={[
+          'Measure height and weight at the same time of day for consistency when tracking over time',
+          'BMI is a screening tool, not a diagnosis — it doesn\'t measure body fat directly',
+          'Athletes and very muscular people may read high on BMI despite being healthy',
+          'BMI categories are designed for adults; children and teens use age-specific charts',
+          'Pair BMI with other measures like waist circumference for a fuller picture',
+          'Always discuss significant weight concerns with a healthcare professional',
+        ]}
+        faqs={[
+          { question: 'How is BMI calculated?', answer: 'BMI equals your weight in kilograms divided by the square of your height in metres (kg/m²). The imperial formula multiplies the pounds-over-inches-squared result by 703. This tool does the math for you in either unit system.' },
+          { question: 'What is a healthy BMI range?', answer: 'For most adults, a BMI between 18.5 and 24.9 is considered the normal range. Below 18.5 is underweight, 25 to 29.9 is overweight, and 30 or above is classed as obese.' },
+          { question: 'Is BMI accurate for everyone?', answer: 'BMI is a useful general screen but has limits. It doesn\'t distinguish muscle from fat, so athletes may read high, and it doesn\'t account for age, sex, or fat distribution. Treat it as one indicator, not the whole story.' },
+          { question: 'Does this calculator store my data?', answer: 'No. The calculation happens entirely in your browser. Your height and weight are never uploaded, stored, or shared.' },
+          { question: 'Can I use BMI for children?', answer: 'Adult BMI categories don\'t apply to children and teens, who are assessed using age- and sex-specific percentile charts. Consult a paediatrician for young people.' },
+          { question: 'Is the BMI calculator free?', answer: 'Yes, completely free with no signup and no limits on how often you can use it.' },
+        ]}
+        relatedTools={[
+          { name: 'Calorie Calculator', slug: 'calorie-calculator', description: 'Estimate your daily calorie needs' },
+          { name: 'Body Fat Calculator', slug: 'body-fat-calculator', description: 'Estimate your body fat percentage' },
+          { name: 'Macro Calculator', slug: 'macro-calculator', description: 'Calculate your daily macronutrients' },
+          { name: 'Water Intake Calculator', slug: 'water-intake', description: 'Find your recommended daily water intake' },
+          { name: 'Age Calculator', slug: 'age-calculator', description: 'Calculate your exact age' },
+        ]}
+      />
     </div>
   )
 }

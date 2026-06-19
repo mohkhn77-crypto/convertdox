@@ -1,6 +1,7 @@
 'use client'
 import { useState, useRef } from 'react'
 import NavBar from '@/components/NavBar'
+import ToolPageSEO from '@/components/ToolPageSEO'
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://convertdox-backend-production.up.railway.app'
 
@@ -217,6 +218,50 @@ export default function MergePdfPage() {
           ))}
         </section>
       </div>
+      <ToolPageSEO
+        toolName="Merge PDF"
+        whatIs="Merging PDF files means combining two or more separate PDF documents into a single file, with the pages arranged in the order you choose. A PDF merger takes individual documents — contracts, scanned pages, reports, invoices — and stitches them together into one cohesive file that's easier to share, print, and archive. Instead of sending five attachments, you send one. Instead of printing documents separately, you print a single file."
+        whatIsExtended="ConvertDox merges PDFs entirely through your browser session — your files are uploaded over an encrypted connection, combined on our server, and then automatically deleted within minutes. There's no watermark added to the output, no page limit, and no signup required. The merged PDF preserves the original quality, fonts, and formatting of each source document, so the result looks exactly like the originals placed back to back."
+        howToUse={[
+          'Click the upload area and select two or more PDF files from your device (or drag and drop them in)',
+          'Wait for the files to upload — you\'ll see each document listed once it\'s ready',
+          'Drag the files into the order you want them to appear in the final document',
+          'Click the Merge button to combine them into a single PDF',
+          'Download your merged file — it\'s ready to share, print, or store',
+          'Your uploaded files are automatically deleted from our servers within minutes',
+        ]}
+        useCases={[
+          { title: 'Combining Contracts', description: 'Merge a signed agreement, its appendices, and supporting exhibits into one clean file for your records or to send to the other party.' },
+          { title: 'Assembling Reports', description: 'Combine a cover page, charts exported separately, and written sections into a single polished report ready for distribution.' },
+          { title: 'Scanned Documents', description: 'Scanners often save each page as a separate PDF. Merge them back into one multi-page document in the correct order.' },
+          { title: 'Job Applications', description: 'Combine your resume, cover letter, and portfolio into a single PDF so recruiters receive everything in one attachment.' },
+          { title: 'Invoices & Receipts', description: 'Bundle a month of invoices or expense receipts into one file for accounting, tax filing, or reimbursement.' },
+          { title: 'Study Material', description: 'Merge lecture slides, notes, and reference PDFs into a single study guide you can read straight through.' },
+        ]}
+        tips={[
+          'Arrange before you merge — drag files into the exact order you want, since the final PDF follows that sequence',
+          'Name files numerically (01, 02, 03) before uploading if you want them to sort predictably',
+          'Check page orientation — if some pages are landscape and others portrait, the merged file keeps each as-is',
+          'Compress large scans first with our Compress PDF tool if the merged file will be emailed',
+          'There\'s no page limit, but very large merges (hundreds of pages) take a little longer to process',
+          'The merged file downloads with no watermark — it\'s yours to use freely',
+        ]}
+        faqs={[
+          { question: 'Is merging PDFs free?', answer: 'Yes, completely free with no signup, no watermark, and no page limit. You can merge as many PDFs as you need.' },
+          { question: 'Are my files kept private?', answer: 'Yes. Files are uploaded over an encrypted connection, merged, and automatically deleted from our servers within minutes. We never store, read, or share your documents.' },
+          { question: 'Can I change the order of pages?', answer: 'You can arrange the order of the files before merging by dragging them into place. To reorder individual pages within a file, use our PDF Editor tool first.' },
+          { question: 'Will merging reduce the quality of my PDFs?', answer: 'No. Merging combines the original files without recompressing them, so text stays sharp and images keep their original resolution.' },
+          { question: 'Is there a limit on file size or number of files?', answer: 'There\'s no strict limit, though very large files or dozens of documents at once will take longer to upload and process.' },
+          { question: 'Can I merge password-protected PDFs?', answer: 'You\'ll need to remove the password first using our Unlock PDF tool, then merge the unlocked files.' },
+        ]}
+        relatedTools={[
+          { name: 'Split PDF', slug: 'split-pdf', description: 'Split a PDF into separate files or page ranges' },
+          { name: 'Compress PDF', slug: 'compress-pdf', description: 'Reduce PDF file size for easier sharing' },
+          { name: 'PDF Editor', slug: 'pdf-editor', description: 'Reorder, rotate, and delete PDF pages' },
+          { name: 'Rotate PDF', slug: 'rotate-pdf', description: 'Rotate PDF pages permanently' },
+          { name: 'PDF to Word', slug: 'pdf-to-word', description: 'Convert PDF to an editable Word document' },
+        ]}
+      />
     </div>
   )
 }
