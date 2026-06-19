@@ -7,6 +7,7 @@
 import { useState } from 'react'
 import NavBar from '@/components/NavBar'
 import TrustStrip from '@/components/TrustStrip'
+import ToolPageSEO from '@/components/ToolPageSEO'
 
 type CalcType = 'whatpct'|'pctof'|'change'|'increase'|'decrease'
 
@@ -115,6 +116,50 @@ export default function PercentageCalculatorPage() {
           ))}
         </div>
       </div>
+      <ToolPageSEO
+        toolName="Percentage Calculator"
+        whatIs="A percentage calculator works out percentage-based math quickly and accurately. Percentages come up constantly in everyday life — calculating a discount, working out a tip, figuring a tax amount, finding what fraction one number is of another, or seeing how much something increased or decreased. Rather than remembering the formulas and doing the arithmetic by hand, a percentage calculator gives you the answer instantly across several common types of percentage problems."
+        whatIsExtended="There isn't just one percentage calculation — there are several distinct types, and people often mix them up. What is X% of Y? X is what percent of Y? What is the percentage increase or decrease from one number to another? The ConvertDox Percentage Calculator handles each of these as a separate, clearly-labeled calculation, so you pick the question you're actually asking and get the right answer. Everything is computed in your browser, instantly, with no signup."
+        howToUse={[
+          'Choose the type of percentage calculation you need from the options',
+          'Enter your numbers into the relevant fields',
+          'The result is calculated automatically as you type',
+          'Read the answer, along with the formula used where shown',
+          'Adjust the numbers to try different scenarios instantly',
+          'No signup needed — the calculation happens right in your browser',
+        ]}
+        useCases={[
+          { title: 'Shopping Discounts', description: 'Work out the sale price when something is 20%, 30%, or 50% off so you know what you\'ll actually pay.' },
+          { title: 'Tips at Restaurants', description: 'Calculate a 15%, 18%, or 20% tip on a bill quickly and accurately.' },
+          { title: 'Tax Amounts', description: 'Find the tax portion of a price, or the total including a given tax percentage.' },
+          { title: 'Grades and Scores', description: 'Convert a score like 42 out of 50 into a percentage to understand a result.' },
+          { title: 'Price Changes', description: 'Calculate the percentage increase or decrease between an old price and a new one.' },
+          { title: 'Statistics and Reports', description: 'Express one figure as a percentage of another for reports, budgets, or comparisons.' },
+        ]}
+        tips={[
+          'Be clear which question you\'re asking — "X% of Y" is different from "X is what percent of Y"',
+          'For discounts, "30% off" means you pay 70% of the original price',
+          'Percentage increase and decrease use the original value as the baseline',
+          'To add a percentage (like tax), multiply by 1 plus the rate as a decimal — e.g. 1.08 for 8%',
+          'Double-check whether a figure is a percentage or a percentage-point change — they\'re not the same',
+          'Use the tool to sanity-check mental math before making a decision',
+        ]}
+        faqs={[
+          { question: 'Is the percentage calculator free?', answer: 'Yes, completely free with no signup and no limits on how often you use it.' },
+          { question: 'How do I calculate a percentage of a number?', answer: 'Multiply the number by the percentage expressed as a decimal. For example, 20% of 150 is 150 × 0.20 = 30. The calculator does this for you.' },
+          { question: 'How do I work out percentage increase or decrease?', answer: 'Subtract the old value from the new value, divide by the old value, and multiply by 100. A positive result is an increase, a negative one is a decrease. The tool calculates it automatically.' },
+          { question: 'What does "X is what percent of Y" mean?', answer: 'It finds what proportion one number is of another. For example, 30 is what percent of 150? The answer is 20%. Divide X by Y and multiply by 100.' },
+          { question: 'Is my data stored?', answer: 'No. All calculations happen in your browser. Nothing you enter is uploaded or stored.' },
+          { question: 'Can it handle discounts and tips?', answer: 'Yes. Use the "percent of" calculation for tips and the discount logic for sale prices — both are common percentage problems the tool covers.' },
+        ]}
+        relatedTools={[
+          { name: 'Discount Calculator', slug: 'discount-calculator', description: 'Find sale prices and savings' },
+          { name: 'Tip Calculator', slug: 'tip-calculator', description: 'Calculate tips and split bills' },
+          { name: 'Tax Calculator', slug: 'tax-calculator', description: 'Estimate tax amounts' },
+          { name: 'Loan Calculator', slug: 'loan-calculator', description: 'Calculate loan payments' },
+          { name: 'Unit Converter', slug: 'unit-converter', description: 'Convert between units of measure' },
+        ]}
+      />
     </div>
   )
 }

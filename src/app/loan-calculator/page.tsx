@@ -3,6 +3,7 @@ import { useState } from 'react'
 import NavBar from '@/components/NavBar'
 import RelatedTools from '@/components/RelatedTools'
 import TrustStrip from '@/components/TrustStrip'
+import ToolPageSEO from '@/components/ToolPageSEO'
 
 interface AmortRow {
   month: number
@@ -121,6 +122,50 @@ export default function LoanCalculatorPage() {
         )}
       </div>
       <RelatedTools currentPath="/loan-calculator" />
+      <ToolPageSEO
+        toolName="Loan Calculator"
+        whatIs="A loan calculator estimates your monthly payment on a loan based on three things: the amount you borrow (the principal), the interest rate, and the length of the loan (the term). It also shows the total amount you'll pay over the life of the loan and how much of that is interest. This helps you understand the real cost of borrowing before you commit, and compare how different rates or terms change what you'll pay each month."
+        whatIsExtended="Loan payments work through amortization: each monthly payment covers some interest and some principal. Early on, more of your payment goes toward interest; over time, more goes toward paying down the balance. The ConvertDox Loan Calculator does this math instantly so you can see the monthly payment and total interest for any combination of amount, rate, and term. This is an estimate for planning purposes — your actual loan terms come from your lender, and you should review the full agreement before borrowing."
+        howToUse={[
+          'Enter the loan amount you want to borrow (the principal)',
+          'Enter the annual interest rate offered',
+          'Enter the loan term — the number of years or months to repay',
+          'The calculator shows your estimated monthly payment',
+          'Review the total cost and total interest over the life of the loan',
+          'Adjust the figures to compare different scenarios',
+        ]}
+        useCases={[
+          { title: 'Comparing Loan Offers', description: 'See how different interest rates or terms change your monthly payment and total cost so you can compare offers.' },
+          { title: 'Budgeting', description: 'Find out whether an estimated monthly payment fits comfortably within your budget before applying.' },
+          { title: 'Car Loans', description: 'Estimate payments on an auto loan to understand the real monthly cost of a vehicle.' },
+          { title: 'Personal Loans', description: 'Work out what a personal loan would cost each month and in total interest.' },
+          { title: 'Understanding Interest', description: 'See how much of your total payment is interest versus principal over the loan\'s life.' },
+          { title: 'Planning Ahead', description: 'Model different loan amounts to decide how much is sensible to borrow.' },
+        ]}
+        tips={[
+          'A longer term lowers the monthly payment but increases the total interest you pay',
+          'Even a small difference in interest rate can mean a large difference over the full term',
+          'The total cost — not just the monthly payment — is the real measure of an affordable loan',
+          'Check whether the rate quoted is the APR, which includes fees, for a true comparison',
+          'Use the calculator to test "what if I borrow less" scenarios before committing',
+          'This is an estimate; your lender\'s official figures and agreement are what count',
+        ]}
+        faqs={[
+          { question: 'Is the loan calculator free?', answer: 'Yes, completely free with no signup and no usage limits.' },
+          { question: 'How is the monthly payment calculated?', answer: 'It uses the standard amortization formula based on the principal, interest rate, and term. Each payment covers interest plus a portion of the principal, with the mix shifting toward principal over time.' },
+          { question: 'Does a longer loan term cost more?', answer: 'Usually yes. A longer term reduces the monthly payment but means you pay interest for longer, increasing the total amount paid over the life of the loan.' },
+          { question: 'Is this financial advice?', answer: 'No. This tool provides estimates for planning and educational purposes only. For decisions about borrowing, review your lender\'s official terms and consider speaking with a qualified financial professional.' },
+          { question: 'Is my data stored?', answer: 'No. All calculations happen in your browser. Nothing you enter is uploaded or saved.' },
+          { question: 'What\'s the difference between interest rate and APR?', answer: 'The interest rate is the cost of borrowing the principal. APR (annual percentage rate) includes the interest rate plus certain fees, giving a fuller picture of the loan\'s cost for comparison.' },
+        ]}
+        relatedTools={[
+          { name: 'Mortgage Calculator', slug: 'mortgage-advanced', description: 'Estimate mortgage payments' },
+          { name: 'Compound Interest', slug: 'compound-interest', description: 'Calculate compound interest growth' },
+          { name: 'Loan EMI Calculator', slug: 'loan-emi-calculator', description: 'Calculate equated monthly instalments' },
+          { name: 'Percentage Calculator', slug: 'percentage-calculator', description: 'Work out percentages' },
+          { name: 'Investment Calculator', slug: 'investment-calculator', description: 'Project investment growth' },
+        ]}
+      />
     </div>
   )
 }

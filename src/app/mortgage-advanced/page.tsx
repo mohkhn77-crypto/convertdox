@@ -2,6 +2,7 @@
 import { useState, useMemo } from 'react'
 import NavBar from '@/components/NavBar'
 import TrustStrip from '@/components/TrustStrip'
+import ToolPageSEO from '@/components/ToolPageSEO'
 
 export default function MortgageAdvancedPage() {
   const [price, setPrice] = useState(450000)
@@ -162,6 +163,50 @@ export default function MortgageAdvancedPage() {
           </table>
         </div>
       </div>
+      <ToolPageSEO
+        toolName="Mortgage Calculator"
+        whatIs="A mortgage calculator estimates the monthly payment on a home loan. Beyond the basic loan math, a mortgage payment often includes more than just principal and interest — it can also cover property taxes and homeowner's insurance, sometimes bundled into one monthly figure. This calculator helps you estimate what owning a home might cost each month, so you can plan a budget and understand affordability before talking to a lender."
+        whatIsExtended="A mortgage is usually the largest loan most people take on, and small differences in rate or term translate into large differences over decades. The monthly principal-and-interest payment is calculated through amortization, where early payments are mostly interest and later ones mostly principal. The ConvertDox Mortgage Calculator estimates your payment from the loan amount, interest rate, and term. These are estimates for planning only — your actual mortgage terms, rates, taxes, and insurance come from your lender and local authorities, and a mortgage professional can give you accurate, personalized figures."
+        howToUse={[
+          'Enter the home loan amount (the price minus your down payment)',
+          'Enter the annual interest rate',
+          'Enter the loan term, typically 15 or 30 years',
+          'Add property tax and insurance figures if the calculator supports them',
+          'Review the estimated monthly payment and total cost over the loan',
+          'Adjust the inputs to compare different scenarios',
+        ]}
+        useCases={[
+          { title: 'Home Affordability', description: 'Estimate the monthly payment for a home at a given price to see if it fits your budget.' },
+          { title: 'Comparing Terms', description: 'Compare a 15-year versus a 30-year mortgage to see the trade-off between monthly payment and total interest.' },
+          { title: 'Down Payment Planning', description: 'See how a larger down payment lowers the loan amount and the monthly payment.' },
+          { title: 'Rate Shopping', description: 'Model how different interest rates change your payment so you understand the value of a better rate.' },
+          { title: 'Refinance Estimates', description: 'Get a rough idea of what a new rate or term might mean for your monthly payment.' },
+          { title: 'Budgeting for Homeownership', description: 'Factor in taxes and insurance to estimate the full monthly cost of owning, not just the loan.' },
+        ]}
+        tips={[
+          'A 15-year mortgage has higher monthly payments but much less total interest than a 30-year',
+          'Remember the true monthly cost often includes property tax and insurance, not just principal and interest',
+          'A larger down payment reduces both the loan amount and the monthly payment',
+          'Even a fraction of a percent in rate makes a big difference over 30 years',
+          'Get pre-approval from a lender for accurate figures based on your finances',
+          'This is an estimate; your lender provides the official terms and rate',
+        ]}
+        faqs={[
+          { question: 'Is the mortgage calculator free?', answer: 'Yes, completely free with no signup and no usage limits.' },
+          { question: 'What does the monthly payment include?', answer: 'At minimum, principal and interest. Many mortgage payments also include property taxes and homeowner\'s insurance. Where the calculator supports those inputs, the estimate reflects them.' },
+          { question: 'Should I choose a 15-year or 30-year mortgage?', answer: 'A 15-year term has higher monthly payments but far less total interest; a 30-year term lowers the monthly payment but costs more overall. The right choice depends on your budget and goals — a mortgage professional can help you decide.' },
+          { question: 'Is this mortgage advice?', answer: 'No. This tool provides estimates for planning and educational purposes only. It is not financial or mortgage advice. Consult a qualified mortgage professional and your lender for accurate, personalized figures.' },
+          { question: 'Is my data stored?', answer: 'No. All calculations happen in your browser. Nothing you enter is uploaded or saved.' },
+          { question: 'Why is my real quote different from this estimate?', answer: 'Lenders factor in your credit, fees, exact rate, taxes, insurance, and other details this calculator can\'t know. Treat this as a planning estimate, not a quote.' },
+        ]}
+        relatedTools={[
+          { name: 'Loan Calculator', slug: 'loan-calculator', description: 'Calculate general loan payments' },
+          { name: 'Compound Interest', slug: 'compound-interest', description: 'Calculate compound interest growth' },
+          { name: 'Loan EMI Calculator', slug: 'loan-emi-calculator', description: 'Calculate equated monthly instalments' },
+          { name: 'Investment Calculator', slug: 'investment-calculator', description: 'Project investment growth' },
+          { name: 'Percentage Calculator', slug: 'percentage-calculator', description: 'Work out percentages' },
+        ]}
+      />
     </div>
   )
 }

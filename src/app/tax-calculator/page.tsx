@@ -2,6 +2,7 @@
 import { useState, useMemo } from 'react'
 import NavBar from '@/components/NavBar'
 import TrustStrip from '@/components/TrustStrip'
+import ToolPageSEO from '@/components/ToolPageSEO'
 
 type Country = 'US' | 'UK' | 'CA' | 'AU'
 type Filing = 'single' | 'mfj' | 'hoh'
@@ -190,6 +191,50 @@ export default function TaxCalculatorPage() {
           <strong>Disclaimer:</strong> Estimate only. Doesn&apos;t include state/provincial tax, FICA/NI, or all deductions. Consult a tax professional for advice.
         </div>
       </div>
+      <ToolPageSEO
+        toolName="Tax Calculator"
+        whatIs="A tax calculator estimates the tax on an amount based on a tax rate you provide. It can work out the tax portion of a price, the total including tax, or the pre-tax amount when you know the total. This is useful for quick estimates — adding sales tax to a purchase, working out the tax included in a total, or budgeting for tax on income at a given rate. It handles the arithmetic so you get a fast, accurate figure."
+        whatIsExtended="Tax rules vary enormously by country, region, and situation, and real tax owed depends on many factors a simple calculator can't capture — brackets, deductions, exemptions, and local rules. This tool is designed for straightforward percentage-based tax estimates, not for preparing or filing taxes. The ConvertDox Tax Calculator computes results instantly in your browser. For your actual tax obligations, the figures from your tax authority and a qualified tax professional are what matter."
+        howToUse={[
+          'Enter the amount you want to calculate tax on',
+          'Enter the applicable tax rate as a percentage',
+          'Choose whether to add tax, find tax included in a total, or work backward to the pre-tax amount',
+          'The calculator shows the tax amount and the relevant total',
+          'Adjust the rate or amount to compare different scenarios',
+          'The calculation happens instantly in your browser',
+        ]}
+        useCases={[
+          { title: 'Adding Sales Tax', description: 'Work out the final price of a purchase once sales tax at a given rate is added.' },
+          { title: 'Finding Tax in a Total', description: 'Determine how much tax is included in a total price when you know the rate.' },
+          { title: 'Pricing Products', description: 'Calculate tax-inclusive prices when setting prices for a product or service.' },
+          { title: 'Budgeting for Tax', description: 'Estimate the tax portion of income or a transaction to plan your budget.' },
+          { title: 'Invoicing', description: 'Work out the tax line on an invoice before issuing it.' },
+          { title: 'Quick Estimates', description: 'Get a fast tax figure for everyday situations without doing the math by hand.' },
+        ]}
+        tips={[
+          'Confirm the correct tax rate for your location — rates differ by country, state, and category',
+          'To add tax, multiply by 1 plus the rate as a decimal (e.g. 1.08 for 8%)',
+          'To find the pre-tax amount from a total, divide by 1 plus the rate',
+          'Sales tax, VAT, and income tax work differently — use the rate that fits your situation',
+          'This tool handles flat-rate percentage tax, not tiered brackets or deductions',
+          'For filing or owed taxes, rely on official figures and a tax professional',
+        ]}
+        faqs={[
+          { question: 'Is the tax calculator free?', answer: 'Yes, completely free with no signup and no usage limits.' },
+          { question: 'Does it calculate income tax with brackets?', answer: 'No. This tool calculates flat percentage-based tax. Income tax with tiered brackets, deductions, and exemptions is more complex and varies by jurisdiction — consult official resources or a tax professional for that.' },
+          { question: 'How do I find the tax included in a total?', answer: 'Divide the total by 1 plus the tax rate as a decimal to get the pre-tax amount, then subtract that from the total. The calculator does this automatically when you choose that mode.' },
+          { question: 'Is this tax advice?', answer: 'No. This is an estimation tool for general use only. It is not tax advice. For your actual tax obligations, consult your tax authority or a qualified tax professional.' },
+          { question: 'Is my data stored?', answer: 'No. All calculations happen in your browser. Nothing you enter is uploaded or saved.' },
+          { question: 'What tax rate should I use?', answer: 'Use the rate that applies to your location and situation — for example, your local sales tax or VAT rate. Tax rates vary widely, so check the correct figure for your case.' },
+        ]}
+        relatedTools={[
+          { name: 'Percentage Calculator', slug: 'percentage-calculator', description: 'Work out percentages' },
+          { name: 'Discount Calculator', slug: 'discount-calculator', description: 'Find sale prices and savings' },
+          { name: 'Salary Calculator', slug: 'salary-calculator', description: 'Break down salary figures' },
+          { name: 'Invoice Generator', slug: 'invoice-generator', description: 'Create professional invoices' },
+          { name: 'Tip Calculator', slug: 'tip-calculator', description: 'Calculate tips and split bills' },
+        ]}
+      />
     </div>
   )
 }
