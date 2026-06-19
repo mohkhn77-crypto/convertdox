@@ -7,6 +7,7 @@ import { useState } from 'react'
 import NavBar from '@/components/NavBar'
 import TrustStrip from '@/components/TrustStrip'
 import RelatedTools from '@/components/RelatedTools'
+import ToolPageSEO from '@/components/ToolPageSEO'
 
 export default function JSONFormatterPage() {
   const [input, setInput] = useState('')
@@ -211,6 +212,50 @@ export default function JSONFormatterPage() {
         'aggregateRating': { '@type': 'AggregateRating', 'ratingValue': '4.8', 'ratingCount': '127' },
         'creator': { '@type': 'Organization', 'name': 'ConvertDox', 'url': 'https://convertdox.com' },
       }) }} />
+      <ToolPageSEO
+        toolName="JSON Formatter"
+        whatIs="A JSON formatter takes raw, messy JSON data and reformats it into a clean, readable, properly indented structure. JSON (JavaScript Object Notation) is the standard format for exchanging data between web servers, APIs, and applications, but it often arrives minified or on a single line, making it impossible to read. A formatter adds proper indentation and line breaks, and a validator checks that the JSON is correctly structured, flagging errors like missing commas or brackets."
+        whatIsExtended="Developers work with JSON constantly — reading API responses, editing config files, debugging data. When JSON is minified into one long line, finding a specific value or spotting a syntax error is painful. The ConvertDox JSON Formatter beautifies your JSON for readability, validates it to catch errors, and can minify it back down when you need a compact version for production. Everything runs in your browser, so your data never leaves your device — important when working with sensitive API keys or private data."
+        howToUse={[
+          'Paste your raw or minified JSON into the input box',
+          'Click Format (or Beautify) to add proper indentation and line breaks',
+          'Review the formatted output — errors are flagged if the JSON is invalid',
+          'Use Minify to compress the JSON back into a single line when needed',
+          'Copy the result to use in your code, config, or documentation',
+          'Everything happens in your browser — your data is never uploaded',
+        ]}
+        useCases={[
+          { title: 'Debugging API Responses', description: 'Paste a raw API response to see it cleanly formatted, making it easy to find the fields and values you need.' },
+          { title: 'Validating JSON', description: 'Check that a JSON file or snippet is syntactically correct before using it, catching errors early.' },
+          { title: 'Editing Config Files', description: 'Format config files like package.json or settings files so they\'re readable and easy to edit by hand.' },
+          { title: 'Minifying for Production', description: 'Compress formatted JSON into a compact single line to reduce payload size in production.' },
+          { title: 'Documentation', description: 'Format JSON examples cleanly before adding them to API docs or technical guides.' },
+          { title: 'Learning JSON Structure', description: 'See nested objects and arrays laid out clearly to understand how a piece of JSON is structured.' },
+        ]}
+        tips={[
+          'If formatting fails, the JSON has a syntax error — the validator points you to the problem',
+          'Common errors are trailing commas, missing quotes around keys, and unmatched brackets',
+          'Use minify for production payloads and beautify for reading and debugging',
+          'JSON keys must be in double quotes — single quotes are not valid JSON',
+          'For very large JSON, formatting makes navigation far easier with collapsible sections where supported',
+          'Your data stays in your browser, so it\'s safe to format JSON containing sensitive values',
+        ]}
+        faqs={[
+          { question: 'Is the JSON formatter free?', answer: 'Yes, completely free with no signup and no limits on how often you use it.' },
+          { question: 'Is my data safe to paste here?', answer: 'Yes. Formatting happens entirely in your browser — your JSON is never uploaded to or stored on any server, so it\'s safe to format sensitive data.' },
+          { question: 'What\'s the difference between format and minify?', answer: 'Format (beautify) adds indentation and line breaks for readability. Minify removes all unnecessary whitespace to create the smallest possible single-line version.' },
+          { question: 'Why does it say my JSON is invalid?', answer: 'The validator detected a syntax error — commonly a trailing comma, a missing quote, an unquoted key, or an unmatched bracket. Fix the flagged issue and format again.' },
+          { question: 'Does it work with large JSON files?', answer: 'Yes, it handles large JSON, though extremely large inputs may take a moment to process in the browser.' },
+          { question: 'Can it convert JSON to other formats?', answer: 'For converting JSON to CSV, use our JSON to CSV tool. This tool focuses on formatting, validating, and minifying JSON.' },
+        ]}
+        relatedTools={[
+          { name: 'JSON to CSV', slug: 'json-to-csv', description: 'Convert JSON data into CSV' },
+          { name: 'CSV to JSON', slug: 'csv-to-json', description: 'Convert CSV data into JSON' },
+          { name: 'Base64 Encoder', slug: 'base64-encoder', description: 'Encode and decode Base64 strings' },
+          { name: 'XML Formatter', slug: 'xml-formatter', description: 'Format and validate XML' },
+          { name: 'YAML to JSON', slug: 'yaml-to-json', description: 'Convert YAML into JSON' },
+        ]}
+      />
     </div>
   )
 }

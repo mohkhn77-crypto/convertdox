@@ -3,6 +3,7 @@ import { useState } from 'react'
 import NavBar from '@/components/NavBar'
 import RelatedTools from '@/components/RelatedTools'
 import TrustStrip from '@/components/TrustStrip'
+import ToolPageSEO from '@/components/ToolPageSEO'
 
 const CHEAT_SHEET = [
   { pattern: '.', desc: 'Any character except newline' },
@@ -180,6 +181,50 @@ export default function RegexTesterPage() {
         )}
       </div>
       <RelatedTools currentPath="/regex-tester" />
+      <ToolPageSEO
+        toolName="Regex Tester"
+        whatIs="A regex tester lets you build and test regular expressions against sample text in real time. A regular expression (regex) is a pattern used to search, match, and manipulate text — finding email addresses in a document, validating a phone number format, or extracting specific data from a string. Because regex syntax is notoriously tricky, a tester that highlights matches as you type is invaluable for getting a pattern right before using it in your code."
+        whatIsExtended="Regular expressions are powerful but easy to get wrong — a single misplaced character changes what a pattern matches. A regex tester removes the guesswork by showing you exactly what your pattern matches in your test text, instantly. The ConvertDox Regex Tester runs entirely in your browser, highlighting matches and capture groups as you refine your expression. It's useful for developers writing validation, data extraction, or search-and-replace logic in any language that supports regex."
+        howToUse={[
+          'Type or paste your regular expression into the pattern field',
+          'Set any flags you need, such as global (g), case-insensitive (i), or multiline (m)',
+          'Paste your test text into the input area',
+          'Watch as matches are highlighted in real time as you adjust the pattern',
+          'Review capture groups and match details to confirm the pattern works',
+          'Copy the working pattern into your code — everything runs in your browser',
+        ]}
+        useCases={[
+          { title: 'Validating Input', description: 'Build and test patterns for validating emails, phone numbers, postal codes, or passwords before adding them to a form.' },
+          { title: 'Extracting Data', description: 'Develop a pattern to pull specific values — dates, IDs, URLs — out of a block of text.' },
+          { title: 'Search and Replace', description: 'Test a pattern for find-and-replace operations in code editors or scripts before running it.' },
+          { title: 'Log Parsing', description: 'Craft expressions to match and extract fields from log files and structured text.' },
+          { title: 'Learning Regex', description: 'Experiment with patterns and see results instantly to understand how regex syntax works.' },
+          { title: 'Cleaning Text', description: 'Build patterns to strip unwanted characters or normalize formatting in messy data.' },
+        ]}
+        tips={[
+          'Use the global (g) flag to find all matches, not just the first',
+          'The case-insensitive (i) flag matches letters regardless of upper or lower case',
+          'Test against real sample data, including edge cases that might break your pattern',
+          'Capture groups (parentheses) let you extract specific parts of a match',
+          'Escape special characters like . * + ? with a backslash when you want them literally',
+          'Build patterns incrementally — start simple and add complexity while watching the matches',
+        ]}
+        faqs={[
+          { question: 'Is the regex tester free?', answer: 'Yes, completely free with no signup and no usage limits.' },
+          { question: 'Which regex flavor does it use?', answer: 'It uses JavaScript regular expression syntax, which is very close to the regex used in most languages. Minor differences exist between flavors, so verify advanced patterns in your target language.' },
+          { question: 'Is my test data private?', answer: 'Yes. The tester runs entirely in your browser — your pattern and test text are never uploaded or stored anywhere.' },
+          { question: 'What do the flags mean?', answer: 'Common flags: g (global, find all matches), i (case-insensitive), m (multiline, ^ and $ match line starts/ends), and s (dot matches newlines). Combine them as needed.' },
+          { question: 'How do capture groups work?', answer: 'Parentheses in a pattern create capture groups, letting you extract specific parts of each match — useful for pulling out structured data.' },
+          { question: 'Why isn\'t my pattern matching?', answer: 'Common issues are forgetting to escape special characters, missing the global flag, or a small syntax error. Build the pattern step by step and watch which part breaks the match.' },
+        ]}
+        relatedTools={[
+          { name: 'Find and Replace', slug: 'find-replace', description: 'Find and replace text in bulk' },
+          { name: 'JSON Formatter', slug: 'json-formatter', description: 'Format, validate, and minify JSON' },
+          { name: 'URL Encoder', slug: 'url-encoder', description: 'Encode and decode URL strings' },
+          { name: 'Text Diff', slug: 'text-diff', description: 'Compare two pieces of text' },
+          { name: 'Slug Generator', slug: 'slug-generator', description: 'Create URL-friendly slugs from text' },
+        ]}
+      />
     </div>
   )
 }

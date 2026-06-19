@@ -7,6 +7,7 @@ import { useState } from 'react'
 import NavBar from '@/components/NavBar'
 import TrustStrip from '@/components/TrustStrip'
 import RelatedTools from '@/components/RelatedTools'
+import ToolPageSEO from '@/components/ToolPageSEO'
 
 export default function Base64Page() {
   const [mode, setMode] = useState<'encode'|'decode'>('encode')
@@ -233,6 +234,50 @@ export default function Base64Page() {
         'aggregateRating': { '@type': 'AggregateRating', 'ratingValue': '4.8', 'ratingCount': '127' },
         'creator': { '@type': 'Organization', 'name': 'ConvertDox', 'url': 'https://convertdox.com' },
       }) }} />
+      <ToolPageSEO
+        toolName="Base64 Encoder & Decoder"
+        whatIs="Base64 is a way of representing binary data — like images or files — using only plain text characters. A Base64 encoder converts text or data into this text-safe format, and a decoder converts it back. Base64 is everywhere in web development: embedding images directly in HTML or CSS, encoding data in URLs, transmitting binary data through text-only channels like email, and storing credentials in certain authentication schemes."
+        whatIsExtended="The reason Base64 exists is that some systems can only handle text reliably. Binary data (images, files) can get corrupted when passed through text-based systems, so encoding it as Base64 makes it safe to transmit. The trade-off is size — Base64 data is about 33% larger than the original. The ConvertDox Base64 tool encodes and decodes in your browser, so sensitive data never leaves your device. It handles both plain text and the data-URI format used for embedding."
+        howToUse={[
+          'Choose whether you want to Encode (text to Base64) or Decode (Base64 to text)',
+          'Paste your text or Base64 string into the input box',
+          'Click the Encode or Decode button',
+          'View the result in the output box',
+          'Copy the result to use in your code, URL, or document',
+          'Everything happens in your browser — your data is never uploaded',
+        ]}
+        useCases={[
+          { title: 'Embedding Images in CSS/HTML', description: 'Encode a small image as Base64 to embed it directly in a stylesheet or HTML, avoiding a separate file request.' },
+          { title: 'Decoding Tokens', description: 'Decode the readable parts of tokens or encoded strings to inspect their contents during debugging.' },
+          { title: 'Data URIs', description: 'Create data-URI strings for icons, fonts, or images that load inline without external files.' },
+          { title: 'Email Attachments', description: 'Understand how binary data is encoded for transmission through text-based email protocols.' },
+          { title: 'API Development', description: 'Encode or decode data that\'s passed as Base64 in API requests and responses.' },
+          { title: 'Basic Authentication', description: 'See how username:password credentials are Base64-encoded in HTTP Basic Auth headers.' },
+        ]}
+        tips={[
+          'Base64 is encoding, not encryption — it\'s easily reversible and provides no security',
+          'Never rely on Base64 to hide sensitive data; anyone can decode it instantly',
+          'Base64 data is about 33% larger than the original — only embed small files this way',
+          'For embedding in CSS/HTML, use the data-URI format with the correct MIME type prefix',
+          'Decoding fails if the input isn\'t valid Base64 — check for stray characters or spaces',
+          'Your data stays in your browser, so encoding sensitive strings here is safe',
+        ]}
+        faqs={[
+          { question: 'Is the Base64 tool free?', answer: 'Yes, completely free with no signup and no usage limits.' },
+          { question: 'Is Base64 encoding secure?', answer: 'No. Base64 is encoding, not encryption. It\'s trivially reversible and provides no security — never use it to protect passwords or sensitive data.' },
+          { question: 'Is my data uploaded anywhere?', answer: 'No. Encoding and decoding happen entirely in your browser. Your data is never sent to or stored on any server.' },
+          { question: 'Why is my Base64 longer than the original?', answer: 'Base64 represents data using a limited character set, which makes the output about 33% larger than the original input. This is normal and expected.' },
+          { question: 'Can I encode images or files?', answer: 'This tool focuses on text. To convert an image to Base64, use our Image to Base64 tool, which handles image files directly.' },
+          { question: 'Why does decoding fail?', answer: 'Decoding fails when the input isn\'t valid Base64 — often due to extra spaces, line breaks, or characters that aren\'t part of the Base64 set. Clean the input and try again.' },
+        ]}
+        relatedTools={[
+          { name: 'Image to Base64', slug: 'image-to-base64', description: 'Convert image files to Base64' },
+          { name: 'URL Encoder', slug: 'url-encoder', description: 'Encode and decode URL strings' },
+          { name: 'JSON Formatter', slug: 'json-formatter', description: 'Format, validate, and minify JSON' },
+          { name: 'Hash Generator', slug: 'hash-generator', description: 'Generate hashes from text' },
+          { name: 'JWT Decoder', slug: 'jwt-decoder', description: 'Decode and inspect JWT tokens' },
+        ]}
+      />
     </div>
   )
 }

@@ -7,6 +7,7 @@ import { useState } from 'react'
 import NavBar from '@/components/NavBar'
 import TrustStrip from '@/components/TrustStrip'
 import RelatedTools from '@/components/RelatedTools'
+import ToolPageSEO from '@/components/ToolPageSEO'
 
 export default function URLEncoderPage() {
   const [mode, setMode] = useState<'encode'|'decode'>('encode')
@@ -169,6 +170,50 @@ export default function URLEncoderPage() {
         </div>
       </div>
       <RelatedTools currentPath="/url-encoder" />
+      <ToolPageSEO
+        toolName="URL Encoder & Decoder"
+        whatIs="A URL encoder converts text into a format that's safe to use in a web address. URLs can only contain certain characters, so spaces, accented letters, and symbols like &, ?, and = must be converted into a special percent-encoded form (for example, a space becomes %20). A URL decoder reverses this, turning encoded strings back into readable text. This is essential whenever data is passed through a URL, such as in query strings and search parameters."
+        whatIsExtended="If you've ever seen a web address full of %20 and %3A, that's percent-encoding at work. It exists because URLs have a limited set of allowed characters, and anything outside that set must be encoded to avoid breaking the link or being misinterpreted. The ConvertDox URL tool encodes and decodes strings in your browser, handling both full URLs and individual components like query parameters. Nothing is uploaded — your data stays on your device."
+        howToUse={[
+          'Choose whether to Encode (text to percent-encoded) or Decode (percent-encoded to text)',
+          'Paste your text or URL into the input box',
+          'Click the Encode or Decode button',
+          'View the converted result in the output box',
+          'Copy the result to use in your link, code, or request',
+          'Everything happens in your browser — your data is never uploaded',
+        ]}
+        useCases={[
+          { title: 'Building Query Strings', description: 'Encode values like search terms or names so they pass safely in a URL\'s query parameters.' },
+          { title: 'Debugging Links', description: 'Decode a percent-encoded URL to read what it actually contains when troubleshooting.' },
+          { title: 'API Requests', description: 'Encode parameters correctly when constructing API request URLs by hand.' },
+          { title: 'Sharing Links With Special Characters', description: 'Encode URLs containing spaces or symbols so they work when pasted or shared.' },
+          { title: 'Form Data', description: 'Understand how form values are encoded when submitted through a URL.' },
+          { title: 'Tracking Parameters', description: 'Encode campaign or tracking values added to marketing URLs.' },
+        ]}
+        tips={[
+          'A space becomes %20 (or sometimes +) when encoded — both are common in URLs',
+          'Encode individual query values, not the whole URL, to avoid breaking the structure',
+          'Reserved characters like &, ?, =, and # have special meaning and must be encoded inside values',
+          'Decoding reveals what an obscure-looking URL actually contains',
+          'Double-encoding (encoding already-encoded text) is a common bug — decode first if unsure',
+          'Your data stays in your browser, so encoding sensitive parameters here is safe',
+        ]}
+        faqs={[
+          { question: 'Is the URL encoder free?', answer: 'Yes, completely free with no signup and no usage limits.' },
+          { question: 'What is URL encoding?', answer: 'URL encoding (percent-encoding) converts characters that aren\'t allowed in URLs into a safe format, like turning a space into %20, so data passes through web addresses correctly.' },
+          { question: 'When do I need to encode a URL?', answer: 'Whenever you put text containing spaces, symbols, or non-English characters into a URL — especially in query parameters — encoding prevents the link from breaking.' },
+          { question: 'Is my data uploaded?', answer: 'No. Encoding and decoding happen entirely in your browser. Your data is never sent to or stored on any server.' },
+          { question: 'Why does a space sometimes become + and sometimes %20?', answer: 'Both represent a space. The + form is used in form submissions (application/x-www-form-urlencoded), while %20 is used in the path and elsewhere. Both are valid in their contexts.' },
+          { question: 'What\'s double-encoding?', answer: 'Double-encoding happens when you encode text that\'s already encoded, turning %20 into %2520. If your decoded result still looks encoded, decode it again.' },
+        ]}
+        relatedTools={[
+          { name: 'Base64 Encoder', slug: 'base64-encoder', description: 'Encode and decode Base64 strings' },
+          { name: 'HTML Entities', slug: 'html-entities', description: 'Encode and decode HTML entities' },
+          { name: 'JSON Formatter', slug: 'json-formatter', description: 'Format, validate, and minify JSON' },
+          { name: 'Slug Generator', slug: 'slug-generator', description: 'Create URL-friendly slugs from text' },
+          { name: 'Regex Tester', slug: 'regex-tester', description: 'Test regular expressions live' },
+        ]}
+      />
     </div>
   )
 }
