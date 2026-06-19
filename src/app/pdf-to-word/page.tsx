@@ -3,6 +3,7 @@ import { useState, useRef } from 'react'
 import NavBar from '@/components/NavBar'
 import LegalNoticeHigh from '@/components/LegalNoticeHigh'
 import LegalFooter from '@/components/LegalFooter'
+import ToolPageSEO from '@/components/ToolPageSEO'
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://convertdox-backend-production.up.railway.app'
 
@@ -140,6 +141,50 @@ export default function PdfToWordPage() {
         </section>
       </div>
       <LegalFooter toolName="PDF to Word" type="copyright" />
+      <ToolPageSEO
+        toolName="PDF to Word"
+        whatIs="Converting PDF to Word means turning a fixed, non-editable PDF document into an editable Word (.docx) file you can change in Microsoft Word, Google Docs, or any word processor. PDFs are designed to look the same everywhere, which makes them great for sharing but frustrating when you need to edit the text. A PDF to Word converter extracts the text, formatting, and layout from the PDF and rebuilds it as an editable document."
+        whatIsExtended="The quality of a PDF-to-Word conversion depends on how the original PDF was created. PDFs generated from text (exported from Word, for example) convert cleanly with editable text and preserved formatting. Scanned PDFs — which are essentially images of pages — are harder, since the text has to be recognized first. ConvertDox processes your file securely and deletes it within minutes, with no watermark on the output."
+        howToUse={[
+          'Upload the PDF you want to convert by clicking the upload area or dragging the file in',
+          'Wait while the file uploads and the converter analyzes its structure',
+          'The tool extracts text and formatting and rebuilds it as a Word document',
+          'Download the converted .docx file',
+          'Open it in Microsoft Word, Google Docs, or any word processor to edit',
+          'Your original PDF is automatically deleted from our servers within minutes',
+        ]}
+        useCases={[
+          { title: 'Editing Received Documents', description: 'Someone sent you a PDF you need to revise. Convert it to Word, make your changes, and you\'re done — no retyping.' },
+          { title: 'Updating Old Files', description: 'Reuse content from an old PDF report or proposal by converting it to an editable format instead of rebuilding from scratch.' },
+          { title: 'Extracting Text', description: 'Pull paragraphs, tables, or sections out of a PDF to repurpose in another document.' },
+          { title: 'Reformatting Resumes', description: 'Convert a PDF resume back to Word so you can tailor it for a new application.' },
+          { title: 'Translating Documents', description: 'Get an editable version so you can translate or annotate the text directly.' },
+          { title: 'Filling Forms', description: 'Turn a flat PDF form into an editable document you can complete and customize.' },
+        ]}
+        tips={[
+          'Text-based PDFs convert best — files exported from Word or similar keep their formatting cleanly',
+          'Scanned PDFs may need OCR first; try our PDF OCR tool if the text isn\'t selectable',
+          'Always review the converted file — complex layouts and tables may need minor cleanup',
+          'Fonts may shift slightly if your computer doesn\'t have the original font installed',
+          'For simple text documents, conversion is usually near-perfect',
+          'Keep the original PDF until you\'ve confirmed the Word version is correct',
+        ]}
+        faqs={[
+          { question: 'Is the PDF to Word converter free?', answer: 'Yes, completely free with no signup and no watermark added to the converted document.' },
+          { question: 'Will the formatting be preserved?', answer: 'For text-based PDFs, formatting like headings, paragraphs, and basic layout is preserved well. Very complex layouts may need minor adjustments after conversion.' },
+          { question: 'Can I convert a scanned PDF?', answer: 'Scanned PDFs are images of text, so they convert best after OCR (optical character recognition). Try our PDF OCR tool first if the text in your PDF isn\'t selectable.' },
+          { question: 'Are my files private?', answer: 'Yes. Your PDF is uploaded securely, converted, and automatically deleted from our servers within minutes. We never store or read your documents.' },
+          { question: 'What format is the output?', answer: 'The output is a .docx file, which opens in Microsoft Word, Google Docs, LibreOffice, and virtually any modern word processor.' },
+          { question: 'Is there a file size limit?', answer: 'You can convert large files, though very large or image-heavy PDFs take longer to process.' },
+        ]}
+        relatedTools={[
+          { name: 'Word to PDF', slug: 'word-to-pdf', description: 'Convert Word documents to PDF' },
+          { name: 'PDF to Text', slug: 'pdf-to-text', description: 'Extract plain text from a PDF' },
+          { name: 'PDF OCR', slug: 'pdf-ocr', description: 'Recognize text in scanned PDFs' },
+          { name: 'Merge PDF', slug: 'merge-pdf', description: 'Combine multiple PDFs into one file' },
+          { name: 'Compress PDF', slug: 'compress-pdf', description: 'Reduce PDF file size for easier sharing' },
+        ]}
+      />
     </div>
   )
 }

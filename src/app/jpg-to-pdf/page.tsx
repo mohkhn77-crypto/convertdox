@@ -1,6 +1,7 @@
 'use client'
 import { useState, useRef } from 'react'
 import NavBar from '@/components/NavBar'
+import ToolPageSEO from '@/components/ToolPageSEO'
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://convertdox-backend-production.up.railway.app'
 
@@ -153,6 +154,50 @@ export default function JpgToPdfPage() {
           ))}
         </section>
       </div>
+      <ToolPageSEO
+        toolName="JPG to PDF"
+        whatIs="Converting JPG to PDF means turning one or more image files into a single PDF document. Images are great for individual photos, but when you need to send a set of pictures as one organized file — scanned receipts, photographed documents, a portfolio — a PDF is far more practical. A JPG to PDF converter combines your images into a clean, ordered document that's easy to share, print, and archive."
+        whatIsExtended="Beyond simple convenience, converting images to PDF solves real problems: PDFs keep pages in order, are universally viewable, and look professional. ConvertDox lets you combine multiple JPGs into one PDF with the pages in your chosen order. Your images are processed securely and deleted within minutes, and the output carries no watermark. The tool also handles PNG and other common image formats, not just JPG."
+        howToUse={[
+          'Upload one or more image files by clicking the upload area or dragging them in',
+          'Arrange the images into the order you want them to appear in the PDF',
+          'Choose page options if available (orientation, margins)',
+          'Click Convert to combine the images into a single PDF',
+          'Download your PDF — ready to share, print, or store',
+          'Your uploaded images are automatically deleted from our servers within minutes',
+        ]}
+        useCases={[
+          { title: 'Scanned Receipts', description: 'Combine photos of receipts into one PDF for expense reports, reimbursement, or tax records.' },
+          { title: 'Photographed Documents', description: 'Turn phone photos of a multi-page document into a single, properly ordered PDF.' },
+          { title: 'Portfolios', description: 'Compile design work, artwork, or photography into one polished PDF to send to clients.' },
+          { title: 'ID and Application Documents', description: 'Combine images of IDs, certificates, or supporting documents into one file for applications.' },
+          { title: 'Sharing Photo Sets', description: 'Send a group of related images as one organized document instead of many separate attachments.' },
+          { title: 'Creating Simple Booklets', description: 'Turn a series of image pages into a shareable, printable PDF booklet.' },
+        ]}
+        tips={[
+          'Arrange images before converting — the PDF follows the order you set',
+          'Name files numerically (01, 02, 03) before uploading for predictable ordering',
+          'Higher-resolution images make sharper PDFs but larger files — compress first if size matters',
+          'Mixed orientations are fine; each image becomes its own page',
+          'Combine with our Compress PDF tool afterward if the result is too large to email',
+          'The output has no watermark — it\'s yours to use freely',
+        ]}
+        faqs={[
+          { question: 'Is JPG to PDF free?', answer: 'Yes, completely free with no signup, no watermark, and no limit on how many images you can combine.' },
+          { question: 'Can I combine multiple images into one PDF?', answer: 'Yes. Upload several images and they\'ll be combined into a single PDF, one image per page, in the order you arrange them.' },
+          { question: 'Does it work with PNG and other formats?', answer: 'Yes. The tool handles JPG, PNG, and other common image formats, not just JPG.' },
+          { question: 'Will image quality be reduced?', answer: 'Your images are placed into the PDF at their original quality. The file size depends on the resolution of the images you upload.' },
+          { question: 'Are my images private?', answer: 'Yes. Your images are uploaded securely, converted, and automatically deleted from our servers within minutes. We never store or share them.' },
+          { question: 'Can I choose the page order?', answer: 'Yes. Arrange the images into your preferred order before converting, and the PDF will follow that sequence.' },
+        ]}
+        relatedTools={[
+          { name: 'PDF to JPG', slug: 'pdf-to-jpg', description: 'Convert PDF pages to JPG images' },
+          { name: 'Merge PDF', slug: 'merge-pdf', description: 'Combine multiple PDFs into one file' },
+          { name: 'Compress PDF', slug: 'compress-pdf', description: 'Reduce PDF file size for easier sharing' },
+          { name: 'Compress Image', slug: 'compress-image', description: 'Reduce image file size before converting' },
+          { name: 'PNG to PDF', slug: 'png-to-pdf', description: 'Convert PNG images to PDF' },
+        ]}
+      />
     </div>
   )
 }

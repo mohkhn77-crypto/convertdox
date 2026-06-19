@@ -2,6 +2,7 @@
 import { useState, useRef } from 'react'
 import NavBar from '@/components/NavBar'
 import FileAutoDeletedNotice from '@/components/FileAutoDeletedNotice'
+import ToolPageSEO from '@/components/ToolPageSEO'
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://convertdox-backend-production.up.railway.app'
 
@@ -128,6 +129,50 @@ export default function PdfToJpgPage() {
           ))}
         </section>
       </div>
+      <ToolPageSEO
+        toolName="PDF to JPG"
+        whatIs="Converting PDF to JPG means turning the pages of a PDF document into individual JPG image files — one image per page. This is useful when you need to use a PDF page as a picture: posting it on social media, embedding it in a presentation, displaying it on a website, or sharing it where images work better than documents. A PDF to JPG converter renders each page as a high-quality image you can use anywhere images are supported."
+        whatIsExtended="There are good reasons to turn a PDF into images rather than keep it as a document. Images are easier to preview, embed, and post — they display instantly without a PDF reader, and they can't be edited as easily, which is useful for sharing final versions. ConvertDox converts each page to a clear JPG and deletes your file within minutes of processing. For multi-page PDFs, you get an image for each page, with no watermark added."
+        howToUse={[
+          'Upload the PDF you want to convert by clicking the upload area or dragging the file in',
+          'Wait while the file uploads and each page is rendered to an image',
+          'Choose quality or resolution options if available',
+          'Convert the PDF — each page becomes a separate JPG image',
+          'Download the images individually or as a ZIP for multi-page files',
+          'Your original PDF is automatically deleted from our servers within minutes',
+        ]}
+        useCases={[
+          { title: 'Social Media Posts', description: 'Turn a PDF flyer, certificate, or infographic into an image you can post directly to social platforms.' },
+          { title: 'Presentations', description: 'Embed PDF pages as images into PowerPoint or Google Slides without formatting headaches.' },
+          { title: 'Website Display', description: 'Show document pages as images on a web page where visitors can view them without downloading a PDF.' },
+          { title: 'Thumbnails and Previews', description: 'Create image previews of document pages for catalogs, listings, or galleries.' },
+          { title: 'Sharing Single Pages', description: 'Send one page of a document as a quick image instead of the whole PDF file.' },
+          { title: 'Image Editing', description: 'Convert a page to JPG so you can open it in an image editor to annotate or mark it up.' },
+        ]}
+        tips={[
+          'Higher resolution produces sharper images but larger files — match the setting to your use',
+          'For multi-page PDFs, download as a ZIP to keep all the page images organized',
+          'JPG is best for pages with photos; for pages with sharp text and lines, PNG can look cleaner',
+          'Check the output resolution if you plan to print the images rather than view them on screen',
+          'Convert only the pages you need if your PDF is long and you want just a few images',
+          'The images carry no watermark and are yours to use freely',
+        ]}
+        faqs={[
+          { question: 'Is PDF to JPG free?', answer: 'Yes, completely free with no signup and no watermark added to the images.' },
+          { question: 'Does each page become a separate image?', answer: 'Yes. Each page of your PDF is converted into its own JPG image. For multi-page files you can download them together as a ZIP.' },
+          { question: 'Can I control the image quality?', answer: 'Where resolution options are available, you can choose higher quality for sharper images or lower for smaller file sizes.' },
+          { question: 'Should I use JPG or PNG?', answer: 'JPG is great for pages containing photos and is smaller in size. If your page has sharp text or line art, our PDF to PNG tool may look crisper.' },
+          { question: 'Are my files private?', answer: 'Yes. Your PDF is uploaded securely, converted, and automatically deleted from our servers within minutes. We never store or read your files.' },
+          { question: 'Is there a page or size limit?', answer: 'You can convert multi-page documents, though very large or high-resolution files take longer to process.' },
+        ]}
+        relatedTools={[
+          { name: 'JPG to PDF', slug: 'jpg-to-pdf', description: 'Convert JPG images into a PDF' },
+          { name: 'PDF to PNG', slug: 'pdf-to-png', description: 'Convert PDF pages to PNG images' },
+          { name: 'PDF to Text', slug: 'pdf-to-text', description: 'Extract plain text from a PDF' },
+          { name: 'Compress Image', slug: 'compress-image', description: 'Reduce image file size' },
+          { name: 'Merge PDF', slug: 'merge-pdf', description: 'Combine multiple PDFs into one file' },
+        ]}
+      />
     </div>
   )
 }

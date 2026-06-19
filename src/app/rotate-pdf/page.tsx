@@ -1,6 +1,7 @@
 'use client'
 import { useState, useRef } from 'react'
 import NavBar from '@/components/NavBar'
+import ToolPageSEO from '@/components/ToolPageSEO'
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://convertdox-backend-production.up.railway.app'
 
@@ -154,6 +155,50 @@ export default function RotatePdfPage() {
           ))}
         </section>
       </div>
+      <ToolPageSEO
+        toolName="Rotate PDF"
+        whatIs="Rotating a PDF means permanently changing the orientation of one or more pages — turning them 90, 180, or 270 degrees so they display and print the right way up. This is essential when a scanned document comes out sideways or upside down, or when a file mixes portrait and landscape pages that need to be aligned. A PDF rotator fixes the orientation and saves it into the file itself, so the correction sticks no matter where the document is opened."
+        whatIsExtended="There's an important difference between simply viewing a PDF rotated and actually rotating it. Most PDF readers let you turn a page on screen, but that rotation is temporary — reopen the file and it's sideways again. ConvertDox rotates the pages at the file level and saves the result, so the orientation is permanent. Your file is processed securely and deleted from our servers within minutes, with no watermark added."
+        howToUse={[
+          'Upload the PDF you want to rotate by clicking the upload area or dragging the file in',
+          'Preview the pages to see which ones need rotating',
+          'Choose to rotate all pages or select specific pages',
+          'Pick the rotation direction — 90° clockwise, 90° counter-clockwise, or 180°',
+          'Apply the rotation and review the corrected orientation',
+          'Download the rotated PDF — the change is saved permanently into the file',
+        ]}
+        useCases={[
+          { title: 'Fixing Sideways Scans', description: 'Scanners often save pages in the wrong orientation. Rotate them so the document reads correctly and prints properly.' },
+          { title: 'Mixed Orientation Files', description: 'Align a document that mixes portrait and landscape pages so everything faces the same way.' },
+          { title: 'Photographed Documents', description: 'Photos of documents taken on a phone are frequently rotated. Correct them before sharing or printing.' },
+          { title: 'Preparing for Print', description: 'Ensure every page is upright before sending a file to a printer to avoid wasted paper and reprints.' },
+          { title: 'Professional Presentation', description: 'Send clients and colleagues correctly oriented documents instead of files they have to turn their heads to read.' },
+          { title: 'Archiving Records', description: 'Fix orientation before filing documents so your archive is clean and consistently readable.' },
+        ]}
+        tips={[
+          'Check every page — a document can have just one or two pages that are rotated incorrectly',
+          'Use 180° for upside-down pages, and 90° for pages lying on their side',
+          'Rotation is lossless — it changes orientation without affecting text or image quality',
+          'Rotate before merging if you\'re combining files, so the final document is consistent',
+          'Preview after rotating to confirm every page faces the right way before downloading',
+          'The rotation is saved into the file, so it stays fixed wherever the PDF is opened',
+        ]}
+        faqs={[
+          { question: 'Is rotating a PDF free?', answer: 'Yes, completely free with no signup and no watermark added to your document.' },
+          { question: 'Will the rotation be saved permanently?', answer: 'Yes. Unlike rotating a page in a PDF viewer (which is temporary), this saves the new orientation into the file itself, so it stays corrected everywhere.' },
+          { question: 'Can I rotate just one page?', answer: 'Yes. You can rotate all pages at once or select specific pages to rotate individually.' },
+          { question: 'Does rotating reduce quality?', answer: 'No. Rotation is lossless — it only changes orientation and does not affect the text or image quality of your document.' },
+          { question: 'Are my files private?', answer: 'Yes. Your PDF is uploaded securely, rotated, and automatically deleted from our servers within minutes. We never store or read your files.' },
+          { question: 'Can I rotate a password-protected PDF?', answer: 'Remove the password first with our Unlock PDF tool, then rotate the unlocked file.' },
+        ]}
+        relatedTools={[
+          { name: 'PDF Editor', slug: 'pdf-editor', description: 'Reorder, rotate, and delete PDF pages' },
+          { name: 'Merge PDF', slug: 'merge-pdf', description: 'Combine multiple PDFs into one file' },
+          { name: 'Split PDF', slug: 'split-pdf', description: 'Split a PDF into separate files or ranges' },
+          { name: 'Compress PDF', slug: 'compress-pdf', description: 'Reduce PDF file size for easier sharing' },
+          { name: 'PDF to Word', slug: 'pdf-to-word', description: 'Convert PDF to an editable Word document' },
+        ]}
+      />
     </div>
   )
 }
