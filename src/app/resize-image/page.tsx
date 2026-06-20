@@ -12,6 +12,12 @@ export default function ResizeImagePage() {
   const [file, setFile] = useState<File | null>(null)
   const [width, setWidth] = useState('')
   const [height, setHeight] = useState('')
+  const [mode, setMode] = useState<'pixels' | 'percent' | 'ratio'>('pixels')
+  const [percent, setPercent] = useState('50')
+  const [ratioW, setRatioW] = useState(1)
+  const [ratioH, setRatioH] = useState(1)
+  const [ratioWidth, setRatioWidth] = useState('1080')
+  const [cropPosition, setCropPosition] = useState<'top' | 'center' | 'bottom'>('center')
   const [processing, setProcessing] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
@@ -25,13 +31,24 @@ export default function ResizeImagePage() {
 
   const resize = async () => {
     if (!file) return
-    if (!width && !height) { setError('Please enter a width or height'); return }
+    if (mode === 'pixels' && !width && !height) { setError('Please enter a width or height'); return }
+    if (mode === 'percent' && (!percent || Number(percent) <= 0)) { setError('Please enter a percentage'); return }
     setProcessing(true); setError(''); setSuccess(false)
     try {
       const formData = new FormData()
       formData.append('file', file)
-      if (width) formData.append('width', width)
-      if (height) formData.append('height', height)
+      formData.append('mode', mode)
+      if (mode === 'pixels') {
+        if (width) formData.append('width', width)
+        if (height) formData.append('height', height)
+      } else if (mode === 'percent') {
+        formData.append('percent', percent)
+      } else if (mode === 'ratio') {
+        formData.append('ratioW', String(ratioW))
+        formData.append('ratioH', String(ratioH))
+        if (ratioWidth) formData.append('width', ratioWidth)
+        formData.append('cropPosition', cropPosition)
+      }
       const res = await fetch(`${BACKEND_URL}/api/image/resize`, { method: 'POST', body: formData })
       if (!res.ok) {
         const data = await res.json().catch(() => ({ error: 'Unknown error' })) as { error?: string }
@@ -102,28 +119,99 @@ export default function ResizeImagePage() {
         )}
 
         <div style={{ marginTop:'24px' }}>
-          <div style={{ fontSize:'14px', fontWeight:700, color:'#0F2A4A', marginBottom:'12px' }}>Common presets (width):</div>
-          <div style={{ display:'flex', gap:'8px', flexWrap:'wrap' as const, marginBottom:'16px' }}>
-            {PRESETS.map(p => (
-              <button key={p.value} onClick={() => { setWidth(String(p.value)); setHeight('') }}
-                style={{ padding:'8px 16px', borderRadius:'8px', border:'1.5px solid', borderColor: width === String(p.value) ? '#E85D04' : '#e2e8f0', background: width === String(p.value) ? '#FFF7ED' : 'white', color: width === String(p.value) ? '#E85D04' : '#0F2A4A', fontSize:'13px', fontWeight:700, cursor:'pointer', fontFamily:'inherit' }}>
-                {p.label}
+          {/* Mode tabs */}
+          <div style={{ display:'flex', gap:'8px', marginBottom:'20px', borderBottom:'2px solid #f1f5f9' }}>
+            {([['pixels','By Pixels'],['percent','By Percentage'],['ratio','By Aspect Ratio']] as const).map(([m, label]) => (
+              <button key={m} onClick={() => setMode(m)}
+                style={{ padding:'10px 18px', border:'none', background:'transparent', borderBottom: mode === m ? '3px solid #E85D04' : '3px solid transparent', marginBottom:'-2px', color: mode === m ? '#E85D04' : '#64748b', fontSize:'14px', fontWeight:700, cursor:'pointer', fontFamily:'inherit' }}>
+                {label}
               </button>
             ))}
           </div>
-          <div style={{ display:'flex', gap:'16px', flexWrap:'wrap' as const }}>
-            <div style={{ flex:1, minWidth:'140px' }}>
-              <label style={{ display:'block', fontSize:'14px', fontWeight:700, color:'#0F2A4A', marginBottom:'8px' }}>Width (px)</label>
-              <input type="number" value={width} onChange={e => setWidth(e.target.value)} placeholder="e.g. 1200"
-                style={{ width:'100%', padding:'12px 14px', borderRadius:'10px', border:'1.5px solid #e2e8f0', fontSize:'14px', fontFamily:'inherit', color:'#0F2A4A', outline:'none', boxSizing:'border-box' as const }} />
+
+          {/* PIXELS MODE */}
+          {mode === 'pixels' && (
+            <div>
+              <div style={{ fontSize:'14px', fontWeight:700, color:'#0F2A4A', marginBottom:'12px' }}>Common presets (width):</div>
+              <div style={{ display:'flex', gap:'8px', flexWrap:'wrap' as const, marginBottom:'16px' }}>
+                {PRESETS.map(p => (
+                  <button key={p.value} onClick={() => { setWidth(String(p.value)); setHeight('') }}
+                    style={{ padding:'8px 16px', borderRadius:'8px', border:'1.5px solid', borderColor: width === String(p.value) ? '#E85D04' : '#e2e8f0', background: width === String(p.value) ? '#FFF7ED' : 'white', color: width === String(p.value) ? '#E85D04' : '#0F2A4A', fontSize:'13px', fontWeight:700, cursor:'pointer', fontFamily:'inherit' }}>
+                    {p.label}
+                  </button>
+                ))}
+              </div>
+              <div style={{ display:'flex', gap:'16px', flexWrap:'wrap' as const }}>
+                <div style={{ flex:1, minWidth:'140px' }}>
+                  <label style={{ display:'block', fontSize:'14px', fontWeight:700, color:'#0F2A4A', marginBottom:'8px' }}>Width (px)</label>
+                  <input type="number" value={width} onChange={e => setWidth(e.target.value)} placeholder="e.g. 1200"
+                    style={{ width:'100%', padding:'12px 14px', borderRadius:'10px', border:'1.5px solid #e2e8f0', fontSize:'14px', fontFamily:'inherit', color:'#0F2A4A', outline:'none', boxSizing:'border-box' as const }} />
+                </div>
+                <div style={{ flex:1, minWidth:'140px' }}>
+                  <label style={{ display:'block', fontSize:'14px', fontWeight:700, color:'#0F2A4A', marginBottom:'8px' }}>Height (px) <span style={{ color:'#94a3b8', fontWeight:400 }}>— optional</span></label>
+                  <input type="number" value={height} onChange={e => setHeight(e.target.value)} placeholder="Leave blank to maintain ratio"
+                    style={{ width:'100%', padding:'12px 14px', borderRadius:'10px', border:'1.5px solid #e2e8f0', fontSize:'14px', fontFamily:'inherit', color:'#0F2A4A', outline:'none', boxSizing:'border-box' as const }} />
+                </div>
+              </div>
+              <div style={{ marginTop:'8px', fontSize:'12px', color:'#94a3b8' }}>If only width is set, height is calculated automatically to preserve the original aspect ratio.</div>
             </div>
-            <div style={{ flex:1, minWidth:'140px' }}>
-              <label style={{ display:'block', fontSize:'14px', fontWeight:700, color:'#0F2A4A', marginBottom:'8px' }}>Height (px) <span style={{ color:'#94a3b8', fontWeight:400 }}>— optional</span></label>
-              <input type="number" value={height} onChange={e => setHeight(e.target.value)} placeholder="Leave blank to maintain ratio"
+          )}
+
+          {/* PERCENT MODE */}
+          {mode === 'percent' && (
+            <div>
+              <div style={{ fontSize:'14px', fontWeight:700, color:'#0F2A4A', marginBottom:'12px' }}>Scale to percentage of original:</div>
+              <div style={{ display:'flex', gap:'8px', flexWrap:'wrap' as const, marginBottom:'16px' }}>
+                {['25','50','75'].map(p => (
+                  <button key={p} onClick={() => setPercent(p)}
+                    style={{ padding:'8px 16px', borderRadius:'8px', border:'1.5px solid', borderColor: percent === p ? '#E85D04' : '#e2e8f0', background: percent === p ? '#FFF7ED' : 'white', color: percent === p ? '#E85D04' : '#0F2A4A', fontSize:'13px', fontWeight:700, cursor:'pointer', fontFamily:'inherit' }}>
+                    {p}%
+                  </button>
+                ))}
+              </div>
+              <label style={{ display:'block', fontSize:'14px', fontWeight:700, color:'#0F2A4A', marginBottom:'8px' }}>Custom percentage (1–100)</label>
+              <input type="number" min="1" max="100" value={percent} onChange={e => setPercent(e.target.value)} placeholder="e.g. 50"
                 style={{ width:'100%', padding:'12px 14px', borderRadius:'10px', border:'1.5px solid #e2e8f0', fontSize:'14px', fontFamily:'inherit', color:'#0F2A4A', outline:'none', boxSizing:'border-box' as const }} />
+              <div style={{ marginTop:'8px', fontSize:'12px', color:'#94a3b8' }}>The image is scaled to this percentage of its original size, keeping its proportions.</div>
             </div>
-          </div>
-          <div style={{ marginTop:'8px', fontSize:'12px', color:'#94a3b8' }}>If only width is set, height is calculated automatically to preserve the original aspect ratio.</div>
+          )}
+
+          {/* RATIO MODE */}
+          {mode === 'ratio' && (
+            <div>
+              <div style={{ fontSize:'14px', fontWeight:700, color:'#0F2A4A', marginBottom:'12px' }}>Aspect ratio:</div>
+              <div style={{ display:'flex', gap:'8px', flexWrap:'wrap' as const, marginBottom:'20px' }}>
+                {([['1:1',1,1],['16:9',16,9],['4:3',4,3],['9:16',9,16],['3:2',3,2]] as const).map(([label, w, h]) => {
+                  const active = ratioW === w && ratioH === h
+                  return (
+                    <button key={label} onClick={() => { setRatioW(w); setRatioH(h) }}
+                      style={{ padding:'8px 16px', borderRadius:'8px', border:'1.5px solid', borderColor: active ? '#E85D04' : '#e2e8f0', background: active ? '#FFF7ED' : 'white', color: active ? '#E85D04' : '#0F2A4A', fontSize:'13px', fontWeight:700, cursor:'pointer', fontFamily:'inherit' }}>
+                      {label}
+                    </button>
+                  )
+                })}
+              </div>
+              <div style={{ display:'flex', gap:'16px', flexWrap:'wrap' as const, marginBottom:'16px' }}>
+                <div style={{ flex:1, minWidth:'140px' }}>
+                  <label style={{ display:'block', fontSize:'14px', fontWeight:700, color:'#0F2A4A', marginBottom:'8px' }}>Target width (px)</label>
+                  <input type="number" value={ratioWidth} onChange={e => setRatioWidth(e.target.value)} placeholder="e.g. 1080"
+                    style={{ width:'100%', padding:'12px 14px', borderRadius:'10px', border:'1.5px solid #e2e8f0', fontSize:'14px', fontFamily:'inherit', color:'#0F2A4A', outline:'none', boxSizing:'border-box' as const }} />
+                </div>
+                <div style={{ flex:1, minWidth:'140px' }}>
+                  <label style={{ display:'block', fontSize:'14px', fontWeight:700, color:'#0F2A4A', marginBottom:'8px' }}>Crop position</label>
+                  <div style={{ display:'flex', gap:'6px' }}>
+                    {(['top','center','bottom'] as const).map(pos => (
+                      <button key={pos} onClick={() => setCropPosition(pos)}
+                        style={{ flex:1, padding:'12px 6px', borderRadius:'10px', border:'1.5px solid', borderColor: cropPosition === pos ? '#E85D04' : '#e2e8f0', background: cropPosition === pos ? '#FFF7ED' : 'white', color: cropPosition === pos ? '#E85D04' : '#0F2A4A', fontSize:'13px', fontWeight:700, cursor:'pointer', fontFamily:'inherit', textTransform:'capitalize' as const }}>
+                        {pos}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <div style={{ fontSize:'12px', color:'#94a3b8' }}>The image is cropped to the chosen ratio. Crop position controls which part is kept when the image must be trimmed.</div>
+            </div>
+          )}
         </div>
 
         {error && <div style={{ marginTop:'16px', background:'#FEE2E2', border:'1.5px solid #FCA5A5', borderRadius:'10px', padding:'12px 16px', color:'#991B1B', fontSize:'14px', fontWeight:600 }}>⚠️ {error}</div>}
