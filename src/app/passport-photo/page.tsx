@@ -5,20 +5,22 @@ import NavBar from '@/components/NavBar'
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://convertdox-backend-production.up.railway.app'
 
 const COUNTRIES = [
-  { key: 'us',        name: 'United States', size: '2×2 in (600×600px)',   bg: 'Plain white or off-white', note: 'Head 25–35mm (chin to crown). Off-white accepted.' },
-  { key: 'uk',        name: 'United Kingdom', size: '35×45mm (413×531px)',  bg: 'Light grey (NOT pure white)', note: 'UK prefers a light grey background — pure white is a common rejection reason.' },
-  { key: 'schengen',  name: 'Schengen / EU',  size: '35×45mm (413×531px)',  bg: 'Light grey or cream',        note: 'Used for Schengen visas and most EU passports. Germany requires light grey.' },
-  { key: 'canada',    name: 'Canada',         size: '50×70mm (591×827px)',  bg: 'Plain white',                note: 'Unique larger size. Face 31–36mm chin to crown. Printed photos need a photographer stamp.' },
-  { key: 'india',     name: 'India',          size: '51×51mm (600×600px)',  bg: 'Pure white only',            note: 'Off-white can be rejected. Online uploads often capped at 300KB — compress after.' },
-  { key: 'australia', name: 'Australia',      size: '35×45mm (413×531px)',  bg: 'Plain white',                note: 'Head 32–36mm chin to crown. No glasses (strict since 2024).' },
-  { key: 'china',     name: 'China',          size: '33×48mm (390×567px)',  bg: 'Plain white',                note: 'Narrower format. Visa uploads often need a specific small file size.' },
-  { key: 'japan',     name: 'Japan',          size: '35×45mm (413×531px)',  bg: 'Plain white or light',       note: 'Head should fill roughly 70–80% of the photo height.' },
+  { key: 'us',        name: 'United States', size: '2×2 in (600×600px)',   bg: 'Plain white or off-white', bgColor: '#FFFFFF', note: 'Head 25–35mm (chin to crown). Off-white accepted.' },
+  { key: 'uk',        name: 'United Kingdom', size: '35×45mm (413×531px)',  bg: 'Light grey (NOT pure white)', bgColor: '#D8D8D8', note: 'UK prefers a light grey background — pure white is a common rejection reason.' },
+  { key: 'schengen',  name: 'Schengen / EU',  size: '35×45mm (413×531px)',  bg: 'Light grey or cream',        bgColor: '#D8D8D8', note: 'Used for Schengen visas and most EU passports. Germany requires light grey.' },
+  { key: 'canada',    name: 'Canada',         size: '50×70mm (591×827px)',  bg: 'Plain white',                bgColor: '#FFFFFF', note: 'Unique larger size. Face 31–36mm chin to crown. Printed photos need a photographer stamp.' },
+  { key: 'india',     name: 'India',          size: '51×51mm (600×600px)',  bg: 'Pure white only',            bgColor: '#FFFFFF', note: 'Off-white can be rejected. Online uploads often capped at 300KB — compress after.' },
+  { key: 'australia', name: 'Australia',      size: '35×45mm (413×531px)',  bg: 'Plain white',                bgColor: '#FFFFFF', note: 'Head 32–36mm chin to crown. No glasses (strict since 2024).' },
+  { key: 'china',     name: 'China',          size: '33×48mm (390×567px)',  bg: 'Plain white',                bgColor: '#FFFFFF', note: 'Narrower format. Visa uploads often need a specific small file size.' },
+  { key: 'japan',     name: 'Japan',          size: '35×45mm (413×531px)',  bg: 'Plain white or light',       bgColor: '#FFFFFF', note: 'Head should fill roughly 70–80% of the photo height.' },
 ]
 
 export default function PassportPhotoPage() {
   const [file, setFile] = useState<File | null>(null)
   const [country, setCountry] = useState('us')
   const [cropPosition, setCropPosition] = useState<'top' | 'center' | 'bottom'>('top')
+  const [replaceBg, setReplaceBg] = useState(false)
+  const [statusMsg, setStatusMsg] = useState('')
   const [processing, setProcessing] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
@@ -33,10 +35,41 @@ export default function PassportPhotoPage() {
 
   const convert = async () => {
     if (!file) return
-    setProcessing(true); setError(''); setSuccess(false)
+    setProcessing(true); setError(''); setSuccess(false); setStatusMsg('')
     try {
+      // Decide what to send: raw file, or a background-replaced composite
+      let uploadBlob: Blob = file
+
+      if (replaceBg) {
+        // 1) Remove background in the browser (transparent PNG)
+        setStatusMsg('Loading model (first run may take a moment)…')
+        const { removeBackground } = await import('@imgly/background-removal')
+        setStatusMsg('Removing background…')
+        const cutout = await removeBackground(file)
+
+        // 2) Composite the cutout onto the country's correct background color
+        setStatusMsg('Applying passport background…')
+        uploadBlob = await new Promise<Blob>((resolve, reject) => {
+          const img = new Image()
+          img.onload = () => {
+            const canvas = document.createElement('canvas')
+            canvas.width = img.naturalWidth
+            canvas.height = img.naturalHeight
+            const ctx = canvas.getContext('2d')
+            if (!ctx) { reject(new Error('Canvas not supported')); return }
+            ctx.fillStyle = selectedCountry.bgColor || '#FFFFFF'
+            ctx.fillRect(0, 0, canvas.width, canvas.height)
+            ctx.drawImage(img, 0, 0)
+            canvas.toBlob(b => b ? resolve(b) : reject(new Error('Failed to create image')), 'image/jpeg', 0.95)
+          }
+          img.onerror = () => reject(new Error('Failed to load cutout'))
+          img.src = URL.createObjectURL(cutout)
+        })
+      }
+
+      setStatusMsg('Sizing to passport dimensions…')
       const formData = new FormData()
-      formData.append('file', file)
+      formData.append('file', uploadBlob, 'photo.jpg')
       formData.append('country', country)
       formData.append('cropPosition', cropPosition)
       const res = await fetch(`${BACKEND_URL}/api/specialty/passport-photo`, { method: 'POST', body: formData })
@@ -55,6 +88,7 @@ export default function PassportPhotoPage() {
       setError(err instanceof Error ? err.message : 'Failed to create passport photo. Please try again.')
     } finally {
       setProcessing(false)
+      setStatusMsg('')
     }
   }
 
@@ -117,6 +151,19 @@ export default function PassportPhotoPage() {
               ))}
             </div>
             <div style={{ fontSize:'12px', color:'#94a3b8', marginTop:'8px' }}>Tip: &quot;Top&quot; usually works best for passport photos since the head sits near the top of the frame.</div>
+
+            {/* Background replacement toggle */}
+            <div style={{ marginTop:'16px', paddingTop:'16px', borderTop:'1.5px solid #f1f5f9' }}>
+              <label style={{ display:'flex', alignItems:'flex-start', gap:'10px', cursor:'pointer' }}>
+                <input type="checkbox" checked={replaceBg} onChange={e => setReplaceBg(e.target.checked)} style={{ marginTop:'3px', width:'18px', height:'18px', accentColor:'#E85D04', cursor:'pointer' }} />
+                <span>
+                  <span style={{ fontSize:'14px', fontWeight:700, color:'#0F2A4A' }}>✨ Replace background with {selectedCountry.name} passport color</span>
+                  <span style={{ display:'block', fontSize:'12px', color:'#94a3b8', marginTop:'4px', lineHeight:'1.5' }}>
+                    Removes your photo&apos;s background and replaces it with the required color ({selectedCountry.bg}). Runs an AI model in your browser — the first run downloads it (a few seconds). Works best with a clear subject. Always check the result before submitting.
+                  </span>
+                </span>
+              </label>
+            </div>
           </div>
         </div>
 
@@ -147,6 +194,7 @@ export default function PassportPhotoPage() {
         )}
 
         {error && <div style={{ marginTop:'16px', background:'#FEE2E2', border:'1.5px solid #FCA5A5', borderRadius:'10px', padding:'12px 16px', color:'#991B1B', fontSize:'14px', fontWeight:600 }}>⚠️ {error}</div>}
+        {processing && statusMsg && <div style={{ marginTop:'16px', background:'#EFF6FF', border:'1.5px solid #BFDBFE', borderRadius:'10px', padding:'12px 16px', color:'#1E40AF', fontSize:'14px', fontWeight:600 }}>⏳ {statusMsg}</div>}
         {success && <div style={{ marginTop:'16px', background:'#F0FDF4', border:'1.5px solid #BBF7D0', borderRadius:'10px', padding:'12px 16px', color:'#166534', fontSize:'14px', fontWeight:600 }}>✅ Done! Your passport-photo.jpg has downloaded (600×600px, 300 DPI).</div>}
 
         <div style={{ marginTop:'24px', textAlign:'center' as const }}>
