@@ -157,6 +157,7 @@ const MEGA_MENU: MegaMenu = {
     groups: [
       { title: 'Financial', tools: [
         { name: 'Investment Calculator', href: '/investment-calculator' },
+        { name: 'Zakat Calculator', href: '/zakat-calculator' },
         { name: 'Tax Calculator', href: '/tax-calculator' },
         { name: 'Salary Calculator', href: '/salary-calculator' },
         { name: 'Tip Calculator', href: '/tip-calculator' },
