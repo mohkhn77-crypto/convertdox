@@ -105,6 +105,7 @@ const MEGA_MENU: MegaMenu = {
         { name: 'Background Remover', href: '/bg-remove' },
         { name: 'Passport Photo', href: '/passport-photo' },
         { name: 'Image to Text (OCR)', href: '/image-to-text' },
+        { name: 'Video to Text', href: '/video-to-text' },
         { name: 'Favicon Generator', href: '/favicon-generator' },
         { name: 'Social Media Crops', href: '/social-media-crops' },
         { name: 'YouTube Thumbnail', href: '/youtube-thumbnail' },
