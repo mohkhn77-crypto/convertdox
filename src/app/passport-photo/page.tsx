@@ -5,14 +5,15 @@ import NavBar from '@/components/NavBar'
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://convertdox-backend-production.up.railway.app'
 
 const COUNTRIES = [
-  { key: 'us',        name: 'United States', size: '2×2 in (600×600px)',   bg: 'Plain white or off-white', bgColor: '#FFFFFF', note: 'Head 25–35mm (chin to crown). Off-white accepted.' },
-  { key: 'uk',        name: 'United Kingdom', size: '35×45mm (413×531px)',  bg: 'Light grey (NOT pure white)', bgColor: '#D8D8D8', note: 'UK prefers a light grey background — pure white is a common rejection reason.' },
-  { key: 'schengen',  name: 'Schengen / EU',  size: '35×45mm (413×531px)',  bg: 'Light grey or cream',        bgColor: '#D8D8D8', note: 'Used for Schengen visas and most EU passports. Germany requires light grey.' },
-  { key: 'canada',    name: 'Canada',         size: '50×70mm (591×827px)',  bg: 'Plain white',                bgColor: '#FFFFFF', note: 'Unique larger size. Face 31–36mm chin to crown. Printed photos need a photographer stamp.' },
-  { key: 'india',     name: 'India',          size: '51×51mm (600×600px)',  bg: 'Pure white only',            bgColor: '#FFFFFF', note: 'Off-white can be rejected. Online uploads often capped at 300KB — compress after.' },
-  { key: 'australia', name: 'Australia',      size: '35×45mm (413×531px)',  bg: 'Plain white',                bgColor: '#FFFFFF', note: 'Head 32–36mm chin to crown. No glasses (strict since 2024).' },
-  { key: 'china',     name: 'China',          size: '33×48mm (390×567px)',  bg: 'Plain white',                bgColor: '#FFFFFF', note: 'Narrower format. Visa uploads often need a specific small file size.' },
-  { key: 'japan',     name: 'Japan',          size: '35×45mm (413×531px)',  bg: 'Plain white or light',       bgColor: '#FFFFFF', note: 'Head should fill roughly 70–80% of the photo height.' },
+  { key: 'us',        name: 'United States', flag: '🇺🇸', size: '2×2 in (600×600px)',   bg: 'Plain white or off-white', bgColor: '#FFFFFF', note: 'Head 25–35mm (chin to crown). Off-white accepted.' },
+  { key: 'uk',        name: 'United Kingdom', flag: '🇬🇧', size: '35×45mm (413×531px)',  bg: 'Light grey (NOT pure white)', bgColor: '#D8D8D8', note: 'UK prefers a light grey background — pure white is a common rejection reason.' },
+  { key: 'schengen',  name: 'Schengen / EU',  flag: '🇪🇺', size: '35×45mm (413×531px)',  bg: 'Light grey or cream',        bgColor: '#D8D8D8', note: 'Used for Schengen visas and most EU passports. Germany requires light grey.' },
+  { key: 'canada',    name: 'Canada',         flag: '🇨🇦', size: '50×70mm (591×827px)',  bg: 'Plain white',                bgColor: '#FFFFFF', note: 'Unique larger size. Face 31–36mm chin to crown. Printed photos need a photographer stamp.' },
+  { key: 'india',     name: 'India',          flag: '🇮🇳', size: '51×51mm (600×600px)',  bg: 'Pure white only',            bgColor: '#FFFFFF', note: 'Off-white can be rejected. Online uploads often capped at 300KB — compress after.' },
+  { key: 'pakistan',  name: 'Pakistan',       flag: '🇵🇰', size: '35×45mm (413×531px)',  bg: 'Plain white',                bgColor: '#FFFFFF', note: 'White background, full face, neutral expression. Used for NADRA/passport and visa photos.' },
+  { key: 'australia', name: 'Australia',      flag: '🇦🇺', size: '35×45mm (413×531px)',  bg: 'Plain white',                bgColor: '#FFFFFF', note: 'Head 32–36mm chin to crown. No glasses (strict since 2024).' },
+  { key: 'china',     name: 'China',          flag: '🇨🇳', size: '33×48mm (390×567px)',  bg: 'Plain white',                bgColor: '#FFFFFF', note: 'Narrower format. Visa uploads often need a specific small file size.' },
+  { key: 'japan',     name: 'Japan',          flag: '🇯🇵', size: '35×45mm (413×531px)',  bg: 'Plain white or light',       bgColor: '#FFFFFF', note: 'Head should fill roughly 70–80% of the photo height.' },
 ]
 
 export default function PassportPhotoPage() {
@@ -128,12 +129,13 @@ export default function PassportPhotoPage() {
             <label style={{ fontSize:'14px', fontWeight:700, color:'#0F2A4A', display:'block', marginBottom:'10px' }}>🌍 Select country</label>
             <select value={country} onChange={e => setCountry(e.target.value)}
               style={{ width:'100%', padding:'12px 14px', borderRadius:'10px', border:'1.5px solid #e2e8f0', fontSize:'14px', fontFamily:'inherit', color:'#0F2A4A', outline:'none', background:'white', boxSizing:'border-box' as const, marginBottom:'14px' }}>
-              {COUNTRIES.map(c => <option key={c.key} value={c.key}>{c.name} — {c.size}</option>)}
+              {COUNTRIES.map(c => <option key={c.key} value={c.key}>{c.flag} {c.name} — {c.size}</option>)}
             </select>
 
             {/* Per-country info */}
             <div style={{ background:'#EFF6FF', border:'1.5px solid #BFDBFE', borderRadius:'10px', padding:'12px 14px', marginBottom:'14px' }}>
               <div style={{ fontSize:'13px', color:'#1E3A8A', lineHeight:'1.7' }}>
+                <div style={{ fontSize:'15px', fontWeight:700, marginBottom:'4px' }}>{selectedCountry.flag} {selectedCountry.name}</div>
                 <div><strong>Size:</strong> {selectedCountry.size} · 300 DPI · JPEG</div>
                 <div><strong>Background:</strong> {selectedCountry.bg}</div>
                 <div style={{ marginTop:'4px', color:'#1E40AF' }}>{selectedCountry.note}</div>
