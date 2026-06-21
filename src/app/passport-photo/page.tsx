@@ -14,6 +14,21 @@ const COUNTRIES = [
   { key: 'australia', name: 'Australia',      flag: '🇦🇺', size: '35×45mm (413×531px)',  bg: 'Plain white',                bgColor: '#FFFFFF', note: 'Head 32–36mm chin to crown. No glasses (strict since 2024).' },
   { key: 'china',     name: 'China',          flag: '🇨🇳', size: '33×48mm (390×567px)',  bg: 'Plain white',                bgColor: '#FFFFFF', note: 'Narrower format. Visa uploads often need a specific small file size.' },
   { key: 'japan',     name: 'Japan',          flag: '🇯🇵', size: '35×45mm (413×531px)',  bg: 'Plain white or light',       bgColor: '#FFFFFF', note: 'Head should fill roughly 70–80% of the photo height.' },
+  { key: 'germany',   name: 'Germany',        flag: '🇩🇪', size: '35×45mm (413×531px)',  bg: 'Light grey (NOT white)',     bgColor: '#D8D8D8', note: 'Germany requires a plain light-grey background. Pure white is commonly rejected.' },
+  { key: 'france',    name: 'France',         flag: '🇫🇷', size: '35×45mm (413×531px)',  bg: 'Light grey or light blue',   bgColor: '#D8D8D8', note: 'France bans pure white backgrounds — use light grey or light blue.' },
+  { key: 'italy',     name: 'Italy',          flag: '🇮🇹', size: '35×45mm (413×531px)',  bg: 'White or light grey',        bgColor: '#FFFFFF', note: 'Standard 35×45mm. Check whether you need a passport, CIE, or consular photo.' },
+  { key: 'spain',     name: 'Spain',          flag: '🇪🇸', size: '35×45mm (413×531px)',  bg: 'White or light grey',        bgColor: '#FFFFFF', note: 'Standard 35×45mm format for Spanish passport and ID.' },
+  { key: 'ireland',   name: 'Ireland',        flag: '🇮🇪', size: '35×45mm (413×531px)',  bg: 'White, grey or cream',       bgColor: '#FFFFFF', note: 'Ireland accepts white, light grey, or cream backgrounds.' },
+  { key: 'brazil',    name: 'Brazil',         flag: '🇧🇷', size: '50×70mm (591×827px)',  bg: 'Plain white',                bgColor: '#FFFFFF', note: 'Brazil uses the larger 50×70mm format, like Canada.' },
+  { key: 'mexico',    name: 'Mexico',         flag: '🇲🇽', size: '35×45mm (413×531px)',  bg: 'Plain white',                bgColor: '#FFFFFF', note: 'Passport applications often require three printed copies.' },
+  { key: 'bangladesh',name: 'Bangladesh',     flag: '🇧🇩', size: '35×45mm (413×531px)',  bg: 'Plain white',                bgColor: '#FFFFFF', note: 'Standard 35×45mm with a plain white background.' },
+  { key: 'nigeria',   name: 'Nigeria',        flag: '🇳🇬', size: '35×45mm (413×531px)',  bg: 'Plain white',                bgColor: '#FFFFFF', note: 'Standard 35×45mm. Used for passport and many visa applications.' },
+  { key: 'philippines',name: 'Philippines',   flag: '🇵🇭', size: '2×2 in (600×600px)',   bg: 'Plain white',                bgColor: '#FFFFFF', note: 'Philippines uses the 2×2 inch square format like the US.' },
+  { key: 'uae',       name: 'United Arab Emirates', flag: '🇦🇪', size: '43×55mm (508×650px)', bg: 'Plain white',           bgColor: '#FFFFFF', note: 'UAE visa/residence photos. Emirates ID may use a different size — check your document.' },
+  { key: 'saudi',     name: 'Saudi Arabia',   flag: '🇸🇦', size: '40×60mm (472×709px)',  bg: 'Plain white',                bgColor: '#FFFFFF', note: 'White background. Online portals often enforce a small file-size limit (~200KB).' },
+  { key: 'turkey',    name: 'Turkey',         flag: '🇹🇷', size: '50×60mm (591×709px)',  bg: 'Plain white',                bgColor: '#FFFFFF', note: 'Taller 50×60mm format. Both ears should be visible.' },
+  { key: 'singapore', name: 'Singapore',      flag: '🇸🇬', size: '35×45mm (413×531px)',  bg: 'Plain white',                bgColor: '#FFFFFF', note: 'White background. Online uploads often capped near 60KB — compress after sizing.' },
+  { key: 'malaysia',  name: 'Malaysia',       flag: '🇲🇾', size: '35×45mm (413×531px)',  bg: 'Plain white',                bgColor: '#FFFFFF', note: 'Standard 35×45mm with a white background.' },
 ]
 
 export default function PassportPhotoPage() {
