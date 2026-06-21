@@ -35,6 +35,9 @@ export default function ZakatCalculatorPage() {
   const [currency, setCurrency] = useState('USD')
   const selectedCurrency = CURRENCIES.find(c => c.code === currency) || CURRENCIES[0]
   const sym = selectedCurrency.symbol
+  const [goldUnit, setGoldUnit] = useState<'g' | 'tola'>('g')
+  const [silverUnit, setSilverUnit] = useState<'g' | 'tola'>('g')
+  const [tolaValue, setTolaValue] = useState<11.6638 | 12.5>(11.6638)
 
   // Fetch live prices in the selected currency. Defensive: fall back to manual.
   // gold-api.com gives USD per troy ounce (no key). For non-USD, convert via
@@ -80,8 +83,10 @@ export default function ZakatCalculatorPage() {
 
   const gp = num(goldPrice)
   const sp = num(silverPrice)
-  const goldValue = num(goldGrams) * gp
-  const silverValue = num(silverGrams) * sp
+  const goldGramsActual = goldUnit === 'tola' ? num(goldGrams) * tolaValue : num(goldGrams)
+  const silverGramsActual = silverUnit === 'tola' ? num(silverGrams) * tolaValue : num(silverGrams)
+  const goldValue = goldGramsActual * gp
+  const silverValue = silverGramsActual * sp
   const cashValue = num(cash)
   const totalWealth = cashValue + goldValue + silverValue
 
@@ -132,15 +137,54 @@ export default function ZakatCalculatorPage() {
           </div>
           <div style={{ display:'flex', gap:'12px', flexWrap:'wrap' as const }}>
             <div style={{ flex:1, minWidth:'140px' }}>
-              <label style={labelStyle}>🥇 Gold (grams)</label>
+              <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'6px' }}>
+                <label style={{ ...labelStyle, marginBottom:0 }}>🥇 Gold</label>
+                <div style={{ display:'flex', gap:'4px' }}>
+                  {(['g', 'tola'] as const).map(u => (
+                    <button key={u} onClick={() => setGoldUnit(u)}
+                      style={{ padding:'3px 8px', borderRadius:'6px', border:'1.5px solid', borderColor: goldUnit === u ? '#E85D04' : '#e2e8f0', background: goldUnit === u ? '#FFF7ED' : 'white', color: goldUnit === u ? '#E85D04' : '#64748b', fontSize:'11px', fontWeight:700, cursor:'pointer', fontFamily:'inherit' }}>
+                      {u}
+                    </button>
+                  ))}
+                </div>
+              </div>
               <input type="number" min="0" value={goldGrams} onChange={e => setGoldGrams(e.target.value)} placeholder="0" style={inputStyle} />
+              {goldUnit === 'tola' && num(goldGrams) > 0 && (
+                <div style={{ fontSize:'11px', color:'#94a3b8', marginTop:'4px' }}>≈ {(num(goldGrams) * tolaValue).toFixed(2)} grams</div>
+              )}
             </div>
             <div style={{ flex:1, minWidth:'140px' }}>
-              <label style={labelStyle}>🥈 Silver (grams)</label>
+              <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'6px' }}>
+                <label style={{ ...labelStyle, marginBottom:0 }}>🥈 Silver</label>
+                <div style={{ display:'flex', gap:'4px' }}>
+                  {(['g', 'tola'] as const).map(u => (
+                    <button key={u} onClick={() => setSilverUnit(u)}
+                      style={{ padding:'3px 8px', borderRadius:'6px', border:'1.5px solid', borderColor: silverUnit === u ? '#E85D04' : '#e2e8f0', background: silverUnit === u ? '#FFF7ED' : 'white', color: silverUnit === u ? '#E85D04' : '#64748b', fontSize:'11px', fontWeight:700, cursor:'pointer', fontFamily:'inherit' }}>
+                      {u}
+                    </button>
+                  ))}
+                </div>
+              </div>
               <input type="number" min="0" value={silverGrams} onChange={e => setSilverGrams(e.target.value)} placeholder="0" style={inputStyle} />
+              {silverUnit === 'tola' && num(silverGrams) > 0 && (
+                <div style={{ fontSize:'11px', color:'#94a3b8', marginTop:'4px' }}>≈ {(num(silverGrams) * tolaValue).toFixed(2)} grams</div>
+              )}
             </div>
           </div>
         </div>
+
+        {/* Tola definition */}
+        {(goldUnit === 'tola' || silverUnit === 'tola') && (
+          <div style={{ background:'#EFF6FF', border:'1.5px solid #BFDBFE', borderRadius:'10px', padding:'12px 14px', marginBottom:'16px', fontSize:'13px', color:'#1e40af' }}>
+            <strong>Tola value:</strong>{' '}
+            {([[ 11.6638, 'Standard (11.6638 g) — AAOIFI / international standard' ], [ 12.5, 'Pakistan bazaar (12.5 g) — traditional subcontinent measure' ]] as [number, string][]).map(([v, lbl]) => (
+              <label key={v} style={{ display:'block', marginTop:'6px', cursor:'pointer' }}>
+                <input type="radio" name="tolaValue" value={v} checked={tolaValue === v} onChange={() => setTolaValue(v as 11.6638 | 12.5)} style={{ marginRight:'6px' }} />
+                {lbl}
+              </label>
+            ))}
+          </div>
+        )}
 
         {/* Prices (editable) */}
         <div style={{ background:'white', border:'1.5px solid #e2e8f0', borderRadius:'14px', padding:'20px', marginBottom:'16px' }}>
@@ -170,7 +214,7 @@ export default function ZakatCalculatorPage() {
             ))}
           </div>
           <div style={{ fontSize:'12px', color:'#94a3b8', marginTop:'10px', lineHeight:'1.6' }}>
-            Gold nisab ≈ {gp > 0 ? `${sym}${money(goldNisabValue)}` : '—'} · Silver nisab ≈ {sp > 0 ? `${sym}${money(silverNisabValue)}` : '—'}. Many scholars recommend the silver nisab (lower threshold) so more wealth benefits recipients; others use gold. Choose per your guidance.
+            Gold nisab ≈ {gp > 0 ? `${sym}${money(goldNisabValue)}` : '—'} ({(GOLD_NISAB_G / tolaValue).toFixed(2)} tola) · Silver nisab ≈ {sp > 0 ? `${sym}${money(silverNisabValue)}` : '—'} ({(SILVER_NISAB_G / tolaValue).toFixed(2)} tola). Many scholars recommend the silver nisab (lower threshold) so more wealth benefits recipients; others use gold. Choose per your guidance.
           </div>
         </div>
 
@@ -213,6 +257,7 @@ export default function ZakatCalculatorPage() {
             { q:'How much Zakat do I pay?', a:'Zakat is 2.5% of your qualifying wealth, provided that wealth meets or exceeds the nisab and has been held for one lunar year (hawl).' },
             { q:'Does this include jewellery I wear?', a:'Scholars differ on whether gold and silver jewellery in regular personal use is subject to Zakat. This calculator includes any gold and silver grams you enter — consult a scholar on how to treat jewellery in your case.' },
             { q:'Can I calculate Zakat in my own currency?', a:'Yes. Choose your currency from the dropdown (USD, PKR, INR, GBP, EUR, SAR, AED and more). Live gold and silver prices are converted to your currency automatically. If live conversion is unavailable, you can enter today\'s local gold and silver price per gram manually — the calculation works the same way.' },
+            { q:'What is a tola and how does it relate to grams?', a:'A tola is a traditional South Asian unit of weight used for gold and silver. The international (AAOIFI) standard is 11.6638 grams per tola — this is what most Islamic finance bodies use for nisab calculations. The traditional Pakistan bazaar tola is 12.5 grams. You can switch between both on this calculator; the tola definition selector appears automatically when you select tola as your unit.' },
             { q:'Does this cover all my assets?', a:'This tool covers cash, gold, and silver. It does not include business inventory, shares, rental income, debts owed to you, or liabilities you owe, all of which can affect your total Zakat. Consult a scholar for a complete assessment.' },
           ].map(faq => (
             <details key={faq.q} style={{ background:'#f8fafc', border:'1.5px solid #e2e8f0', borderRadius:'10px', padding:'14px 18px', marginBottom:'8px' }}>
