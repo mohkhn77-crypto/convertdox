@@ -180,3 +180,27 @@ Last updated: June 2026
 - LibreOffice PDF conversions need `--infilter="writer_pdf_import"` flag
 - For Vercel + Cloudflare: keep ALL records as "DNS only" (gray cloud)
 - Custom favicon at /public/favicon.ico (delete src/app/favicon.ico if conflicts)
+
+---
+
+## Background Remover (bg-remove) — future improvement
+
+Current state: working, using @imgly/background-removal (client-side, runs in the
+browser, free, private — nothing uploaded). Output is a transparent PNG.
+
+Limitation: browser-based model quality is good for clear subject/simple background,
+but weaker on fine details (hair wisps, busy backgrounds) vs. paid services.
+
+Future options to explore when revenue allows or quality becomes a priority:
+- AI/API-based removal (e.g. remove.bg, Photoroom, Cloudinary) — higher quality but
+  costs per image; only viable once the tool generates revenue.
+- Self-hosted rembg (Python service) — free per image but needs separate service +
+  more RAM than the current Node/Railway setup.
+- Newer/larger client-side models if @imgly or alternatives improve.
+
+Related: this tool also feeds the Passport Photo Editor's planned Phase 3
+(replace busy background with passport-compliant white/grey background).
+
+Build notes (so we don't re-debug): the library is browser-only. It MUST be
+dynamically imported inside the handler, AND listed in serverExternalPackages in
+next.config.ts (alongside pdfjs-dist), or Vercel's build fails with "Module not found".
