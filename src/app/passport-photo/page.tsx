@@ -1,40 +1,39 @@
 'use client'
 import { useState, useRef } from 'react'
 import NavBar from '@/components/NavBar'
+import PassportEditor from '@/components/PassportEditor'
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://convertdox-backend-production.up.railway.app'
 
 const COUNTRIES = [
-  { key: 'us',        name: 'United States', flag: '🇺🇸', size: '2×2 in (600×600px)',   bg: 'Plain white or off-white', bgColor: '#FFFFFF', note: 'Head 25–35mm (chin to crown). Off-white accepted.' },
-  { key: 'uk',        name: 'United Kingdom', flag: '🇬🇧', size: '35×45mm (413×531px)',  bg: 'Light grey (NOT pure white)', bgColor: '#D8D8D8', note: 'UK prefers a light grey background — pure white is a common rejection reason.' },
-  { key: 'schengen',  name: 'Schengen / EU',  flag: '🇪🇺', size: '35×45mm (413×531px)',  bg: 'Light grey or cream',        bgColor: '#D8D8D8', note: 'Used for Schengen visas and most EU passports. Germany requires light grey.' },
-  { key: 'canada',    name: 'Canada',         flag: '🇨🇦', size: '50×70mm (591×827px)',  bg: 'Plain white',                bgColor: '#FFFFFF', note: 'Unique larger size. Face 31–36mm chin to crown. Printed photos need a photographer stamp.' },
-  { key: 'india',     name: 'India',          flag: '🇮🇳', size: '51×51mm (600×600px)',  bg: 'Pure white only',            bgColor: '#FFFFFF', note: 'Off-white can be rejected. Online uploads often capped at 300KB — compress after.' },
-  { key: 'pakistan',  name: 'Pakistan',       flag: '🇵🇰', size: '35×45mm (413×531px)',  bg: 'Plain white',                bgColor: '#FFFFFF', note: 'White background, full face, neutral expression. Used for NADRA/passport and visa photos.' },
-  { key: 'australia', name: 'Australia',      flag: '🇦🇺', size: '35×45mm (413×531px)',  bg: 'Plain white',                bgColor: '#FFFFFF', note: 'Head 32–36mm chin to crown. No glasses (strict since 2024).' },
-  { key: 'china',     name: 'China',          flag: '🇨🇳', size: '33×48mm (390×567px)',  bg: 'Plain white',                bgColor: '#FFFFFF', note: 'Narrower format. Visa uploads often need a specific small file size.' },
-  { key: 'japan',     name: 'Japan',          flag: '🇯🇵', size: '35×45mm (413×531px)',  bg: 'Plain white or light',       bgColor: '#FFFFFF', note: 'Head should fill roughly 70–80% of the photo height.' },
-  { key: 'germany',   name: 'Germany',        flag: '🇩🇪', size: '35×45mm (413×531px)',  bg: 'Light grey (NOT white)',     bgColor: '#D8D8D8', note: 'Germany requires a plain light-grey background. Pure white is commonly rejected.' },
-  { key: 'france',    name: 'France',         flag: '🇫🇷', size: '35×45mm (413×531px)',  bg: 'Light grey or light blue',   bgColor: '#D8D8D8', note: 'France bans pure white backgrounds — use light grey or light blue.' },
-  { key: 'italy',     name: 'Italy',          flag: '🇮🇹', size: '35×45mm (413×531px)',  bg: 'White or light grey',        bgColor: '#FFFFFF', note: 'Standard 35×45mm. Check whether you need a passport, CIE, or consular photo.' },
-  { key: 'spain',     name: 'Spain',          flag: '🇪🇸', size: '35×45mm (413×531px)',  bg: 'White or light grey',        bgColor: '#FFFFFF', note: 'Standard 35×45mm format for Spanish passport and ID.' },
-  { key: 'ireland',   name: 'Ireland',        flag: '🇮🇪', size: '35×45mm (413×531px)',  bg: 'White, grey or cream',       bgColor: '#FFFFFF', note: 'Ireland accepts white, light grey, or cream backgrounds.' },
-  { key: 'brazil',    name: 'Brazil',         flag: '🇧🇷', size: '50×70mm (591×827px)',  bg: 'Plain white',                bgColor: '#FFFFFF', note: 'Brazil uses the larger 50×70mm format, like Canada.' },
-  { key: 'mexico',    name: 'Mexico',         flag: '🇲🇽', size: '35×45mm (413×531px)',  bg: 'Plain white',                bgColor: '#FFFFFF', note: 'Passport applications often require three printed copies.' },
-  { key: 'bangladesh',name: 'Bangladesh',     flag: '🇧🇩', size: '35×45mm (413×531px)',  bg: 'Plain white',                bgColor: '#FFFFFF', note: 'Standard 35×45mm with a plain white background.' },
-  { key: 'nigeria',   name: 'Nigeria',        flag: '🇳🇬', size: '35×45mm (413×531px)',  bg: 'Plain white',                bgColor: '#FFFFFF', note: 'Standard 35×45mm. Used for passport and many visa applications.' },
-  { key: 'philippines',name: 'Philippines',   flag: '🇵🇭', size: '2×2 in (600×600px)',   bg: 'Plain white',                bgColor: '#FFFFFF', note: 'Philippines uses the 2×2 inch square format like the US.' },
-  { key: 'uae',       name: 'United Arab Emirates', flag: '🇦🇪', size: '43×55mm (508×650px)', bg: 'Plain white',           bgColor: '#FFFFFF', note: 'UAE visa/residence photos. Emirates ID may use a different size — check your document.' },
-  { key: 'saudi',     name: 'Saudi Arabia',   flag: '🇸🇦', size: '40×60mm (472×709px)',  bg: 'Plain white',                bgColor: '#FFFFFF', note: 'White background. Online portals often enforce a small file-size limit (~200KB).' },
-  { key: 'turkey',    name: 'Turkey',         flag: '🇹🇷', size: '50×60mm (591×709px)',  bg: 'Plain white',                bgColor: '#FFFFFF', note: 'Taller 50×60mm format. Both ears should be visible.' },
-  { key: 'singapore', name: 'Singapore',      flag: '🇸🇬', size: '35×45mm (413×531px)',  bg: 'Plain white',                bgColor: '#FFFFFF', note: 'White background. Online uploads often capped near 60KB — compress after sizing.' },
-  { key: 'malaysia',  name: 'Malaysia',       flag: '🇲🇾', size: '35×45mm (413×531px)',  bg: 'Plain white',                bgColor: '#FFFFFF', note: 'Standard 35×45mm with a white background.' },
+  { key: 'us',         pxW: 600, pxH: 600, name: 'United States',        flag: '🇺🇸', size: '2×2 in (600×600px)',        bg: 'Plain white or off-white',    bgColor: '#FFFFFF', note: 'Head 25–35mm (chin to crown). Off-white accepted.' },
+  { key: 'uk',         pxW: 413, pxH: 531, name: 'United Kingdom',        flag: '🇬🇧', size: '35×45mm (413×531px)',        bg: 'Light grey (NOT pure white)', bgColor: '#D8D8D8', note: 'UK prefers a light grey background — pure white is a common rejection reason.' },
+  { key: 'schengen',   pxW: 413, pxH: 531, name: 'Schengen / EU',         flag: '🇪🇺', size: '35×45mm (413×531px)',        bg: 'Light grey or cream',         bgColor: '#D8D8D8', note: 'Used for Schengen visas and most EU passports. Germany requires light grey.' },
+  { key: 'canada',     pxW: 591, pxH: 827, name: 'Canada',                flag: '🇨🇦', size: '50×70mm (591×827px)',        bg: 'Plain white',                 bgColor: '#FFFFFF', note: 'Unique larger size. Face 31–36mm chin to crown. Printed photos need a photographer stamp.' },
+  { key: 'india',      pxW: 600, pxH: 600, name: 'India',                 flag: '🇮🇳', size: '51×51mm (600×600px)',        bg: 'Pure white only',             bgColor: '#FFFFFF', note: 'Off-white can be rejected. Online uploads often capped at 300KB — compress after.' },
+  { key: 'pakistan',   pxW: 413, pxH: 531, name: 'Pakistan',              flag: '🇵🇰', size: '35×45mm (413×531px)',        bg: 'Plain white',                 bgColor: '#FFFFFF', note: 'White background, full face, neutral expression. Used for NADRA/passport and visa photos.' },
+  { key: 'australia',  pxW: 413, pxH: 531, name: 'Australia',             flag: '🇦🇺', size: '35×45mm (413×531px)',        bg: 'Plain white',                 bgColor: '#FFFFFF', note: 'Head 32–36mm chin to crown. No glasses (strict since 2024).' },
+  { key: 'china',      pxW: 390, pxH: 567, name: 'China',                 flag: '🇨🇳', size: '33×48mm (390×567px)',        bg: 'Plain white',                 bgColor: '#FFFFFF', note: 'Narrower format. Visa uploads often need a specific small file size.' },
+  { key: 'japan',      pxW: 413, pxH: 531, name: 'Japan',                 flag: '🇯🇵', size: '35×45mm (413×531px)',        bg: 'Plain white or light',        bgColor: '#FFFFFF', note: 'Head should fill roughly 70–80% of the photo height.' },
+  { key: 'germany',    pxW: 413, pxH: 531, name: 'Germany',               flag: '🇩🇪', size: '35×45mm (413×531px)',        bg: 'Light grey (NOT white)',      bgColor: '#D8D8D8', note: 'Germany requires a plain light-grey background. Pure white is commonly rejected.' },
+  { key: 'france',     pxW: 413, pxH: 531, name: 'France',                flag: '🇫🇷', size: '35×45mm (413×531px)',        bg: 'Light grey or light blue',    bgColor: '#D8D8D8', note: 'France bans pure white backgrounds — use light grey or light blue.' },
+  { key: 'italy',      pxW: 413, pxH: 531, name: 'Italy',                 flag: '🇮🇹', size: '35×45mm (413×531px)',        bg: 'White or light grey',         bgColor: '#FFFFFF', note: 'Standard 35×45mm. Check whether you need a passport, CIE, or consular photo.' },
+  { key: 'spain',      pxW: 413, pxH: 531, name: 'Spain',                 flag: '🇪🇸', size: '35×45mm (413×531px)',        bg: 'White or light grey',         bgColor: '#FFFFFF', note: 'Standard 35×45mm format for Spanish passport and ID.' },
+  { key: 'ireland',    pxW: 413, pxH: 531, name: 'Ireland',               flag: '🇮🇪', size: '35×45mm (413×531px)',        bg: 'White, grey or cream',        bgColor: '#FFFFFF', note: 'Ireland accepts white, light grey, or cream backgrounds.' },
+  { key: 'brazil',     pxW: 591, pxH: 827, name: 'Brazil',                flag: '🇧🇷', size: '50×70mm (591×827px)',        bg: 'Plain white',                 bgColor: '#FFFFFF', note: 'Brazil uses the larger 50×70mm format, like Canada.' },
+  { key: 'mexico',     pxW: 413, pxH: 531, name: 'Mexico',                flag: '🇲🇽', size: '35×45mm (413×531px)',        bg: 'Plain white',                 bgColor: '#FFFFFF', note: 'Passport applications often require three printed copies.' },
+  { key: 'bangladesh', pxW: 413, pxH: 531, name: 'Bangladesh',            flag: '🇧🇩', size: '35×45mm (413×531px)',        bg: 'Plain white',                 bgColor: '#FFFFFF', note: 'Standard 35×45mm with a plain white background.' },
+  { key: 'nigeria',    pxW: 413, pxH: 531, name: 'Nigeria',               flag: '🇳🇬', size: '35×45mm (413×531px)',        bg: 'Plain white',                 bgColor: '#FFFFFF', note: 'Standard 35×45mm. Used for passport and many visa applications.' },
+  { key: 'philippines',pxW: 600, pxH: 600, name: 'Philippines',           flag: '🇵🇭', size: '2×2 in (600×600px)',        bg: 'Plain white',                 bgColor: '#FFFFFF', note: 'Philippines uses the 2×2 inch square format like the US.' },
+  { key: 'uae',        pxW: 508, pxH: 650, name: 'United Arab Emirates',  flag: '🇦🇪', size: '43×55mm (508×650px)',        bg: 'Plain white',                 bgColor: '#FFFFFF', note: 'UAE visa/residence photos. Emirates ID may use a different size — check your document.' },
+  { key: 'saudi',      pxW: 472, pxH: 709, name: 'Saudi Arabia',          flag: '🇸🇦', size: '40×60mm (472×709px)',        bg: 'Plain white',                 bgColor: '#FFFFFF', note: 'White background. Online portals often enforce a small file-size limit (~200KB).' },
+  { key: 'turkey',     pxW: 591, pxH: 709, name: 'Turkey',                flag: '🇹🇷', size: '50×60mm (591×709px)',        bg: 'Plain white',                 bgColor: '#FFFFFF', note: 'Taller 50×60mm format. Both ears should be visible.' },
+  { key: 'singapore',  pxW: 413, pxH: 531, name: 'Singapore',             flag: '🇸🇬', size: '35×45mm (413×531px)',        bg: 'Plain white',                 bgColor: '#FFFFFF', note: 'White background. Online uploads often capped near 60KB — compress after sizing.' },
+  { key: 'malaysia',   pxW: 413, pxH: 531, name: 'Malaysia',              flag: '🇲🇾', size: '35×45mm (413×531px)',        bg: 'Plain white',                 bgColor: '#FFFFFF', note: 'Standard 35×45mm with a white background.' },
 ]
 
 export default function PassportPhotoPage() {
   const [file, setFile] = useState<File | null>(null)
   const [country, setCountry] = useState('us')
-  const [cropPosition, setCropPosition] = useState<'top' | 'center' | 'bottom'>('top')
   const [replaceBg, setReplaceBg] = useState(false)
   const [statusMsg, setStatusMsg] = useState('')
   const [processing, setProcessing] = useState(false)
@@ -49,23 +48,21 @@ export default function PassportPhotoPage() {
     setFile(f); setError(''); setSuccess(false)
   }
 
-  const convert = async () => {
-    if (!file) return
+  // Called by the editor with the already-cropped, correctly-sized JPEG blob
+  const handleCropped = async (croppedBlob: Blob) => {
     setProcessing(true); setError(''); setSuccess(false); setStatusMsg('')
     try {
-      // Decide what to send: raw file, or a background-replaced composite
-      let uploadBlob: Blob = file
+      let finalBlob: Blob = croppedBlob
 
       if (replaceBg) {
-        // 1) Remove background in the browser (transparent PNG)
+        // Remove background from the cropped image, then composite onto the country color
         setStatusMsg('Loading model (first run may take a moment)…')
         const { removeBackground } = await import('@imgly/background-removal')
         setStatusMsg('Removing background…')
-        const cutout = await removeBackground(file)
+        const cutout = await removeBackground(croppedBlob)
 
-        // 2) Composite the cutout onto the country's correct background color
         setStatusMsg('Applying passport background…')
-        uploadBlob = await new Promise<Blob>((resolve, reject) => {
+        finalBlob = await new Promise<Blob>((resolve, reject) => {
           const img = new Image()
           img.onload = () => {
             const canvas = document.createElement('canvas')
@@ -83,23 +80,13 @@ export default function PassportPhotoPage() {
         })
       }
 
-      setStatusMsg('Sizing to passport dimensions…')
-      const formData = new FormData()
-      formData.append('file', uploadBlob, 'photo.jpg')
-      formData.append('country', country)
-      formData.append('cropPosition', cropPosition)
-      const res = await fetch(`${BACKEND_URL}/api/specialty/passport-photo`, { method: 'POST', body: formData })
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({ error: 'Unknown error' })) as { error?: string }
-        throw new Error(data.error ?? `Server error: ${res.status}`)
-      }
-      const blob = await res.blob()
-      const url = URL.createObjectURL(blob)
+      // Download
+      const url = URL.createObjectURL(finalBlob)
       const a = document.createElement('a')
       a.href = url; a.download = 'passport-photo.jpg'
       document.body.appendChild(a); a.click()
       URL.revokeObjectURL(url); document.body.removeChild(a)
-      setSuccess(true); setFile(null)
+      setSuccess(true)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to create passport photo. Please try again.')
     } finally {
@@ -157,18 +144,6 @@ export default function PassportPhotoPage() {
               </div>
             </div>
 
-            {/* Crop position */}
-            <label style={{ fontSize:'14px', fontWeight:700, color:'#0F2A4A', display:'block', marginBottom:'8px' }}>Crop position <span style={{ color:'#94a3b8', fontWeight:400 }}>— which part of the photo to keep</span></label>
-            <div style={{ display:'flex', gap:'8px' }}>
-              {(['top','center','bottom'] as const).map(pos => (
-                <button key={pos} onClick={() => setCropPosition(pos)}
-                  style={{ flex:1, padding:'10px 6px', borderRadius:'10px', border:'1.5px solid', borderColor: cropPosition === pos ? '#E85D04' : '#e2e8f0', background: cropPosition === pos ? '#FFF7ED' : 'white', color: cropPosition === pos ? '#E85D04' : '#0F2A4A', fontSize:'13px', fontWeight:700, cursor:'pointer', fontFamily:'inherit', textTransform:'capitalize' as const }}>
-                  {pos}
-                </button>
-              ))}
-            </div>
-            <div style={{ fontSize:'12px', color:'#94a3b8', marginTop:'8px' }}>Tip: &quot;Top&quot; usually works best for passport photos since the head sits near the top of the frame.</div>
-
             {/* Background replacement toggle */}
             <div style={{ marginTop:'16px', paddingTop:'16px', borderTop:'1.5px solid #f1f5f9' }}>
               <label style={{ display:'flex', alignItems:'flex-start', gap:'10px', cursor:'pointer' }}>
@@ -206,20 +181,30 @@ export default function PassportPhotoPage() {
               <div style={{ fontSize:'14px', fontWeight:600, color:'#0F2A4A', overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' as const }}>{file.name}</div>
               <div style={{ fontSize:'12px', color:'#94a3b8' }}>{fmt(file.size)}</div>
             </div>
-            <button onClick={() => setFile(null)} style={{ background:'#FEE2E2', color:'#DC2626', border:'none', borderRadius:'6px', padding:'4px 10px', cursor:'pointer', fontWeight:700, fontSize:'16px' }}>×</button>
+            <button onClick={() => { setFile(null); setSuccess(false) }} style={{ background:'#FEE2E2', color:'#DC2626', border:'none', borderRadius:'6px', padding:'4px 10px', cursor:'pointer', fontWeight:700, fontSize:'16px' }}>×</button>
+          </div>
+        )}
+
+        {file && (
+          <div style={{ marginTop:'24px', background:'#f8fafc', border:'1.5px solid #e2e8f0', borderRadius:'16px', padding:'24px' }}>
+            <div style={{ fontSize:'15px', fontWeight:700, color:'#0F2A4A', marginBottom:'4px', textAlign:'center' as const }}>Position your photo</div>
+            <div style={{ fontSize:'13px', color:'#64748b', marginBottom:'18px', textAlign:'center' as const }}>Drag to move, pinch or use the slider to zoom. Line up your face with the guide oval.</div>
+            <PassportEditor
+              key={country + '-' + (file?.name ?? '')}
+              file={file}
+              targetWidth={selectedCountry.pxW}
+              targetHeight={selectedCountry.pxH}
+              bgColor={replaceBg ? selectedCountry.bgColor : '#FFFFFF'}
+              showGuides={true}
+              onCropped={handleCropped}
+              exportLabel={processing ? '⏳ Working…' : (replaceBg ? '✨ Create with background' : '🛂 Create Passport Photo')}
+            />
           </div>
         )}
 
         {error && <div style={{ marginTop:'16px', background:'#FEE2E2', border:'1.5px solid #FCA5A5', borderRadius:'10px', padding:'12px 16px', color:'#991B1B', fontSize:'14px', fontWeight:600 }}>⚠️ {error}</div>}
         {processing && statusMsg && <div style={{ marginTop:'16px', background:'#EFF6FF', border:'1.5px solid #BFDBFE', borderRadius:'10px', padding:'12px 16px', color:'#1E40AF', fontSize:'14px', fontWeight:600 }}>⏳ {statusMsg}</div>}
-        {success && <div style={{ marginTop:'16px', background:'#F0FDF4', border:'1.5px solid #BBF7D0', borderRadius:'10px', padding:'12px 16px', color:'#166534', fontSize:'14px', fontWeight:600 }}>✅ Done! Your passport-photo.jpg has downloaded (600×600px, 300 DPI).</div>}
-
-        <div style={{ marginTop:'24px', textAlign:'center' as const }}>
-          <button onClick={convert} disabled={!file || processing}
-            style={{ background: !file || processing ? '#cbd5e1' : '#E85D04', color:'white', padding:'16px 48px', borderRadius:'12px', border:'none', fontSize:'16px', fontWeight:700, cursor: !file || processing ? 'not-allowed' : 'pointer', fontFamily:'inherit', minWidth:'260px' }}>
-            {processing ? '⏳ Creating passport photo…' : '🛂 Create Passport Photo'}
-          </button>
-        </div>
+        {success && <div style={{ marginTop:'16px', background:'#F0FDF4', border:'1.5px solid #BBF7D0', borderRadius:'10px', padding:'12px 16px', color:'#166534', fontSize:'14px', fontWeight:600 }}>✅ Done! Your passport-photo.jpg has downloaded ({selectedCountry.size}).</div>}
       </div>
 
       <div style={{ maxWidth:'860px', margin:'48px auto 0', padding:'0 24px 48px' }}>
