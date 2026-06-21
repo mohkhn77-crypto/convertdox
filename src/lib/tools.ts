@@ -53,11 +53,9 @@ export const TOOLS: Tool[] = [
   { iconType:'csv-json',     title:'CSV to JSON Converter',   desc:'Convert CSV spreadsheet data to JSON',     href:'/csv-to-json',     cat:'dev' },
   { iconType:'uuid',         title:'UUID Generator',          desc:'Generate random UUID v4 identifiers',      href:'/uuid-generator',  cat:'dev' },
   // Calculators (new)
-  { iconType:'loan',       title:'Loan Calculator',          desc:'Calculate monthly payments & amortization',  href:'/loan-calculator',      cat:'calc' },
   { iconType:'timezone',   title:'Time Zone Converter',      desc:'Convert times between any time zones',        href:'/timezone-converter',   cat:'calc' },
   { iconType:'date-diff',  title:'Date Difference',          desc:'Days, weeks, months between two dates',       href:'/date-difference',      cat:'calc' },
   { iconType:'salary',     title:'Salary Calculator',        desc:'Convert hourly ↔ annual salary instantly',    href:'/salary-calculator',    cat:'calc' },
-  { iconType:'compound',   title:'Compound Interest',        desc:'Calculate investment growth over time',        href:'/compound-interest',    cat:'calc' },
   { iconType:'gpa',        title:'GPA Calculator',           desc:'Calculate GPA from course grades',            href:'/gpa-calculator',       cat:'calc' },
   { iconType:'calorie',    title:'Calorie Calculator',       desc:'BMR & TDEE from age, height & weight',        href:'/calorie-calculator',   cat:'calc' },
   { iconType:'pomodoro',   title:'Pomodoro Timer',           desc:'Focus timer with work & break intervals',     href:'/pomodoro-timer',       cat:'fun' },
@@ -85,8 +83,6 @@ export const TOOLS: Tool[] = [
   { iconType:'quotes',        title:'Quote Generator',         desc:'Famous quotes by category',                  href:'/quote-generator',      cat:'text' },
   // Batch 3 — Color
   { iconType:'palette',       title:'Color Palette',           desc:'5 palette modes from any base color',         href:'/color-palette',        cat:'color' },
-  { iconType:'box-shadow',    title:'CSS Box Shadow',          desc:'Visual CSS box shadow generator',             href:'/box-shadow',           cat:'color' },
-  { iconType:'border-radius', title:'CSS Border Radius',       desc:'Visual border radius generator',              href:'/border-radius',        cat:'color' },
   { iconType:'color-blind',   title:'Color Blindness Sim',     desc:'Test colors for accessibility',               href:'/color-blindness',      cat:'color' },
   // Batch 3 — Security
   { iconType:'pw-strength',   title:'Password Strength',       desc:'Test password security strength',             href:'/password-strength',    cat:'security' },
@@ -130,13 +126,11 @@ export const TOOLS: Tool[] = [
   { iconType:'word-counter', title:'Detailed Word Counter',   desc:'Analyze text in detail',                                  href:'/detailed-word-counter',       cat:'text' },
   { iconType:'tax',          title:'Tax Calculator',          desc:'Estimate income tax for US, UK, Canada, Australia',       href:'/tax-calculator',              cat:'calc' },
   { iconType:'invest',       title:'Investment Calculator',   desc:'Project stock/savings growth over time',                  href:'/investment-calculator',       cat:'calc' },
-  { iconType:'mortgage',     title:'Advanced Mortgage',       desc:'Full PITI calculator with PMI and amortization',          href:'/mortgage-advanced',           cat:'calc' },
   { iconType:'retire',       title:'Retirement Calculator',   desc:'401k/IRA nest egg and withdrawal projections',            href:'/retirement-calculator',       cat:'calc' },
   { iconType:'body-fat',     title:'Body Fat Calculator',     desc:'Calculate body fat % with Navy or BMI method',            href:'/body-fat-calculator',         cat:'calc' },
   { iconType:'macro',        title:'Macro Calculator',        desc:'Daily protein, carbs, and fat targets by goal',           href:'/macro-calculator',            cat:'calc' },
   { iconType:'water',        title:'Water Intake Calculator', desc:'Daily hydration needs based on weight and activity',      href:'/water-intake',                cat:'calc' },
   { iconType:'fuel',         title:'Fuel Cost Calculator',    desc:'Estimate trip fuel cost and per-person share',            href:'/fuel-cost',                   cat:'calc' },
-  { iconType:'loan',         title:'Loan EMI Calculator',     desc:'Calculate monthly payments',                              href:'/loan-emi-calculator',         cat:'calc' },
   { iconType:'calorie',      title:'Pregnancy Calculator',    desc:'Pregnancy due date calculator',                           href:'/pregnancy-due-date-calculator',cat:'calc' },
   { iconType:'flexbox',      title:'CSS Flexbox Generator',   desc:'Visual flexbox layout builder with live preview',         href:'/flexbox-generator',           cat:'dev' },
   { iconType:'grid-gen',     title:'CSS Grid Generator',      desc:'Visual CSS Grid builder with live preview',               href:'/grid-generator',              cat:'dev' },
@@ -224,7 +218,6 @@ export const TOOLS: Tool[] = [
   { iconType:'pdf-pages',    title:'PDF Page Counter',     desc:'Count pages in PDF files',                href:'/pdf-page-counter',            cat:'util' },
   { iconType:'meta-gen',     title:'Meta Description',     desc:'Generate SEO meta descriptions',          href:'/meta-description-generator',  cat:'dev' },
   { iconType:'yt-thumb',     title:'YouTube Thumbnail',    desc:'Download YouTube thumbnails',             href:'/youtube-thumbnail',           cat:'util' },
-  { iconType:'emi',          title:'Loan Calculator',      desc:'Calculate monthly loan payments',          href:'/loan-calculator',             cat:'calc' },
 
   // === AI Tools ===
   { iconType:'ai', title:'AI Summarizer',             desc:'Summarize long text instantly',        href:'/ai-summarizer',       cat:'ai' },

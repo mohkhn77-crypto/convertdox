@@ -156,7 +156,6 @@ export default function PercentageCalculatorPage() {
           { name: 'Discount Calculator', slug: 'discount-calculator', description: 'Find sale prices and savings' },
           { name: 'Tip Calculator', slug: 'tip-calculator', description: 'Calculate tips and split bills' },
           { name: 'Tax Calculator', slug: 'tax-calculator', description: 'Estimate tax amounts' },
-          { name: 'Loan Calculator', slug: 'loan-calculator', description: 'Calculate loan payments' },
           { name: 'Unit Converter', slug: 'unit-converter', description: 'Convert between units of measure' },
         ]}
       />

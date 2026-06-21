@@ -156,10 +156,6 @@ const MEGA_MENU: MegaMenu = {
     label: 'Calculators',
     groups: [
       { title: 'Financial', tools: [
-        { name: 'Loan EMI Calculator', href: '/loan-emi-calculator' },
-        { name: 'Loan Calculator', href: '/loan-calculator' },
-        { name: 'Mortgage Calculator', href: '/mortgage-advanced' },
-        { name: 'Compound Interest', href: '/compound-interest' },
         { name: 'Investment Calculator', href: '/investment-calculator' },
         { name: 'Tax Calculator', href: '/tax-calculator' },
         { name: 'Salary Calculator', href: '/salary-calculator' },
@@ -204,8 +200,6 @@ const MEGA_MENU: MegaMenu = {
       ]},
       { title: 'CSS Tools', tools: [
         { name: 'CSS Gradient', href: '/css-gradient' },
-        { name: 'Box Shadow', href: '/box-shadow' },
-        { name: 'Border Radius', href: '/border-radius' },
         { name: 'Flexbox Generator', href: '/flexbox-generator' },
         { name: 'Grid Generator', href: '/grid-generator' },
         { name: 'Animation', href: '/animation-generator' },

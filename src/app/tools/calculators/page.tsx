@@ -49,12 +49,6 @@ const CALC_TOOLS = [
     features: ['20+ unit categories', 'Real-time conversion', 'All common units supported'],
   },
   {
-    title: 'Loan Calculator',
-    desc: 'Calculate monthly payments, total interest, and amortization.',
-    href: '/loan-calculator',
-    features: ['Monthly payment breakdown', 'Total interest paid', 'Full amortization schedule'],
-  },
-  {
     title: 'Time Zone Converter',
     desc: 'Convert times between any time zones worldwide.',
     href: '/timezone-converter',
@@ -71,12 +65,6 @@ const CALC_TOOLS = [
     desc: 'Convert hourly to annual salary and vice versa instantly.',
     href: '/salary-calculator',
     features: ['Hourly to annual conversion', 'Monthly and weekly rates', 'Overtime calculation'],
-  },
-  {
-    title: 'Compound Interest',
-    desc: 'Calculate investment growth with compound interest over time.',
-    href: '/compound-interest',
-    features: ['Principal and rate inputs', 'Monthly or annual compounding', 'Growth chart visualisation'],
   },
   {
     title: 'GPA Calculator',
@@ -149,12 +137,6 @@ const CALC_TOOLS = [
     desc: 'Project the growth of your investments over time with compound interest and monthly contributions.',
     href: '/investment-calculator',
     features: ['Monthly contributions', 'Year-by-year table', 'Growth chart'],
-  },
-  {
-    title: 'Advanced Mortgage Calculator',
-    desc: 'Calculate your full monthly mortgage payment including PMI, property tax, insurance, and HOA.',
-    href: '/mortgage-advanced',
-    features: ['PMI auto-calculation', 'Amortization table', 'Full PITI breakdown'],
   },
   {
     title: 'Retirement Calculator',

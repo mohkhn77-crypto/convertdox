@@ -31,18 +31,6 @@ const COLOR_TOOLS = [
     features: ['Complementary, analogous, triadic', 'Monochromatic palettes', 'HEX and RGB export'],
   },
   {
-    title: 'CSS Box Shadow Generator',
-    desc: 'Visual CSS box shadow generator with live preview.',
-    href: '/box-shadow',
-    features: ['Offset, blur, spread controls', 'Inset shadow option', 'Copy CSS instantly'],
-  },
-  {
-    title: 'CSS Border Radius Generator',
-    desc: 'Visual border radius generator with live shape preview.',
-    href: '/border-radius',
-    features: ['Individual corner control', 'Elliptical radius support', 'Copy CSS shorthand'],
-  },
-  {
     title: 'Color Blindness Simulator',
     desc: 'Test how your colours appear to users with colour blindness.',
     href: '/color-blindness',
