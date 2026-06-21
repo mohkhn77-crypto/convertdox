@@ -188,7 +188,16 @@ export default function ZakatCalculatorPage() {
 
         {/* Prices (editable) */}
         <div style={{ background:'white', border:'1.5px solid #e2e8f0', borderRadius:'14px', padding:'20px', marginBottom:'16px' }}>
-          <div style={{ fontSize:'15px', fontWeight:800, color:'#0F2A4A', marginBottom:'14px' }}>Metal prices (per gram, {currency})</div>
+          <div style={{ marginBottom:'14px' }}>
+            <div style={{ fontSize:'15px', fontWeight:800, color:'#0F2A4A' }}>
+              {priceStatus === 'manual' ? `Enter today's gold & silver rate (${currency} per gram)` : `Today's gold & silver rate (${currency} per gram)`}
+            </div>
+            <div style={{ fontSize:'12px', color:'#64748b', marginTop:'4px', lineHeight:'1.5' }}>
+              {priceStatus === 'manual'
+                ? `We couldn't load live prices, so please enter today's gold and silver price per gram. You can find these on your local gold market or jeweller's site.`
+                : `These live market rates were loaded automatically and are used to value the gold and silver you entered above. You don't need to change them unless your local rate is different.`}
+            </div>
+          </div>
           <div style={{ display:'flex', gap:'12px', flexWrap:'wrap' as const }}>
             <div style={{ flex:1, minWidth:'140px' }}>
               <label style={labelStyle}>Gold price / gram</label>
@@ -199,7 +208,7 @@ export default function ZakatCalculatorPage() {
               <input type="number" min="0" value={silverPrice} onChange={e => { setSilverPrice(e.target.value); setPriceStatus('manual') }} placeholder="0.00" style={inputStyle} />
             </div>
           </div>
-          <div style={{ fontSize:'12px', color:'#94a3b8', marginTop:'8px' }}>Prices are in {currency} per gram. You can adjust them to match your local market rate.</div>
+          <div style={{ fontSize:'12px', color:'#94a3b8', marginTop:'8px' }}>Tip: edit a price above only if your local market rate differs from the live rate shown.</div>
         </div>
 
         {/* Nisab basis */}
