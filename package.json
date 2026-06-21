@@ -10,6 +10,7 @@
     "postinstall": "node scripts/copy-pdf-worker.js"
   },
   "dependencies": {
+    "@imgly/background-removal": "^1.7.0",
     "gray-matter": "^4.0.3",
     "lucide-react": "^1.16.0",
     "next": "16.2.6",
