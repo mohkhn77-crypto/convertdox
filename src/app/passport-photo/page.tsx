@@ -35,6 +35,7 @@ export default function PassportPhotoPage() {
   const [file, setFile] = useState<File | null>(null)
   const [country, setCountry] = useState('us')
   const [replaceBg, setReplaceBg] = useState(false)
+  const [resultUrl, setResultUrl] = useState<string | null>(null)
   const [statusMsg, setStatusMsg] = useState('')
   const [processing, setProcessing] = useState(false)
   const [error, setError] = useState('')
@@ -80,12 +81,9 @@ export default function PassportPhotoPage() {
         })
       }
 
-      // Download
+      // Show the result as a preview the user can confirm before downloading
       const url = URL.createObjectURL(finalBlob)
-      const a = document.createElement('a')
-      a.href = url; a.download = 'passport-photo.jpg'
-      document.body.appendChild(a); a.click()
-      URL.revokeObjectURL(url); document.body.removeChild(a)
+      setResultUrl(url)
       setSuccess(true)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to create passport photo. Please try again.')
@@ -93,6 +91,19 @@ export default function PassportPhotoPage() {
       setProcessing(false)
       setStatusMsg('')
     }
+  }
+
+  const downloadResult = () => {
+    if (!resultUrl) return
+    const a = document.createElement('a')
+    a.href = resultUrl
+    a.download = 'passport-photo.jpg'
+    document.body.appendChild(a); a.click(); document.body.removeChild(a)
+  }
+
+  const startOver = () => {
+    if (resultUrl) URL.revokeObjectURL(resultUrl)
+    setResultUrl(null); setFile(null); setSuccess(false)
   }
 
   const fmt = (b: number) => b < 1_048_576 ? `${(b / 1024).toFixed(1)} KB` : `${(b / 1_048_576).toFixed(1)} MB`
@@ -185,7 +196,7 @@ export default function PassportPhotoPage() {
           </div>
         )}
 
-        {file && (
+        {file && !resultUrl && (
           <div style={{ marginTop:'24px', background:'#f8fafc', border:'1.5px solid #e2e8f0', borderRadius:'16px', padding:'24px' }}>
             <div style={{ fontSize:'15px', fontWeight:700, color:'#0F2A4A', marginBottom:'4px', textAlign:'center' as const }}>Position your photo</div>
             <div style={{ fontSize:'13px', color:'#64748b', marginBottom:'18px', textAlign:'center' as const }}>Drag to move, pinch or use the slider to zoom. Line up your face with the guide oval.</div>
@@ -204,7 +215,18 @@ export default function PassportPhotoPage() {
 
         {error && <div style={{ marginTop:'16px', background:'#FEE2E2', border:'1.5px solid #FCA5A5', borderRadius:'10px', padding:'12px 16px', color:'#991B1B', fontSize:'14px', fontWeight:600 }}>⚠️ {error}</div>}
         {processing && statusMsg && <div style={{ marginTop:'16px', background:'#EFF6FF', border:'1.5px solid #BFDBFE', borderRadius:'10px', padding:'12px 16px', color:'#1E40AF', fontSize:'14px', fontWeight:600 }}>⏳ {statusMsg}</div>}
-        {success && <div style={{ marginTop:'16px', background:'#F0FDF4', border:'1.5px solid #BBF7D0', borderRadius:'10px', padding:'12px 16px', color:'#166534', fontSize:'14px', fontWeight:600 }}>✅ Done! Your passport-photo.jpg has downloaded ({selectedCountry.size}).</div>}
+          {resultUrl && (
+            <div style={{ marginTop:'24px', background:'#f8fafc', border:'1.5px solid #e2e8f0', borderRadius:'16px', padding:'24px', textAlign:'center' as const }}>
+              <div style={{ fontSize:'16px', fontWeight:800, color:'#166534', marginBottom:'4px' }}>✅ Your {selectedCountry.flag} {selectedCountry.name} passport photo is ready</div>
+              <div style={{ fontSize:'13px', color:'#64748b', marginBottom:'18px' }}>{selectedCountry.size} · check it looks right, then download</div>
+              <img src={resultUrl} alt="Passport photo preview" style={{ maxWidth:'260px', width:'100%', borderRadius:'8px', border:'1.5px solid #e2e8f0', boxShadow:'0 4px 16px rgba(15,42,74,0.12)' }} />
+              <div style={{ display:'flex', gap:'12px', justifyContent:'center', marginTop:'20px', flexWrap:'wrap' as const }}>
+                <button onClick={downloadResult} style={{ background:'#E85D04', color:'white', padding:'14px 36px', borderRadius:'12px', border:'none', fontSize:'15px', fontWeight:700, cursor:'pointer', fontFamily:'inherit' }}>💾 Download Photo</button>
+                <button onClick={startOver} style={{ background:'white', color:'#0F2A4A', padding:'14px 36px', borderRadius:'12px', border:'1.5px solid #e2e8f0', fontSize:'15px', fontWeight:700, cursor:'pointer', fontFamily:'inherit' }}>↻ Start Over</button>
+              </div>
+              <div style={{ fontSize:'12px', color:'#94a3b8', marginTop:'14px', maxWidth:'400px', margin:'14px auto 0' }}>Remember: verify background, head size, and expression against the official {selectedCountry.name} requirements before submitting.</div>
+            </div>
+          )}
       </div>
 
       <div style={{ maxWidth:'860px', margin:'48px auto 0', padding:'0 24px 48px' }}>
@@ -219,10 +241,11 @@ export default function PassportPhotoPage() {
         <section>
           <h2 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif", fontSize:'26px', fontWeight:800, color:'#0F2A4A', marginBottom:'16px' }}>Frequently Asked Questions</h2>
           {[
-            { q:'Does this meet official passport requirements?', a:'The output dimensions match US standard (2×2 inches at 300 DPI). However, each country has specific requirements (white background, head position, expression). Always verify official requirements before submitting.' },
-            { q:'What if my face is not centered?', a:'The tool applies a center crop. For best results, ensure your face is centered in the original photo before uploading.' },
-            { q:'Can I use this for visa photos?', a:'Visa photos typically follow the same 2×2 inch format. Check the specific country\'s visa photo requirements for any additional rules.' },
-            { q:'Is there a file size limit?', a:'Images up to 20 MB are supported.' },
+            { q:'Does this meet official passport requirements?', a:'The tool sizes your photo to the correct official dimensions for the country you select (24 countries supported). You position your face using the interactive editor with a head-placement guide. However, each country also has rules for background, head size, and expression — always verify against the official source before submitting.' },
+            { q:'How do I position my face correctly?', a:'After uploading, an interactive editor appears with a guide oval. Drag your photo and use the zoom slider (or pinch on mobile) to line up your face within the oval, then click Create. You preview the result before downloading.' },
+            { q:'Can it replace my background?', a:'Yes. Turn on "Replace background" before creating your photo. It removes your existing background in your browser and replaces it with the color required for the selected country (white or light grey). Always check the result, as automatic removal works best with a clear subject.' },
+            { q:'Can I use this for visa photos?', a:'Many visa photos follow the same dimensions as passport photos. Select the relevant country and check that country\'s specific visa requirements for any extra rules.' },
+            { q:'Is there a file size limit?', a:'Images up to 20 MB are supported, and processing happens in your browser.' },
           ].map(faq => (
             <details key={faq.q} style={{ background:'#f8fafc', border:'1.5px solid #e2e8f0', borderRadius:'10px', padding:'14px 18px', marginBottom:'8px' }}>
               <summary style={{ fontSize:'15px', fontWeight:600, color:'#0F2A4A', cursor:'pointer' }}>{faq.q}</summary>
