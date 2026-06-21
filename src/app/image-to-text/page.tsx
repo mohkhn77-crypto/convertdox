@@ -43,7 +43,7 @@ export default function ImageToTextPage() {
     try {
       const formData = new FormData()
       formData.append('file', file)
-      formData.append('lang', lang)
+      formData.append('language', lang)
       const res = await fetch(`${BACKEND_URL}/api/ocr/image-to-text`, { method: 'POST', body: formData })
       if (!res.ok) {
         const data = await res.json().catch(() => ({ error: 'Unknown error' })) as { error?: string }

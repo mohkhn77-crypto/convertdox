@@ -1037,7 +1037,7 @@ const JSON_LD = [
     'name': 'ConvertDox',
     'url': 'https://convertdox.com',
     'logo': 'https://convertdox.com/og-image.png',
-    'description': '175+ free online tools — no signup, files never stored',
+    'description': '180+ free online tools — no signup, files never stored',
   },
   {
     '@context': 'https://schema.org',
@@ -1126,7 +1126,7 @@ export default function HomePage() {
             <span style={{ color:'#F48C42' }}>In One Place</span>
           </h1>
           <p style={{ fontSize:'clamp(15px,2vw,18px)',color:'rgba(255,255,255,0.65)',maxWidth:'540px',margin:'0 auto 40px',lineHeight:1.7 }}>
-            PDF, Image, AI, Calculators, Text, QR Code and 200+ more tools. Free. Fast. No installation.
+            PDF, Image, AI, Calculators, Text, QR Code and 180+ more tools. Free. Fast. No installation.
           </p>
           {/* File Upload Box */}
           <div style={{ maxWidth:'620px',margin:'0 auto 32px' }}>
@@ -1214,7 +1214,7 @@ export default function HomePage() {
               Built for everyone — fast, free, secure
             </h2>
             <p style={{ fontSize:'17px',color:'#64748b',maxWidth:'620px',margin:'0 auto',lineHeight:'1.7' }}>
-              ConvertDox brings together 200+ professional tools in one platform —
+              ConvertDox brings together 180+ professional tools in one platform —
               designed with privacy, speed, and simplicity at its core.
             </p>
           </div>
