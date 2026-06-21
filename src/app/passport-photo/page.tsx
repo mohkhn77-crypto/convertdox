@@ -4,12 +4,26 @@ import NavBar from '@/components/NavBar'
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://convertdox-backend-production.up.railway.app'
 
+const COUNTRIES = [
+  { key: 'us',        name: 'United States', size: '2×2 in (600×600px)',   bg: 'Plain white or off-white', note: 'Head 25–35mm (chin to crown). Off-white accepted.' },
+  { key: 'uk',        name: 'United Kingdom', size: '35×45mm (413×531px)',  bg: 'Light grey (NOT pure white)', note: 'UK prefers a light grey background — pure white is a common rejection reason.' },
+  { key: 'schengen',  name: 'Schengen / EU',  size: '35×45mm (413×531px)',  bg: 'Light grey or cream',        note: 'Used for Schengen visas and most EU passports. Germany requires light grey.' },
+  { key: 'canada',    name: 'Canada',         size: '50×70mm (591×827px)',  bg: 'Plain white',                note: 'Unique larger size. Face 31–36mm chin to crown. Printed photos need a photographer stamp.' },
+  { key: 'india',     name: 'India',          size: '51×51mm (600×600px)',  bg: 'Pure white only',            note: 'Off-white can be rejected. Online uploads often capped at 300KB — compress after.' },
+  { key: 'australia', name: 'Australia',      size: '35×45mm (413×531px)',  bg: 'Plain white',                note: 'Head 32–36mm chin to crown. No glasses (strict since 2024).' },
+  { key: 'china',     name: 'China',          size: '33×48mm (390×567px)',  bg: 'Plain white',                note: 'Narrower format. Visa uploads often need a specific small file size.' },
+  { key: 'japan',     name: 'Japan',          size: '35×45mm (413×531px)',  bg: 'Plain white or light',       note: 'Head should fill roughly 70–80% of the photo height.' },
+]
+
 export default function PassportPhotoPage() {
   const [file, setFile] = useState<File | null>(null)
+  const [country, setCountry] = useState('us')
+  const [cropPosition, setCropPosition] = useState<'top' | 'center' | 'bottom'>('top')
   const [processing, setProcessing] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const selectedCountry = COUNTRIES.find(c => c.key === country) || COUNTRIES[0]
 
   const handleFile = (f: File | null) => {
     if (!f) return
@@ -23,6 +37,8 @@ export default function PassportPhotoPage() {
     try {
       const formData = new FormData()
       formData.append('file', file)
+      formData.append('country', country)
+      formData.append('cropPosition', cropPosition)
       const res = await fetch(`${BACKEND_URL}/api/specialty/passport-photo`, { method: 'POST', body: formData })
       if (!res.ok) {
         const data = await res.json().catch(() => ({ error: 'Unknown error' })) as { error?: string }
@@ -51,8 +67,8 @@ export default function PassportPhotoPage() {
         <div style={{ maxWidth:'1100px', margin:'0 auto', display:'flex', alignItems:'center', gap:'16px' }}>
           <div style={{ width:'56px', height:'56px', background:'rgba(232,93,4,0.2)', borderRadius:'14px', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'28px' }}>🛂</div>
           <div>
-            <h1 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif", fontSize:'clamp(24px,3vw,36px)', fontWeight:800, color:'white', margin:0 }}>Passport Photo Maker</h1>
-            <p style={{ color:'rgba(255,255,255,0.65)', fontSize:'15px', margin:'6px 0 0' }}>Auto-crop to standard 2×2 inch passport photo size (600×600px at 300 DPI)</p>
+            <h1 style={{ fontFamily:"'Space Grotesk',system-ui,sans-serif", fontSize:'clamp(24px,3vw,36px)', fontWeight:800, color:'white', margin:0 }}>Passport Photo Editor</h1>
+            <p style={{ color:'rgba(255,255,255,0.65)', fontSize:'15px', margin:'6px 0 0' }}>Crop & size photos to official passport dimensions for the US, UK, EU, Canada, India & more</p>
           </div>
         </div>
       </div>
@@ -66,13 +82,43 @@ export default function PassportPhotoPage() {
       </div>
 
       <div style={{ maxWidth:'860px', margin:'20px auto 0', padding:'0 24px' }}>
-        <div style={{ background:'#EFF6FF', border:'1.5px solid #BFDBFE', borderRadius:'12px', padding:'14px 18px' }}>
-          <div style={{ fontSize:'14px', fontWeight:700, color:'#1E40AF', marginBottom:'4px' }}>📐 Output Specifications</div>
-          <div style={{ fontSize:'13px', color:'#1E3A8A', lineHeight:'1.6' }}>
-            600 × 600 pixels · 300 DPI · JPEG format · White background — matches standard US passport photo requirements (2×2 inches). The image is center-cropped to a square. For best results, use a photo where your face is centered and well-lit.
+          {/* Disclaimer banner */}
+          <div style={{ background:'#FFFBEB', border:'1.5px solid #FDE68A', borderRadius:'12px', padding:'12px 16px', marginBottom:'16px' }}>
+            <div style={{ fontSize:'13px', color:'#92400E', lineHeight:'1.6' }}>
+              <strong>⚠️ Please read:</strong> This tool crops and sizes your photo to the official <strong>dimensions</strong> for the selected country. You are responsible for meeting the other requirements — background color, head size and position, neutral expression, and no glasses where required. Always verify against the official government source before submitting.
+            </div>
+          </div>
+
+          {/* Country selector */}
+          <div style={{ background:'white', border:'1.5px solid #e2e8f0', borderRadius:'12px', padding:'18px' }}>
+            <label style={{ fontSize:'14px', fontWeight:700, color:'#0F2A4A', display:'block', marginBottom:'10px' }}>🌍 Select country</label>
+            <select value={country} onChange={e => setCountry(e.target.value)}
+              style={{ width:'100%', padding:'12px 14px', borderRadius:'10px', border:'1.5px solid #e2e8f0', fontSize:'14px', fontFamily:'inherit', color:'#0F2A4A', outline:'none', background:'white', boxSizing:'border-box' as const, marginBottom:'14px' }}>
+              {COUNTRIES.map(c => <option key={c.key} value={c.key}>{c.name} — {c.size}</option>)}
+            </select>
+
+            {/* Per-country info */}
+            <div style={{ background:'#EFF6FF', border:'1.5px solid #BFDBFE', borderRadius:'10px', padding:'12px 14px', marginBottom:'14px' }}>
+              <div style={{ fontSize:'13px', color:'#1E3A8A', lineHeight:'1.7' }}>
+                <div><strong>Size:</strong> {selectedCountry.size} · 300 DPI · JPEG</div>
+                <div><strong>Background:</strong> {selectedCountry.bg}</div>
+                <div style={{ marginTop:'4px', color:'#1E40AF' }}>{selectedCountry.note}</div>
+              </div>
+            </div>
+
+            {/* Crop position */}
+            <label style={{ fontSize:'14px', fontWeight:700, color:'#0F2A4A', display:'block', marginBottom:'8px' }}>Crop position <span style={{ color:'#94a3b8', fontWeight:400 }}>— which part of the photo to keep</span></label>
+            <div style={{ display:'flex', gap:'8px' }}>
+              {(['top','center','bottom'] as const).map(pos => (
+                <button key={pos} onClick={() => setCropPosition(pos)}
+                  style={{ flex:1, padding:'10px 6px', borderRadius:'10px', border:'1.5px solid', borderColor: cropPosition === pos ? '#E85D04' : '#e2e8f0', background: cropPosition === pos ? '#FFF7ED' : 'white', color: cropPosition === pos ? '#E85D04' : '#0F2A4A', fontSize:'13px', fontWeight:700, cursor:'pointer', fontFamily:'inherit', textTransform:'capitalize' as const }}>
+                  {pos}
+                </button>
+              ))}
+            </div>
+            <div style={{ fontSize:'12px', color:'#94a3b8', marginTop:'8px' }}>Tip: &quot;Top&quot; usually works best for passport photos since the head sits near the top of the frame.</div>
           </div>
         </div>
-      </div>
 
       <div style={{ maxWidth:'860px', margin:'16px auto 0', padding:'0 24px' }}>
         <div
