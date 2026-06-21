@@ -7,6 +7,21 @@ const GOLD_NISAB_G = 87.48
 const SILVER_NISAB_G = 612.36
 const ZAKAT_RATE = 0.025
 
+const CURRENCIES = [
+  { code: 'USD', symbol: '$',   name: 'US Dollar' },
+  { code: 'PKR', symbol: '₨',   name: 'Pakistani Rupee' },
+  { code: 'INR', symbol: '₹',   name: 'Indian Rupee' },
+  { code: 'GBP', symbol: '£',   name: 'British Pound' },
+  { code: 'EUR', symbol: '€',   name: 'Euro' },
+  { code: 'SAR', symbol: 'SAR ', name: 'Saudi Riyal' },
+  { code: 'AED', symbol: 'AED ', name: 'UAE Dirham' },
+  { code: 'BDT', symbol: '৳',   name: 'Bangladeshi Taka' },
+  { code: 'CAD', symbol: 'C$',  name: 'Canadian Dollar' },
+  { code: 'AUD', symbol: 'A$',  name: 'Australian Dollar' },
+  { code: 'MYR', symbol: 'RM',  name: 'Malaysian Ringgit' },
+  { code: 'TRY', symbol: '₺',   name: 'Turkish Lira' },
+]
+
 export default function ZakatCalculatorPage() {
   // Holdings
   const [cash, setCash] = useState('')
@@ -17,24 +32,41 @@ export default function ZakatCalculatorPage() {
   const [silverPrice, setSilverPrice] = useState('') // per gram
   const [priceStatus, setPriceStatus] = useState<'loading' | 'live' | 'manual'>('loading')
   const [nisabBasis, setNisabBasis] = useState<'gold' | 'silver'>('gold')
+  const [currency, setCurrency] = useState('USD')
+  const selectedCurrency = CURRENCIES.find(c => c.code === currency) || CURRENCIES[0]
+  const sym = selectedCurrency.symbol
 
-  // Fetch live prices (client-side, no key). Defensive: fall back to manual.
+  // Fetch live prices in the selected currency. Defensive: fall back to manual.
+  // gold-api.com gives USD per troy ounce (no key). For non-USD, convert via
+  // open.er-api.com (free, no key). If either fails, drop to manual entry.
   useEffect(() => {
     let cancelled = false
     const load = async () => {
+      setPriceStatus('loading')
       try {
         const [g, s] = await Promise.all([
           fetch('https://api.gold-api.com/price/XAU').then(r => r.json()),
           fetch('https://api.gold-api.com/price/XAG').then(r => r.json()),
         ])
-        const goldOz = Number(g?.price)
-        const silverOz = Number(s?.price)
-        if (!cancelled && goldOz > 0 && silverOz > 0) {
-          setGoldPrice((goldOz / TROY_OZ_G).toFixed(2))
-          setSilverPrice((silverOz / TROY_OZ_G).toFixed(2))
+        const goldOzUsd = Number(g?.price)
+        const silverOzUsd = Number(s?.price)
+        if (!(goldOzUsd > 0 && silverOzUsd > 0)) { if (!cancelled) setPriceStatus('manual'); return }
+
+        let fx = 1
+        if (currency !== 'USD') {
+          try {
+            const fxData = await fetch('https://open.er-api.com/v6/latest/USD').then(r => r.json())
+            const rate = Number(fxData?.rates?.[currency])
+            if (rate > 0) { fx = rate } else { if (!cancelled) setPriceStatus('manual'); return }
+          } catch {
+            if (!cancelled) setPriceStatus('manual'); return
+          }
+        }
+
+        if (!cancelled) {
+          setGoldPrice(((goldOzUsd / TROY_OZ_G) * fx).toFixed(2))
+          setSilverPrice(((silverOzUsd / TROY_OZ_G) * fx).toFixed(2))
           setPriceStatus('live')
-        } else if (!cancelled) {
-          setPriceStatus('manual')
         }
       } catch {
         if (!cancelled) setPriceStatus('manual')
@@ -42,7 +74,7 @@ export default function ZakatCalculatorPage() {
     }
     load()
     return () => { cancelled = true }
-  }, [])
+  }, [currency])
 
   const num = (v: string) => { const n = parseFloat(v); return isNaN(n) || n < 0 ? 0 : n }
 
@@ -81,15 +113,21 @@ export default function ZakatCalculatorPage() {
         {/* Price status */}
         <div style={{ background: priceStatus === 'live' ? '#F0FDF4' : '#FFFBEB', border: `1.5px solid ${priceStatus === 'live' ? '#BBF7D0' : '#FDE68A'}`, borderRadius:'10px', padding:'10px 14px', fontSize:'13px', color: priceStatus === 'live' ? '#166534' : '#92400E', marginBottom:'18px' }}>
           {priceStatus === 'loading' && '⏳ Loading live gold & silver prices…'}
-          {priceStatus === 'live' && '✅ Live gold & silver prices loaded (USD per gram). You can adjust them below if needed.'}
-          {priceStatus === 'manual' && '⚠️ Couldn\'t load live prices. Please enter today\'s gold & silver price per gram manually below.'}
+          {priceStatus === 'live' && `✅ Live gold & silver prices loaded (${currency} per gram). You can adjust them below if needed.`}
+          {priceStatus === 'manual' && `⚠️ Couldn't load live prices for ${currency}. Please enter today's gold & silver price per gram (in ${currency}) manually below.`}
         </div>
 
         {/* Holdings */}
         <div style={{ background:'white', border:'1.5px solid #e2e8f0', borderRadius:'14px', padding:'20px', marginBottom:'16px' }}>
-          <div style={{ fontSize:'15px', fontWeight:800, color:'#0F2A4A', marginBottom:'14px' }}>Your holdings</div>
+          <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'14px', gap:'12px', flexWrap:'wrap' as const }}>
+            <div style={{ fontSize:'15px', fontWeight:800, color:'#0F2A4A' }}>Your holdings</div>
+            <select value={currency} onChange={e => setCurrency(e.target.value)}
+              style={{ padding:'8px 12px', borderRadius:'10px', border:'1.5px solid #e2e8f0', fontSize:'13px', fontFamily:'inherit', color:'#0F2A4A', outline:'none', background:'white', fontWeight:700, cursor:'pointer' }}>
+              {CURRENCIES.map(c => <option key={c.code} value={c.code}>{c.code} — {c.name}</option>)}
+            </select>
+          </div>
           <div style={{ marginBottom:'14px' }}>
-            <label style={labelStyle}>💵 Cash & savings (USD)</label>
+            <label style={labelStyle}>💵 Cash & savings ({currency})</label>
             <input type="number" min="0" value={cash} onChange={e => setCash(e.target.value)} placeholder="0.00" style={inputStyle} />
           </div>
           <div style={{ display:'flex', gap:'12px', flexWrap:'wrap' as const }}>
@@ -106,7 +144,7 @@ export default function ZakatCalculatorPage() {
 
         {/* Prices (editable) */}
         <div style={{ background:'white', border:'1.5px solid #e2e8f0', borderRadius:'14px', padding:'20px', marginBottom:'16px' }}>
-          <div style={{ fontSize:'15px', fontWeight:800, color:'#0F2A4A', marginBottom:'14px' }}>Metal prices (per gram, USD)</div>
+          <div style={{ fontSize:'15px', fontWeight:800, color:'#0F2A4A', marginBottom:'14px' }}>Metal prices (per gram, {currency})</div>
           <div style={{ display:'flex', gap:'12px', flexWrap:'wrap' as const }}>
             <div style={{ flex:1, minWidth:'140px' }}>
               <label style={labelStyle}>Gold price / gram</label>
@@ -117,7 +155,7 @@ export default function ZakatCalculatorPage() {
               <input type="number" min="0" value={silverPrice} onChange={e => { setSilverPrice(e.target.value); setPriceStatus('manual') }} placeholder="0.00" style={inputStyle} />
             </div>
           </div>
-          <div style={{ fontSize:'12px', color:'#94a3b8', marginTop:'8px' }}>Prices are in USD per gram. To use another currency, enter your local gold & silver price per gram here.</div>
+          <div style={{ fontSize:'12px', color:'#94a3b8', marginTop:'8px' }}>Prices are in {currency} per gram. You can adjust them to match your local market rate.</div>
         </div>
 
         {/* Nisab basis */}
@@ -132,20 +170,20 @@ export default function ZakatCalculatorPage() {
             ))}
           </div>
           <div style={{ fontSize:'12px', color:'#94a3b8', marginTop:'10px', lineHeight:'1.6' }}>
-            Gold nisab ≈ {gp > 0 ? `$${money(goldNisabValue)}` : '—'} · Silver nisab ≈ {sp > 0 ? `$${money(silverNisabValue)}` : '—'}. Many scholars recommend the silver nisab (lower threshold) so more wealth benefits recipients; others use gold. Choose per your guidance.
+            Gold nisab ≈ {gp > 0 ? `${sym}${money(goldNisabValue)}` : '—'} · Silver nisab ≈ {sp > 0 ? `${sym}${money(silverNisabValue)}` : '—'}. Many scholars recommend the silver nisab (lower threshold) so more wealth benefits recipients; others use gold. Choose per your guidance.
           </div>
         </div>
 
         {/* Result */}
         <div style={{ background:'linear-gradient(135deg,#0F2A4A,#1a3a5c)', borderRadius:'16px', padding:'24px', color:'white', marginBottom:'20px' }}>
           <div style={{ fontSize:'13px', color:'rgba(255,255,255,0.7)', marginBottom:'6px' }}>Total zakatable wealth</div>
-          <div style={{ fontSize:'24px', fontWeight:800, marginBottom:'16px' }}>${money(totalWealth)}</div>
+          <div style={{ fontSize:'24px', fontWeight:800, marginBottom:'16px' }}>{sym}{money(totalWealth)}</div>
           <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', borderTop:'1px solid rgba(255,255,255,0.15)', paddingTop:'16px' }}>
             <div>
               <div style={{ fontSize:'13px', color:'rgba(255,255,255,0.7)' }}>{meetsNisab ? 'Zakat due (2.5%)' : 'Below nisab — no Zakat due'}</div>
-              {!meetsNisab && activeNisab > 0 && <div style={{ fontSize:'12px', color:'rgba(255,255,255,0.55)', marginTop:'2px' }}>You need ${money(activeNisab)} to reach the {nisabBasis} nisab.</div>}
+              {!meetsNisab && activeNisab > 0 && <div style={{ fontSize:'12px', color:'rgba(255,255,255,0.55)', marginTop:'2px' }}>You need {sym}{money(activeNisab)} to reach the {nisabBasis} nisab.</div>}
             </div>
-            <div style={{ fontSize:'30px', fontWeight:800, color:'#F48C42' }}>${money(zakatDue)}</div>
+            <div style={{ fontSize:'30px', fontWeight:800, color:'#F48C42' }}>{sym}{money(zakatDue)}</div>
           </div>
         </div>
 
@@ -174,7 +212,7 @@ export default function ZakatCalculatorPage() {
             { q:'Should I use the gold or silver nisab?', a:'Both are valid. The silver nisab is a lower threshold, so using it means more people pay Zakat and more wealth reaches recipients — many scholars recommend it for this reason. Others use the gold nisab. Follow the guidance of a scholar you trust.' },
             { q:'How much Zakat do I pay?', a:'Zakat is 2.5% of your qualifying wealth, provided that wealth meets or exceeds the nisab and has been held for one lunar year (hawl).' },
             { q:'Does this include jewellery I wear?', a:'Scholars differ on whether gold and silver jewellery in regular personal use is subject to Zakat. This calculator includes any gold and silver grams you enter — consult a scholar on how to treat jewellery in your case.' },
-            { q:'Are live prices accurate?', a:'Prices are fetched from a live market source and shown per gram in USD. They are estimates for calculation purposes. You can always adjust them or enter your local market price. If live prices fail to load, simply enter today\'s gold and silver price per gram.' },
+            { q:'Can I calculate Zakat in my own currency?', a:'Yes. Choose your currency from the dropdown (USD, PKR, INR, GBP, EUR, SAR, AED and more). Live gold and silver prices are converted to your currency automatically. If live conversion is unavailable, you can enter today\'s local gold and silver price per gram manually — the calculation works the same way.' },
             { q:'Does this cover all my assets?', a:'This tool covers cash, gold, and silver. It does not include business inventory, shares, rental income, debts owed to you, or liabilities you owe, all of which can affect your total Zakat. Consult a scholar for a complete assessment.' },
           ].map(faq => (
             <details key={faq.q} style={{ background:'#f8fafc', border:'1.5px solid #e2e8f0', borderRadius:'10px', padding:'14px 18px', marginBottom:'8px' }}>
