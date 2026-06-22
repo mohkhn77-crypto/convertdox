@@ -472,11 +472,6 @@ export default function PdfAnnotator() {
             <button onClick={() => { setFile(null); setPdf(null); setStrokes({}); setShapes({}); setTexts({}) }} style={{ ...btn(), color: '#DC2626' }}>✕ Close</button>
           </div>
 
-          {tool === 'text' && (
-            <div style={{ background: '#FFF7ED', border: '1.5px solid #FDBA74', borderRadius: '10px', padding: '10px 14px', marginBottom: '12px', fontSize: '13px', color: '#9A3412', fontWeight: 600 }}>
-              {pendingTextPos ? '⌨️ Type your text. Press Enter to place it, Escape to cancel. Click again to start a new text.' : '📍 Click on the page where you want to add text, then start typing.'}
-            </div>
-          )}
           {/* Hidden key-catcher: captures typing for in-place canvas text */}
           {tool === 'text' && (
             <textarea
