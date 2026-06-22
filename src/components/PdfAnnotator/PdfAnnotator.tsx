@@ -5,7 +5,8 @@ import type { PDFDocumentProxy } from '@/lib/pdf-config'
 
 // A stroke is a list of points in PDF-space (origin bottom-left, in PDF points).
 type Point = { x: number; y: number }
-type Stroke = { points: Point[]; color: string; width: number }
+type ToolKind = 'pencil' | 'highlighter' | 'eraser'
+type Stroke = { points: Point[]; color: string; width: number; opacity: number }
 type PageStrokes = { [pageNumber: number]: Stroke[] }
 
 const RENDER_SCALE = 1.5 // display scale for the page canvas
@@ -16,8 +17,15 @@ export default function PdfAnnotator() {
   const [pageNum, setPageNum] = useState(1)
   const [pageCount, setPageCount] = useState(0)
   const [strokes, setStrokes] = useState<PageStrokes>({})
-  const [color] = useState('#E11D48') // 1a: fixed pencil color (red), tools added later
-  const [penWidth] = useState(3)
+  const [tool, setTool] = useState<ToolKind>('pencil')
+  const [penColor, setPenColor] = useState('#E11D48')
+  const [penWidth, setPenWidth] = useState(3)
+  const [hlColor, setHlColor] = useState('#FACC15')
+  const [hlWidth, setHlWidth] = useState(16)
+  // Active stroke style derived from the selected tool
+  const activeColor = tool === 'highlighter' ? hlColor : penColor
+  const activeWidth = tool === 'highlighter' ? hlWidth : penWidth
+  const activeOpacity = tool === 'highlighter' ? 0.35 : 1
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
 
@@ -57,6 +65,7 @@ export default function PdfAnnotator() {
     ctx.clearRect(0, 0, overlay.width, overlay.height)
     const pageStrokes = strokes[pageNum] || []
     for (const st of pageStrokes) {
+      ctx.globalAlpha = st.opacity
       ctx.strokeStyle = st.color
       ctx.lineWidth = st.width
       ctx.lineCap = 'round'; ctx.lineJoin = 'round'
@@ -68,6 +77,7 @@ export default function PdfAnnotator() {
       })
       ctx.stroke()
     }
+    ctx.globalAlpha = 1
   }, [strokes, pageNum])
 
   // Render the current page to the page canvas + size the overlay to match
@@ -108,23 +118,41 @@ export default function PdfAnnotator() {
     return { x: (e.clientX - rect.left) * scaleX, y: (e.clientY - rect.top) * scaleY }
   }
 
+  // Distance from a point to a stroke (in PDF units), for the eraser
+  const eraseAt = (pdfPt: Point) => {
+    const tol = 6 // PDF-units tolerance
+    setStrokes(prev => {
+      const pageStrokes = prev[pageNum] || []
+      const kept = pageStrokes.filter(st => {
+        // remove stroke if any of its points is within tolerance of the erase point
+        return !st.points.some(p => Math.hypot(p.x - pdfPt.x, p.y - pdfPt.y) <= tol + st.width)
+      })
+      if (kept.length === pageStrokes.length) return prev
+      return { ...prev, [pageNum]: kept }
+    })
+  }
+
   const onPointerDown = (e: React.PointerEvent) => {
     if (!viewportRef.current) return
     ;(e.target as HTMLElement).setPointerCapture(e.pointerId)
     const { x, y } = getLocalXY(e)
-    drawingRef.current = { active: true, pts: [toPdfPoint(x, y)] }
+    const pdfPt = toPdfPoint(x, y)
+    if (tool === 'eraser') { drawingRef.current = { active: true, pts: [] }; eraseAt(pdfPt); return }
+    drawingRef.current = { active: true, pts: [pdfPt] }
   }
 
   const onPointerMove = (e: React.PointerEvent) => {
     if (!drawingRef.current.active) return
     const { x, y } = getLocalXY(e)
-    drawingRef.current.pts.push(toPdfPoint(x, y))
-    // live draw the in-progress stroke on top of committed strokes
+    const pdfPt = toPdfPoint(x, y)
+    if (tool === 'eraser') { eraseAt(pdfPt); return }
+    drawingRef.current.pts.push(pdfPt)
     const overlay = overlayRef.current!
     const vp = viewportRef.current!
     const ctx = overlay.getContext('2d')!
     redrawOverlay()
-    ctx.strokeStyle = color; ctx.lineWidth = penWidth; ctx.lineCap = 'round'; ctx.lineJoin = 'round'
+    ctx.globalAlpha = activeOpacity
+    ctx.strokeStyle = activeColor; ctx.lineWidth = activeWidth; ctx.lineCap = 'round'; ctx.lineJoin = 'round'
     ctx.beginPath()
     drawingRef.current.pts.forEach((p, i) => {
       const sx = p.x * (vp.width / vp.pdfWidth)
@@ -132,14 +160,16 @@ export default function PdfAnnotator() {
       if (i === 0) ctx.moveTo(sx, sy); else ctx.lineTo(sx, sy)
     })
     ctx.stroke()
+    ctx.globalAlpha = 1
   }
 
   const onPointerUp = () => {
     if (!drawingRef.current.active) return
     const pts = drawingRef.current.pts
+    const wasEraser = tool === 'eraser'
     drawingRef.current = { active: false, pts: [] }
-    if (pts.length < 2) return
-    setStrokes(prev => ({ ...prev, [pageNum]: [...(prev[pageNum] || []), { points: pts, color, width: penWidth }] }))
+    if (wasEraser || pts.length < 2) return
+    setStrokes(prev => ({ ...prev, [pageNum]: [...(prev[pageNum] || []), { points: pts, color: activeColor, width: activeWidth, opacity: activeOpacity }] }))
   }
 
   const clearPage = () => setStrokes(prev => ({ ...prev, [pageNum]: [] }))
@@ -170,6 +200,7 @@ export default function PdfAnnotator() {
               end: { x: b.x, y: b.y },
               thickness: st.width,
               color: rgb(c.r, c.g, c.b),
+              opacity: st.opacity,
             })
           }
         }
@@ -213,7 +244,21 @@ export default function PdfAnnotator() {
         <div style={{ marginTop: '8px' }}>
           {/* Toolbar */}
           <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' as const, alignItems: 'center', padding: '12px', background: '#f8fafc', border: '1.5px solid #e2e8f0', borderRadius: '12px', marginBottom: '12px', position: 'sticky' as const, top: '0', zIndex: 10 }}>
-            <span style={btn(true)}>✏️ Pencil</span>
+            <button onClick={() => setTool('pencil')} style={btn(tool === 'pencil')}>✏️ Pencil</button>
+            <button onClick={() => setTool('highlighter')} style={btn(tool === 'highlighter')}>🖍 Highlighter</button>
+            <button onClick={() => setTool('eraser')} style={btn(tool === 'eraser')}>🩹 Eraser</button>
+            {tool === 'pencil' && (
+              <>
+                <input type="color" value={penColor} onChange={e => setPenColor(e.target.value)} title="Pencil color" style={{ width: '34px', height: '34px', border: '1.5px solid #e2e8f0', borderRadius: '8px', cursor: 'pointer', background: 'white' }} />
+                <input type="range" min={1} max={12} value={penWidth} onChange={e => setPenWidth(Number(e.target.value))} title="Pencil width" style={{ accentColor: '#E85D04' }} />
+              </>
+            )}
+            {tool === 'highlighter' && (
+              <>
+                <input type="color" value={hlColor} onChange={e => setHlColor(e.target.value)} title="Highlighter color" style={{ width: '34px', height: '34px', border: '1.5px solid #e2e8f0', borderRadius: '8px', cursor: 'pointer', background: 'white' }} />
+                <input type="range" min={8} max={40} value={hlWidth} onChange={e => setHlWidth(Number(e.target.value))} title="Highlighter width" style={{ accentColor: '#E85D04' }} />
+              </>
+            )}
             <button onClick={clearPage} style={btn()}>Clear page</button>
             <div style={{ flex: 1 }} />
             <button onClick={() => setPageNum(n => Math.max(1, n - 1))} disabled={pageNum <= 1} style={btn()}>◀ Prev</button>
@@ -232,7 +277,7 @@ export default function PdfAnnotator() {
                 onPointerDown={onPointerDown}
                 onPointerMove={onPointerMove}
                 onPointerUp={onPointerUp}
-                style={{ position: 'absolute', top: 0, left: 0, maxWidth: '100%', touchAction: 'none', cursor: 'crosshair' }} />
+                style={{ position: 'absolute', top: 0, left: 0, maxWidth: '100%', touchAction: 'none', cursor: tool === 'eraser' ? 'cell' : 'crosshair' }} />
             </div>
           </div>
         </div>
