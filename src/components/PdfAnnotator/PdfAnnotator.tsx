@@ -28,6 +28,7 @@ export default function PdfAnnotator() {
   const [texts, setTexts] = useState<PageTexts>({})
   const [editingTextId, setEditingTextId] = useState<string | null>(null)
   const [textSize, setTextSize] = useState(16)
+  const [vpState, setVpState] = useState<{ width: number; height: number; pdfWidth: number; pdfHeight: number } | null>(null)
   const dragTextRef = useRef<{ id: string | null; offsetX: number; offsetY: number }>({ id: null, offsetX: 0, offsetY: 0 })
   const [tool, setTool] = useState<ToolKind>('pencil')
   const [penColor, setPenColor] = useState('#E11D48')
@@ -140,7 +141,9 @@ export default function PdfAnnotator() {
     overlay.width = viewport.width
     overlay.height = viewport.height
     await page.render({ canvasContext: ctx, viewport }).promise
-    viewportRef.current = { width: viewport.width, height: viewport.height, pdfWidth: unscaled.width, pdfHeight: unscaled.height }
+    const vpInfo = { width: viewport.width, height: viewport.height, pdfWidth: unscaled.width, pdfHeight: unscaled.height }
+    viewportRef.current = vpInfo
+    setVpState(vpInfo)
     redrawOverlay()
   }, [pdf, pageNum, redrawOverlay])
 
@@ -450,29 +453,27 @@ export default function PdfAnnotator() {
                 onPointerMove={(e) => { onPointerMove(e); moveTextDrag(e) }}
                 onPointerUp={() => { onPointerUp(); endTextDrag() }}
                 style={{ position: 'absolute', top: 0, left: 0, maxWidth: '100%', touchAction: 'none', zIndex: 10, cursor: tool === 'eraser' ? 'cell' : (tool === 'text' ? 'text' : 'crosshair') }} />
-              {/* Text layer */}
-              {(texts[pageNum] || []).map(t => {
-                const vp = viewportRef.current
-                if (!vp) return null
-                const sx = t.pos.x * (vp.width / vp.pdfWidth)
-                const sy = (vp.pdfHeight - t.pos.y) * (vp.height / vp.pdfHeight)
-                const rect = overlayRef.current?.getBoundingClientRect()
-                const dispScale = rect ? rect.width / (overlayRef.current!.width || 1) : 1
+              {/* Text layer — positioned with percentages so it tracks the displayed canvas at any scale */}
+              {vpState && (texts[pageNum] || []).map(t => {
+                const leftPct = (t.pos.x / vpState.pdfWidth) * 100
+                const topPct = ((vpState.pdfHeight - t.pos.y) / vpState.pdfHeight) * 100
                 return (
                   <div key={t.id}
-                    style={{ position: 'absolute', left: sx * dispScale, top: sy * dispScale, pointerEvents: tool === 'text' ? 'auto' : 'none', zIndex: 20 }}
+                    style={{ position: 'absolute', left: `${leftPct}%`, top: `${topPct}%`, pointerEvents: tool === 'text' ? 'auto' : 'none', zIndex: editingTextId === t.id ? 30 : 20 }}
                     onPointerDown={(e) => { if (editingTextId === t.id) e.stopPropagation(); else startTextDrag(e, t) }}>
                     {editingTextId === t.id ? (
                       <textarea
+                        id={`pdf-text-${t.id}`}
+                        name={`pdf-text-${t.id}`}
                         autoFocus
                         value={t.text}
                         onChange={(e) => updateText(t.id, e.target.value)}
                         onBlur={() => finishText(t.id)}
                         onPointerDown={(e) => e.stopPropagation()}
-                        style={{ fontSize: `${t.size * dispScale}px`, color: t.color, fontFamily: 'Helvetica, Arial, sans-serif', border: '1px dashed #E85D04', background: 'rgba(255,255,255,0.7)', outline: 'none', resize: 'both', minWidth: '60px', lineHeight: 1.2, padding: '2px' }} />
+                        style={{ fontSize: `${t.size}px`, color: t.color, fontFamily: 'Helvetica, Arial, sans-serif', border: '1px dashed #E85D04', background: 'rgba(255,255,255,0.85)', outline: 'none', resize: 'both', minWidth: '80px', minHeight: '24px', lineHeight: 1.2, padding: '2px' }} />
                     ) : (
                       <div onDoubleClick={() => tool === 'text' && setEditingTextId(t.id)}
-                        style={{ fontSize: `${t.size * dispScale}px`, color: t.color, fontFamily: 'Helvetica, Arial, sans-serif', whiteSpace: 'pre-wrap', lineHeight: 1.2, cursor: tool === 'text' ? 'move' : 'default', padding: '2px', userSelect: 'none' }}>
+                        style={{ fontSize: `${t.size}px`, color: t.color, fontFamily: 'Helvetica, Arial, sans-serif', whiteSpace: 'pre-wrap', lineHeight: 1.2, cursor: tool === 'text' ? 'move' : 'default', padding: '2px', userSelect: 'none' }}>
                         {t.text || ' '}
                       </div>
                     )}
