@@ -179,17 +179,18 @@ export default function PdfAnnotator() {
 
   const onPointerDown = (e: React.PointerEvent) => {
     if (!viewportRef.current) return
-    ;(e.target as HTMLElement).setPointerCapture(e.pointerId)
     const { x, y } = getLocalXY(e)
     const pdfPt = toPdfPoint(x, y)
-    if (tool === 'eraser') { drawingRef.current = { active: true, pts: [] }; eraseAt(pdfPt); return }
-    if (SHAPE_TOOLS.includes(tool)) { shapeRef.current = { active: true, start: pdfPt, end: pdfPt }; return }
+    // Text tool: place a box and let the textarea take focus — do NOT capture the pointer
     if (tool === 'text') {
       const id = `t-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`
       setTexts(prev => ({ ...prev, [pageNum]: [...(prev[pageNum] || []), { id, pos: pdfPt, text: '', size: textSize, color: penColor }] }))
       setEditingTextId(id)
       return
     }
+    ;(e.target as HTMLElement).setPointerCapture(e.pointerId)
+    if (tool === 'eraser') { drawingRef.current = { active: true, pts: [] }; eraseAt(pdfPt); return }
+    if (SHAPE_TOOLS.includes(tool)) { shapeRef.current = { active: true, start: pdfPt, end: pdfPt }; return }
     drawingRef.current = { active: true, pts: [pdfPt] }
   }
 
@@ -448,7 +449,7 @@ export default function PdfAnnotator() {
                 onPointerDown={onPointerDown}
                 onPointerMove={(e) => { onPointerMove(e); moveTextDrag(e) }}
                 onPointerUp={() => { onPointerUp(); endTextDrag() }}
-                style={{ position: 'absolute', top: 0, left: 0, maxWidth: '100%', touchAction: 'none', cursor: tool === 'eraser' ? 'cell' : (tool === 'text' ? 'text' : 'crosshair') }} />
+                style={{ position: 'absolute', top: 0, left: 0, maxWidth: '100%', touchAction: 'none', zIndex: 10, cursor: tool === 'eraser' ? 'cell' : (tool === 'text' ? 'text' : 'crosshair') }} />
               {/* Text layer */}
               {(texts[pageNum] || []).map(t => {
                 const vp = viewportRef.current
@@ -459,14 +460,15 @@ export default function PdfAnnotator() {
                 const dispScale = rect ? rect.width / (overlayRef.current!.width || 1) : 1
                 return (
                   <div key={t.id}
-                    style={{ position: 'absolute', left: sx * dispScale, top: sy * dispScale, pointerEvents: tool === 'text' ? 'auto' : 'none' }}
-                    onPointerDown={(e) => startTextDrag(e, t)}>
+                    style={{ position: 'absolute', left: sx * dispScale, top: sy * dispScale, pointerEvents: tool === 'text' ? 'auto' : 'none', zIndex: 20 }}
+                    onPointerDown={(e) => { if (editingTextId === t.id) e.stopPropagation(); else startTextDrag(e, t) }}>
                     {editingTextId === t.id ? (
                       <textarea
                         autoFocus
                         value={t.text}
                         onChange={(e) => updateText(t.id, e.target.value)}
                         onBlur={() => finishText(t.id)}
+                        onPointerDown={(e) => e.stopPropagation()}
                         style={{ fontSize: `${t.size * dispScale}px`, color: t.color, fontFamily: 'Helvetica, Arial, sans-serif', border: '1px dashed #E85D04', background: 'rgba(255,255,255,0.7)', outline: 'none', resize: 'both', minWidth: '60px', lineHeight: 1.2, padding: '2px' }} />
                     ) : (
                       <div onDoubleClick={() => tool === 'text' && setEditingTextId(t.id)}
