@@ -26,6 +26,58 @@ export default function PdfAnnotator() {
   const [strokes, setStrokes] = useState<PageStrokes>({})
   const [shapes, setShapes] = useState<PageShapes>({})
   const [texts, setTexts] = useState<PageTexts>({})
+  // Undo/redo history: snapshots of {strokes, shapes, texts}
+  type Snapshot = { strokes: PageStrokes; shapes: PageShapes; texts: PageTexts }
+  const historyRef = useRef<Snapshot[]>([])
+  const historyPosRef = useRef<number>(-1)
+  const [canUndo, setCanUndo] = useState(false)
+  const [canRedo, setCanRedo] = useState(false)
+  const strokesRef = useRef<PageStrokes>({})
+  const shapesRef = useRef<PageShapes>({})
+  const textsRef = useRef<PageTexts>({})
+  // keep refs in sync so pushHistory captures the latest committed state
+  useEffect(() => { strokesRef.current = strokes }, [strokes])
+  useEffect(() => { shapesRef.current = shapes }, [shapes])
+  useEffect(() => { textsRef.current = texts }, [texts])
+
+  function deepClone<T>(o: T): T { return JSON.parse(JSON.stringify(o)) }
+  const syncUndoRedoFlags = () => {
+    setCanUndo(historyPosRef.current > 0)
+    setCanRedo(historyPosRef.current < historyRef.current.length - 1)
+  }
+  // Call BEFORE a mutating action: snapshot current state, drop redo-future, cap at 50
+  const pushHistory = () => {
+    const snap: Snapshot = { strokes: deepClone(strokesRef.current), shapes: deepClone(shapesRef.current), texts: deepClone(textsRef.current) }
+    const cut = historyRef.current.slice(0, historyPosRef.current + 1)
+    cut.push(snap)
+    while (cut.length > 50) cut.shift()
+    historyRef.current = cut
+    historyPosRef.current = cut.length - 1
+    syncUndoRedoFlags()
+  }
+  const resetHistory = () => {
+    historyRef.current = [{ strokes: {}, shapes: {}, texts: {} }]
+    historyPosRef.current = 0
+    syncUndoRedoFlags()
+  }
+  const applySnapshot = (snap: Snapshot) => {
+    setStrokes(deepClone(snap.strokes))
+    setShapes(deepClone(snap.shapes))
+    setTexts(deepClone(snap.texts))
+  }
+  const undo = () => {
+    if (historyPosRef.current <= 0) return
+    historyPosRef.current -= 1
+    applySnapshot(historyRef.current[historyPosRef.current])
+    syncUndoRedoFlags()
+    setPendingTextPos(null); setDraftText('')
+  }
+  const redo = () => {
+    if (historyPosRef.current >= historyRef.current.length - 1) return
+    historyPosRef.current += 1
+    applySnapshot(historyRef.current[historyPosRef.current])
+    syncUndoRedoFlags()
+  }
   const [textSize, setTextSize] = useState(16)
   const [vpState, setVpState] = useState<{ width: number; height: number; pdfWidth: number; pdfHeight: number } | null>(null)
   const [pendingTextPos, setPendingTextPos] = useState<Point | null>(null)
@@ -67,6 +119,8 @@ export default function PdfAnnotator() {
       setStrokes({})
       setShapes({})
       setTexts({})
+      strokesRef.current = {}; shapesRef.current = {}; textsRef.current = {}
+      resetHistory()
       setPendingTextPos(null)
       setDraftText('')
     } catch {
@@ -186,6 +240,19 @@ export default function PdfAnnotator() {
 
   useEffect(() => { redrawOverlay() }, [strokes, shapes, texts, pageNum, pendingTextPos, draftText, cursorOn, redrawOverlay])
 
+  // Undo/redo keyboard shortcuts
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (!file) return
+      const mod = e.metaKey || e.ctrlKey
+      if (mod && e.key.toLowerCase() === 'z' && !e.shiftKey) { e.preventDefault(); undo() }
+      else if (mod && (e.key.toLowerCase() === 'y' || (e.key.toLowerCase() === 'z' && e.shiftKey))) { e.preventDefault(); redo() }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [file])
+
   // Blink the text cursor while placing text
   useEffect(() => {
     if (!pendingTextPos) return
@@ -211,6 +278,7 @@ export default function PdfAnnotator() {
   // Distance from a point to a stroke (in PDF units), for the eraser
   const eraseAt = (pdfPt: Point) => {
     const tol = 6 // PDF-units tolerance
+    let didErase = false
     setStrokes(prev => {
       const pageStrokes = prev[pageNum] || []
       const kept = pageStrokes.filter(st => {
@@ -218,8 +286,10 @@ export default function PdfAnnotator() {
         return !st.points.some(p => Math.hypot(p.x - pdfPt.x, p.y - pdfPt.y) <= tol + st.width)
       })
       if (kept.length === pageStrokes.length) return prev
+      didErase = true
       return { ...prev, [pageNum]: kept }
     })
+    if (didErase) { /* snapshot pre-state captured at pointer-down via pushHistory */ }
   }
 
   const onPointerDown = (e: React.PointerEvent) => {
@@ -229,6 +299,7 @@ export default function PdfAnnotator() {
     // Text tool: commit any current draft, then start a fresh one at the click point
     if (tool === 'text') {
       if (pendingTextPos && draftText.trim()) {
+        pushHistory()
         const id = `t-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`
         setTexts(prev => ({ ...prev, [pageNum]: [...(prev[pageNum] || []), { id, pos: pendingTextPos, text: draftText, size: textSize, color: penColor }] }))
       }
@@ -239,8 +310,9 @@ export default function PdfAnnotator() {
       return
     }
     ;(e.target as HTMLElement).setPointerCapture(e.pointerId)
-    if (tool === 'eraser') { drawingRef.current = { active: true, pts: [] }; eraseAt(pdfPt); return }
+    if (tool === 'eraser') { pushHistory(); drawingRef.current = { active: true, pts: [] }; eraseAt(pdfPt); return }
     if (SHAPE_TOOLS.includes(tool)) { shapeRef.current = { active: true, start: pdfPt, end: pdfPt }; return }
+    pushHistory()
     drawingRef.current = { active: true, pts: [pdfPt] }
   }
 
@@ -281,6 +353,7 @@ export default function PdfAnnotator() {
       const { start, end } = shapeRef.current
       shapeRef.current = { active: false, start: null, end: null }
       if (start && end && (Math.abs(start.x - end.x) > 2 || Math.abs(start.y - end.y) > 2)) {
+        pushHistory()
         setShapes(prev => ({ ...prev, [pageNum]: [...(prev[pageNum] || []), { kind: tool as ShapeKind, start, end, color: activeColor, width: activeWidth }] }))
       }
       return
@@ -293,10 +366,11 @@ export default function PdfAnnotator() {
     setStrokes(prev => ({ ...prev, [pageNum]: [...(prev[pageNum] || []), { points: pts, color: activeColor, width: activeWidth, opacity: activeOpacity }] }))
   }
 
-  const clearPage = () => { setStrokes(prev => ({ ...prev, [pageNum]: [] })); setShapes(prev => ({ ...prev, [pageNum]: [] })); setTexts(prev => ({ ...prev, [pageNum]: [] })); setPendingTextPos(null); setDraftText('') }
+  const clearPage = () => { pushHistory(); setStrokes(prev => ({ ...prev, [pageNum]: [] })); setShapes(prev => ({ ...prev, [pageNum]: [] })); setTexts(prev => ({ ...prev, [pageNum]: [] })); setPendingTextPos(null); setDraftText('') }
 
   const commitPendingText = () => {
     if (pendingTextPos && draftText.trim()) {
+      pushHistory()
       const id = `t-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`
       setTexts(prev => ({ ...prev, [pageNum]: [...(prev[pageNum] || []), { id, pos: pendingTextPos, text: draftText, size: textSize, color: penColor }] }))
     }
@@ -462,6 +536,8 @@ export default function PdfAnnotator() {
                 <span style={{ fontSize: '12px', color: '#64748b' }}>Click the page to choose position, then type below</span>
               </>
             )}
+            <button onClick={undo} disabled={!canUndo} style={{ ...btn(), opacity: canUndo ? 1 : 0.4, cursor: canUndo ? 'pointer' : 'not-allowed' }} title="Undo (Ctrl/Cmd+Z)">↶ Undo</button>
+            <button onClick={redo} disabled={!canRedo} style={{ ...btn(), opacity: canRedo ? 1 : 0.4, cursor: canRedo ? 'pointer' : 'not-allowed' }} title="Redo (Ctrl/Cmd+Shift+Z)">↷ Redo</button>
             <button onClick={clearPage} style={btn()}>Clear page</button>
             <div style={{ flex: 1 }} />
             <button onClick={() => setPageNum(n => Math.max(1, n - 1))} disabled={pageNum <= 1} style={btn()}>◀ Prev</button>
