@@ -5,12 +5,14 @@ import type { PDFDocumentProxy } from '@/lib/pdf-config'
 
 // A stroke is a list of points in PDF-space (origin bottom-left, in PDF points).
 type Point = { x: number; y: number }
-type ToolKind = 'pencil' | 'highlighter' | 'eraser' | 'rect' | 'ellipse' | 'line' | 'check' | 'cross'
+type ToolKind = 'pencil' | 'highlighter' | 'eraser' | 'rect' | 'ellipse' | 'line' | 'check' | 'cross' | 'text'
 type ShapeKind = 'rect' | 'ellipse' | 'line' | 'check' | 'cross'
 type Stroke = { points: Point[]; color: string; width: number; opacity: number }
 type Shape = { kind: ShapeKind; start: Point; end: Point; color: string; width: number }
 type PageStrokes = { [pageNumber: number]: Stroke[] }
 type PageShapes = { [pageNumber: number]: Shape[] }
+type TextItem = { id: string; pos: Point; text: string; size: number; color: string }
+type PageTexts = { [pageNumber: number]: TextItem[] }
 
 const SHAPE_TOOLS: ToolKind[] = ['rect', 'ellipse', 'line', 'check', 'cross']
 
@@ -23,6 +25,10 @@ export default function PdfAnnotator() {
   const [pageCount, setPageCount] = useState(0)
   const [strokes, setStrokes] = useState<PageStrokes>({})
   const [shapes, setShapes] = useState<PageShapes>({})
+  const [texts, setTexts] = useState<PageTexts>({})
+  const [editingTextId, setEditingTextId] = useState<string | null>(null)
+  const [textSize, setTextSize] = useState(16)
+  const dragTextRef = useRef<{ id: string | null; offsetX: number; offsetY: number }>({ id: null, offsetX: 0, offsetY: 0 })
   const [tool, setTool] = useState<ToolKind>('pencil')
   const [penColor, setPenColor] = useState('#E11D48')
   const [penWidth, setPenWidth] = useState(3)
@@ -57,6 +63,7 @@ export default function PdfAnnotator() {
       setPageNum(1)
       setStrokes({})
       setShapes({})
+      setTexts({})
     } catch {
       setError('Could not open this PDF.')
     } finally {
@@ -177,6 +184,12 @@ export default function PdfAnnotator() {
     const pdfPt = toPdfPoint(x, y)
     if (tool === 'eraser') { drawingRef.current = { active: true, pts: [] }; eraseAt(pdfPt); return }
     if (SHAPE_TOOLS.includes(tool)) { shapeRef.current = { active: true, start: pdfPt, end: pdfPt }; return }
+    if (tool === 'text') {
+      const id = `t-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`
+      setTexts(prev => ({ ...prev, [pageNum]: [...(prev[pageNum] || []), { id, pos: pdfPt, text: '', size: textSize, color: penColor }] }))
+      setEditingTextId(id)
+      return
+    }
     drawingRef.current = { active: true, pts: [pdfPt] }
   }
 
@@ -229,16 +242,50 @@ export default function PdfAnnotator() {
     setStrokes(prev => ({ ...prev, [pageNum]: [...(prev[pageNum] || []), { points: pts, color: activeColor, width: activeWidth, opacity: activeOpacity }] }))
   }
 
-  const clearPage = () => { setStrokes(prev => ({ ...prev, [pageNum]: [] })); setShapes(prev => ({ ...prev, [pageNum]: [] })) }
+  const clearPage = () => { setStrokes(prev => ({ ...prev, [pageNum]: [] })); setShapes(prev => ({ ...prev, [pageNum]: [] })); setTexts(prev => ({ ...prev, [pageNum]: [] })) }
+
+  const updateText = (id: string, value: string) => {
+    setTexts(prev => ({ ...prev, [pageNum]: (prev[pageNum] || []).map(t => t.id === id ? { ...t, text: value } : t) }))
+  }
+  const finishText = (id: string) => {
+    setTexts(prev => ({ ...prev, [pageNum]: (prev[pageNum] || []).filter(t => t.id !== id || t.text.trim() !== '') }))
+    setEditingTextId(null)
+  }
+  const startTextDrag = (e: React.PointerEvent, t: TextItem) => {
+    if (tool !== 'text') return
+    e.stopPropagation()
+    const vp = viewportRef.current!
+    const s = { x: t.pos.x * (vp.width / vp.pdfWidth), y: (vp.pdfHeight - t.pos.y) * (vp.height / vp.pdfHeight) }
+    const rect = overlayRef.current!.getBoundingClientRect()
+    const scaleX = overlayRef.current!.width / rect.width
+    const scaleY = overlayRef.current!.height / rect.height
+    const px = (e.clientX - rect.left) * scaleX
+    const py = (e.clientY - rect.top) * scaleY
+    dragTextRef.current = { id: t.id, offsetX: px - s.x, offsetY: py - s.y }
+    ;(e.target as HTMLElement).setPointerCapture(e.pointerId)
+  }
+  const moveTextDrag = (e: React.PointerEvent) => {
+    if (!dragTextRef.current.id) return
+    const rect = overlayRef.current!.getBoundingClientRect()
+    const scaleX = overlayRef.current!.width / rect.width
+    const scaleY = overlayRef.current!.height / rect.height
+    const px = (e.clientX - rect.left) * scaleX - dragTextRef.current.offsetX
+    const py = (e.clientY - rect.top) * scaleY - dragTextRef.current.offsetY
+    const pdfPt = toPdfPoint(px, py)
+    const id = dragTextRef.current.id
+    setTexts(prev => ({ ...prev, [pageNum]: (prev[pageNum] || []).map(t => t.id === id ? { ...t, pos: pdfPt } : t) }))
+  }
+  const endTextDrag = () => { dragTextRef.current = { id: null, offsetX: 0, offsetY: 0 } }
 
   // Export: burn strokes onto the PDF with pdf-lib (in the browser)
   const exportPdf = async () => {
     if (!file) return
     setBusy(true); setError('')
     try {
-      const { PDFDocument, rgb } = await import('pdf-lib')
+      const { PDFDocument, rgb, StandardFonts } = await import('pdf-lib')
       const bytes = await file.arrayBuffer()
       const doc = await PDFDocument.load(bytes)
+      const helv = await doc.embedFont(StandardFonts.Helvetica)
       const pages = doc.getPages()
       const hexToRgb = (hex: string) => {
         const h = hex.replace('#', '')
@@ -291,6 +338,25 @@ export default function PdfAnnotator() {
           }
         }
       })
+      // Text items
+      Object.entries(texts).forEach(([pgStr, pageTexts]) => {
+        const idx = parseInt(pgStr, 10) - 1
+        const page = pages[idx]
+        if (!page) return
+        for (const t of pageTexts) {
+          if (!t.text.trim()) continue
+          const c = hexToRgb(t.color)
+          page.drawText(t.text, {
+            x: t.pos.x,
+            y: t.pos.y - t.size,
+            size: t.size,
+            font: helv,
+            color: rgb(c.r, c.g, c.b),
+            lineHeight: t.size * 1.2,
+          })
+        }
+      })
+
       const out = await doc.save()
       const blob = new Blob([out.buffer as ArrayBuffer], { type: 'application/pdf' })
       const url = URL.createObjectURL(blob)
@@ -338,6 +404,7 @@ export default function PdfAnnotator() {
             <button onClick={() => setTool('line')} style={btn(tool === 'line')}>╱ Line</button>
             <button onClick={() => setTool('check')} style={btn(tool === 'check')}>✓ Check</button>
             <button onClick={() => setTool('cross')} style={btn(tool === 'cross')}>✗ Cross</button>
+            <button onClick={() => setTool('text')} style={btn(tool === 'text')}>🅣 Text</button>
             {tool === 'pencil' && (
               <>
                 <input type="color" value={penColor} onChange={e => setPenColor(e.target.value)} title="Pencil color" style={{ width: '34px', height: '34px', border: '1.5px solid #e2e8f0', borderRadius: '8px', cursor: 'pointer', background: 'white' }} />
@@ -356,6 +423,13 @@ export default function PdfAnnotator() {
                 <input type="range" min={1} max={12} value={penWidth} onChange={e => setPenWidth(Number(e.target.value))} title="Shape line width" style={{ accentColor: '#E85D04' }} />
               </>
             )}
+            {tool === 'text' && (
+              <>
+                <input type="color" value={penColor} onChange={e => setPenColor(e.target.value)} title="Text color" style={{ width: '34px', height: '34px', border: '1.5px solid #e2e8f0', borderRadius: '8px', cursor: 'pointer', background: 'white' }} />
+                <input type="range" min={8} max={48} value={textSize} onChange={e => setTextSize(Number(e.target.value))} title="Text size" style={{ accentColor: '#E85D04' }} />
+                <span style={{ fontSize: '12px', color: '#64748b' }}>Click to place, type, drag to move, double-click to edit</span>
+              </>
+            )}
             <button onClick={clearPage} style={btn()}>Clear page</button>
             <div style={{ flex: 1 }} />
             <button onClick={() => setPageNum(n => Math.max(1, n - 1))} disabled={pageNum <= 1} style={btn()}>◀ Prev</button>
@@ -363,7 +437,7 @@ export default function PdfAnnotator() {
             <button onClick={() => setPageNum(n => Math.min(pageCount, n + 1))} disabled={pageNum >= pageCount} style={btn()}>Next ▶</button>
             <div style={{ flex: 1 }} />
             <button onClick={exportPdf} disabled={busy} style={{ ...btn(), background: busy ? '#cbd5e1' : '#E85D04', color: 'white', borderColor: 'transparent' }}>{busy ? '⏳' : '⬇️ Download annotated PDF'}</button>
-            <button onClick={() => { setFile(null); setPdf(null); setStrokes({}) }} style={{ ...btn(), color: '#DC2626' }}>✕ Close</button>
+            <button onClick={() => { setFile(null); setPdf(null); setStrokes({}); setShapes({}); setTexts({}) }} style={{ ...btn(), color: '#DC2626' }}>✕ Close</button>
           </div>
 
           {/* Page + overlay */}
@@ -372,9 +446,37 @@ export default function PdfAnnotator() {
               <canvas ref={pageCanvasRef} style={{ display: 'block', maxWidth: '100%' }} />
               <canvas ref={overlayRef}
                 onPointerDown={onPointerDown}
-                onPointerMove={onPointerMove}
-                onPointerUp={onPointerUp}
-                style={{ position: 'absolute', top: 0, left: 0, maxWidth: '100%', touchAction: 'none', cursor: tool === 'eraser' ? 'cell' : 'crosshair' }} />
+                onPointerMove={(e) => { onPointerMove(e); moveTextDrag(e) }}
+                onPointerUp={() => { onPointerUp(); endTextDrag() }}
+                style={{ position: 'absolute', top: 0, left: 0, maxWidth: '100%', touchAction: 'none', cursor: tool === 'eraser' ? 'cell' : (tool === 'text' ? 'text' : 'crosshair') }} />
+              {/* Text layer */}
+              {(texts[pageNum] || []).map(t => {
+                const vp = viewportRef.current
+                if (!vp) return null
+                const sx = t.pos.x * (vp.width / vp.pdfWidth)
+                const sy = (vp.pdfHeight - t.pos.y) * (vp.height / vp.pdfHeight)
+                const rect = overlayRef.current?.getBoundingClientRect()
+                const dispScale = rect ? rect.width / (overlayRef.current!.width || 1) : 1
+                return (
+                  <div key={t.id}
+                    style={{ position: 'absolute', left: sx * dispScale, top: sy * dispScale, pointerEvents: tool === 'text' ? 'auto' : 'none' }}
+                    onPointerDown={(e) => startTextDrag(e, t)}>
+                    {editingTextId === t.id ? (
+                      <textarea
+                        autoFocus
+                        value={t.text}
+                        onChange={(e) => updateText(t.id, e.target.value)}
+                        onBlur={() => finishText(t.id)}
+                        style={{ fontSize: `${t.size * dispScale}px`, color: t.color, fontFamily: 'Helvetica, Arial, sans-serif', border: '1px dashed #E85D04', background: 'rgba(255,255,255,0.7)', outline: 'none', resize: 'both', minWidth: '60px', lineHeight: 1.2, padding: '2px' }} />
+                    ) : (
+                      <div onDoubleClick={() => tool === 'text' && setEditingTextId(t.id)}
+                        style={{ fontSize: `${t.size * dispScale}px`, color: t.color, fontFamily: 'Helvetica, Arial, sans-serif', whiteSpace: 'pre-wrap', lineHeight: 1.2, cursor: tool === 'text' ? 'move' : 'default', padding: '2px', userSelect: 'none' }}>
+                        {t.text || ' '}
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
             </div>
           </div>
         </div>
