@@ -446,13 +446,13 @@ export default function PdfAnnotator() {
 
           {/* Page + overlay */}
           <div style={{ display: 'flex', justifyContent: 'center', background: '#e2e8f0', borderRadius: '12px', padding: '20px', overflow: 'auto' }}>
-            <div style={{ position: 'relative', boxShadow: '0 4px 20px rgba(15,42,74,0.2)' }}>
-              <canvas ref={pageCanvasRef} style={{ display: 'block', maxWidth: '100%' }} />
+            <div style={{ position: 'relative', boxShadow: '0 4px 20px rgba(15,42,74,0.2)', width: '100%', maxWidth: vpState ? `${vpState.width}px` : '800px', alignSelf: 'flex-start' }}>
+              <canvas ref={pageCanvasRef} style={{ display: 'block', width: '100%', height: 'auto' }} />
               <canvas ref={overlayRef}
                 onPointerDown={onPointerDown}
                 onPointerMove={(e) => { onPointerMove(e); moveTextDrag(e) }}
                 onPointerUp={() => { onPointerUp(); endTextDrag() }}
-                style={{ position: 'absolute', top: 0, left: 0, maxWidth: '100%', touchAction: 'none', zIndex: 10, cursor: tool === 'eraser' ? 'cell' : (tool === 'text' ? 'text' : 'crosshair') }} />
+                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', touchAction: 'none', zIndex: 10, cursor: tool === 'eraser' ? 'cell' : (tool === 'text' ? 'text' : 'crosshair') }} />
               {/* Text layer — positioned with percentages so it tracks the displayed canvas at any scale */}
               {vpState && (texts[pageNum] || []).map(t => {
                 const leftPct = (t.pos.x / vpState.pdfWidth) * 100
