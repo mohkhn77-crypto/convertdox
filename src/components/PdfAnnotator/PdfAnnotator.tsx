@@ -30,6 +30,8 @@ export default function PdfAnnotator() {
   const [vpState, setVpState] = useState<{ width: number; height: number; pdfWidth: number; pdfHeight: number } | null>(null)
   const [pendingTextPos, setPendingTextPos] = useState<Point | null>(null)
   const [draftText, setDraftText] = useState('')
+  const [cursorOn, setCursorOn] = useState(true)
+  const hiddenInputRef = useRef<HTMLTextAreaElement>(null)
   const [tool, setTool] = useState<ToolKind>('pencil')
   const [penColor, setPenColor] = useState('#E11D48')
   const [penWidth, setPenWidth] = useState(3)
@@ -102,9 +104,6 @@ export default function PdfAnnotator() {
     ctx.stroke()
   }
 
-  const tSizeMarker = (vp: { width: number; height: number; pdfWidth: number; pdfHeight: number }) =>
-    textSize * (vp.height / vp.pdfHeight)
-
   // Redraw all stored strokes, shapes, and text for the current page onto the overlay
   const redrawOverlay = useCallback(() => {
     const overlay = overlayRef.current
@@ -141,18 +140,26 @@ export default function PdfAnnotator() {
         ctx.fillText(line, sx, sy + i * t.size * 1.2 * (vp.height / vp.pdfHeight))
       })
     }
-    // Draw pending placement marker
+    // Draw in-progress draft text + blinking cursor
     if (pendingTextPos) {
       const mx = pendingTextPos.x * (vp.width / vp.pdfWidth)
       const my = (vp.pdfHeight - pendingTextPos.y) * (vp.height / vp.pdfHeight)
-      const mh = tSizeMarker(vp)
-      ctx.strokeStyle = '#E85D04'; ctx.lineWidth = 1.5; ctx.setLineDash([4, 3])
-      ctx.beginPath(); ctx.moveTo(mx, my); ctx.lineTo(mx, my + mh); ctx.stroke()
-      ctx.setLineDash([])
-      ctx.fillStyle = 'rgba(232,93,4,0.2)'
-      ctx.fillRect(mx, my, mh * 3, 3)
+      const scl = vp.width / vp.pdfWidth
+      const lineH = textSize * 1.2 * (vp.height / vp.pdfHeight)
+      ctx.fillStyle = penColor
+      ctx.font = `${textSize * scl}px Helvetica, Arial, sans-serif`
+      ctx.textBaseline = 'top'
+      const lines = draftText.split('\n')
+      lines.forEach((line, i) => ctx.fillText(line, mx, my + i * lineH))
+      if (cursorOn) {
+        const lastLine = lines[lines.length - 1] || ''
+        const w = ctx.measureText(lastLine).width
+        const cy = my + (lines.length - 1) * lineH
+        ctx.strokeStyle = penColor; ctx.lineWidth = 1.5
+        ctx.beginPath(); ctx.moveTo(mx + w + 1, cy); ctx.lineTo(mx + w + 1, cy + textSize * scl); ctx.stroke()
+      }
     }
-  }, [strokes, shapes, texts, pageNum, pendingTextPos])
+  }, [strokes, shapes, texts, pageNum, pendingTextPos, draftText, cursorOn])
 
   // Render the current page to the page canvas + size the overlay to match
   const renderPage = useCallback(async () => {
@@ -177,7 +184,14 @@ export default function PdfAnnotator() {
 
   useEffect(() => { if (pdf) renderPage() }, [pdf, pageNum, renderPage])
 
-  useEffect(() => { redrawOverlay() }, [strokes, shapes, texts, pageNum, pendingTextPos, redrawOverlay])
+  useEffect(() => { redrawOverlay() }, [strokes, shapes, texts, pageNum, pendingTextPos, draftText, cursorOn, redrawOverlay])
+
+  // Blink the text cursor while placing text
+  useEffect(() => {
+    if (!pendingTextPos) return
+    const id = setInterval(() => setCursorOn(c => !c), 530)
+    return () => clearInterval(id)
+  }, [pendingTextPos])
 
   // Convert a screen point (canvas px, origin top-left) to PDF point (origin bottom-left)
   const toPdfPoint = (sx: number, sy: number): Point => {
@@ -212,9 +226,16 @@ export default function PdfAnnotator() {
     if (!viewportRef.current) return
     const { x, y } = getLocalXY(e)
     const pdfPt = toPdfPoint(x, y)
-    // Text tool: record where text will be placed; user types in the panel below
+    // Text tool: commit any current draft, then start a fresh one at the click point
     if (tool === 'text') {
+      if (pendingTextPos && draftText.trim()) {
+        const id = `t-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`
+        setTexts(prev => ({ ...prev, [pageNum]: [...(prev[pageNum] || []), { id, pos: pendingTextPos, text: draftText, size: textSize, color: penColor }] }))
+      }
+      setDraftText('')
       setPendingTextPos(pdfPt)
+      setCursorOn(true)
+      setTimeout(() => hiddenInputRef.current?.focus(), 0)
       return
     }
     ;(e.target as HTMLElement).setPointerCapture(e.pointerId)
@@ -275,13 +296,18 @@ export default function PdfAnnotator() {
   const clearPage = () => { setStrokes(prev => ({ ...prev, [pageNum]: [] })); setShapes(prev => ({ ...prev, [pageNum]: [] })); setTexts(prev => ({ ...prev, [pageNum]: [] })); setPendingTextPos(null); setDraftText('') }
 
   const commitPendingText = () => {
-    if (!pendingTextPos || !draftText.trim()) { setPendingTextPos(null); setDraftText(''); return }
-    const id = `t-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`
-    setTexts(prev => ({ ...prev, [pageNum]: [...(prev[pageNum] || []), { id, pos: pendingTextPos, text: draftText, size: textSize, color: penColor }] }))
+    if (pendingTextPos && draftText.trim()) {
+      const id = `t-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`
+      setTexts(prev => ({ ...prev, [pageNum]: [...(prev[pageNum] || []), { id, pos: pendingTextPos, text: draftText, size: textSize, color: penColor }] }))
+    }
     setPendingTextPos(null)
     setDraftText('')
   }
   const cancelPendingText = () => { setPendingTextPos(null); setDraftText('') }
+  const onHiddenKey = (e: React.KeyboardEvent) => {
+    if (e.key === 'Escape') { e.preventDefault(); cancelPendingText(); return }
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); commitPendingText(); return }
+  }
 
   // Export: burn strokes onto the PDF with pdf-lib (in the browser)
   const exportPdf = async () => {
@@ -447,29 +473,20 @@ export default function PdfAnnotator() {
           </div>
 
           {tool === 'text' && (
-            <div style={{ background: '#FFF7ED', border: '1.5px solid #FDBA74', borderRadius: '12px', padding: '14px', marginBottom: '12px' }}>
-              {!pendingTextPos ? (
-                <div style={{ fontSize: '13px', color: '#9A3412', fontWeight: 600 }}>📍 Click anywhere on the page to choose where your text goes.</div>
-              ) : (
-                <div>
-                  <div style={{ fontSize: '13px', color: '#9A3412', fontWeight: 600, marginBottom: '8px' }}>Type your text, then click Place:</div>
-                  <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' as const, alignItems: 'center' }}>
-                    <input
-                      id="pdf-annotate-text-input"
-                      name="pdf-annotate-text-input"
-                      autoFocus
-                      type="text"
-                      value={draftText}
-                      onChange={e => setDraftText(e.target.value)}
-                      onKeyDown={e => { if (e.key === 'Enter') commitPendingText(); if (e.key === 'Escape') cancelPendingText() }}
-                      placeholder="Your text…"
-                      style={{ flex: 1, minWidth: '200px', padding: '10px 12px', borderRadius: '8px', border: '1.5px solid #FDBA74', fontSize: '14px', fontFamily: 'inherit', outline: 'none' }} />
-                    <button onClick={commitPendingText} style={{ background: '#E85D04', color: 'white', border: 'none', borderRadius: '8px', padding: '10px 20px', fontSize: '13px', fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit' }}>Place text</button>
-                    <button onClick={cancelPendingText} style={{ background: 'white', color: '#0F2A4A', border: '1.5px solid #e2e8f0', borderRadius: '8px', padding: '10px 16px', fontSize: '13px', fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit' }}>Cancel</button>
-                  </div>
-                </div>
-              )}
+            <div style={{ background: '#FFF7ED', border: '1.5px solid #FDBA74', borderRadius: '10px', padding: '10px 14px', marginBottom: '12px', fontSize: '13px', color: '#9A3412', fontWeight: 600 }}>
+              {pendingTextPos ? '⌨️ Type your text. Press Enter to place it, Escape to cancel. Click again to start a new text.' : '📍 Click on the page where you want to add text, then start typing.'}
             </div>
+          )}
+          {/* Hidden key-catcher: captures typing for in-place canvas text */}
+          {tool === 'text' && (
+            <textarea
+              ref={hiddenInputRef}
+              value={draftText}
+              onChange={e => setDraftText(e.target.value)}
+              onKeyDown={onHiddenKey}
+              onBlur={() => { /* keep draft; clicking canvas refocuses */ }}
+              aria-label="PDF text input"
+              style={{ position: 'fixed', top: 0, left: 0, width: '1px', height: '1px', opacity: 0, pointerEvents: 'none', resize: 'none' }} />
           )}
 
           {/* Page + overlay */}
