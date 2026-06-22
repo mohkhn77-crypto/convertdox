@@ -178,9 +178,11 @@ export default function PdfAnnotator() {
   }
 
   const onPointerDown = (e: React.PointerEvent) => {
-    if (!viewportRef.current) return
+    console.log('[annotator] pointerdown fired, tool =', tool, 'viewport =', !!viewportRef.current)
+    if (!viewportRef.current) { console.log('[annotator] BAILED: no viewport'); return }
     const { x, y } = getLocalXY(e)
     const pdfPt = toPdfPoint(x, y)
+    if (tool === 'text') console.log('[annotator] TEXT branch, placing box at', pdfPt)
     // Text tool: place a box and let the textarea take focus — do NOT capture the pointer
     if (tool === 'text') {
       const id = `t-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`
