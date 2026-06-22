@@ -5,9 +5,14 @@ import type { PDFDocumentProxy } from '@/lib/pdf-config'
 
 // A stroke is a list of points in PDF-space (origin bottom-left, in PDF points).
 type Point = { x: number; y: number }
-type ToolKind = 'pencil' | 'highlighter' | 'eraser'
+type ToolKind = 'pencil' | 'highlighter' | 'eraser' | 'rect' | 'ellipse' | 'line' | 'check' | 'cross'
+type ShapeKind = 'rect' | 'ellipse' | 'line' | 'check' | 'cross'
 type Stroke = { points: Point[]; color: string; width: number; opacity: number }
+type Shape = { kind: ShapeKind; start: Point; end: Point; color: string; width: number }
 type PageStrokes = { [pageNumber: number]: Stroke[] }
+type PageShapes = { [pageNumber: number]: Shape[] }
+
+const SHAPE_TOOLS: ToolKind[] = ['rect', 'ellipse', 'line', 'check', 'cross']
 
 const RENDER_SCALE = 1.5 // display scale for the page canvas
 
@@ -17,6 +22,7 @@ export default function PdfAnnotator() {
   const [pageNum, setPageNum] = useState(1)
   const [pageCount, setPageCount] = useState(0)
   const [strokes, setStrokes] = useState<PageStrokes>({})
+  const [shapes, setShapes] = useState<PageShapes>({})
   const [tool, setTool] = useState<ToolKind>('pencil')
   const [penColor, setPenColor] = useState('#E11D48')
   const [penWidth, setPenWidth] = useState(3)
@@ -35,6 +41,7 @@ export default function PdfAnnotator() {
   // Current page viewport info needed to map screen <-> PDF coordinates
   const viewportRef = useRef<{ width: number; height: number; pdfWidth: number; pdfHeight: number } | null>(null)
   const drawingRef = useRef<{ active: boolean; pts: Point[] }>({ active: false, pts: [] })
+  const shapeRef = useRef<{ active: boolean; start: Point | null; end: Point | null }>({ active: false, start: null, end: null })
 
   // Load the PDF document
   const loadFile = useCallback(async (f: File) => {
@@ -49,12 +56,41 @@ export default function PdfAnnotator() {
       setPageCount(doc.numPages)
       setPageNum(1)
       setStrokes({})
+      setShapes({})
     } catch {
       setError('Could not open this PDF.')
     } finally {
       setBusy(false)
     }
   }, [])
+
+  // Draw one shape onto a ctx using SCREEN coordinates
+  const drawShapeScreen = (ctx: CanvasRenderingContext2D, sh: Shape) => {
+    const vp = viewportRef.current!
+    const toS = (p: Point) => ({ x: p.x * (vp.width / vp.pdfWidth), y: (vp.pdfHeight - p.y) * (vp.height / vp.pdfHeight) })
+    const a = toS(sh.start), b = toS(sh.end)
+    ctx.strokeStyle = sh.color
+    ctx.lineWidth = sh.width
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round'
+    const x = Math.min(a.x, b.x), y = Math.min(a.y, b.y)
+    const w = Math.abs(b.x - a.x), h = Math.abs(b.y - a.y)
+    ctx.beginPath()
+    if (sh.kind === 'rect') {
+      ctx.rect(x, y, w, h)
+    } else if (sh.kind === 'ellipse') {
+      ctx.ellipse(x + w / 2, y + h / 2, w / 2, h / 2, 0, 0, Math.PI * 2)
+    } else if (sh.kind === 'line') {
+      ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y)
+    } else if (sh.kind === 'check') {
+      ctx.moveTo(x + w * 0.1, y + h * 0.55)
+      ctx.lineTo(x + w * 0.4, y + h * 0.9)
+      ctx.lineTo(x + w * 0.9, y + h * 0.1)
+    } else if (sh.kind === 'cross') {
+      ctx.moveTo(x, y); ctx.lineTo(x + w, y + h)
+      ctx.moveTo(x + w, y); ctx.lineTo(x, y + h)
+    }
+    ctx.stroke()
+  }
 
   // Redraw all stored strokes for the current page onto the overlay
   const redrawOverlay = useCallback(() => {
@@ -78,7 +114,9 @@ export default function PdfAnnotator() {
       ctx.stroke()
     }
     ctx.globalAlpha = 1
-  }, [strokes, pageNum])
+    const pageShapes = shapes[pageNum] || []
+    for (const sh of pageShapes) drawShapeScreen(ctx, sh)
+  }, [strokes, shapes, pageNum])
 
   // Render the current page to the page canvas + size the overlay to match
   const renderPage = useCallback(async () => {
@@ -138,14 +176,24 @@ export default function PdfAnnotator() {
     const { x, y } = getLocalXY(e)
     const pdfPt = toPdfPoint(x, y)
     if (tool === 'eraser') { drawingRef.current = { active: true, pts: [] }; eraseAt(pdfPt); return }
+    if (SHAPE_TOOLS.includes(tool)) { shapeRef.current = { active: true, start: pdfPt, end: pdfPt }; return }
     drawingRef.current = { active: true, pts: [pdfPt] }
   }
 
   const onPointerMove = (e: React.PointerEvent) => {
-    if (!drawingRef.current.active) return
+    if (!drawingRef.current.active && !shapeRef.current.active) return
     const { x, y } = getLocalXY(e)
     const pdfPt = toPdfPoint(x, y)
     if (tool === 'eraser') { eraseAt(pdfPt); return }
+    if (SHAPE_TOOLS.includes(tool)) {
+      if (!shapeRef.current.active) return
+      shapeRef.current.end = pdfPt
+      const overlay = overlayRef.current!
+      const ctx = overlay.getContext('2d')!
+      redrawOverlay()
+      drawShapeScreen(ctx, { kind: tool as ShapeKind, start: shapeRef.current.start!, end: pdfPt, color: activeColor, width: activeWidth })
+      return
+    }
     drawingRef.current.pts.push(pdfPt)
     const overlay = overlayRef.current!
     const vp = viewportRef.current!
@@ -164,6 +212,15 @@ export default function PdfAnnotator() {
   }
 
   const onPointerUp = () => {
+    // Commit a shape if one was being drawn
+    if (SHAPE_TOOLS.includes(tool) && shapeRef.current.active) {
+      const { start, end } = shapeRef.current
+      shapeRef.current = { active: false, start: null, end: null }
+      if (start && end && (Math.abs(start.x - end.x) > 2 || Math.abs(start.y - end.y) > 2)) {
+        setShapes(prev => ({ ...prev, [pageNum]: [...(prev[pageNum] || []), { kind: tool as ShapeKind, start, end, color: activeColor, width: activeWidth }] }))
+      }
+      return
+    }
     if (!drawingRef.current.active) return
     const pts = drawingRef.current.pts
     const wasEraser = tool === 'eraser'
@@ -172,7 +229,7 @@ export default function PdfAnnotator() {
     setStrokes(prev => ({ ...prev, [pageNum]: [...(prev[pageNum] || []), { points: pts, color: activeColor, width: activeWidth, opacity: activeOpacity }] }))
   }
 
-  const clearPage = () => setStrokes(prev => ({ ...prev, [pageNum]: [] }))
+  const clearPage = () => { setStrokes(prev => ({ ...prev, [pageNum]: [] })); setShapes(prev => ({ ...prev, [pageNum]: [] })) }
 
   // Export: burn strokes onto the PDF with pdf-lib (in the browser)
   const exportPdf = async () => {
@@ -202,6 +259,35 @@ export default function PdfAnnotator() {
               color: rgb(c.r, c.g, c.b),
               opacity: st.opacity,
             })
+          }
+        }
+      })
+
+      // Shapes
+      type PdfPage = ReturnType<typeof doc.getPages>[number]
+      const lineSeg = (page: PdfPage, a: Point, b: Point, c: { r: number; g: number; b: number }, w: number) => {
+        page.drawLine({ start: { x: a.x, y: a.y }, end: { x: b.x, y: b.y }, thickness: w, color: rgb(c.r, c.g, c.b) })
+      }
+      Object.entries(shapes).forEach(([pgStr, pageShapes]) => {
+        const idx = parseInt(pgStr, 10) - 1
+        const page = pages[idx]
+        if (!page) return
+        for (const sh of pageShapes) {
+          const c = hexToRgb(sh.color)
+          const x = Math.min(sh.start.x, sh.end.x), y = Math.min(sh.start.y, sh.end.y)
+          const w = Math.abs(sh.end.x - sh.start.x), h = Math.abs(sh.end.y - sh.start.y)
+          if (sh.kind === 'rect') {
+            page.drawRectangle({ x, y, width: w, height: h, borderColor: rgb(c.r, c.g, c.b), borderWidth: sh.width, opacity: 0 })
+          } else if (sh.kind === 'ellipse') {
+            page.drawEllipse({ x: x + w / 2, y: y + h / 2, xScale: w / 2, yScale: h / 2, borderColor: rgb(c.r, c.g, c.b), borderWidth: sh.width, opacity: 0 })
+          } else if (sh.kind === 'line') {
+            lineSeg(page, sh.start, sh.end, c, sh.width)
+          } else if (sh.kind === 'check') {
+            lineSeg(page, { x: x + w * 0.1, y: y + h * 0.45 }, { x: x + w * 0.4, y: y + h * 0.1 }, c, sh.width)
+            lineSeg(page, { x: x + w * 0.4, y: y + h * 0.1 }, { x: x + w * 0.9, y: y + h * 0.9 }, c, sh.width)
+          } else if (sh.kind === 'cross') {
+            lineSeg(page, { x, y: y + h }, { x: x + w, y }, c, sh.width)
+            lineSeg(page, { x, y }, { x: x + w, y: y + h }, c, sh.width)
           }
         }
       })
@@ -247,6 +333,11 @@ export default function PdfAnnotator() {
             <button onClick={() => setTool('pencil')} style={btn(tool === 'pencil')}>✏️ Pencil</button>
             <button onClick={() => setTool('highlighter')} style={btn(tool === 'highlighter')}>🖍 Highlighter</button>
             <button onClick={() => setTool('eraser')} style={btn(tool === 'eraser')}>🩹 Eraser</button>
+            <button onClick={() => setTool('rect')} style={btn(tool === 'rect')}>▭ Box</button>
+            <button onClick={() => setTool('ellipse')} style={btn(tool === 'ellipse')}>⬭ Ellipse</button>
+            <button onClick={() => setTool('line')} style={btn(tool === 'line')}>╱ Line</button>
+            <button onClick={() => setTool('check')} style={btn(tool === 'check')}>✓ Check</button>
+            <button onClick={() => setTool('cross')} style={btn(tool === 'cross')}>✗ Cross</button>
             {tool === 'pencil' && (
               <>
                 <input type="color" value={penColor} onChange={e => setPenColor(e.target.value)} title="Pencil color" style={{ width: '34px', height: '34px', border: '1.5px solid #e2e8f0', borderRadius: '8px', cursor: 'pointer', background: 'white' }} />
@@ -257,6 +348,12 @@ export default function PdfAnnotator() {
               <>
                 <input type="color" value={hlColor} onChange={e => setHlColor(e.target.value)} title="Highlighter color" style={{ width: '34px', height: '34px', border: '1.5px solid #e2e8f0', borderRadius: '8px', cursor: 'pointer', background: 'white' }} />
                 <input type="range" min={8} max={40} value={hlWidth} onChange={e => setHlWidth(Number(e.target.value))} title="Highlighter width" style={{ accentColor: '#E85D04' }} />
+              </>
+            )}
+            {SHAPE_TOOLS.includes(tool) && (
+              <>
+                <input type="color" value={penColor} onChange={e => setPenColor(e.target.value)} title="Shape color" style={{ width: '34px', height: '34px', border: '1.5px solid #e2e8f0', borderRadius: '8px', cursor: 'pointer', background: 'white' }} />
+                <input type="range" min={1} max={12} value={penWidth} onChange={e => setPenWidth(Number(e.target.value))} title="Shape line width" style={{ accentColor: '#E85D04' }} />
               </>
             )}
             <button onClick={clearPage} style={btn()}>Clear page</button>
